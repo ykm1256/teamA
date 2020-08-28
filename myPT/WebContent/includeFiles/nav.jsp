@@ -1,0 +1,55 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark p-1">
+      <div id="navBrand" class="d-flex align-items-center">
+        <a class="navbar-brand" href="index.html"
+          ><img src="img/colorChanged.png"
+        /></a>
+      </div>
+
+      <button
+        class="btn btn-link btn-sm order-4 order-lg-0 mr-lg-auto"
+        id="sidebarToggle"
+        href="#"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <div class="row ml-auto px-lg-3">
+        <div class="d-flex justify-content-between">
+          <!-- <div type="button" class="menus btn btn-light order-lg-1 mx-1 p-1">QR</div> -->
+
+          <!--navbar 드롭다운-->
+          <ul class="navbar-nav order-lg-2 mx-1">
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                id="userDropdown"
+                href="#"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+                ><i class="fas fa-user fa-fw"></i
+              ></a>
+              <div
+                class="dropdown-menu dropdown-menu-right"
+                aria-labelledby="userDropdown"
+              >
+                <a
+                  class="dropdown-item"
+                  data-toggle="modal"
+                  data-target="#QRModal"
+                  >QR</a
+                >
+                <a class="dropdown-item" href="login.html">Logout</a>
+              </div>
+            </li>
+          </ul>
+
+          <div type="button" class="menus btn btn-light order-lg-3 mr-3 p-1">
+            혼잡
+          </div>
+        </div>
+      </div>
+    </nav>
