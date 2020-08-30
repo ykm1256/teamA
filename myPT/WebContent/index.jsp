@@ -14,6 +14,7 @@
     <title>템플릿</title>
     <link href="css/styles.css" rel="stylesheet" />
     <link href="css/index.css" rel="stylesheet"/>
+    <link href="css/widget.css" rel="stylesheet"/>
 
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
@@ -35,7 +36,9 @@
       <!-- /sideNav -->
       <div id="layoutSidenav_content">
         <main>
-          <div class="container-fluid"></div>
+          <div class="container-fluid">
+          <!-- 여기서부터 작성 -->
+          </div>
         </main>
       </div>
     </div>
