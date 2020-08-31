@@ -10,6 +10,12 @@
                 </div>
                 메인페이지
               </a>
+              <a class="nav-link" href="inbody.jsp">
+                <div class="sb-nav-link-icon">
+                  <i class="fas fa-chart-area"></i>
+                </div>
+                인바디
+              </a>
               <a
                 class="nav-link collapsed"
                 href="#"
@@ -33,16 +39,16 @@
                 data-parent="#sidenavAccordion"
               >
                 <nav class="sb-sidenav-menu-nested nav">
-                  <a class="nav-link" href="layout-static.html"
+                  <a class="nav-link" href="community.jsp"
                     >커뮤니티 게시판</a
                   >
-                  <a class="nav-link" href="layout-sidenav-light.html"
+                  <a class="nav-link" href="photoBoard.jsp"
                     >포토 게시판</a
                   >
-                  <a class="nav-link" href="layout-sidenav-light.html">Q & A</a>
+                  <a class="nav-link" href="question.jsp">Q & A</a>
                 </nav>
               </div>
-              <a class="nav-link" href="charts.html">
+              <a class="nav-link" href="payment.jsp">
                 <div class="sb-nav-link-icon">
                   <i class="fas fa-chart-area"></i>
                 </div>

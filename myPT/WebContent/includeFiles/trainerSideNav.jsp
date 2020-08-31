@@ -4,13 +4,13 @@
         <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
           <div class="sb-sidenav-menu">
             <div class="nav">
-              <a class="nav-link" href="index.html">
+              <a class="nav-link" href="trainerMain.jsp">
                 <div class="sb-nav-link-icon">
                   <i class="fas fa-tachometer-alt"></i>
                 </div>
                 메인페이지
               </a>
-              <a class="nav-link" href="ptUserManagement.jsp">
+              <a class="nav-link" href="ptUserList.jsp">
                 <div class="sb-nav-link-icon">
                   <i class="fas fa-chart-area"></i>
                 </div>
@@ -39,13 +39,13 @@
                 data-parent="#sidenavAccordion"
               >
                 <nav class="sb-sidenav-menu-nested nav">
-                  <a class="nav-link" href="layout-static.html"
+                  <a class="nav-link" href="community.jsp"
                     >커뮤니티 게시판</a
                   >
-                  <a class="nav-link" href="layout-sidenav-light.html"
+                  <a class="nav-link" href="photoBoard.jsp"
                     >포토 게시판</a
                   >
-                  <a class="nav-link" href="layout-sidenav-light.html">Q & A</a>
+                  <a class="nav-link" href="question.jsp">Q & A</a>
                 </nav>
               </div>
             </div>

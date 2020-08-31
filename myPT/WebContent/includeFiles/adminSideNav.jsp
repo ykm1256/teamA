@@ -4,7 +4,7 @@
         <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
           <div class="sb-sidenav-menu">
             <div class="nav">
-              <a class="nav-link" href="index.html">
+              <a class="nav-link" href="userList.jsp">
                 <div class="sb-nav-link-icon">
                   <i class="fas fa-tachometer-alt"></i>
                 </div>
@@ -33,19 +33,19 @@
                 data-parent="#sidenavAccordion"
               >
                 <nav class="sb-sidenav-menu-nested nav">
-                  <a class="nav-link" href="management.jsp">회원 관리</a>
-                  <a class="nav-link" href="trainerManagement.jsp"
+                  <a class="nav-link" href="userList.jsp">회원 관리</a>
+                  <a class="nav-link" href="trainerList.jsp"
                     >트레이너 관리</a
                   >
                 </nav>
               </div>
-              <a class="nav-link" href="charts.html">
+              <a class="nav-link" href="userRegister.jsp">
                 <div class="sb-nav-link-icon">
                   <i class="fas fa-chart-area"></i>
                 </div>
                 회원 등록
               </a>
-              <a class="nav-link" href="charts.html">
+              <a class="nav-link" href="income.jsp">
                 <div class="sb-nav-link-icon">
                   <i class="fas fa-chart-area"></i>
                 </div>
@@ -74,13 +74,13 @@
                 data-parent="#sidenavAccordion"
               >
                 <nav class="sb-sidenav-menu-nested nav">
-                  <a class="nav-link" href="layout-static.html"
+                  <a class="nav-link" href="community.jsp"
                     >커뮤니티 게시판</a
                   >
-                  <a class="nav-link" href="layout-sidenav-light.html"
+                  <a class="nav-link" href="photoBoard.jsp"
                     >포토 게시판</a
                   >
-                  <a class="nav-link" href="layout-sidenav-light.html">Q & A</a>
+                  <a class="nav-link" href="question.jsp">Q & A</a>
                 </nav>
               </div>
             </div>
