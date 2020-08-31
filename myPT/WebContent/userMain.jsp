@@ -14,6 +14,7 @@
     <title>메인 페이지</title>
     <link href="css/styles.css" rel="stylesheet" />
     <link href="css/index.css" rel="stylesheet"/>
+    <link href="css/widget.css" rel="stylesheet"/>
 
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
@@ -31,7 +32,7 @@
 
     <div id="layoutSidenav">
       <!-- sideNav -->
-      <jsp:include page="includeFiles/sideNav.jsp"></jsp:include>
+      <jsp:include page="includeFiles/userSideNav.jsp"></jsp:include>
       <!-- /sideNav -->
       <div id="layoutSidenav_content">
         <main>
