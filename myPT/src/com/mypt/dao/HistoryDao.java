@@ -9,10 +9,10 @@ import com.mypt.dto.HistoryDto;
 
 
 public class HistoryDao {
-	private DBConnection instance;
+	private DBConnection db;
 	
 	public HistoryDao() {
-		instance=DBConnection.getInstance();
+		db=DBConnection.getInstance();
 	}
 	
 	public void insertHistory(HistoryDto historyBean) {
@@ -21,7 +21,7 @@ public class HistoryDao {
 		String sql=null;
 		
 		try {
-			con=instance.getConnection();
+			con=db.getConnection();
 			sql= "insert history(hid,paydate,price,hcount) "
 					+ "valuse(?,?,?,?)";
 			ps=con.prepareStatement(sql);
@@ -53,7 +53,7 @@ public class HistoryDao {
 		HistoryDto historyBean=new HistoryDto();
 		
 		try {
-			con=instance.getConnection();
+			con=db.getConnection();
 			sql="select * from history where hid=?";
 			ps=con.prepareStatement(sql);
 			ps.setString(1, hid);
@@ -77,7 +77,7 @@ public class HistoryDao {
 		String sql=null;
 		
 		try {
-			con=instance.getConnection();
+			con=db.getConnection();
 			sql= "update history set paydate=?,price=?,hcount=? where hid=?";
 			ps=con.prepareStatement(sql);
 			
@@ -108,7 +108,7 @@ public class HistoryDao {
 		String sql=null;
 		
 		try {
-			con=instance.getConnection();
+			con=db.getConnection();
 			sql= "delete from history where hid=?";
 			ps=con.prepareStatement(sql);
 			ps.setString(1, hid);

@@ -3,8 +3,11 @@ package com.mypt.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.mypt.controller.action.list.PTUserListViewAction;
 import com.mypt.controller.action.list.TrainerListViewAction;
 import com.mypt.controller.action.list.UserListViewAction;
+import com.mypt.controller.action.login.TrainerLoginAction;
+import com.mypt.controller.action.login.UserLoginAction;
 
 
 public class ActionFactory 
@@ -33,6 +36,13 @@ public class ActionFactory
 		map.put("/userList", new UserListViewAction());
 		//trainerList
 		map.put("/trainerList", new TrainerListViewAction());
+		//ptUserList
+		map.put("/ptUserList", new PTUserListViewAction());
+		
+		//userLogin
+		map.put("/userLogin", new UserLoginAction());
+		//trainerLogin
+		map.put("/trainerLogin", new TrainerLoginAction());
 		
 	}
 	

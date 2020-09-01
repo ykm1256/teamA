@@ -13,10 +13,10 @@ import com.mypt.dto.CCommentDto;
 import com.mypt.dto.TrainerDto;
 
 public class CCommentDao {
-	private DBConnection instance;
+	private DBConnection db;
 	
 	public CCommentDao() {
-		instance = DBConnection.getInstance();
+		db = DBConnection.getInstance();
 	}
 	
 
@@ -25,7 +25,7 @@ public class CCommentDao {
 		Connection con = null;
 		PreparedStatement ps = null;
 		try {
-			con = instance.getConnection();
+			con = db.getConnection();
 			String sql = "insert into ccomment (cb_num,cb_cnick,cb_ccontent) values(?,?,?)";
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, cd.getcb_cnum());			
@@ -36,7 +36,7 @@ public class CCommentDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			instance.closeConnection(null, ps, con);
+			db.closeConnection(null, ps, con);
 		}
 
 	}
@@ -47,7 +47,7 @@ public class CCommentDao {
 		ResultSet rs = null;
 		CCommentDto cd = new CCommentDto();
 		try {
-			con = instance.getConnection();
+			con = db.getConnection();
 			String sql = "select * from ccomment where cb_cnum='" + cb_cnum + "'";
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
@@ -62,7 +62,7 @@ public class CCommentDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			instance.closeConnection(rs, ps, con);
+			db.closeConnection(rs, ps, con);
 		}
 		return cd;
 	}
@@ -71,7 +71,7 @@ public class CCommentDao {
 		Connection con = null;
 		PreparedStatement ps = null;
 		try {
-			con = instance.getConnection();
+			con = db.getConnection();
 			String sql = "update ccomment set cb_ccontent=?, cb_cdate=now() where cb_cnum=?";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, cd.getcb_ccontent());
@@ -81,7 +81,7 @@ public class CCommentDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			instance.closeConnection(null, ps, con);
+			db.closeConnection(null, ps, con);
 		}
 	}
 
@@ -89,7 +89,7 @@ public class CCommentDao {
 		Connection con = null;
 		PreparedStatement ps = null;
 		try {
-			con = instance.getConnection();
+			con = db.getConnection();
 			String sql = "delete from ccomment where cb_cnum ="+ cb_cnum;
 			ps = con.prepareStatement(sql);
 			ps.executeUpdate();
@@ -97,7 +97,7 @@ public class CCommentDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			instance.closeConnection(null, ps, con);
+			db.closeConnection(null, ps, con);
 		}
 
 	}
@@ -109,7 +109,7 @@ public class CCommentDao {
 		ArrayList<CCommentDto> arr = new ArrayList<CCommentDto>();
 		CCommentDto cd = null;
 		try {
-			con = instance.getConnection();
+			con = db.getConnection();
 			String sql = "select * from ccomment";
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
@@ -126,7 +126,7 @@ public class CCommentDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			instance.closeConnection(rs, ps, con);
+			db.closeConnection(rs, ps, con);
 		}
 		return arr;
 	}

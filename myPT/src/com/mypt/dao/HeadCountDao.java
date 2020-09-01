@@ -8,17 +8,17 @@ import com.mypt.connection.DBConnection;
 import com.mypt.dto.HeadCountDto;
 
 public class HeadCountDao {
-	private DBConnection instance;
+	private DBConnection db;
 	
 	public HeadCountDao() {
-		instance = DBConnection.getInstance();
+		db = DBConnection.getInstance();
 	}
 	
 	public void headcountInsert(HeadCountDto hd) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		try {
-			con = instance.getConnection();
+			con = db.getConnection();
 			String sql = "insert into headcount values(?,?,?)";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, hd.getH_id());
@@ -29,7 +29,7 @@ public class HeadCountDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			instance.closeConnection(null, ps, con);
+			db.closeConnection(null, ps, con);
 		}
 	}
 	
@@ -41,7 +41,7 @@ public class HeadCountDao {
 		int count = 0;
 		
 		try {
-			con = instance.getConnection();
+			con = db.getConnection();
 			String sql = "select count(*) from headcount where h_date=? and intime=?";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, h_date);
@@ -54,7 +54,7 @@ public class HeadCountDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			instance.closeConnection(rs, ps, con);
+			db.closeConnection(rs, ps, con);
 		}
 		return count;
 		
@@ -64,7 +64,7 @@ public class HeadCountDao {
 		Connection con = null;
 		PreparedStatement ps = null;
 		try {
-			con = instance.getConnection();
+			con = db.getConnection();
 			String sql = "update headcount set outtime=now() where h_id=? and h_date=?";
 			ps = con.prepareStatement(sql);			
 			ps.setString(1, h_id);
@@ -74,7 +74,7 @@ public class HeadCountDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			instance.closeConnection(null, ps, con);
+			db.closeConnection(null, ps, con);
 		}				
 	}
 	
@@ -82,7 +82,7 @@ public class HeadCountDao {
 		Connection con = null;
 		PreparedStatement ps = null;
 		try {
-			con = instance.getConnection();
+			con = db.getConnection();
 			String sql = "delete from headcount where h_id=? and h_date=?";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, h_id);
@@ -92,7 +92,7 @@ public class HeadCountDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			instance.closeConnection(null, ps, con);
+			db.closeConnection(null, ps, con);
 		}
 	}
 

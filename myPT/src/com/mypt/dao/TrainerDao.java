@@ -9,10 +9,10 @@ import com.mypt.connection.DBConnection;
 import com.mypt.dto.TrainerDto;
 
 public class TrainerDao {
-	private DBConnection instance;
+	private DBConnection db;
 	
 	public TrainerDao() {
-		instance = DBConnection.getInstance();
+		db = DBConnection.getInstance();
 	}
 
 	public void trainerInsert(TrainerDto td) {
@@ -20,7 +20,7 @@ public class TrainerDao {
 		Connection con = null;
 		PreparedStatement ps = null;
 		try {
-			con = instance.getConnection();
+			con = db.getConnection();
 			String sql = "insert into trainer values(?,?,?,?,?,?,?,?)";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, td.getT_id());
@@ -36,7 +36,7 @@ public class TrainerDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			instance.closeConnection(null, ps, con);
+			db.closeConnection(null, ps, con);
 		}
 
 	}
@@ -47,7 +47,7 @@ public class TrainerDao {
 		ResultSet rs = null;
 		TrainerDto td = new TrainerDto();
 		try {
-			con = instance.getConnection();
+			con = db.getConnection();
 			String sql = "select * from trainer where t_id='" + t_id + "'";
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
@@ -65,7 +65,7 @@ public class TrainerDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			instance.closeConnection(rs, ps, con);
+			db.closeConnection(rs, ps, con);
 		}
 		return td;
 	}
@@ -74,7 +74,7 @@ public class TrainerDao {
 		Connection con = null;
 		PreparedStatement ps = null;
 		try {
-			con = instance.getConnection();
+			con = db.getConnection();
 			String sql = "update trainer set t_pw=?, t_name=?, t_gender=?, t_email, t_birth, t_address, t_nick where t_id=?";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, td.getT_pw());
@@ -90,7 +90,7 @@ public class TrainerDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			instance.closeConnection(null, ps, con);
+			db.closeConnection(null, ps, con);
 		}
 	}
 
@@ -98,7 +98,7 @@ public class TrainerDao {
 		Connection con = null;
 		PreparedStatement ps = null;
 		try {
-			con = instance.getConnection();
+			con = db.getConnection();
 			String sql = "delete from trainer where t_id = '" + t_id + "'";
 			ps = con.prepareStatement(sql);
 			ps.executeUpdate();
@@ -106,11 +106,12 @@ public class TrainerDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			instance.closeConnection(null, ps, con);
+			db.closeConnection(null, ps, con);
 		}
 
 	}
 	
+	// 트레이너 리스트 보기
 	public ArrayList<TrainerDto> trainerList(){
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -118,7 +119,7 @@ public class TrainerDao {
 		ArrayList<TrainerDto> arr = new ArrayList<TrainerDto>();
 		TrainerDto td = null;
 		try {
-			con = instance.getConnection();
+			con = db.getConnection();
 			String sql = "select * from trainer";
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
@@ -140,12 +141,36 @@ public class TrainerDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			instance.closeConnection(rs, ps, con);
+			db.closeConnection(rs, ps, con);
 		}
 		
 		return arr;
 	}
-
 	
+	//트레이너 로그인
+	public int trainerLogin(String id, String pw) {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		String sql=null;
+		int flag = 0;
+		
+		
+		try {
+			con=db.getConnection();
+			sql="select * from trainer where t_id=? and t_pw=?";
+			ps=con.prepareStatement(sql);
+			ps.setString(1, id);
+			ps.setString(2, pw);
+			rs=ps.executeQuery();
+			if(rs.next()) {
+				flag = 1;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return flag;
+	}
 
 }

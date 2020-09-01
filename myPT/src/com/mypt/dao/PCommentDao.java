@@ -11,10 +11,10 @@ import com.mypt.dto.PCommentDto;
 
 
 public class PCommentDao {
-	private DBConnection instance;
+	private DBConnection db;
 	
 	public PCommentDao() {
-		instance = DBConnection.getInstance();
+		db = DBConnection.getInstance();
 	}
 
 	public void pCommentInsert(PCommentDto pd) {
@@ -22,7 +22,7 @@ public class PCommentDao {
 		Connection con = null;
 		PreparedStatement ps = null;
 		try {
-			con = instance.getConnection();
+			con = db.getConnection();
 			String sql = "insert into pcomment (pb_num,pb_cnick,pb_ccontent) values(?,?,?)";
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, pd.getpb_cnum());			
@@ -33,7 +33,7 @@ public class PCommentDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			instance.closeConnection(null, ps, con);
+			db.closeConnection(null, ps, con);
 		}
 
 	}
@@ -44,7 +44,7 @@ public class PCommentDao {
 		ResultSet rs = null;
 		PCommentDto pd = new PCommentDto();
 		try {
-			con = instance.getConnection();
+			con = db.getConnection();
 			String sql = "select * from pcomment where pb_cnum='" + pb_cnum + "'";
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
@@ -59,7 +59,7 @@ public class PCommentDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			instance.closeConnection(rs, ps, con);
+			db.closeConnection(rs, ps, con);
 		}
 		return pd;
 	}
@@ -68,7 +68,7 @@ public class PCommentDao {
 		Connection con = null;
 		PreparedStatement ps = null;
 		try {
-			con = instance.getConnection();
+			con = db.getConnection();
 			String sql = "update pcomment set pb_ccontent=?, pb_pdate=now() where pb_cnum=?";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, pd.getpb_ccontent());
@@ -78,7 +78,7 @@ public class PCommentDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			instance.closeConnection(null, ps, con);
+			db.closeConnection(null, ps, con);
 		}
 	}
 
@@ -86,7 +86,7 @@ public class PCommentDao {
 		Connection con = null;
 		PreparedStatement ps = null;
 		try {
-			con = instance.getConnection();
+			con = db.getConnection();
 			String sql = "delete from pcomment where pb_cnum ="+ pb_cnum;
 			ps = con.prepareStatement(sql);
 			ps.executeUpdate();
@@ -94,7 +94,7 @@ public class PCommentDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			instance.closeConnection(null, ps, con);
+			db.closeConnection(null, ps, con);
 		}
 
 	}
@@ -105,7 +105,7 @@ public class PCommentDao {
 		ArrayList<PCommentDto> arr = new ArrayList<PCommentDto>();
 		PCommentDto pd = null;
 		try {
-			con = instance.getConnection();
+			con = db.getConnection();
 			String sql = "select * from pcomment";
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
@@ -122,7 +122,7 @@ public class PCommentDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			instance.closeConnection(rs, ps, con);
+			db.closeConnection(rs, ps, con);
 		}
 		return arr;
 	}

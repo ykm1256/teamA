@@ -16,6 +16,7 @@ public class UserListViewAction implements Action{
 		UserDao dao=new UserDao();
 		
 		ArrayList<UserDto> arr=dao.userList();
+		
 		request.setAttribute("userList", arr);
 		return "list/userList";
 	}

@@ -1,6 +1,7 @@
 package com.mypt.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -67,9 +68,12 @@ public class FrontController extends HttpServlet {
 			//String 리터럴도 객체			
 			String redirectPath = strView.substring("redirect:".length());
 			response.sendRedirect(redirectPath);
-		} 
-		else 
-		{
+		}else if(strView=="callback") {
+		      PrintWriter out = response.getWriter();      
+		      out.println(request.getAttribute("flag"));
+		      System.out.println(request.getAttribute("flag"));
+		      
+		} else {
 			//디스패치 방식으로 jsp 바로 실행
 			String prefix = "/WEB-INF/views/";
 			String suffix = ".jsp";

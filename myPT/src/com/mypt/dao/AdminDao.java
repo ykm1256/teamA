@@ -8,10 +8,10 @@ import com.mypt.connection.DBConnection;
 import com.mypt.dto.AdminDto;
 
 public class AdminDao {
-private DBConnection instance;
+private DBConnection db;
 	
 	public AdminDao() {
-		instance=DBConnection.getInstance();
+		db=DBConnection.getInstance();
 	}
 	
 	public void insertAdmin(AdminDto adminBean) {
@@ -20,7 +20,7 @@ private DBConnection instance;
 		String sql=null;
 		
 		try {
-			con=instance.getConnection();
+			con=db.getConnection();
 			sql= "insert admin(id,pw) values(?,?) ";
 			ps=con.prepareStatement(sql);
 			ps.setString(1, adminBean.getId());
@@ -49,7 +49,7 @@ private DBConnection instance;
 		AdminDto adminBean=new AdminDto();
 		
 		try {
-			con=instance.getConnection();
+			con=db.getConnection();
 			sql="select * from admin where id=?";
 			ps=con.prepareStatement(sql);
 			ps.setString(1, id);
@@ -72,7 +72,7 @@ private DBConnection instance;
 		String sql=null;
 		
 		try {
-			con=instance.getConnection();
+			con=db.getConnection();
 			sql= "update admin set pwd=? where id=?";
 			ps=con.prepareStatement(sql);
 			
@@ -101,7 +101,7 @@ private DBConnection instance;
 		String sql=null;
 		
 		try {
-			con=instance.getConnection();
+			con=db.getConnection();
 			sql= "delete from admin where id=?";
 			ps=con.prepareStatement(sql);
 			ps.setString(1, id);

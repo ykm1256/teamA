@@ -8,17 +8,17 @@ import com.mypt.connection.DBConnection;
 import com.mypt.dto.ScheduleDto;
 
 public class ScheduleDao {
-	private DBConnection instance;
+	private DBConnection db;
 	
 	public ScheduleDao() {
-		instance = DBConnection.getInstance();
+		db = DBConnection.getInstance();
 	}
 	
 	public void scheduleInsert(ScheduleDto sd) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		try {
-			con = instance.getConnection();
+			con = db.getConnection();
 			String sql = "insert into schedule values(?,?,?)";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, sd.getS_id());
@@ -29,7 +29,7 @@ public class ScheduleDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			instance.closeConnection(null, ps, con);
+			db.closeConnection(null, ps, con);
 		}
 	}
 	
@@ -39,7 +39,7 @@ public class ScheduleDao {
 		ResultSet rs = null;
 		ScheduleDto sd = new ScheduleDto();
 		try {
-			con = instance.getConnection();
+			con = db.getConnection();
 			String sql = "select * from schedule where s_id=? and s_date=?";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, s_id);
@@ -54,7 +54,7 @@ public class ScheduleDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			instance.closeConnection(rs, ps, con);
+			db.closeConnection(rs, ps, con);
 		}
 		return sd;		
 	}
@@ -63,7 +63,7 @@ public class ScheduleDao {
 		Connection con = null;
 		PreparedStatement ps = null;
 		try {
-			con = instance.getConnection();
+			con = db.getConnection();
 			String sql = "update schedule set s_time=? where s_id=?, s_date=?";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, sd.getS_time());
@@ -74,7 +74,7 @@ public class ScheduleDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			instance.closeConnection(null, ps, con);
+			db.closeConnection(null, ps, con);
 		}				
 	}
 	
@@ -82,7 +82,7 @@ public class ScheduleDao {
 		Connection con = null;
 		PreparedStatement ps = null;
 		try {
-			con = instance.getConnection();
+			con = db.getConnection();
 			String sql = "delete from schedule where s_id=?,s_date=?";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, s_id);
@@ -92,7 +92,7 @@ public class ScheduleDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			instance.closeConnection(null, ps, con);
+			db.closeConnection(null, ps, con);
 		}
 	}
 

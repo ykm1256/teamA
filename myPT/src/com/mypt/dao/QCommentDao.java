@@ -15,10 +15,10 @@ import com.mypt.dto.QCommentDto;
 import com.mypt.dto.TrainerDto;
 
 public class QCommentDao {
-	private DBConnection instance;
+	private DBConnection db;
 	
 	public QCommentDao() {
-		instance = DBConnection.getInstance();
+		db = DBConnection.getInstance();
 	}
 
 	public void qCommentInsert(QCommentDto qd) {
@@ -26,7 +26,7 @@ public class QCommentDao {
 		Connection con = null;
 		PreparedStatement ps = null;
 		try {
-			con = instance.getConnection();
+			con = db.getConnection();
 			String sql = "insert into qcomment (qb_num,qb_cnick,qb_ccontent) values(?,?,?)";
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, qd.getQb_cnum());			
@@ -37,7 +37,7 @@ public class QCommentDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			instance.closeConnection(null, ps, con);
+			db.closeConnection(null, ps, con);
 		}
 
 	}
@@ -48,7 +48,7 @@ public class QCommentDao {
 		ResultSet rs = null;
 		QCommentDto qd = new QCommentDto();
 		try {
-			con = instance.getConnection();
+			con = db.getConnection();
 			String sql = "select * from qcomment where qb_cnum='" + qb_cnum + "'";
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
@@ -63,7 +63,7 @@ public class QCommentDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			instance.closeConnection(rs, ps, con);
+			db.closeConnection(rs, ps, con);
 		}
 		return qd;
 	}
@@ -72,7 +72,7 @@ public class QCommentDao {
 		Connection con = null;
 		PreparedStatement ps = null;
 		try {
-			con = instance.getConnection();
+			con = db.getConnection();
 			String sql = "update qcomment set qb_ccontent=?, qb_cdate=now() where qb_cnum=?";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, qd.getQb_ccontent());
@@ -82,7 +82,7 @@ public class QCommentDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			instance.closeConnection(null, ps, con);
+			db.closeConnection(null, ps, con);
 		}
 	}
 
@@ -90,7 +90,7 @@ public class QCommentDao {
 		Connection con = null;
 		PreparedStatement ps = null;
 		try {
-			con = instance.getConnection();
+			con = db.getConnection();
 			String sql = "delete from qcomment where qb_cnum ="+ qb_cnum;
 			ps = con.prepareStatement(sql);
 			ps.executeUpdate();
@@ -98,7 +98,7 @@ public class QCommentDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			instance.closeConnection(null, ps, con);
+			db.closeConnection(null, ps, con);
 		}
 
 	}
@@ -110,7 +110,7 @@ public class QCommentDao {
 		ArrayList<QCommentDto> arr = new ArrayList<QCommentDto>();
 		QCommentDto qd = null;
 		try {
-			con = instance.getConnection();
+			con = db.getConnection();
 			String sql = "select * from qcomment";
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
@@ -127,7 +127,7 @@ public class QCommentDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			instance.closeConnection(rs, ps, con);
+			db.closeConnection(rs, ps, con);
 		}
 		return arr;
 	}

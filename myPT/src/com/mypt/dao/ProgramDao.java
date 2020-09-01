@@ -9,10 +9,10 @@ import com.mypt.dto.ProgramDto;
 
 
 public class ProgramDao {
-	private DBConnection instance;
+	private DBConnection db;
 	
 	public ProgramDao(){
-		instance=DBConnection.getInstance();
+		db=DBConnection.getInstance();
 	}
 	
 	public void insertProgram(ProgramDto programBean) {
@@ -21,7 +21,7 @@ public class ProgramDao {
 		String sql=null;
 		
 		try {
-			con=instance.getConnection();
+			con=db.getConnection();
 			sql= "insert program(p_id,p_date,p_mention,p_part) "
 					+ "valuse(?,?,?,?)";
 			ps=con.prepareStatement(sql);
@@ -53,7 +53,7 @@ public class ProgramDao {
 		ProgramDto programBean=new ProgramDto();
 		
 		try {
-			con=instance.getConnection();
+			con=db.getConnection();
 			sql="select * from program where p_id=?";
 			ps=con.prepareStatement(sql);
 			ps.setString(1, p_id);
@@ -77,7 +77,7 @@ public class ProgramDao {
 		String sql=null;
 		
 		try {
-			con=instance.getConnection();
+			con=db.getConnection();
 			sql= "update program set p_date=?,p_mention=?,p_part=? where p_id=?";
 			ps=con.prepareStatement(sql);
 			
@@ -108,7 +108,7 @@ public class ProgramDao {
 		String sql=null;
 		
 		try {
-			con=instance.getConnection();
+			con=db.getConnection();
 			sql= "delete from program where p_id=?";
 			ps=con.prepareStatement(sql);
 			ps.setString(1, p_id);

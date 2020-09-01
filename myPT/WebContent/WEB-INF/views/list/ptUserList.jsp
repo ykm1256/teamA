@@ -72,186 +72,32 @@
                       </tr>
                     </thead>
                     <tbody class="text-center">
-                      <tr>
-                        <td>M940001</td>
-                        <td>안상필</td>
-                        <td>남</td>
-                        <td>27</td>
+                      <c:forEach items="${ptUserList }" var="item">
+                      	<tr>
+                        <td>${item.id }</td>
+                        <td>${item.name }</td>
+                        <td>
+                        	<c:choose>
+                        		<c:when test="${item.gender eq 0}">
+                        			여
+                        		</c:when>
+                        		<c:otherwise>
+                        			남
+                        		</c:otherwise>
+                        	</c:choose> 
+                        </td>
+                        <td>${item.birth }</td>
                         <td>010-7474-4303</td>
-                        <td>2020.08.24</td>
-                        <td>2020.09.16</td>
-                        <td>20</td>
+                        <td>${item.startdate }</td>
+                        <td>${item.enddate }</td>
+                        <td>${item.ptcount }</td>
                         <td>
                           <button class="btn btn-primary custom-btn">
                             <i class="fas fa-edit"></i>
                           </button>
                         </td>
                       </tr>
-                      <tr>
-                        <td>M010002</td>
-                        <td>김유신</td>
-                        <td>남</td>
-                        <td>20</td>
-                        <td>010-7474-4303</td>
-                        <td>2020.08.24</td>
-                        <td>2020.09.16</td>
-                        <td>20</td>
-                        <td>
-                          <button class="btn btn-primary custom-btn">
-                            <i class="fas fa-edit"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>M910003</td>
-                        <td>이순신</td>
-                        <td>남</td>
-                        <td>30</td>
-                        <td>010-7474-4303</td>
-                        <td>2020.08.24</td>
-                        <td>2020.09.16</td>
-                        <td>20</td>
-                        <td>
-                          <button class="btn btn-primary custom-btn">
-                            <i class="fas fa-edit"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>F000004</td>
-                        <td>유관순</td>
-                        <td>여</td>
-                        <td>21</td>
-                        <td>010-7474-4303</td>
-                        <td>2020.08.24</td>
-                        <td>2020.09.16</td>
-                        <td>20</td>
-                        <td>
-                          <button class="btn btn-primary custom-btn">
-                            <i class="fas fa-edit"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>M940001</td>
-                        <td>안상필</td>
-                        <td>남</td>
-                        <td>27</td>
-                        <td>010-7474-4303</td>
-                        <td>2020.08.24</td>
-                        <td>2020.09.16</td>
-                        <td>20</td>
-                        <td>
-                          <button class="btn btn-primary custom-btn">
-                            <i class="fas fa-edit"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>M010002</td>
-                        <td>김유신</td>
-                        <td>남</td>
-                        <td>20</td>
-                        <td>010-7474-4303</td>
-                        <td>2020.08.24</td>
-                        <td>2020.09.16</td>
-                        <td>20</td>
-                        <td>
-                          <button class="btn btn-primary custom-btn">
-                            <i class="fas fa-edit"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>M910003</td>
-                        <td>이순신</td>
-                        <td>남</td>
-                        <td>30</td>
-                        <td>010-7474-4303</td>
-                        <td>2020.08.24</td>
-                        <td>2020.09.16</td>
-                        <td>20</td>
-                        <td>
-                          <button class="btn btn-primary custom-btn">
-                            <i class="fas fa-edit"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>F000004</td>
-                        <td>유관순</td>
-                        <td>여</td>
-                        <td>21</td>
-                        <td>010-7474-4303</td>
-                        <td>2020.08.24</td>
-                        <td>2020.09.16</td>
-                        <td>20</td>
-                        <td>
-                          <button class="btn btn-primary custom-btn">
-                            <i class="fas fa-edit"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>M940001</td>
-                        <td>안상필</td>
-                        <td>남</td>
-                        <td>27</td>
-                        <td>010-7474-4303</td>
-                        <td>2020.08.24</td>
-                        <td>2020.09.16</td>
-                        <td>20</td>
-                        <td>
-                          <button class="btn btn-primary custom-btn">
-                            <i class="fas fa-edit"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>M010002</td>
-                        <td>김유신</td>
-                        <td>남</td>
-                        <td>20</td>
-                        <td>010-7474-4303</td>
-                        <td>2020.08.24</td>
-                        <td>2020.09.16</td>
-                        <td>20</td>
-                        <td>
-                          <button class="btn btn-primary custom-btn">
-                            <i class="fas fa-edit"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>M910003</td>
-                        <td>이순신</td>
-                        <td>남</td>
-                        <td>30</td>
-                        <td>010-7474-4303</td>
-                        <td>2020.08.24</td>
-                        <td>2020.09.16</td>
-                        <td>20</td>
-                        <td>
-                          <button class="btn btn-primary custom-btn">
-                            <i class="fas fa-edit"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>F000004</td>
-                        <td>유관순</td>
-                        <td>여</td>
-                        <td>21</td>
-                        <td>010-7474-4303</td>
-                        <td>2020.08.24</td>
-                        <td>2020.09.16</td>
-                        <td>20</td>
-                        <td>
-                          <button class="btn btn-primary custom-btn">
-                            <i class="fas fa-edit"></i>
-                          </button>
-                        </td>
-                      </tr>
+                      </c:forEach>
                     </tbody>
                   </table>
                 </div>

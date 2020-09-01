@@ -11,7 +11,7 @@
     />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>템플릿</title>
+    <title>myPT</title>
     <link href="css/styles.css" rel="stylesheet" />
     <link href="css/index.css" rel="stylesheet"/>
     <link href="css/widget.css" rel="stylesheet"/>
@@ -19,7 +19,6 @@
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
     ></script>
-    
 
   </head>
   <body class="" style="background-color: black">
@@ -51,14 +50,12 @@
                     </h2>
                   </div>
                   <div class="card-body">
-                    
+                    <form>
                       <div class="form-group">
-                        <label class="small mb-1 text-white" for="id">ID</label>
-                        
+                        <label class="small mb-1 text-white">ID</label>
                         <input
                           class="form-control py-4 text-white rounded-0 border-top-0 border-right-0 border-left-0"
-                          id="id"
-                          name="id"
+                          id="inputID"
                           style="background-color: black"
                           placeholder="Enter ID"
                         />
@@ -66,14 +63,13 @@
                       <div class="form-group">
                         <label
                           class="small mb-1 text-white"
-                          for="pw1"
+                          for="inputPassword1"
                           >Password</label
                         >
                         <input
                           class="form-control py-4 text-white rounded-0 border-top-0 border-right-0 border-left-0"
                           style="background-color: black"
-                          id="pw1"
-                          name="pw"
+                          id="inputPassword1"
                           type="password"
                           placeholder="Enter password"
                         />
@@ -93,19 +89,17 @@
                       <div
                         class="form-group d-flex align-items-center justify-content-between mt-4 mb-0"
                       >
-                        <button
-                          class="btn-block btn text-white"
+                        <a
+                          class="btn btn-primary btn-block"
                           style="
                             background-color: rgb(63, 72, 204);
                             border-color: rgb(63, 72, 204);
                           "
-                          id="btntrainer"
-                          
+                          href="index.html"
+                          >Login</a
                         >
-                          로그인
-                        </button>
                       </div>
-                    
+                    </form>
                   </div>
                 </div>
               </div>
@@ -158,16 +152,16 @@
                     </h2>
                   </div>
                   <div class="card-body">
-                    
+                    <form>
                       <div class="form-group">
                         <label
                           class="small mb-1 text-white"
-                          for="email"
+                          for="inputEmailAddress"
                           >Email</label
                         >
                         <input
                           class="form-control py-4 text-white rounded-0 border-top-0 border-right-0 border-left-0"
-                          id="email"                          
+                          id="inputEmailAddress"
                           style="background-color: black"
                           type="email"
                           placeholder="Enter email address"
@@ -176,13 +170,13 @@
                       <div class="form-group">
                         <label
                           class="small mb-1 text-white"
-                          for="pw2"
+                          for="inputPassword2"
                           >Password</label
                         >
                         <input
                           class="form-control py-4 text-white rounded-0 border-top-0 border-right-0 border-left-0"
                           style="background-color: black"
-                          id="pw2"                          
+                          id="inputPassword2"
                           type="password"
                           placeholder="Enter password"
                         />
@@ -202,19 +196,17 @@
                       <div
                         class="form-group d-flex align-items-center justify-content-between mt-4 mb-0"
                       >
-                        <button
-                          class="btn-block btn text-white"
+                        <a
+                          class="btn btn-primary btn-block"
                           style="
                             background-color: rgb(63, 72, 204);
                             border-color: rgb(63, 72, 204);
                           "
-                          id="btnUser"
-                          
+                          href="index.html"
+                          >Login</a
                         >
-                          로그인
-                        </button>
                       </div>
-                 
+                    </form>
                   </div>
                 </div>
               </div>
@@ -234,7 +226,5 @@
       crossorigin="anonymous"
     ></script>
     <script src="js/scripts.js"></script>
-    <script src="js/login.js"></script>
-    
   </body>
 </html>

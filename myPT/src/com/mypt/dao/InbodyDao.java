@@ -9,10 +9,10 @@ import com.mypt.dto.InbodyDto;
 
 
 public class InbodyDao {
-	private DBConnection instance;
+	private DBConnection db;
 	
 	public InbodyDao(){
-		instance=DBConnection.getInstance();
+		db=DBConnection.getInstance();
 	}
 	
 	public void insertInbody(InbodyDto inbodyBean) {
@@ -21,7 +21,7 @@ public class InbodyDao {
 		String sql=null;
 		
 		try {
-			con=instance.getConnection();
+			con=db.getConnection();
 			sql= "insert inbody(i_id,i_date,muscle,fat,height,weight) "
 					+ "values(?,?,?,?,?,?)";
 			ps=con.prepareStatement(sql);
@@ -55,7 +55,7 @@ public class InbodyDao {
 		InbodyDto inbodyBean=new InbodyDto();
 		
 		try {
-			con=instance.getConnection();
+			con=db.getConnection();
 			sql="select * from inbody where i_id=?";
 			ps=con.prepareStatement(sql);
 			ps.setString(1, i_id);
@@ -81,7 +81,7 @@ public class InbodyDao {
 		String sql=null;
 		
 		try {
-			con=instance.getConnection();
+			con=db.getConnection();
 			sql= "update inbody set i_date=?,muscle=?,fat=?,height=?,weight=?"
 					+ " where i_id=?";
 			ps=con.prepareStatement(sql);
@@ -115,7 +115,7 @@ public class InbodyDao {
 		String sql=null;
 		
 		try {
-			con=instance.getConnection();
+			con=db.getConnection();
 			sql= "delete from inbody where i_id=?";
 			ps=con.prepareStatement(sql);
 			ps.setString(1, i_id);
