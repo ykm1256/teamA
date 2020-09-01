@@ -1,6 +1,9 @@
 package com.mypt.connection;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -13,11 +16,27 @@ public class DBConnection {
 		return instance;
 	}
 	
-	public Connection getConnection() throws Exception { // ï¿½Ú¹ï¿½sql ï¿½ï¿½ï¿½ï¿½Æ®
+	public Connection getConnection() throws Exception { // ÀÚ¹Ùsql ÀÓÆ÷Æ®
 		Context initCtx = new InitialContext();
-		Context envCtx = (Context) initCtx.lookup("java:comp/env");	//lookupï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã£ï¿½ï¿½
+		Context envCtx = (Context) initCtx.lookup("java:comp/env");	//lookupÀ¸·Î ÆÄÀÏ Ã£À½
 		DataSource ds = (DataSource)envCtx.lookup("jdbc/mysql");
 		return ds.getConnection();
+	}
+	
+	public void closeConnection(ResultSet rs, PreparedStatement ps, Connection con ) {
+		// TODO Auto-generated method stub
+		try {
+			
+			if (rs != null)
+				rs.close();
+			if (ps != null)
+				ps.close();
+			if (con != null)
+				con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 

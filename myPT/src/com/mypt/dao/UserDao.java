@@ -3,6 +3,7 @@ package com.mypt.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import com.mypt.connection.DBConnection;
 import com.mypt.dto.UserDto;
@@ -45,14 +46,7 @@ public class UserDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				if(ps!=null)
-					ps.close();
-				if(con!=null)
-					con.close();
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
+			instance.closeConnection(null, ps, con);
 		}
 	}
 	
@@ -82,13 +76,57 @@ public class UserDao {
 				userBean.setNick(rs.getString("nick"));
 				userBean.setStartdate(rs.getDate("startdate"));
 				userBean.setEnddate(rs.getDate("enddate"));
+				userBean.setPtcount(rs.getInt("ptcount"));
 				userBean.setTid(rs.getString("tid"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			instance.closeConnection(rs, ps, con);
 		}
 		
 		return userBean;
+	}
+	
+	// 전체리스트
+	public ArrayList<UserDto> userList(){
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		String sql=null;
+		ArrayList<UserDto> arr= new ArrayList<UserDto>();
+		
+		try {
+			con=instance.getConnection();
+			sql="select * from user";
+			ps=con.prepareStatement(sql);
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				UserDto userBean=new UserDto();
+				userBean.setId(rs.getString("id"));
+				userBean.setPw(rs.getString("pw"));
+				userBean.setName(rs.getString("name"));
+				userBean.setGender(rs.getInt("gender"));
+				userBean.setEmail(rs.getString("email"));
+				userBean.setBirth(rs.getString("birth"));
+				userBean.setAddress(rs.getString("address"));
+				userBean.setQr(rs.getString("qr"));
+				userBean.setSigndate(rs.getTimestamp("signdate"));
+				userBean.setNick(rs.getString("nick"));
+				userBean.setStartdate(rs.getDate("startdate"));
+				userBean.setEnddate(rs.getDate("enddate"));
+				userBean.setPtcount(rs.getInt("ptcount"));
+				userBean.setTid(rs.getString("tid"));
+				
+				arr.add(userBean);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			instance.closeConnection(rs, ps, con);
+		}
+		
+		return arr;
 	}
 	
 	public void updateUser(UserDto userBean) {
@@ -123,14 +161,8 @@ public class UserDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				if(ps!=null)
-					ps.close();
-				if(con!=null)
-					con.close();
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
+			instance.closeConnection(null, ps, con);
+		
 		}
 		
 	}
@@ -150,14 +182,7 @@ public class UserDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				if(ps!=null)
-					ps.close();
-				if(con!=null)
-					con.close();
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
+			instance.closeConnection(null, ps, con);
 		}
 	}
 	

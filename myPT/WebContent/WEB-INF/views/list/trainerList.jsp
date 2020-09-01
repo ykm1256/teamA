@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -12,9 +13,9 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>트레이너 관리</title>
-    <link href="css/styles.css" rel="stylesheet" />
-    <link href="css/index.css" rel="stylesheet"/>
-    <link href="css/widget.css" rel="stylesheet"/>
+    <link href="/myPT/css/styles.css" rel="stylesheet" />
+    <link href="/myPT/css/index.css" rel="stylesheet"/>
+    <link href="/myPT/css/widget.css" rel="stylesheet"/>
 	<!-- 데이터 테이블 css -->
 	<link
       href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"
@@ -30,16 +31,16 @@
   </head>
   <body class="sb-nav-fixed">
     <!-- nav -->
-    <jsp:include page="includeFiles/nav.jsp"></jsp:include>
+    <jsp:include page="/includeFiles/nav.jsp"></jsp:include>
     <!-- nav -->
 
     <!-- QR 모달 -->
-    <jsp:include page="includeFiles/modalQR.jsp"></jsp:include>
+    <jsp:include page="/includeFiles/modalQR.jsp"></jsp:include>
     <!--//QR 모달-->
 
     <div id="layoutSidenav">
       <!-- sideNav -->
-      <jsp:include page="includeFiles/adminSideNav.jsp"></jsp:include>
+      <jsp:include page="/includeFiles/adminSideNav.jsp"></jsp:include>
       <!-- /sideNav -->
       <div id="layoutSidenav_content">
         <main>
@@ -68,11 +69,12 @@
                       </tr>
                     </thead>
                     <tbody class="text-center">
+                      <c:forEach items="${trainerList }" var="item">
                       <tr>
-                        <td>T0001</td>
-                        <td>안상필</td>
-                        <td>남</td>
-                        <td>940511</td>
+                        <td>${item.t_id}</td>
+                        <td>${item.t_name }</td>
+                        <td>${item.t_gender }</td>
+                        <td>${item.t_birth }</td>
                         <td>010-7474-4303</td>
                         <td>
                           <button class="btn btn-primary custom-btn">
@@ -80,42 +82,7 @@
                           </button>
                         </td>
                       </tr>
-                      <tr>
-                        <td>T0002</td>
-                        <td>유관순</td>
-                        <td>여</td>
-                        <td>010101</td>
-                        <td>010-7474-4303</td>
-                        <td>
-                          <button class="btn btn-primary custom-btn">
-                            <i class="fas fa-edit"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>T0003</td>
-                        <td>김갑환</td>
-                        <td>남</td>
-                        <td>900101</td>
-                        <td>010-7474-4303</td>
-                        <td>
-                          <button class="btn btn-primary custom-btn">
-                            <i class="fas fa-edit"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>T0004</td>
-                        <td>장보고</td>
-                        <td>남</td>
-                        <td>850101</td>
-                        <td>010-7474-4303</td>
-                        <td>
-                          <button class="btn btn-primary custom-btn">
-                            <i class="fas fa-edit"></i>
-                          </button>
-                        </td>
-                      </tr>
+                      </c:forEach>
                     </tbody>
                   </table>
                 </div>
@@ -130,12 +97,12 @@
     <script
       src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js">
     </script>
-    <script src="js/scripts.js"></script>
+    <script src="/myPT/js/scripts.js"></script>
     
     <!-- 데이터 테이블 js -->
-    <script src="js/dataTables.min.js"></script>
+    <script src="/myPT/js/dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-    <script src="assets/demo/datatables-demo.js"></script>
+    <script src="/myPT/assets/demo/datatables-demo.js"></script>
     <!-- /데이터 테이블 js -->
     
   </body>
