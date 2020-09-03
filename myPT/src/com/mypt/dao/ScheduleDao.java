@@ -9,11 +9,18 @@ import com.mypt.dto.ScheduleDto;
 
 public class ScheduleDao {
 	private DBConnection db;
-	
-	public ScheduleDao() {
+
+//////////dao 싱글톤 (이)
+	private static ScheduleDao instance = new ScheduleDao();
+
+	public static ScheduleDao getInstance() {
+		return instance;
+	}
+
+	private ScheduleDao() {
 		db = DBConnection.getInstance();
 	}
-	
+
 	public void scheduleInsert(ScheduleDto sd) {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -32,7 +39,7 @@ public class ScheduleDao {
 			db.closeConnection(null, ps, con);
 		}
 	}
-	
+
 	public ScheduleDto scheduleSelect(String s_id, String s_date) {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -45,7 +52,7 @@ public class ScheduleDao {
 			ps.setString(1, s_id);
 			ps.setString(2, s_date);
 			rs = ps.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				sd.setS_id(s_id);
 				sd.setS_date(s_date);
 				sd.setS_time(rs.getString(3));
@@ -56,9 +63,9 @@ public class ScheduleDao {
 		} finally {
 			db.closeConnection(rs, ps, con);
 		}
-		return sd;		
+		return sd;
 	}
-	
+
 	public void ScheduleUpdate(ScheduleDto sd) {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -75,9 +82,9 @@ public class ScheduleDao {
 			e.printStackTrace();
 		} finally {
 			db.closeConnection(null, ps, con);
-		}				
+		}
 	}
-	
+
 	public void ScheduleDelete(String s_id, String s_date) {
 		Connection con = null;
 		PreparedStatement ps = null;

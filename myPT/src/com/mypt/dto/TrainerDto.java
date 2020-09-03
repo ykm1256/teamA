@@ -1,6 +1,9 @@
 package com.mypt.dto;
 
 public class TrainerDto {
+	
+	private String t_id, t_pw, t_name, t_email, t_birth, t_address, t_nick,t_gender,t_tel,t_zipcode;
+	
 	public String getT_id() {
 		return t_id;
 	}
@@ -43,14 +46,25 @@ public class TrainerDto {
 	public void setT_nick(String t_nick) {
 		this.t_nick = t_nick;
 	}
-	public int getT_gender() {
+	public String getT_gender() {
 		return t_gender;
 	}
-	public void setT_gender(int t_gender) {
+	public void setT_gender(String t_gender) {
 		this.t_gender = t_gender;
 	}
-	String t_id, t_pw, t_name, t_email, t_birth, t_address, t_nick;
-	int t_gender;
+	public String getT_tel() {
+		return t_tel;
+	}
+	public void setT_tel(String t_tel) {
+		this.t_tel = t_tel;
+	}
+	public String getT_zipcode() {
+		return t_zipcode;
+	}
+	public void setT_zipcode(String t_zipcode) {
+		this.t_zipcode = t_zipcode;
+	}
+	
 	
 	
 

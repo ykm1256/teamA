@@ -10,7 +10,14 @@ import com.mypt.dto.HeadCountDto;
 public class HeadCountDao {
 	private DBConnection db;
 	
-	public HeadCountDao() {
+//////dao 싱글톤 (이)
+	private static HeadCountDao instance = new HeadCountDao();
+	public static HeadCountDao getInstance() 
+	{
+		return instance;
+	}
+	
+	private HeadCountDao() {
 		db = DBConnection.getInstance();
 	}
 	

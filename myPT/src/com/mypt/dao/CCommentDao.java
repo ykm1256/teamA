@@ -15,7 +15,14 @@ import com.mypt.dto.TrainerDto;
 public class CCommentDao {
 	private DBConnection db;
 	
-	public CCommentDao() {
+//////dao 싱글톤 (이)
+	private static CCommentDao instance = new CCommentDao();
+	public static CCommentDao getInstance() 
+	{
+		return instance;
+	}
+	
+	private CCommentDao() {
 		db = DBConnection.getInstance();
 	}
 	

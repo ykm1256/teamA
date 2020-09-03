@@ -11,7 +11,14 @@ import com.mypt.dto.TrainerDto;
 public class TrainerDao {
 	private DBConnection db;
 	
-	public TrainerDao() {
+//////////dao 싱글톤 (이)
+private static TrainerDao instance = new TrainerDao();
+public static TrainerDao getInstance() 
+{
+return instance;
+}
+	
+	private TrainerDao() {
 		db = DBConnection.getInstance();
 	}
 
@@ -21,16 +28,18 @@ public class TrainerDao {
 		PreparedStatement ps = null;
 		try {
 			con = db.getConnection();
-			String sql = "insert into trainer values(?,?,?,?,?,?,?,?)";
+			String sql = "insert into trainer values(?,?,?,?,?,?,?,?,?,?)";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, td.getT_id());
 			ps.setString(2, td.getT_pw());
 			ps.setString(3, td.getT_name());
-			ps.setInt(4, td.getT_gender());
+			ps.setString(4, td.getT_gender());
 			ps.setString(5, td.getT_email());
 			ps.setString(6, td.getT_birth());
 			ps.setString(7, td.getT_address());
 			ps.setString(8, td.getT_nick());
+			ps.setString(9, td.getT_zipcode());
+			ps.setString(10, td.getT_tel());
 			ps.executeUpdate();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -52,14 +61,16 @@ public class TrainerDao {
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 			if (rs.next()) {
-				td.setT_id(rs.getString(1));
-				td.setT_pw(rs.getString(2));
-				td.setT_name(rs.getString(3));
-				td.setT_gender(Integer.parseInt(rs.getString(4)));
-				td.setT_email(rs.getString(5));
-				td.setT_birth(rs.getString(6));
-				td.setT_address(rs.getString(7));
-				td.setT_nick(rs.getString(8));
+				td.setT_id(rs.getString("t_id"));
+				td.setT_pw(rs.getString("t_pw"));
+				td.setT_name(rs.getString("t_name"));
+				td.setT_gender(rs.getString("t_gender"));
+				td.setT_email(rs.getString("t_email"));
+				td.setT_birth(rs.getString("t_birth"));
+				td.setT_address(rs.getString("t_address"));
+				td.setT_nick(rs.getString("t_nick"));
+				td.setT_zipcode(rs.getString("t_zipcode"));
+				td.setT_tel(rs.getString("t_tel"));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -75,16 +86,18 @@ public class TrainerDao {
 		PreparedStatement ps = null;
 		try {
 			con = db.getConnection();
-			String sql = "update trainer set t_pw=?, t_name=?, t_gender=?, t_email, t_birth, t_address, t_nick where t_id=?";
+			String sql = "update trainer set t_pw=?, t_name=?, t_gender=?, t_email=?, t_birth=?, t_address=?, t_nick=?,t_zipcode=?, t_tel=? where t_id=?";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, td.getT_pw());
 			ps.setString(2, td.getT_name());
-			ps.setInt(3, td.getT_gender());
+			ps.setString(3, td.getT_gender());
 			ps.setString(4, td.getT_email());
 			ps.setString(5, td.getT_birth());
 			ps.setString(6, td.getT_address());
 			ps.setString(7, td.getT_nick());
-			ps.setString(8, td.getT_id());
+			ps.setString(8, td.getT_zipcode());
+			ps.setString(9, td.getT_tel());
+			ps.setString(10, td.getT_id());
 			ps.executeUpdate();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -128,7 +141,7 @@ public class TrainerDao {
 				td.setT_id(rs.getString(1));
 				td.setT_pw(rs.getString(2));
 				td.setT_name(rs.getString(3));
-				td.setT_gender(rs.getInt(4));
+				td.setT_gender(rs.getString(4));
 				td.setT_email(rs.getString(5));
 				td.setT_birth(rs.getString(6));
 				td.setT_address(rs.getString(7));

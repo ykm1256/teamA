@@ -3,17 +3,17 @@ package com.mypt.controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.mypt.controller.action.register.EmailCheckAction;
-import com.mypt.controller.action.register.MoveUserList;
-import com.mypt.controller.action.register.MoveUserRegister;
-import com.mypt.controller.action.register.NickCheckAction;
-import com.mypt.controller.action.register.UserInsertAction;
-import com.mypt.controller.action.list.PTUserListViewAction;
-import com.mypt.controller.action.list.TrainerListViewAction;
-import com.mypt.controller.action.list.UserListViewAction;
-import com.mypt.controller.action.login.MoveIntroAction;
-import com.mypt.controller.action.login.TrainerLoginAction;
-import com.mypt.controller.action.login.UserLoginAction;
+import com.mypt.action.check.EmailCheckAction;
+import com.mypt.action.check.NickCheckAction;
+import com.mypt.action.list.PTUserListViewAction;
+import com.mypt.action.list.TrainerListViewAction;
+import com.mypt.action.list.UserListViewAction;
+import com.mypt.action.login.TrainerLoginAction;
+import com.mypt.action.login.UserLoginAction;
+import com.mypt.action.move.MoveIntroAction;
+import com.mypt.action.move.MoveUserList;
+import com.mypt.action.move.MoveUserRegister;
+import com.mypt.action.register.UserInsertAction;
 
 
 public class ActionFactory 

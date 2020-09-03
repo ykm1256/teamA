@@ -17,7 +17,14 @@ import com.mypt.dto.TrainerDto;
 public class QCommentDao {
 	private DBConnection db;
 	
-	public QCommentDao() {
+//////////dao 싱글톤 (이)
+private static QCommentDao instance = new QCommentDao();
+public static QCommentDao getInstance() 
+{
+return instance;
+}
+	
+	private QCommentDao() {
 		db = DBConnection.getInstance();
 	}
 

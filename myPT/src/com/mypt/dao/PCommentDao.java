@@ -9,11 +9,17 @@ import java.util.ArrayList;
 import com.mypt.connection.DBConnection;
 import com.mypt.dto.PCommentDto;
 
-
 public class PCommentDao {
 	private DBConnection db;
-	
-	public PCommentDao() {
+
+//////////dao 싱글톤 (이)
+	private static PCommentDao instance = new PCommentDao();
+
+	public static PCommentDao getInstance() {
+		return instance;
+	}
+
+	private PCommentDao() {
 		db = DBConnection.getInstance();
 	}
 
@@ -25,9 +31,9 @@ public class PCommentDao {
 			con = db.getConnection();
 			String sql = "insert into pcomment (pb_num,pb_cnick,pb_ccontent) values(?,?,?)";
 			ps = con.prepareStatement(sql);
-			ps.setInt(1, pd.getpb_cnum());			
-			ps.setString(2, pd.getpb_cnick());			
-			ps.setString(3, pd.getpb_ccontent());			
+			ps.setInt(1, pd.getpb_cnum());
+			ps.setString(2, pd.getpb_cnick());
+			ps.setString(3, pd.getpb_ccontent());
 			ps.executeUpdate();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -63,7 +69,7 @@ public class PCommentDao {
 		}
 		return pd;
 	}
-	
+
 	public void pCommentUpdate(PCommentDto pd) {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -87,7 +93,7 @@ public class PCommentDao {
 		PreparedStatement ps = null;
 		try {
 			con = db.getConnection();
-			String sql = "delete from pcomment where pb_cnum ="+ pb_cnum;
+			String sql = "delete from pcomment where pb_cnum =" + pb_cnum;
 			ps = con.prepareStatement(sql);
 			ps.executeUpdate();
 		} catch (Exception e) {
@@ -98,7 +104,8 @@ public class PCommentDao {
 		}
 
 	}
-	public ArrayList<PCommentDto> pCommentList(){
+
+	public ArrayList<PCommentDto> pCommentList() {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -109,7 +116,7 @@ public class PCommentDao {
 			String sql = "select * from pcomment";
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
-			while(rs.next()) {
+			while (rs.next()) {
 				pd = new PCommentDto();
 				pd.setpb_cnum(rs.getInt(1));
 				pd.setpb_num(rs.getInt(2));
@@ -126,7 +133,5 @@ public class PCommentDao {
 		}
 		return arr;
 	}
-
-	
 
 }

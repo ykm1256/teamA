@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 public class UserDto {
+	private InbodyDto inbody;
+	
 	private String id;
 	private String pw;
 	private String name;
@@ -18,13 +20,33 @@ public class UserDto {
 	private Date enddate;
 	private int ptcount;
 	private String tid;
+	private String zipcode;
 	private String tel;
 	
+	
+	public UserDto() {};
+	public UserDto(InbodyDto inbody)
+	{
+		this.inbody= inbody; 
+	}
+	
+	public InbodyDto getInbody() {
+		return inbody;
+	}
+	public void setInbody(InbodyDto inbody) {
+		this.inbody = inbody;
+	}
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	public String getZipcode() {
+		return zipcode;
+	}
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
 	}
 	public String getPw() {
 		return pw;

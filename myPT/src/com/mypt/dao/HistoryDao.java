@@ -3,6 +3,7 @@ package com.mypt.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import com.mypt.connection.DBConnection;
 import com.mypt.dto.HistoryDto;
@@ -10,6 +11,13 @@ import com.mypt.dto.HistoryDto;
 
 public class HistoryDao {
 	private DBConnection db;
+	
+//////////dao 싱글톤 (이)
+private static HistoryDao instance = new HistoryDao();
+public static HistoryDao getInstance() 
+{
+return instance;
+}
 	
 	public HistoryDao() {
 		db=DBConnection.getInstance();
@@ -34,14 +42,7 @@ public class HistoryDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				if(ps!=null)
-					ps.close();
-				if(con!=null)
-					con.close();
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
+			db.closeConnection(null, ps, con);
 		}
 	}
 	
@@ -66,6 +67,8 @@ public class HistoryDao {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			db.closeConnection(rs, ps, con);
 		}
 		
 		return historyBean;
@@ -90,14 +93,7 @@ public class HistoryDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				if(ps!=null)
-					ps.close();
-				if(con!=null)
-					con.close();
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
+			db.closeConnection(null, ps, con);
 		}
 		
 	}
@@ -117,14 +113,181 @@ public class HistoryDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				if(ps!=null)
-					ps.close();
-				if(con!=null)
-					con.close();
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
+			db.closeConnection(null, ps, con);
 		}
 	}
+	
+	
+	// 그래프관련 메서드 추가
+		// 월별 매출
+		public ArrayList<HistoryDto> getincome(int year,int month) {
+			Connection con=null;
+			PreparedStatement ps=null;
+			ResultSet rs=null;
+			String sql=null;
+			HistoryDto historyBean=null;
+			ArrayList<HistoryDto> arr = new ArrayList<HistoryDto>();
+			
+					
+			try {
+				for(int i=1; i<=month;i++) {
+					historyBean = new HistoryDto();
+				
+				con=db.getConnection();
+				if(i<10) {
+				sql="select ifnull(sum(price),0) from history where paydate like '%"+year+"-0"+i+"%';";
+				}
+				else {
+					sql="select ifnull(sum(price),0) from history where paydate like '%"+year+"-"+i+"%';";
+				}
+				System.out.println(sql);
+				ps=con.prepareStatement(sql);			
+				rs=ps.executeQuery();
+				historyBean.setMonth(i);
+				if(rs.next()) {
+					System.out.println(rs.getString(1));
+					historyBean.setIncome(Integer.parseInt(rs.getString(1)));
+					
+				}
+				arr.add(historyBean);
+				db.closeConnection(rs, ps, con);
+				
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			return arr;
+		}
+		
+		//월별 등록회원수
+		public ArrayList<HistoryDto> getUser(int year,int month) {
+			Connection con=null;
+			PreparedStatement ps=null;
+			ResultSet rs=null;
+			String sql=null;
+			HistoryDto historyBean=null;
+			ArrayList<HistoryDto> arr = new ArrayList<HistoryDto>();
+			
+					
+			try {
+				for(int i=1; i<=month;i++) {
+					historyBean = new HistoryDto();
+				
+				con=db.getConnection();
+				if(i<10) {
+				sql="select count(distinct hid) from history where paydate like '%"+year+"-0"+i+"%';";
+				}
+				else {
+					sql="select count(distinct hid) from history where paydate like '%"+year+"-"+i+"%';";
+				}
+				System.out.println(sql);
+				ps=con.prepareStatement(sql);			
+				rs=ps.executeQuery();
+				historyBean.setMonth(i);
+				if(rs.next()) {
+					System.out.println(rs.getString(1));
+					historyBean.setUsercnt(Integer.parseInt(rs.getString(1)));
+					
+				}
+				arr.add(historyBean);
+				db.closeConnection(rs, ps, con);
+				
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			return arr;
+		}
+		
+		
+		// 이번 달 수입 (윤)
+		public int monthIncome(int year,int month) {
+			Connection con=null;
+			PreparedStatement ps=null;
+			ResultSet rs=null;
+			String sql=null;				
+			int income = 0;		
+			
+			try {		
+				con=db.getConnection();
+				if(month<10) {
+				sql="select ifnull(sum(price),0) from history where paydate like '%"+year+"-0"+month+"%';";
+				}
+				else {
+					sql="select ifnull(sum(price),0) from history where paydate like '%"+year+"-"+month+"%';";
+				}
+				System.out.println(sql);
+				ps=con.prepareStatement(sql);			
+				rs=ps.executeQuery();			
+				if(rs.next()) {
+					System.out.println(rs.getString(1));
+					income = Integer.parseInt(rs.getString(1));			
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				db.closeConnection(rs, ps, con);
+			}		
+			return income;
+		}
+		
+		// 현재 회원수(윤)
+		public int nowUser(String now) {
+			Connection con=null;
+			PreparedStatement ps=null;
+			ResultSet rs=null;
+			String sql=null;				
+			int usercnt = 0;		
+			
+			try {		
+				con=db.getConnection();
+				
+				sql="select count(*) from user where startdate <= ? and enddate >= ?";
+				
+				System.out.println(sql);
+				ps=con.prepareStatement(sql);
+				ps.setString(1, now);
+				ps.setString(2, now);
+				rs=ps.executeQuery();			
+				if(rs.next()) {
+					System.out.println(rs.getString(1));
+					usercnt = Integer.parseInt(rs.getString(1));			
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				db.closeConnection(rs, ps, con);
+			}		
+			return usercnt;
+		}
+		
+		// 신규 회원수(윤)
+			public int newUser(String now) {
+				Connection con=null;
+				PreparedStatement ps=null;
+				ResultSet rs=null;
+				String sql=null;				
+				int usercnt = 0;		
+				
+				try {		
+					con=db.getConnection();
+					
+					sql="select count(*) from user where signdate like '%"+now+"%';";
+					
+					System.out.println(sql);
+					ps=con.prepareStatement(sql);
+					rs=ps.executeQuery();			
+					if(rs.next()) {
+						System.out.println(rs.getString(1));
+						usercnt = Integer.parseInt(rs.getString(1));			
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					db.closeConnection(rs, ps, con);
+				}		
+				return usercnt;
+			}
 }
