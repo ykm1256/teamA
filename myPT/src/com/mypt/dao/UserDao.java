@@ -33,8 +33,10 @@ public class UserDao {
 ///////		signdate삭제 (이)
 		try {
 			con = db.getConnection();
-			sql = "insert user(id,pw,name,gender,email,birth," + "address,qr,nick,startdate,enddate,"
-					+ "ptcount,tid,zipcode,tel) " + "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			sql = "insert user(id,pw,name,gender,email,birth,"
+					+ "address,qr,nick,startdate,enddate,"
+					+ "ptcount,tid,zipcode,tel) "
+					+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 			ps = con.prepareStatement(sql);
 
