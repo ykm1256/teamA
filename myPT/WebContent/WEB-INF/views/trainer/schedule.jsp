@@ -12,9 +12,9 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>스케줄 관리</title>
-    <link href="css/styles.css" rel="stylesheet" />
-    <link href="css/index.css" rel="stylesheet"/>
-    <link href="css/widget.css" rel="stylesheet"/>
+    <link href="/myPT/css/styles.css" rel="stylesheet" />
+    <link href="/myPT/css/index.css" rel="stylesheet"/>
+    <link href="/myPT/css/widget.css" rel="stylesheet"/>
     
     <!-- 스케줄 css -->
     <link href="css/scheduleManager.css" rel="stylesheet" />
@@ -27,16 +27,16 @@
   </head>
   <body class="sb-nav-fixed">
     <!-- nav -->
-    <jsp:include page="includeFiles/nav.jsp"></jsp:include>
+    <jsp:include page="/includeFiles/nav.jsp"></jsp:include>
     <!-- nav -->
 
     <!-- QR 모달 -->
-    <jsp:include page="includeFiles/modalQR.jsp"></jsp:include>
+    <jsp:include page="/includeFiles/modalQR.jsp"></jsp:include>
     <!--//QR 모달-->
 
     <div id="layoutSidenav">
       <!-- sideNav -->
-      <jsp:include page="includeFiles/trainerSideNav.jsp"></jsp:include>
+      <jsp:include page="/includeFiles/trainerSideNav.jsp"></jsp:include>
       <!-- /sideNav -->
       <div id="layoutSidenav_content">
         <main>
@@ -326,7 +326,7 @@
     </div>
     
     <!-- 스케줄 모달 -->
-    <jsp:include page="includeFiles/modalSchedule.jsp"></jsp:include>
+    <jsp:include page="/includeFiles/modalSchedule.jsp"></jsp:include>
     <!-- /스케줄 모달 -->
     
     <script
@@ -334,10 +334,10 @@
     <script
       src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js">
     </script>
-    <script src="js/scripts.js"></script>
+    <script src="/myPT/js/scripts.js"></script>
     
     <!-- 스케줄 조정 js -->
-    <script src="js/scheduleManager.js"></script>
+    <script src="/myPT/js/scheduleManager.js"></script>
     <!-- /스케줄 조정 js -->
     
   </body>

@@ -1,3 +1,60 @@
+var months = new Array();
+var income = new Array();
+var user = new Array();
+
+/*$.getJSON("income.do",
+				  {"year":"2020"},
+				  function(data){
+					  alert(data);					  
+					 $.each(data,function(key,val){
+						alert(val.month);
+						months.push(val.month);
+						income.push(val.income);												 
+					 }) //each
+					 
+				  });*/
+		
+		//월별 매출
+		$.ajax({
+		url:"income.do",
+		type:"post",
+		async:false,
+		success:function(data){
+			data = $.parseJSON(data);			
+			for(var i=0;i<data.length;i++){
+				months.push(data[i].month+"월");
+				income.push(data[i].income);
+			}			
+		},
+		error: function(e){
+			alert(e);
+		}
+		
+	})
+	
+	
+	//월별 등록회원수
+		$.ajax({
+		url:"userCount.do",
+		type:"post",
+		async:false,
+		success:function(data){
+			data = $.parseJSON(data);			
+			for(var i=0;i<data.length;i++){				
+				user.push(data[i].user);
+			}			
+		},
+		error: function(e){
+			alert(e);
+		}
+		
+	})
+		
+
+
+
+
+
 // CHART1
 Chart.plugins.register({
   beforeRender: function (chart) {
@@ -47,35 +104,21 @@ Chart.plugins.register({
     }
   },
 });
-
 //////////////////////////////////////////////
 var ctx1 = document.getElementById("myChart1");
 var charData1 = {
-  labels: [
-    "1월",
-    "2월",
-    "3월",
-    "4월",
-    "5월",
-    "6월",
-    "7월",
-    "8월",
-    "9월",
-    "10월",
-    "11월",
-    "12월",
-  ],
+  labels: months,
   datasets: [
     {
       label: "등록회원수",
       yAxisID: "A",
-      data: [10, 12, 5, 25, 30, 15, 15, 18, 22, 27, 5, 9, 10],
+      data: user,
       backgroundColor: "rgba(75, 192, 192, 0.8)",
     },
     {
       label: "월 매출(만원)",
       yAxisID: "B",
-      data: [209, 245, 383, 403, 589, 300, 580, 234, 346, 436, 451, 124, 467],
+      data: income,
       backgroundColor: "rgba(54, 162, 235, 0.8)",
     },
   ],

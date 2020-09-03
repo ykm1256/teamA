@@ -23,7 +23,7 @@ $('input[type=text], input[type=password], input[type=email]').on('keyup', funct
 
 		switch(id)
 		{	
-			case "userName":
+			case "trainerName":
 				if(inputVal.length<2)
 				{
 					wrongFormat($(this),'2자 이상 입력해주세요')
@@ -42,7 +42,7 @@ $('input[type=text], input[type=password], input[type=email]').on('keyup', funct
 				break;
 				
 			
-			case "tel":
+			case "phone":
 				if(!regexp.test(inputVal))
 				{
 					wrongFormat($(this),'올바른 번호를 입력해주세요')
@@ -97,6 +97,11 @@ $('input[type=text], input[type=password], input[type=email]').on('keyup', funct
 				wrongFormat($('#nickname'),'한글,숫자,영문자/2자 이상 입력해주세요 ');
 				return false;
 			}
+		// 현재닉네임일 경우(윤)
+		if($('#nowNick').val()==$('#nickname').val()){
+			alert("현재 닉네임입니다.");
+			rightFormat($('#nickname'));
+		}else{
 			
 			$.ajax({
 				type:"post",
@@ -115,7 +120,7 @@ $('input[type=text], input[type=password], input[type=email]').on('keyup', funct
 					else if(data==1)
 					{				
 						alert("사용 불가한 닉네임입니다");
-						$('#nickname').val("");
+						$('#nickname').val($('#nowNick').val()); // 원래닉네임으로 (윤)
 					}
 					else
 					{
@@ -127,6 +132,7 @@ $('input[type=text], input[type=password], input[type=email]').on('keyup', funct
 				}		
 					
 		});
+		}
 	});
 
 	
@@ -140,52 +146,59 @@ $('input[type=text], input[type=password], input[type=email]').on('keyup', funct
 				wrongFormat($('#email'),'올바른 이메일을 입력해주세요');
 				return false;
 			}
+			// 현재이메일일 경우(윤)
+		if($('#nowEmail').val()==$('#email').val())
+			{
+			alert("현재 이메일입니다.");
+			rightFormat($('#email'));
+			} else{
 
-			$.ajax({
-				type:"post",
-				url:"emailCheck.do",
-				data : {"email":$("#email").val()},
-				success: function(data){
-					data=data.trim();
-					console.log(data);
-					if(data==0)
-					{
-						alert("사용 가능한 이메일입니다");
-						$('#confirmEmail').val($('#email').val());
-						 rightFormat($('#email'));
-					}
-					else if(data==1)
-					{				
-						alert("사용 불가한 이메일입니다");
-						$('#email').val("");
-					}
-					else
-					{
-						alert("오류 발생");
-					}
-				},
-				error: function(e){
-					alert("오류가 발생했습니다.")
-				}		
-					
-		});
+				$.ajax({
+					type:"post",
+					url:"emailCheck.do",
+					data : {"email":$("#email").val()},
+					success: function(data){
+						data=data.trim();
+						console.log(data);
+						if(data==0)
+						{
+							alert("사용 가능한 이메일입니다");
+							$('#confirmEmail').val($('#email').val());
+							 rightFormat($('#email'));
+						}
+						else if(data==1)
+						{				
+							alert("사용 불가한 이메일입니다"); 
+							$('#email').val($('#nowEmail').val()); // 현재이메일로(윤)
+						}
+						else
+						{
+							alert("오류 발생");
+						}
+					},
+					error: function(e){
+						alert("오류가 발생했습니다.")
+					}		
+						
+				});
+		}
 	});
 	
 
-
+	
 	
 	
 	
 function check(form)
 {
-
-    if($('#confirmNick').val()!=$('#nickname').val() || $("#confirmNick").val()=="")
+// 현재 닉네임,이메일이면 그냥 넘어가도록 설정 (윤)
+    if($('#confirmNick').val()!=$('#nickname').val() && $('#nowNick').val()!=$('#nickname').val())
 	{
 		alert("닉네임을 중복체크해주세요");
 		return false;
 	}
 	    
-	if($('#confirmEmail').val()!=$('#email').val() || $("#confirmEmail").val()=="")
+	if($('#confirmEmail').val()!=$('#email').val() && $('#nowEmail').val()!=$('#email').val())
 	{
 		alert("이메일을 중복체크해주세요");
 		return false;

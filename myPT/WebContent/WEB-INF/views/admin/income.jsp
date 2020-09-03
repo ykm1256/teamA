@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+pageEncoding="UTF-8"%> <%@ taglib prefix="c"
+uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -12,27 +13,26 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>템플릿</title>
-    <link href="css/styles.css" rel="stylesheet" />
-    <link href="css/index.css" rel="stylesheet"/>
-    <link href="css/widget.css" rel="stylesheet"/>
+    <link href="/myPT/css/styles.css" rel="stylesheet" />
+    <link href="/myPT/css/index.css" rel="stylesheet" />
+    <link href="/myPT/css/widget.css" rel="stylesheet" />
 
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
-    ></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+    
+   
   </head>
   <body class="sb-nav-fixed">
     <!-- nav -->
-    <jsp:include page="includeFiles/nav.jsp"></jsp:include>
+    <jsp:include page="/includeFiles/nav.jsp"></jsp:include>
     <!-- nav -->
 
     <!-- QR 모달 -->
-    <jsp:include page="includeFiles/modalQR.jsp"></jsp:include>
+    <jsp:include page="/includeFiles/modalQR.jsp"></jsp:include>
     <!--//QR 모달-->
 
     <div id="layoutSidenav">
       <!-- sideNav -->
-      <jsp:include page="includeFiles/adminSideNav.jsp"></jsp:include>
+      <jsp:include page="/includeFiles/adminSideNav.jsp"></jsp:include>
       <!-- /sideNav -->
       <div id="layoutSidenav_content">
         <main>
@@ -54,7 +54,7 @@
                           <div class="widget-subheading"></div>
                         </div>
                         <div class="widget-content-right">
-                          <div class="widget-numbers">555만원</div>
+                          <div class="widget-numbers">${nowIncome}만원</div>
                         </div>
                       </div>
                     </div>
@@ -77,7 +77,7 @@
                           <div class="widget-subheading"></div>
                         </div>
                         <div class="widget-content-right">
-                          <div class="widget-numbers">+55만원</div>
+                          <div class="widget-numbers">${var }만원</div>
                         </div>
                       </div>
                     </div>
@@ -100,7 +100,7 @@
                           <div class="widget-subheading"></div>
                         </div>
                         <div class="widget-content-right">
-                          <div class="widget-numbers">88명</div>
+                          <div class="widget-numbers">${nowUser }명</div>
                         </div>
                       </div>
                     </div>
@@ -123,7 +123,7 @@
                           <div class="widget-subheading"></div>
                         </div>
                         <div class="widget-content-right">
-                          <div class="widget-numbers">14명</div>
+                          <div class="widget-numbers">${newUser }명</div>
                         </div>
                       </div>
                     </div>
@@ -190,16 +190,15 @@
         </main>
       </div>
     </div>
-    <script
-      src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js">
-    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
     <script src="js/scripts.js"></script>
     <!-- 차트 링크 -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-    <script src="js/chart1.js"></script>
-    <script src="js/chart2.js"></script>
-    <script src="js/income.js"></script>
+    
+    <script src="/myPT/js/chart1.js"></script>
+    <script src="/myPT/js/chart2.js"></script>
+    <script src="/myPT/js/income.js"></script>
+    
   </body>
 </html>

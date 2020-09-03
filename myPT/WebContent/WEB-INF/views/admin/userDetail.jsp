@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -12,9 +13,9 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>템플릿</title>
-    <link href="css/styles.css" rel="stylesheet" />
-    <link href="css/index.css" rel="stylesheet"/>
-    <link href="css/widget.css" rel="stylesheet"/>
+    <link href="/myPT/css/styles.css" rel="stylesheet" />
+    <link href="/myPT/css/index.css" rel="stylesheet"/>
+    <link href="/myPT/css/widget.css" rel="stylesheet"/>
 
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
@@ -23,16 +24,16 @@
   </head>
   <body class="sb-nav-fixed">
     <!-- nav -->
-    <jsp:include page="includeFiles/nav.jsp"></jsp:include>
+    <jsp:include page="/includeFiles/nav.jsp"></jsp:include>
     <!-- nav -->
 
     <!-- QR 모달 -->
-    <jsp:include page="includeFiles/modalQR.jsp"></jsp:include>
+    <jsp:include page="/includeFiles/modalQR.jsp"></jsp:include>
     <!--//QR 모달-->
 
     <div id="layoutSidenav">
       <!-- sideNav -->
-      <jsp:include page="includeFiles/adminSideNav.jsp"></jsp:include>
+      <jsp:include page="/includeFiles/adminSideNav.jsp"></jsp:include>
       <!-- /sideNav -->
       <div id="layoutSidenav_content">
         <main>
@@ -42,30 +43,41 @@
                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                   <div class="card-header">
                     <h3 class="text-center font-weight-light my-4">
-                      트레이너 관리
+                      회원 관리
                     </h3>
                   </div>
 
                   <div class="card-body">
-                    <form>
+                  <form action="userManage.do" method="post" onsubmit="return check(this)">              
                       <div class="form-row">
                         <div class="col-md-6">
                           <div class="form-group">
-                            <label class="small mb-1" for="trainerID"
+                            <label class="small mb-1" for="userID"
                               >아이디</label
                             >
                             <input
                               class="form-control py-2"
-                              id="trainerID"
-                              name="trainerID"
+                              id="userID"
+                              name="userID"
                               type="text"
                               required
                               disabled
-                              value="T951120"
+                              value="${user.id }"
+                            />
+                            <!-- 실제 보내는 ID값 -->
+                            <input
+                              class="form-control py-2"
+                              id="hiddenUserID"
+                              name="hiddenUserID"
+                              type="text"
+                              hidden="true"
+                              required                              
+                              value="${user.id }"
                             />
                           </div>
                         </div>
                       </div>
+
                       <div class="form-row">
                         <div class="col-md-6">
                           <div class="form-group">
@@ -78,7 +90,9 @@
                               name="userName"
                               type="text"
                               required
+                              value="${user.name }"
                             />
+                            <div></div>
                           </div>
                         </div>
                       </div>
@@ -92,10 +106,18 @@
                               id="gender"
                               name="gender"
                               required
-                            >
-                              <option value="남성" selected>남성</option>
-                              <option value="여성">여성</option>
-                            </select>
+                            >                            
+                            <c:choose>
+                            <c:when test="${user.gender==0 }" >                            
+                              <option value="0" selected>남성</option>
+                              <option value="1">여성</option>                            
+                            </c:when>
+                            <c:otherwise>                           
+                              <option value="0">남성</option>
+                              <option value="1" selected>여성</option>                            
+                            </c:otherwise>
+                            </c:choose>
+                            </select> 
                           </div>
                         </div>
                         <div class="col-md-6">
@@ -109,6 +131,7 @@
                               name="birthdate"
                               type="date"
                               required
+                              value="${user.birth }"
                             />
                           </div>
                         </div>
@@ -123,13 +146,21 @@
                               id="nickname"
                               name="nickname"
                               type="text"
+                              minlength="2"
+                              maxlengh="10" 
+                              title="한글,숫자,영문자"                            
                               required
+                              value="${user.nick }"
                             />
+                            <input class="form-control py-2 mb-sm-2" id="confirmNick" type="text" hidden="true">
+                            <input class="form-control py-2 mb-sm-2" id="nowNick" type="text" hidden="true" value="${user.nick}">
+                            <div></div>
                           </div>
                           <div class="col-md-3">
                             <button
                               class="btn btn-outline-primary btn-block"
                               type="button"
+                              id="nickCheck"
                             >
                               중복확인
                             </button>
@@ -148,12 +179,17 @@
                               type="email"
                               aria-describedby="emailHelp"
                               required
+                              value="${user.email }"
                             />
+                            <input class="form-control py-2 mb-sm-2" id="confirmEmail" type="email" hidden="true" value="${user.email }">
+                            <input class="form-control py-2 mb-sm-2" id="nowEmail" type="email" hidden="true" value="${user.email }">
+                          	<div></div>
                           </div>
                           <div class="col-md-3">
                             <button
                               type="button"
                               class="btn btn-outline-primary btn-block"
+                              id="emailCheck"
                             >
                               중복확인
                             </button>
@@ -173,10 +209,7 @@
                               name="password"
                               type="password"
                               required
-                            />
-                            <div class="checkMessage1 d-none">
-                              입력한 비밀번호가 다릅니다
-                            </div>
+                            />                            
                           </div>
                         </div>
                         <div class="col-md-6">
@@ -190,15 +223,26 @@
                               type="password"
                               required
                             />
-                            <div class="checkMessage2 d-none">
-                              입력한 비밀번호가 다릅니다
-                            </div>
+                            <div></div>
+                            
                           </div>
                         </div>
                       </div>
+                      
+                      <div class="form-group">
+                                      <label class="small mb-1" for="tel">HP(-)</label>
+                                      <div class="form-row">
+                                          <div class="col-md-6">
+                                 				 <input type="text" class="form-control py-2" pattern="01\d{1}-\d{3,4}-\d{4}" title="01X-000(0)-0000" id="tel" name="tel"
+                                 				 value="${user.tel }">
+                                        		<div></div>
+                                          
+                                          </div>
+                                      </div>    
+                                  </div>
 
                       <div class="form-group">
-                        <label class="small mb-1" for="address">주소</label>
+                        <label class="small mb-1" for="zipcode">주소</label>
                         <div class="form-row">
                           <div class="col-md-9 mb-sm-2">
                             <input
@@ -206,6 +250,8 @@
                               id="zipcode"
                               name="zipcode"
                               type="text"
+                              value="${user.zipcode }"
+                              
                             />
                           </div>
                           <div class="col-md-3">
@@ -222,24 +268,104 @@
                           id="address"
                           name="address"
                           type="text"
+                          value="${user.address}"
                         />
+                      </div>
+
+                      <div class="form-row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="small mb-1" for="trainer"
+                              >담당 트레이너</label
+                            >
+                            <select
+                              class="form-control"
+                              id="trainer"
+                              name="trainer"
+                            >
+                            <option value="null" selected>미정</option>
+                            <c:if test="${arr!=null }">
+                            <c:forEach items="${arr }" var="t">
+                            	<c:choose>
+                            	<c:when test="${user.tid==t.t_id }">
+                            
+                              <option value="${t.t_id }" selected>${t.t_name }</option>                              
+                              </c:when>
+                              <c:otherwise>
+                              <option value="${t.t_id }">${t.t_name }</option>
+                              </c:otherwise>
+                              </c:choose>
+                              </c:forEach>
+                              </c:if>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="small mb-1" for="startDate"
+                              >시작일</label
+                            >
+                            <input
+                              class="form-control py-2"
+                              id="startDate"
+                              name="startDate"
+                              type="date"
+                              required
+                              value="${user.startdate }"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="small mb-1" for="endDate"
+                              >만료일</label
+                            >
+                            <input class="form-control py-2" id="endDate"
+                            name="endDate" type="date" required
+                            value="${user.enddate }"/>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="small mb-1" for="remainNum"
+                              >남은횟수</label
+                            >
+                            <input
+                              class="form-control py-2"
+                              id="remainNum"
+                              name="remainNum"
+                              type="number"
+                              min="0"
+                              required
+                              value="${user.ptcount }"
+                            />
+                          </div>
+                        </div>
                       </div>
 
                       <div class="form-row mt-4 mb-0">
                         <div class="col-md-6">
                           <div class="form-group">
-                            <a class="btn btn-primary btn-block" href=""
-                              >수정</a
-                            >
+                          <input type="submit" class="btn btn-primary btn-block" value="수정">
+                            
                           </div>
                         </div>
                         <div class="col-md-6">
                           <div class="form-group">
-                            <a class="btn btn-light btn-block" href="">취소</a>
+                            <a class="btn btn-light btn-block" href="javascript:history.back()"
+                            id="cancel"
+                              >취소</a
+                            >
                           </div>
                         </div>
                       </div>
-                    </form>
+                      </form>                        
                   </div>
                 </div>
               </div>
@@ -253,6 +379,7 @@
     <script
       src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js">
     </script>
-    <script src="js/scripts.js"></script>
+    <script src="/myPT/js/scripts.js"></script>
+    <script src="/myPT/js/userdetail.js"></script>
   </body>
 </html>

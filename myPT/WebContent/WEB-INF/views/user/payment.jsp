@@ -10,9 +10,9 @@
       content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
     <title>결제</title>
-    <link href="css/styles.css" rel="stylesheet" />
-    <link href="css/index.css" rel="stylesheet"/>
-    <link href="css/widget.css" rel="stylesheet"/>
+    <link href="/myPT/css/styles.css" rel="stylesheet" />
+    <link href="/myPT/css/index.css" rel="stylesheet"/>
+    <link href="/myPT/css/widget.css" rel="stylesheet"/>
     
     <link rel="stylesheet" href="css/payment.css" />
     
@@ -23,16 +23,16 @@
   </head>
   <body class="sb-nav-fixed">
     <!-- nav -->
-    <jsp:include page="includeFiles/nav.jsp"></jsp:include>
+    <jsp:include page="/includeFiles/nav.jsp"></jsp:include>
     <!-- nav -->
 
     <!-- QR 모달 -->
-    <jsp:include page="includeFiles/modalQR.jsp"></jsp:include>
+    <jsp:include page="/includeFiles/modalQR.jsp"></jsp:include>
     <!--//QR 모달-->
 
     <div id="layoutSidenav">
       <!-- sideNav -->
-      <jsp:include page="includeFiles/sideNav.jsp"></jsp:include>
+      <jsp:include page="/includeFiles/sideNav.jsp"></jsp:include>
       <!-- /sideNav -->
       <div id="layoutSidenav_content">
       
@@ -176,7 +176,7 @@
     <script
       src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js">
     </script>
-    <script src="js/scripts.js"></script>
-    <script src="js/payment.js"></script>
+    <script src="/myPT/js/scripts.js"></script>
+    <script src="/myPT/js/payment.js"></script>
   </body>
 </html>

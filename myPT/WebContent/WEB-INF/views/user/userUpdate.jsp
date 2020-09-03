@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -12,9 +13,9 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>템플릿</title>
-    <link href="css/styles.css" rel="stylesheet" />
-    <link href="css/index.css" rel="stylesheet"/>
-    <link href="css/widget.css" rel="stylesheet"/>
+    <link href="/project/css/styles.css" rel="stylesheet" />
+    <link href="/project/css/index.css" rel="stylesheet"/>
+    <link href="/project/css/widget.css" rel="stylesheet"/>
 
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
@@ -23,16 +24,16 @@
   </head>
   <body class="sb-nav-fixed">
     <!-- nav -->
-    <jsp:include page="includeFiles/nav.jsp"></jsp:include>
+    <jsp:include page="/includeFiles/nav.jsp"></jsp:include>
     <!-- nav -->
 
     <!-- QR 모달 -->
-    <jsp:include page="includeFiles/modalQR.jsp"></jsp:include>
+    <jsp:include page="/includeFiles/modalQR.jsp"></jsp:include>
     <!--//QR 모달-->
 
     <div id="layoutSidenav">
       <!-- sideNav -->
-      <jsp:include page="includeFiles/sideNav.jsp"></jsp:include>
+      <jsp:include page="/includeFiles/sideNav.jsp"></jsp:include>
       <!-- /sideNav -->
       <div id="layoutSidenav_content">
         <main>
@@ -44,7 +45,7 @@
                     <h3 class="text-center font-weight-light my-4">회원정보</h3>
                   </div>
                   <div class="card-body">
-                    <form>
+                    <form action="userUpdate.do" method="post" onsubmit="return check(this)">
                       <div class="form-row">
                         <div class="col-md-6">
                           <div class="form-group">
@@ -58,7 +59,7 @@
                               type="text"
                               required
                               disabled
-                              value="홍길동"
+                              value="${user.name }"
                             />
                           </div>
                         </div>
@@ -71,13 +72,37 @@
                             >
                             <input
                               class="form-control py-2"
-                              id="userNick"
-                              name="userNick"
+                              id="nickname"
+                              name="nickname"
                               type="text"
                               required
                               disabled
-                              value="길동이"
+                              value="${user.nick }"
                             />
+                          </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="small mb-1" for="gender">성별</label>
+                            <select
+                              class="form-control"
+                              id="gender"
+                              name="gender"
+                              required
+                              disabled
+                            >                            
+                            <c:choose>
+                            <c:when test="${user.gender==0 }" >                            
+                              <option value="0" selected>남성</option>
+                              <option value="1">여성</option>                            
+                            </c:when>
+                            <c:otherwise>                           
+                              <option value="0">남성</option>
+                              <option value="1" selected>여성</option>                            
+                            </c:otherwise>
+                            </c:choose>
+                            </select> 
                           </div>
                         </div>
                       </div>
@@ -90,12 +115,21 @@
                             >
                             <input
                               class="form-control py-2"
-                              id="userEmail"
-                              name="userEmail"
+                              id="email"
+                              name="email"
                               type="text"
                               required
                               disabled
-                              value="hong@naver.com"
+                              value="${user.email }"
+                            />
+                            <input
+                              class="form-control py-2"
+                              id="hiddenemail"
+                              name="hiddenemail"
+                              type="text"
+                              required
+                              hidden="true"                             
+                              value="${user.email }"
                             />
                           </div>
                         </div>
@@ -103,12 +137,13 @@
                       <div class="form-row">
                         <div class="col-md-6">
                           <div class="form-group">
-                            <label class="small mb-1" for="inputPassword"
+                            <label class="small mb-1" for="password"
                               >비밀번호</label
                             >
                             <input
                               class="form-control py-4"
-                              id="inputPassword"
+                              id="password"
+                              name="password"
                               type="password"
                               placeholder="Enter password"
                             />
@@ -116,35 +151,52 @@
                         </div>
                         <div class="col-md-6">
                           <div class="form-group">
-                            <label class="small mb-1" for="inputConfirmPassword"
+                            <label class="small mb-1" for="confirmPassword"
                               >비밀번호 확인</label
                             >
                             <input
                               class="form-control py-4"
-                              id="inputConfirmPassword"
+                              id="confirmPassword"
                               type="password"
                               placeholder="Confirm password"
                             />
+                            <div></div>
                           </div>
                         </div>
                       </div>
+                      
+                      <div class="form-group">
+                                      <label class="small mb-1" for="tel">HP(-)*</label>
+                                      <div class="form-row">
+                                          <div class="col-md-6">
+                                 				 <input type="text" class="form-control py-2" pattern="01\d{1}-\d{3,4}-\d{4}" title="01X-000(0)-0000" id="tel" name="tel"
+                                 				 value="${user.tel }">
+                                        		<div></div>
+                                          
+                                          </div>
+                                      </div>    
+                                  </div>
 
                       <div class="form-group">
-                        <label class="small mb-1" for="inputPassword"
+                        <label class="small mb-1" for="zipcode"
                           >주소</label
                         >
                         <div class="form-row">
                           <div class="col-md-6">
                             <input
                               class="form-control"
-                              id="inputPassword"
-                              value="50432"
+                              id="zipcode"
+                              name="zipcode"
+                              value="${user.zipcode }"
                             />
                           </div>
                           <div class="col-md-3 col-xs-12">
-                            <a class="btn btn-outline-primary btn-block" href=""
-                              >주소찾기</a
+                            <button
+                              class="btn btn-outline-primary btn-block"
+                              type="button"
                             >
+                              주소찾기
+                            </button>
                           </div>
                         </div>
                       </div>
@@ -154,8 +206,9 @@
                           <div class="form-group">
                             <input
                               class="form-control"
-                              id="inputdetailaddress"
-                              value="부산광역시 용소로 137번길 13 OO빌 302호"
+                              id="address"
+                              name="address"
+                              value="${user.address }"
                             />
                           </div>
                         </div>
@@ -164,16 +217,12 @@
                       <div class="form-row mt-4 mb-0">
                         <div class="col-md-6">
                           <div class="form-group">
-                            <a
-                              class="btn btn-primary btn-block"
-                              href="login.html"
-                              >수정</a
-                            >
+                            <input type="submit" class="btn btn-primary btn-block" value="수정">
                           </div>
                         </div>
                         <div class="col-md-6">
                           <div class="form-group">
-                            <a class="btn btn-light btn-block" href="login.html"
+                            <a class="btn btn-light btn-block" href="javascript:history.back()"
                               >취소</a
                             >
                           </div>
@@ -193,6 +242,7 @@
     <script
       src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js">
     </script>
-    <script src="js/scripts.js"></script>
+    <script src="/project/js/scripts.js"></script>
+    <script src="/project/js/userUpdate.js"></script>
   </body>
 </html>

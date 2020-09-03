@@ -41,41 +41,6 @@ $(function(){
 		
 	});	
 	
-	$("#btntrainer").click(function(){
-		if($("#id").val()==""){
-			alert("아이디를 입력하세요.")
-			$("#id").focus();
-			return false;
-		}
-		if($("#pw1").val()==""){
-			alert("비밀번호를 입력하세요.")
-			$("#pw1").focus();
-			return false;
-		}
-		
-		
-		$.ajax({
-			type:"post",
-			url:"trainerLogin.do",
-			data : {"id":$("#id").val(), "pw":$("#pw1").val()},
-			success: function(data){
-				
-				
-				data=data.trim();
-				if(data==0){
-					alert("id나 비밀번호가 틀렸습니다.");
-					
-					
-				}else if(data==1){					
-					location.href="trainerMain.jsp";
-				}
-			},
-			error: function(e){
-				alert("에러가 발생했습니다.")
-			}		
-				
-		})
-		
-	});	
+	
 	
 });

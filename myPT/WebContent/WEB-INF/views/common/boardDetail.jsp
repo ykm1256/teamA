@@ -12,9 +12,9 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>템플릿</title>
-    <link href="css/styles.css" rel="stylesheet" />
-    <link href="css/index.css" rel="stylesheet"/>
-    <link href="css/widget.css" rel="stylesheet"/>
+    <link href="/myPT/css/styles.css" rel="stylesheet" />
+    <link href="/myPT/css/index.css" rel="stylesheet"/>
+    <link href="/myPT/css/widget.css" rel="stylesheet"/>
 
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
@@ -23,16 +23,16 @@
   </head>
   <body class="sb-nav-fixed">
     <!-- nav -->
-    <jsp:include page="includeFiles/nav.jsp"></jsp:include>
+    <jsp:include page="/includeFiles/nav.jsp"></jsp:include>
     <!-- nav -->
 
     <!-- QR 모달 -->
-    <jsp:include page="includeFiles/modalQR.jsp"></jsp:include>
+    <jsp:include page="/includeFiles/modalQR.jsp"></jsp:include>
     <!--//QR 모달-->
 
     <div id="layoutSidenav">
       <!-- sideNav -->
-      <jsp:include page="includeFiles/sideNav.jsp"></jsp:include>
+      <jsp:include page="/includeFiles/sideNav.jsp"></jsp:include>
       <!-- /sideNav -->
       <div id="layoutSidenav_content">
         
@@ -203,9 +203,9 @@
     <script
       src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js">
     </script>
-    <script src="js/scripts.js"></script>
+    <script src="/myPT/js/scripts.js"></script>
     <!-- 게시판 관련 -->
-    <script src="js/detail.js"></script>
+    <script src="/myPT/js/detail.js"></script>
   <script type="text/javascript" src="assets/summernote-0.8.18-dist/summernote-bs4.js"></script>
   <script src="assets/summernote-0.8.18-dist/lang/summernote-ko-KR.js"></script>
   </body>
