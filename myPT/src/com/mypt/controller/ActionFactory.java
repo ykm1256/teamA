@@ -11,6 +11,7 @@ import com.mypt.action.list.AdminUserListViewAction;
 import com.mypt.action.login.TrainerLoginAction;
 import com.mypt.action.login.UserLoginAction;
 import com.mypt.action.move.MoveIntroAction;
+import com.mypt.action.move.MoveUserList;
 import com.mypt.action.move.MoveUserMain;
 import com.mypt.action.move.MoveUserRegister;
 import com.mypt.action.register.AdminUserRegisterAction;
@@ -49,12 +50,14 @@ public class ActionFactory
 		map.put("/moveIntro", new MoveIntroAction());
 		//userLogin
 		map.put("/userLogin", new UserLoginAction());
+		map.put("/userMain", new MoveUserMain());
+		
 		//trainerLogin
 		map.put("/trainerLogin", new TrainerLoginAction());
 		
 		//회원가입
 		map.put("/moveUserRegister", new MoveUserRegister());
-		map.put("/moveUserList", new MoveUserMain());
+		map.put("/moveUserList", new MoveUserList());
 
 		map.put("/userInsertAction", new AdminUserRegisterAction());
 		map.put("/nickCheck", new NickCheckAction());
