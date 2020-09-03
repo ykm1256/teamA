@@ -13,7 +13,7 @@ public class UserListViewAction implements Action{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		UserDao dao=new UserDao();
+		UserDao dao=UserDao.getInstance();
 		
 		ArrayList<UserDto> arr=dao.userList();
 		

@@ -14,7 +14,7 @@ public class PTUserListViewAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		UserDao dao=new UserDao();
+		UserDao dao=UserDao.getInstance();
 		HttpSession session = request.getSession();
 		String tid=(String) session.getAttribute("id");
 		ArrayList<UserDto> arr=dao.ptUserList(tid);

@@ -3,6 +3,11 @@ package com.mypt.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.mypt.controller.action.register.EmailCheckAction;
+import com.mypt.controller.action.register.MoveUserList;
+import com.mypt.controller.action.register.MoveUserRegister;
+import com.mypt.controller.action.register.NickCheckAction;
+import com.mypt.controller.action.register.UserInsertAction;
 import com.mypt.controller.action.list.PTUserListViewAction;
 import com.mypt.controller.action.list.TrainerListViewAction;
 import com.mypt.controller.action.list.UserListViewAction;
@@ -43,6 +48,14 @@ public class ActionFactory
 		map.put("/userLogin", new UserLoginAction());
 		//trainerLogin
 		map.put("/trainerLogin", new TrainerLoginAction());
+		
+		//회원가입
+		map.put("/moveUserRegister", new MoveUserRegister());
+		map.put("/moveUserList", new MoveUserList());
+
+		map.put("/userInsertAction", new UserInsertAction());
+		map.put("/nickCheck", new NickCheckAction());
+		map.put("/emailCheck", new EmailCheckAction());
 		
 	}
 	

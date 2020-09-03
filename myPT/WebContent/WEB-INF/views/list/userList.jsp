@@ -77,18 +77,9 @@
                       <tr>
                         <td>${item.id }</td>
                         <td>${item.name }</td>
-                        <td>
-                        	<c:choose>
-                        		<c:when test="${item.gender eq 0}">
-                        			여
-                        		</c:when>
-                        		<c:otherwise>
-                        			남
-                        		</c:otherwise>
-                        	</c:choose> 
-                        </td>
+                        <td>${item.gender }</td>
                         <td>${item.birth }</td>
-                        <td>010-7474-4303</td>
+                        <td>${item.tel }</td>
                         <td>${item.startdate }</td>
                         <td>${item.enddate }</td>
                         <td>${item.ptcount }</td>

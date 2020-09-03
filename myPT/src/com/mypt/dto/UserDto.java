@@ -7,7 +7,7 @@ public class UserDto {
 	private String id;
 	private String pw;
 	private String name;
-	private int gender;
+	private String gender;
 	private String email;
 	private String birth;
 	private String address;
@@ -18,6 +18,7 @@ public class UserDto {
 	private Date enddate;
 	private int ptcount;
 	private String tid;
+	private String tel;
 	
 	public String getId() {
 		return id;
@@ -37,10 +38,10 @@ public class UserDto {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getGender() {
+	public String getGender() {
 		return gender;
 	}
-	public void setGender(int gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
 	public String getEmail() {
@@ -102,6 +103,12 @@ public class UserDto {
 	}
 	public void setPtcount(int ptcount) {
 		this.ptcount = ptcount;
+	}
+	public String getTel() {
+		return tel;
+	}
+	public void setTel(String tel) {
+		this.tel = tel;
 	}
 	
 	

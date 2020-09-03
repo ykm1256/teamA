@@ -1,6 +1,5 @@
 package com.mypt.controller.action.login;
 
-import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +15,7 @@ public class UserLoginAction implements Action{
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
-		UserDao dao = new UserDao();
+		UserDao dao = UserDao.getInstance();
 		String email = request.getParameter("email");
 		String pw = request.getParameter("pw");
 		int flag = dao.userLogin(email, pw);
