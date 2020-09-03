@@ -11,7 +11,7 @@ import com.mypt.dao.UserDao;
 import com.mypt.dto.TrainerDto;
 import com.mypt.dto.UserDto;
 
-public class UserDetailAction implements Action {
+public class AdminUserDetailAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

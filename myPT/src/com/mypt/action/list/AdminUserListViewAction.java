@@ -6,18 +6,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.mypt.controller.Action;
-import com.mypt.dao.TrainerDao;
-import com.mypt.dto.TrainerDto;
+import com.mypt.dao.UserDao;
+import com.mypt.dto.UserDto;
 
-public class TrainerListViewAction implements Action{
+public class AdminUserListViewAction implements Action{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		TrainerDao dao= TrainerDao.getInstance();
+		UserDao dao=UserDao.getInstance();
 		
-		ArrayList<TrainerDto> arr=dao.trainerList();
-		request.setAttribute("trainerList", arr);
-		return "list/trainerList";
+		ArrayList<UserDto> arr=dao.userList();
+		
+		request.setAttribute("userList", arr);
+		return "list/userList";
 	}
-
+	
 }

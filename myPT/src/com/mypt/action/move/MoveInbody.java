@@ -13,7 +13,7 @@ import com.mypt.controller.Action;
 import com.mypt.dao.InbodyDao;
 import com.mypt.dto.UserDto;
 
-public class MoveToInbody implements Action
+public class MoveInbody implements Action
 {
 
 	@Override

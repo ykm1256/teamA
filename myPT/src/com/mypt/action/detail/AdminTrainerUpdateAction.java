@@ -7,7 +7,7 @@ import com.mypt.controller.Action;
 import com.mypt.dao.TrainerDao;
 import com.mypt.dto.TrainerDto;
 
-public class TrainerManageAction implements Action{
+public class AdminTrainerUpdateAction implements Action{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

@@ -10,7 +10,7 @@ import com.mypt.controller.Action;
 import com.mypt.dao.UserDao;
 import com.mypt.dto.UserDto;
 
-public class PTUserListViewAction implements Action {
+public class TrainerUserListViewAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

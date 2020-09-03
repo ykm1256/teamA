@@ -7,13 +7,13 @@ import javax.servlet.http.HttpServletResponse;
 import com.mypt.controller.Action;
 import com.mypt.dao.UserDao;
 
-public class MoveToUserList implements Action {
+public class MoveUserMain implements Action {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception 
 	{
 		
-		return "list/userList";
+		return "main/userMain";
 	}
 
 }

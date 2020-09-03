@@ -5,15 +5,15 @@ import java.util.Map;
 
 import com.mypt.action.check.EmailCheckAction;
 import com.mypt.action.check.NickCheckAction;
-import com.mypt.action.list.PTUserListViewAction;
-import com.mypt.action.list.TrainerListViewAction;
-import com.mypt.action.list.UserListViewAction;
+import com.mypt.action.list.TrainerUserListViewAction;
+import com.mypt.action.list.AdminTrainerListViewAction;
+import com.mypt.action.list.AdminUserListViewAction;
 import com.mypt.action.login.TrainerLoginAction;
 import com.mypt.action.login.UserLoginAction;
 import com.mypt.action.move.MoveIntroAction;
-import com.mypt.action.move.MoveUserList;
+import com.mypt.action.move.MoveUserMain;
 import com.mypt.action.move.MoveUserRegister;
-import com.mypt.action.register.UserInsertAction;
+import com.mypt.action.register.AdminUserRegisterAction;
 
 
 public class ActionFactory 
@@ -39,11 +39,11 @@ public class ActionFactory
 //		map.put("/addrInsertPro", new AddrInsertProAction());
 		
 		//userList
-		map.put("/userList", new UserListViewAction());
+		map.put("/userList", new AdminUserListViewAction());
 		//trainerList
-		map.put("/trainerList", new TrainerListViewAction());
+		map.put("/trainerList", new AdminTrainerListViewAction());
 		//ptUserList
-		map.put("/ptUserList", new PTUserListViewAction());
+		map.put("/ptUserList", new TrainerUserListViewAction());
 		
 		// 인트로 화면
 		map.put("/moveIntro", new MoveIntroAction());
@@ -54,9 +54,9 @@ public class ActionFactory
 		
 		//회원가입
 		map.put("/moveUserRegister", new MoveUserRegister());
-		map.put("/moveUserList", new MoveUserList());
+		map.put("/moveUserList", new MoveUserMain());
 
-		map.put("/userInsertAction", new UserInsertAction());
+		map.put("/userInsertAction", new AdminUserRegisterAction());
 		map.put("/nickCheck", new NickCheckAction());
 		map.put("/emailCheck", new EmailCheckAction());
 		

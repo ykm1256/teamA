@@ -7,7 +7,7 @@ import com.mypt.controller.Action;
 import com.mypt.dao.UserDao;
 import com.mypt.dto.UserDto;
 
-public class UserUpdateAction implements Action{
+public class UserMyUpdateAction implements Action{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

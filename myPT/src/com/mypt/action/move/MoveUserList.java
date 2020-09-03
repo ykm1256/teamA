@@ -13,7 +13,7 @@ public class MoveUserList implements Action {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception 
 	{
 		
-		return "main/userMain";
+		return "list/userList";
 	}
 
 }
