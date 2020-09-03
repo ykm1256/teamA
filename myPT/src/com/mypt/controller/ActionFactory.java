@@ -11,6 +11,7 @@ import com.mypt.controller.action.register.UserInsertAction;
 import com.mypt.controller.action.list.PTUserListViewAction;
 import com.mypt.controller.action.list.TrainerListViewAction;
 import com.mypt.controller.action.list.UserListViewAction;
+import com.mypt.controller.action.login.MoveIntroAction;
 import com.mypt.controller.action.login.TrainerLoginAction;
 import com.mypt.controller.action.login.UserLoginAction;
 
@@ -44,6 +45,8 @@ public class ActionFactory
 		//ptUserList
 		map.put("/ptUserList", new PTUserListViewAction());
 		
+		// 인트로 화면
+		map.put("/moveIntro", new MoveIntroAction());
 		//userLogin
 		map.put("/userLogin", new UserLoginAction());
 		//trainerLogin
