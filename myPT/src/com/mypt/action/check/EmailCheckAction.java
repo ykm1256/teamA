@@ -14,7 +14,7 @@ public class EmailCheckAction implements Action {
 		UserDao dao = UserDao.getInstance();
 		
 		int result = dao.checkEmail(request.getParameter("email"));
-		request.setAttribute("result", result);
+		request.setAttribute("flag", result);
 		
 		return "callback";
 	}

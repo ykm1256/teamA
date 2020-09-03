@@ -18,7 +18,7 @@ public class AdminUserListViewAction implements Action{
 		ArrayList<UserDto> arr=dao.userList();
 		
 		request.setAttribute("userList", arr);
-		return "list/userList";
+		return "admin/userList";
 	}
 	
 }

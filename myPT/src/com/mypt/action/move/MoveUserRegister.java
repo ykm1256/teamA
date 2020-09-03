@@ -22,7 +22,7 @@ public class MoveUserRegister implements Action {
 		
 		request.setAttribute("result", arr);
 		
-		return "register/userRegister";
+		return "admin/userRegister";
 	}
 
 }
