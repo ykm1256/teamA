@@ -30,7 +30,7 @@ $(function(){
 					
 					
 				}else if(data==1){					
-					location.href="userMain.jsp";					
+					location.href="userMain.do";					
 				}
 			},
 			error: function(e){

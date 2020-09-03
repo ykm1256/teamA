@@ -348,7 +348,7 @@ public class UserDao {
 	}
 
 	// 로그인 확인
-	public int userLogin(String id, String pw) {
+	public int userLogin(String email, String pw) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -357,9 +357,9 @@ public class UserDao {
 
 		try {
 			con = db.getConnection();
-			sql = "select * from user where t_id=? and t_pw=?";
+			sql = "select * from user where email=? and pw=?";
 			ps = con.prepareStatement(sql);
-			ps.setString(1, id);
+			ps.setString(1, email);
 			ps.setString(2, pw);
 			rs = ps.executeQuery();
 			if (rs.next()) {
