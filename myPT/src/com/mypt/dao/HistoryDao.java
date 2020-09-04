@@ -37,6 +37,7 @@ return instance;
 			ps.setString(2, historyBean.getPaydate());
 			ps.setInt(3, historyBean.getPrice());
 			ps.setInt(4, historyBean.getHcount());
+			ps.setString(5, historyBean.getT_id());
 			
 			ps.execute();
 		} catch (Exception e) {
