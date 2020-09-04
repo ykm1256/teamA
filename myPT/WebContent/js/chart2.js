@@ -115,9 +115,11 @@ var myChart2 = new Chart(ctx2, {
 
 //연도 선택 이벤트
 $("#selectyear2").change(function() {
+	month = today.getMonth()+1;
 	if ($("#selectyear2").val() < year) {
 		month = 12;
 	}
+	
 	year = $("#selectyear2").val();
 
 	var montharr = new Array();
