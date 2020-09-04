@@ -18,9 +18,9 @@ public class IncomeAction implements Action{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
-		Calendar cal = Calendar.getInstance();
-		int year = cal.get(Calendar.YEAR);
-		int month = cal.get(Calendar.MONTH)+1;
+		
+		int year = Integer.parseInt(request.getParameter("year"));
+		int month = Integer.parseInt(request.getParameter("month"));
 		System.out.println(year);
 		HistoryDao dao = HistoryDao.getInstance();
 		ArrayList<HistoryDto> arr = dao.getincome(year,month);

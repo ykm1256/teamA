@@ -1,20 +1,27 @@
-var montharr = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월"];
+//현재 날짜
+// chart1에서 먼저 선언하였음
+today = new Date();
+year = today.getFullYear();
+month = today.getMonth()+1;
+
+var montharr= new Array();
+
+for(var i=1; i<=month;i++){
+	montharr.push(i+"월");
+}
+
+
 
 // 월선택 셀렉트
 for (var count = 0; count < montharr.length; count++) {
   var option = $(
-    "<option value='" + count + "'>" + montharr[count] + "</option>"
+    "<option value='" + (count+1) + "'>" + montharr[count] + "</option>"
   );
   $("#selectmonth").append(option);
 }
 ////////////////////////////
 
-$("#selectmonth").change(function () {
-  var month = $("#selectmonth").val();
-  month++;
-  $("#tincome").text(month + "월의 트레이너 수익");
-  $("#tmonth").text(month + "월의 트레이너");
-});
+
 
 $(window).resize(function () {
   if (window.matchMedia("(max-width: 910px)").matches == true) {
