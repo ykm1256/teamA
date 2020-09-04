@@ -135,6 +135,11 @@ uri="http://java.sun.com/jsp/jstl/core"%>
               </div>
 
               <div class="col-12">
+              <select class="text-center form-control" id="selectyear1">
+                  <option value="default" disabled selected>연도 선택</option>
+                  <option value="2019">2019년</option>
+                  <option value="2020">2020년</option>
+                </select>
                 <div class="card">
                   <div class="card-header p-4">
                     <h3 class="card-title text-center">
@@ -147,10 +152,21 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                 </div>
               </div>
 
-              <div class="col-md-2 mt-5">
+              <div class="col-md-4 mt-5">
+              <div class="form-row">
+              <div class="form-group">
+              <select class="text-center form-control" id="selectyear2">
+                  <option value="default" disabled selected>연도 선택</option>
+                  <option value="2019">2019년</option>
+                  <option value="2020">2020년</option>
+                </select>
+                </div>
+                <div class="form-group">
                 <select class="text-center form-control" id="selectmonth">
                   <option value="default" disabled selected>월 선택</option>
                 </select>
+                </div>
+                </div>
               </div>
               <div class="card-group col-12 mb-3">
                 <div class="card col-md-8 col-sm-8 col-xs-12 p-0">
@@ -174,9 +190,11 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                     <div class="card">
                       <img src="img/황철순.jpg" class="card-img-top" />
                       <div class="card-body">
-                        <h5 class="card-title" id="tmonthname">
+                      <div id="tmonthname">                   
+                        <h5 class="card-title">
                           황철순 트레이너
                         </h5>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -196,9 +214,9 @@ uri="http://java.sun.com/jsp/jstl/core"%>
     <!-- 차트 링크 -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     
-    <script src="/myPT/js/chart1.js"></script>
-    <script src="/myPT/js/chart2.js"></script>
-    <script src="/myPT/js/income.js"></script>
+    <script src="/myPT/js/chart1.js" charset="utf-8"></script>
+    <script src="/myPT/js/chart2.js" charset="utf-8"></script>
+    <script src="/myPT/js/income.js" charset="utf-8"></script>
     
   </body>
 </html>

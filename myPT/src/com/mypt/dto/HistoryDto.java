@@ -5,12 +5,15 @@ public class HistoryDto {
 	private String paydate;
 	private int price;
 	private int hcount;
-	private String trainer;
+	private String t_id;
 
-	// 월, 트레이너, 수입 추가, 회원수 (윤)
+	
+
+	// 월, 트레이너이름, 수입 추가, 회원수 (윤)
 	private int month;
 	private int income;
 	private int usercnt;
+	private String t_name;
 
 	public int getMonth() {
 		return month;
@@ -20,12 +23,12 @@ public class HistoryDto {
 		this.month = month;
 	}
 
-	public String getTrainer() {
-		return trainer;
+	public String getT_name() {
+		return t_name;
 	}
 
-	public void setTrainer(String trainer) {
-		this.trainer = trainer;
+	public void setT_name(String t_name) {
+		this.t_name = t_name;
 	}
 
 	public int getIncome() {
@@ -74,6 +77,14 @@ public class HistoryDto {
 
 	public void setHcount(int hcount) {
 		this.hcount = hcount;
+	}
+	
+	public String getT_id() {
+		return t_id;
+	}
+
+	public void setT_id(String t_id) {
+		this.t_id = t_id;
 	}
 
 }

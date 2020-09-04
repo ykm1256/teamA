@@ -155,10 +155,57 @@ return instance;
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
+			} finally {
+				db.closeConnection(rs, ps, con);
 			}
 			
 			return arr;
-		}		
+		}
+		
+		// 트레이너별 월수입
+		public ArrayList<HistoryDto> getTrainerIncome(int year,int month) {
+			Connection con=null;
+			PreparedStatement ps=null;
+			ResultSet rs=null;
+			String sql=null;
+			HistoryDto historyBean = null;
+			ArrayList<HistoryDto> arr = new ArrayList<HistoryDto>();			
+					
+			try {						
+				
+				con=db.getConnection();
+				if(month<10) {
+				sql="select sum(price),tid,t.t_name from history h left outer join trainer t on h.tid=t.t_id where paydate like '%"+year+"-0"+month+"%' group by tid;";
+				}
+				else {
+					sql="select sum(price),tid,t.t_name from history h left outer join trainer t on h.tid=t.t_id paydate like '%"+year+"-"+month+"%' group by tid;";							
+				}
+				System.out.println(sql);
+				ps=con.prepareStatement(sql);			
+				rs=ps.executeQuery();
+				
+				while(rs.next()) {
+					historyBean = new HistoryDto();					
+					System.out.println(rs.getString(1));
+					historyBean.setIncome(Integer.parseInt(rs.getString(1)));
+					historyBean.setT_id(rs.getString(2));
+					historyBean.setT_name(rs.getString(3));
+					arr.add(historyBean);
+					
+				}				
+								
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				db.closeConnection(rs, ps, con);
+			}
+			
+			return arr;
+		}
+		
+		
+		////////////그래프관련
 		
 		
 		

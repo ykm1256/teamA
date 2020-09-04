@@ -12,6 +12,7 @@ import com.mypt.action.detail.AdminUserUpdateAction;
 import com.mypt.action.detail.UserMyDetailAction;
 import com.mypt.action.detail.UserMyUpdateAction;
 import com.mypt.action.income.IncomeAction;
+import com.mypt.action.income.IncomeTrainerAction;
 import com.mypt.action.income.MoveIncomeAction;
 import com.mypt.action.list.AdminTrainerListViewAction;
 import com.mypt.action.list.AdminUserListViewAction;
@@ -72,6 +73,7 @@ public class ActionFactory
 		//매출
 		map.put("/moveIncome", new MoveIncomeAction());
 		map.put("/incomeChart", new IncomeAction());
+		map.put("/incomeTrainerChart", new IncomeTrainerAction());
 		
 		//detail
 		map.put("/adminTrainerDetail", new AdminTrainerDetailAction());
