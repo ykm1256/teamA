@@ -155,7 +155,7 @@
                                           <div class="form-group">
                                               <label class="small mb-1" for="trainer">담당 트레이너</label>
                                               <select class="form-control" id="trainer" name="trainer">
-                                              <option value="null" selected>미정</option>
+                                              <option selected>미정</option>
                                                <c:if test="${result!=null}">
 						                           <c:forEach items="${result}" var="t">
 						                             <option value="${t.t_id}">${t.t_name }</option>                              
@@ -174,7 +174,7 @@
                                           </div>
                                       </div>
                                   </div>
-
+									<input id="qrcode" name="qrcode" hidden="true"></input>
 
                                   <div class="form-group mt-4 mb-0">
                                      <input type="submit" class="btn btn-primary btn-block" value="회원등록">
@@ -206,6 +206,7 @@
       src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js">
     </script>
     <script src="js/scripts.js"></script>
+    <script src="js/qrcode/qrcode.js"></script>
     <script src="js/register.js"></script>
     
     <script>
