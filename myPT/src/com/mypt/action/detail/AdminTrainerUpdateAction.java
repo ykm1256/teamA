@@ -27,7 +27,7 @@ public class AdminTrainerUpdateAction implements Action{
 		TrainerDao dao = TrainerDao.getInstance();
 		dao.trainerUpdate(dto);
 		
-		return "redirect:moveTrainerList.do";
+		return "redirect:trainerList.do";
 	}
 
 }

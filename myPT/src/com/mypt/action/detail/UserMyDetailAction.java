@@ -18,7 +18,7 @@ public class UserMyDetailAction implements Action {
 		
 		request.setAttribute("user", user);
 		
-		return "userUpdate";
+		return "user/userUpdate";
 	}
 	
 	

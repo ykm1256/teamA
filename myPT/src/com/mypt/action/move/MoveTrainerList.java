@@ -12,8 +12,7 @@ public class MoveTrainerList implements Action {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception 
 	{
 		
-		return "list/trainerList";
+		return "admin/trainerList";
 	}
 
 }
-
