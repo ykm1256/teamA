@@ -156,7 +156,7 @@ $('input[type=text], input[type=password], input[type=email]').on('keyup', funct
 					
 						//qr코드 생성 (안)
 						var qrcode = new QRCode(document.getElementById("qrcode"), {
-        					text: "http://localhost:8080/myPT/?email="+$("#email").val(),
+        					text: "http://192.168.0.47:8080/myPT/qrCheck.do?email="+$("#email").val(),
         					width: 500,
         					height: 500,
 						});
