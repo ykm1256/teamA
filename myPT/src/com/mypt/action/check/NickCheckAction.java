@@ -14,7 +14,7 @@ public class NickCheckAction implements Action {
 		UserDao dao = UserDao.getInstance();
 		
 		int result = dao.checkNick(request.getParameter("nickname"));
-		request.setAttribute("flag", result);
+		request.setAttribute("result", result);
 		
 		return "callback";
 	}
