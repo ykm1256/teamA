@@ -482,4 +482,33 @@ public class UserDao {
 		return result;
 	}
 
+	// QR 값을 받아오기
+	public String getQR(String id) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql=null;
+		
+		String result = null;
+
+		try {
+			sql= "select qr from user where id=?";
+			con = db.getConnection();
+			ps = con.prepareStatement(sql);
+
+			ps.setString(1,id);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				result = rs.getString("qr");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.closeConnection(rs, ps, con);
+		}
+
+		return result;
+	}
+	
 }

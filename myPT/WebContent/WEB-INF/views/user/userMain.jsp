@@ -295,5 +295,6 @@
       src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js">
     </script>
     <script src="js/scripts.js"></script>
+    <script src="js/userAttendance.js"></script>
   </body>
 </html>

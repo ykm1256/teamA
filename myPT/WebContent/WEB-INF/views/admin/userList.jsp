@@ -13,9 +13,9 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>회원 관리</title>
-    <link href="/myPT/css/styles.css" rel="stylesheet" />
-    <link href="/myPT/css/index.css" rel="stylesheet"/>
-    <link href="/myPT/css/widget.css" rel="stylesheet"/>
+    <link href="<%=request.getContextPath() %>/css/styles.css" rel="stylesheet" />
+    <link href="<%=request.getContextPath() %>/css/index.css" rel="stylesheet"/>
+    <link href="<%=request.getContextPath() %>/css/widget.css" rel="stylesheet"/>
 	<!-- 데이터 테이블 css -->
 	<link
       href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"
@@ -95,6 +95,7 @@
                       
                     </tbody>
                   </table>
+                  <%out.println(request.getContextPath()); %>
                 </div>
               </div>
             </div>
@@ -107,12 +108,12 @@
     <script
       src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js">
     </script>
-    <script src="/myPT/js/scripts.js"></script>
+    <script src="<%=request.getContextPath() %>/js/scripts.js"></script>
     
     <!-- 데이터 테이블 js -->
-    <script src="/myPT/js/dataTables.min.js"></script>
+    <script src="<%=request.getContextPath() %>/js/dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-    <script src="/myPT/assets/demo/datatables-demo.js"></script>
+    <script src="<%=request.getContextPath() %>/assets/demo/datatables-demo.js"></script>
     <!-- /데이터 테이블 js -->
     
   </body>

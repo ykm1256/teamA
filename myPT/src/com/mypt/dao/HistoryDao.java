@@ -30,13 +30,14 @@ return instance;
 		
 		try {
 			con=db.getConnection();
-			sql= "insert history(hid,paydate,price,hcount) "
-					+ "valuse(?,?,?,?)";
+			sql= "insert history(hid,paydate,price,hcount,trainer) "
+					+ "valuse(?,?,?,?,?)";
 			ps=con.prepareStatement(sql);
 			ps.setString(1, historyBean.getHid());
 			ps.setString(2, historyBean.getPaydate());
 			ps.setInt(3, historyBean.getPrice());
 			ps.setInt(4, historyBean.getHcount());
+			ps.setString(5, historyBean.getTrainer());
 			
 			ps.execute();
 		} catch (Exception e) {
