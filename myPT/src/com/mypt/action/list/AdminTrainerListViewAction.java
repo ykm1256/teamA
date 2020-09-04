@@ -17,7 +17,7 @@ public class AdminTrainerListViewAction implements Action{
 		
 		ArrayList<TrainerDto> arr=dao.trainerList();
 		request.setAttribute("trainerList", arr);
-		return "list/trainerList";
+		return "admin/trainerList";
 	}
 
 }

@@ -20,7 +20,7 @@ public class TrainerUserListViewAction implements Action {
 		ArrayList<UserDto> arr=dao.ptUserList(tid);
 		
 		request.setAttribute("ptUserList", arr);
-		return "list/ptUserList";
+		return "trainer/ptUserList";
 	}
 
 }
