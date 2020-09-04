@@ -19,20 +19,7 @@ public class MoveInbody implements Action
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception 
 	{
-		HttpSession session = request.getSession();
-		
-		String id= (String) session.getAttribute("id");
-		String userName= (String) session.getAttribute("name");
-
-		InbodyDao dao = InbodyDao.getInstance();
-                
-//		ArrayList<UserDto> arr = dao.getUserInbodyList(id);
-	        JsonArray jarr = dao.getUserInbodyList(id);
-
-		request.setAttribute("arr", jarr);
-
-	
-		return "userPages/inbody";
+		return "user/inbody";
 	}
 
 }

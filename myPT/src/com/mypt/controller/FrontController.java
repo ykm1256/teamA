@@ -69,9 +69,9 @@ public class FrontController extends HttpServlet {
 			String redirectPath = strView.substring("redirect:".length());
 			response.sendRedirect(redirectPath);
 		}else if(strView=="callback") {
-		      PrintWriter out = response.getWriter();      
-		      out.println(request.getAttribute("flag"));
-		      System.out.println(request.getAttribute("flag"));
+		      PrintWriter out = response.getWriter();    
+		      System.out.println(request.getAttribute("result"));
+		      out.println(request.getAttribute("result"));
 		      
 		} else {
 			//디스패치 방식으로 jsp 바로 실행

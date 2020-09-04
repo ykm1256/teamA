@@ -5,11 +5,13 @@ import java.util.Map;
 
 import com.mypt.action.check.EmailCheckAction;
 import com.mypt.action.check.NickCheckAction;
+import com.mypt.action.inbody.UserInbodyResultAction;
 import com.mypt.action.list.TrainerUserListViewAction;
 import com.mypt.action.list.AdminTrainerListViewAction;
 import com.mypt.action.list.AdminUserListViewAction;
 import com.mypt.action.login.TrainerLoginAction;
 import com.mypt.action.login.UserLoginAction;
+import com.mypt.action.move.MoveInbody;
 import com.mypt.action.move.MoveIntroAction;
 import com.mypt.action.move.MoveUserList;
 import com.mypt.action.move.MoveUserMain;
@@ -30,15 +32,7 @@ public class ActionFactory
 	
 	private ActionFactory()
 	{
-		//차트기능
-//		map.put("/chartExam", new ChartExamAction());
-		
-		//address기능
-//		map.put("/addressList",new AddressListAction());
-//		map.put("/addressView",new AddressViewAction());
-//		map.put("/addrInsert", new AddressInsertAction());
-//		map.put("/addrInsertPro", new AddrInsertProAction());
-		
+
 		//userList
 		map.put("/userList", new AdminUserListViewAction());
 		//trainerList
@@ -48,9 +42,13 @@ public class ActionFactory
 		
 		// 인트로 화면
 		map.put("/moveIntro", new MoveIntroAction());
+		map.put("/moveInbody", new MoveInbody());
 		//userLogin
 		map.put("/userLogin", new UserLoginAction());
 		map.put("/userMain", new MoveUserMain());
+		map.put("/getInbodyResult", new UserInbodyResultAction());
+		
+		
 		
 		//trainerLogin
 		map.put("/trainerLogin", new TrainerLoginAction());

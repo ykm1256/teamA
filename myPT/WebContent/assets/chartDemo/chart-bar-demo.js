@@ -7,10 +7,82 @@ var ctx = document.getElementById("myBarChart");
 
 // 그래프를 그릴 때의 데이터
 // 툴팁에 띄워줄 데이터
-//  170/60/여 표준체중: 60.69kg, 표준 골격근량 체중 25% 15kg , 표준 체지방량 체중 23% 13.8kg 
+
 
 // var datas= [60, 20, 12]; //자기수치
-// 평균대비% = 자기수치*100/평균수치
+// 표준체중 대비 수치
+ 
+// 자기
+// 자기 키, 자기 체중
+// 자기 골격근, 지방
+ 
+//표준 체중 : 키*100 * 0.9
+
+//남평균 골격근량= 자기체중/100*45 // +-3
+//여평균 골격근량= 자기체중/100*36 // +-3
+ 
+//남평균 지방량= 자기체중/100*18 // +-4
+//여평균 지방량= 자기체중/100*25 // +-4
+
+//평균대비% = 평균수치*100/자기수치
+ 
+var gender="";
+var height= 0;
+var weight= 0;
+var fat= 0;
+var muscle= 0;
+
+
+//표준 체중 대비 자기체중
+function getPerStandardWeight()
+{
+	let standardWeight= (height*100)*0.9;  //표준체중
+	let perStandardWeight= standardWeight*100/weight;	
+	
+	return perStandardWeight;
+}
+
+//표준 체중 대비 자기 골격근량
+function getPerStandardMuscle()
+{
+	let standardMuscle = "";
+	
+	if(gender=="남성")
+	{
+		standardMuscle= muscle/100*45; //표준 골격근량	
+	}
+	else
+	{
+		standardMuscle= muscle/100*36;
+	}
+	
+	perStandardMuscle= standardMuscle*100/muscle;
+	
+	return perStandardMuscle;
+
+}
+
+//표준 지방 대비 자기 지방
+function getPerStandardMuscle()
+{
+	let standardFat = "";
+	
+	if(gender=="남성")
+	{
+		standardFat= fat/100*18; //표준 지방
+	}
+	else
+	{
+		standardFat= fat/100*25; 
+	}
+	
+	perStandardFat= standardFat*100/fat;
+
+	return perStandardFat;
+}
+
+
+
 
 var chartFixedTooltips = new Chart(ctx, {
     type: 'horizontalBar',

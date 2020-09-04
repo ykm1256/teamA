@@ -30,7 +30,7 @@ public class UserLoginAction implements Action{
 		}
 		
 		response.setContentType("text/html;charset=utf-8");
-		request.setAttribute("flag", flag);
+		request.setAttribute("result", flag);
 		
 		
 		return "callback";
