@@ -29,7 +29,7 @@ public class HistoryDao {
 
 		try {
 			con = db.getConnection();
-			sql = "insert history(hid,paydate,price,hcount,trainer) " + "valuse(?,?,?,?,?)";
+			sql = "insert history(hid,paydate,price,hcount,tid) " + "values(?,?,?,?,?)";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, historyBean.getHid());
 			ps.setString(2, historyBean.getPaydate());
