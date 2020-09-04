@@ -24,7 +24,7 @@ public class AdminUserDetailAction implements Action {
 		ArrayList<TrainerDto> arr = tdao.trainerList();
 		request.setAttribute("user", user);
 		request.setAttribute("arr", arr);
-		return "userDetail";
+		return "admin/userDetail";
 	}
 	
 	

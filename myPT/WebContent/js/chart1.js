@@ -16,7 +16,7 @@ var user = new Array();
 		
 		//월별 매출
 		$.ajax({
-		url:"income.do",
+		url:"incomeChart.do",
 		type:"post",
 		async:false,
 		success:function(data){
@@ -24,6 +24,7 @@ var user = new Array();
 			for(var i=0;i<data.length;i++){
 				months.push(data[i].month+"월");
 				income.push(data[i].income);
+				user.push(data[i].user);
 			}			
 		},
 		error: function(e){
@@ -34,7 +35,7 @@ var user = new Array();
 	
 	
 	//월별 등록회원수
-		$.ajax({
+		/*$.ajax({
 		url:"userCount.do",
 		type:"post",
 		async:false,
@@ -49,6 +50,7 @@ var user = new Array();
 		}
 		
 	})
+	*/
 		
 
 

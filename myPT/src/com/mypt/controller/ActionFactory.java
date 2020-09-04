@@ -5,16 +5,20 @@ import java.util.Map;
 
 import com.mypt.action.check.EmailCheckAction;
 import com.mypt.action.check.NickCheckAction;
+import com.mypt.action.detail.AdminTrainerDetailAction;
+import com.mypt.action.detail.AdminTrainerUpdateAction;
+import com.mypt.action.detail.AdminUserDetailAction;
+import com.mypt.action.detail.AdminUserUpdateAction;
+import com.mypt.action.detail.UserMyDetailAction;
+import com.mypt.action.detail.UserMyUpdateAction;
 import com.mypt.action.income.IncomeAction;
 import com.mypt.action.income.MoveIncomeAction;
-import com.mypt.action.income.UserCountAction;
-import com.mypt.action.list.TrainerUserListViewAction;
 import com.mypt.action.list.AdminTrainerListViewAction;
 import com.mypt.action.list.AdminUserListViewAction;
+import com.mypt.action.list.TrainerUserListViewAction;
 import com.mypt.action.login.TrainerLoginAction;
 import com.mypt.action.login.UserLoginAction;
 import com.mypt.action.move.MoveIntroAction;
-import com.mypt.action.move.MoveUserList;
 import com.mypt.action.move.MoveUserMain;
 import com.mypt.action.move.MoveUserRegister;
 import com.mypt.action.register.AdminUserRegisterAction;
@@ -59,8 +63,7 @@ public class ActionFactory
 		map.put("/trainerLogin", new TrainerLoginAction());
 		
 		//회원가입
-		map.put("/moveUserRegister", new MoveUserRegister());
-		map.put("/moveUserList", new MoveUserList());
+		map.put("/moveUserRegister", new MoveUserRegister());		
 
 		map.put("/userInsertAction", new AdminUserRegisterAction());
 		map.put("/nickCheck", new NickCheckAction());
@@ -68,8 +71,18 @@ public class ActionFactory
 		
 		//매출
 		map.put("/moveIncome", new MoveIncomeAction());
-		map.put("/income", new IncomeAction());
-		map.put("/userCount", new UserCountAction());
+		map.put("/incomeChart", new IncomeAction());
+		
+		//detail
+		map.put("/adminTrainerDetail", new AdminTrainerDetailAction());
+		map.put("/adminUserDetail", new AdminUserDetailAction());
+		map.put("/userMyDetail", new UserMyDetailAction());
+		
+		//update
+		map.put("/userMyUpdate", new UserMyUpdateAction());
+		map.put("/adminTrainerUpdate", new AdminTrainerUpdateAction());
+		map.put("/adminUserUpdate", new AdminUserUpdateAction());
+		
 		
 	}
 	

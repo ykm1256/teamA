@@ -119,15 +119,14 @@ return instance;
 	
 	
 	// 그래프관련 메서드 추가
-		// 월별 매출
+		// 월별 매출, 회원수
 		public ArrayList<HistoryDto> getincome(int year,int month) {
 			Connection con=null;
 			PreparedStatement ps=null;
 			ResultSet rs=null;
 			String sql=null;
 			HistoryDto historyBean=null;
-			ArrayList<HistoryDto> arr = new ArrayList<HistoryDto>();
-			
+			ArrayList<HistoryDto> arr = new ArrayList<HistoryDto>();			
 					
 			try {
 				for(int i=1; i<=month;i++) {
@@ -135,10 +134,10 @@ return instance;
 				
 				con=db.getConnection();
 				if(i<10) {
-				sql="select ifnull(sum(price),0) from history where paydate like '%"+year+"-0"+i+"%';";
+				sql="select ifnull(sum(price),0),count(distinct hid) from history where paydate like '%"+year+"-0"+i+"%';";
 				}
 				else {
-					sql="select ifnull(sum(price),0) from history where paydate like '%"+year+"-"+i+"%';";
+					sql="select ifnull(sum(price),0),count(distinct hid) from history where paydate like '%"+year+"-"+i+"%';";							
 				}
 				System.out.println(sql);
 				ps=con.prepareStatement(sql);			
@@ -147,6 +146,7 @@ return instance;
 				if(rs.next()) {
 					System.out.println(rs.getString(1));
 					historyBean.setIncome(Integer.parseInt(rs.getString(1)));
+					historyBean.setUsercnt(Integer.parseInt(rs.getString(2)));
 					
 				}
 				arr.add(historyBean);
@@ -158,48 +158,8 @@ return instance;
 			}
 			
 			return arr;
-		}
+		}		
 		
-		//월별 등록회원수
-		public ArrayList<HistoryDto> getUser(int year,int month) {
-			Connection con=null;
-			PreparedStatement ps=null;
-			ResultSet rs=null;
-			String sql=null;
-			HistoryDto historyBean=null;
-			ArrayList<HistoryDto> arr = new ArrayList<HistoryDto>();
-			
-					
-			try {
-				for(int i=1; i<=month;i++) {
-					historyBean = new HistoryDto();
-				
-				con=db.getConnection();
-				if(i<10) {
-				sql="select count(distinct hid) from history where paydate like '%"+year+"-0"+i+"%';";
-				}
-				else {
-					sql="select count(distinct hid) from history where paydate like '%"+year+"-"+i+"%';";
-				}
-				System.out.println(sql);
-				ps=con.prepareStatement(sql);			
-				rs=ps.executeQuery();
-				historyBean.setMonth(i);
-				if(rs.next()) {
-					System.out.println(rs.getString(1));
-					historyBean.setUsercnt(Integer.parseInt(rs.getString(1)));
-					
-				}
-				arr.add(historyBean);
-				db.closeConnection(rs, ps, con);
-				
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
-			return arr;
-		}
 		
 		
 		// 이번 달 수입 (윤)

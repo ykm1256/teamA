@@ -27,6 +27,7 @@ public class IncomeAction implements Action{
 		for(HistoryDto dto: arr) {
 			System.out.println(dto.getMonth());
 			System.out.println(dto.getIncome());
+			System.out.println(dto.getUsercnt());
 		}
 		
 		JSONArray jarr = new JSONArray();
@@ -34,6 +35,7 @@ public class IncomeAction implements Action{
 			JSONObject obj = new JSONObject();
 			obj.put("month", dto.getMonth());
 			obj.put("income", dto.getIncome());
+			obj.put("user", dto.getUsercnt());
 			jarr.add(obj);
 		}
 		request.setAttribute("result", jarr);
