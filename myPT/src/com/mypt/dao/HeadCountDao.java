@@ -3,6 +3,7 @@ package com.mypt.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 
 import com.mypt.connection.DBConnection;
 import com.mypt.dto.HeadCountDto;
@@ -26,10 +27,9 @@ public class HeadCountDao {
 		PreparedStatement ps = null;
 		try {
 			con = db.getConnection();
-			String sql = "insert into headcount values(?,?,?)";
+			String sql = "insert into headcount(h_id) values(?)";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, hd.getH_id());
-			ps.setString(2, String.valueOf(hd.getH_date()));
 			ps.executeUpdate();			
 					
 		} catch (Exception e) {
@@ -41,7 +41,7 @@ public class HeadCountDao {
 	}
 	
 	
-	public int headcountSelect(String h_date, String intime) {
+	public int headcountSelect(String h_id, String intime) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -49,9 +49,9 @@ public class HeadCountDao {
 		
 		try {
 			con = db.getConnection();
-			String sql = "select count(*) from headcount where h_date=? and intime=?";
+			String sql = "select count(*) from headcount where h_id=? and intime=?";
 			ps = con.prepareStatement(sql);
-			ps.setString(1, h_date);
+			ps.setString(1, h_id);
 			ps.setString(2, intime);
 			rs = ps.executeQuery();
 			if(rs.next()) {
@@ -67,15 +67,15 @@ public class HeadCountDao {
 		
 	}
 	
-	public void headcountUpdate(String h_id, String h_date) {
+	public void headcountUpdate(String h_id, String date) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		try {
 			con = db.getConnection();
-			String sql = "update headcount set outtime=now() where h_id=? and h_date=?";
+			String sql = "update headcount set outtime=now() where h_id=? and intime like concat('%',?,'%')";
 			ps = con.prepareStatement(sql);			
 			ps.setString(1, h_id);
-			ps.setString(2, h_date);
+			ps.setString(2,date);
 			ps.executeUpdate();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -85,15 +85,15 @@ public class HeadCountDao {
 		}				
 	}
 	
-	public void headcountDelete(String h_id, String h_date) {
+	public void headcountDelete(String h_id, String date) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		try {
 			con = db.getConnection();
-			String sql = "delete from headcount where h_id=? and h_date=?";
+			String sql = "delete from headcount where h_id=? and intime=?";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, h_id);
-			ps.setString(2, h_date);
+			ps.setString(2, date);
 			ps.executeUpdate();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -102,6 +102,38 @@ public class HeadCountDao {
 			db.closeConnection(null, ps, con);
 		}
 	}
-
+	
+	public int headcountCheck(String h_id,String date) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs=null;
+		
+		int result=0;
+		
+		try {
+			con = db.getConnection();
+			String sql = "select * from headcount where h_id=? and intime like concat('%',?,'%')";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, h_id);
+			ps.setString(2, date);
+			rs=ps.executeQuery();
+			if(rs.next()) {
+				if(rs.getString("outtime")==null) {
+					result=1;
+				}else {
+					result=2;
+				}
+			}else {
+				result=0;
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.closeConnection(rs, ps, con);
+		}
+		
+		return result;
+	}
 
 }
