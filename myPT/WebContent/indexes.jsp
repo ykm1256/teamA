@@ -6,3 +6,4 @@
 <button onclick="location.href='userMyDetail.do'">유저정보관리</button><br>
 <button onclick="location.href='moveIncome.do'">매출</button><br>
 
+
