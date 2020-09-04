@@ -22,6 +22,8 @@ import com.mypt.action.login.UserLoginAction;
 import com.mypt.action.move.MoveIntroAction;
 import com.mypt.action.move.MoveUserMain;
 import com.mypt.action.move.MoveUserRegister;
+import com.mypt.action.qr.QrCheckAction;
+import com.mypt.action.qr.QrViewAction;
 import com.mypt.action.register.AdminUserRegisterAction;
 
 
@@ -84,6 +86,12 @@ public class ActionFactory
 		map.put("/userMyUpdate", new UserMyUpdateAction());
 		map.put("/adminTrainerUpdate", new AdminTrainerUpdateAction());
 		map.put("/adminUserUpdate", new AdminUserUpdateAction());
+		
+		//qr코드
+		map.put("/qrGet",new QrViewAction());
+		
+		// 출석
+		map.put("/qrCheck",new QrCheckAction());
 		
 		
 	}
