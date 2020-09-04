@@ -26,6 +26,7 @@ public class AdminUserRegisterAction implements Action {
 		dto.setPw(request.getParameter("password"));
 		dto.setZipcode(request.getParameter("zipcode"));
 		dto.setAddress(request.getParameter("address"));
+		dto.setQr(request.getParameter("qrcode"));
 		// null값 처리
 		dto.setStartdate(Date.valueOf(request.getParameter("startdate")));
 		dto.setTid(request.getParameter("trainer"));
@@ -35,7 +36,7 @@ public class AdminUserRegisterAction implements Action {
 		UserDao dao= UserDao.getInstance();		
 		dao.insertUser(dto);
 		
-		return "redirect:moveUserList.do";
+		return "redirect:userList.do";
 	}
 
 }

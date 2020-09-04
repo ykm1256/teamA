@@ -153,6 +153,13 @@ $('input[type=text], input[type=password], input[type=email]').on('keyup', funct
 						alert("사용 가능한 이메일입니다");
 						$('#confirmEmail').val($('#email').val());
 						 rightFormat($('#email'));
+					
+						//qr코드 생성 (안)
+						var qrcode = new QRCode(document.getElementById("qrcode"), {
+        					text: "http://localhost:8080/myPT/?email="+$("#email").val(),
+        					width: 500,
+        					height: 500,
+						});
 					}
 					else if(data==1)
 					{				
@@ -198,7 +205,9 @@ function check(form)
 	
 // 공백값 처리
 //현재보다 이후 날짜의 생년/현재보다 이전 날짜의 시작일 불가하도록 설정 - 유효값확인 전에 가능할 지도
-	
+
+	//생성된 qr코드의 src 값을 qrcode에 넣어줌
+	$("#qrcode").val($("#qrcode img").attr("src"));
 	
 	return true;
 		       
