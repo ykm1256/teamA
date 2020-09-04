@@ -5,6 +5,9 @@ import java.util.Map;
 
 import com.mypt.action.check.EmailCheckAction;
 import com.mypt.action.check.NickCheckAction;
+import com.mypt.action.income.IncomeAction;
+import com.mypt.action.income.MoveIncomeAction;
+import com.mypt.action.income.UserCountAction;
 import com.mypt.action.list.TrainerUserListViewAction;
 import com.mypt.action.list.AdminTrainerListViewAction;
 import com.mypt.action.list.AdminUserListViewAction;
@@ -62,6 +65,11 @@ public class ActionFactory
 		map.put("/userInsertAction", new AdminUserRegisterAction());
 		map.put("/nickCheck", new NickCheckAction());
 		map.put("/emailCheck", new EmailCheckAction());
+		
+		//매출
+		map.put("/moveIncome", new MoveIncomeAction());
+		map.put("/income", new IncomeAction());
+		map.put("/userCount", new UserCountAction());
 		
 	}
 	
