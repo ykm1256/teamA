@@ -74,7 +74,7 @@
                     <tbody class="text-center">
                       <c:forEach items="${ptUserList }" var="item">
                       	<tr>
-                        <td>${item.id }</td>
+                        <td><a href="moveSchedule.do?id=${item.id }">${item.id }</a></td>
                         <td>${item.name }</td>
                         <td>${item.gender }</td>
                         <td>${item.birth }</td>

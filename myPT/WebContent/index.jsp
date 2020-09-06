@@ -5,7 +5,8 @@
 	/* response.sendRedirect("trainerList.do"); */
 	/* response.sendRedirect("ptUserList.do"); */
 	
-/* 	response.sendRedirect("moveUserRegister.do"); */
+ 	/* response.sendRedirect("moveUserRegister.do"); */
 	
- 	/* response.sendRedirect("moveIntro.do"); */ 
+ 	response.sendRedirect("moveIntro.do");
+ 	/* response.sendRedirect("moveSchedule.do"); */
 %>

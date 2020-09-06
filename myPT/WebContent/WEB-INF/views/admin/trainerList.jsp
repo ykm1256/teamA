@@ -75,7 +75,7 @@
                         <td>${item.t_name }</td>
                         <td>${item.t_gender }</td>
                         <td>${item.t_birth }</td>
-                        <td>010-7474-4303</td>
+                        <td>${item.t_tel }</td>
                         <td>
                           <button class="btn btn-primary custom-btn">
                             <i class="fas fa-edit"></i>

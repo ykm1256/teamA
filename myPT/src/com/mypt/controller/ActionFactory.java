@@ -20,6 +20,7 @@ import com.mypt.action.list.TrainerUserListViewAction;
 import com.mypt.action.login.TrainerLoginAction;
 import com.mypt.action.login.UserLoginAction;
 import com.mypt.action.move.MoveIntroAction;
+import com.mypt.action.move.MoveSchedule;
 import com.mypt.action.move.MoveUserMain;
 import com.mypt.action.move.MoveUserRegister;
 import com.mypt.action.qr.QrCheckAction;
@@ -40,14 +41,6 @@ public class ActionFactory
 	
 	private ActionFactory()
 	{
-		//차트기능
-//		map.put("/chartExam", new ChartExamAction());
-		
-		//address기능
-//		map.put("/addressList",new AddressListAction());
-//		map.put("/addressView",new AddressViewAction());
-//		map.put("/addrInsert", new AddressInsertAction());
-//		map.put("/addrInsertPro", new AddrInsertProAction());
 		
 		//userList
 		map.put("/userList", new AdminUserListViewAction());
@@ -92,6 +85,9 @@ public class ActionFactory
 		
 		// 출석
 		map.put("/qrCheck",new QrCheckAction());
+		
+		// 스케줄 관리
+		map.put("/moveSchedule",new MoveSchedule());
 		
 		
 	}
