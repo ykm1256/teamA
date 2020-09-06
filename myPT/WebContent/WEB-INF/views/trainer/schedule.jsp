@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -41,7 +42,7 @@
       <div id="layoutSidenav_content">
         <main>
           <div class="container-fluid">
-            <h1 class="mt-4 mb-4">스케줄 조정</h1>
+            <h1 class="mt-4 mb-4">${user.name}님 스케줄 조정</h1>
             <!-- 달 주 선택 -->
             <div class="container h-100 mb-4">
               <div class="row h-100 justify-content-center align-items-center">

@@ -13,9 +13,9 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>템플릿</title>
-    <link href="/project/css/styles.css" rel="stylesheet" />
-    <link href="/project/css/index.css" rel="stylesheet"/>
-    <link href="/project/css/widget.css" rel="stylesheet"/>
+    <link href="/myPT/css/styles.css" rel="stylesheet" />
+    <link href="/myPT/css/index.css" rel="stylesheet"/>
+    <link href="/myPT/css/widget.css" rel="stylesheet"/>
 
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
@@ -242,7 +242,7 @@
     <script
       src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js">
     </script>
-    <script src="/project/js/scripts.js"></script>
-    <script src="/project/js/userUpdate.js"></script>
+    <script src="/myPT/js/scripts.js"></script>
+    <script src="/myPT/js/userUpdate.js"></script>
   </body>
 </html>
