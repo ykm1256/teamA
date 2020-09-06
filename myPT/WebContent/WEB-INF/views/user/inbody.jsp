@@ -39,7 +39,7 @@
          
          <main>
        		 <div class="container-fluid text-center">
-	              <div class="row border border-dark rounded-top my-3 mx-auto p-1">
+	              <div class="row border border-dark rounded-top my-3 mx-auto p-1" id="profile">
 	                  <div class="col border-right border-dark" id="userName">
 	                  </div>
 	                  <div class="col border-right border-dark" id="age">
@@ -53,7 +53,7 @@
 	
 	              <div class="card mb-4">
 	                  <div class="card-body p-1">
-	                      <canvas id="inbodyChart" width="100%" height="25"></canvas>
+	                      <canvas id="inbodyChart" width="100%" height="300"></canvas>
 	                  </div>
 	                  <div class="card-footer">
 	                      측정일: <span id="latestMeasureDay"></span>
@@ -82,22 +82,23 @@
                       <div class="card-header bg-dark text-white">
 
                           <div class="row">
-                              <div class="col">
-                                  <select class="form-control" id="previousMeasureDay" onchange="preDayIschanged()"> 
-                                      <option value="default" disabled selected>이전 측정일</option>   
-                                  </select>
-                      
-                                  <select id="numOfResult" onchange="numOfResultIschanged()"> 
-                                      <option value="10" selected>10개</option>
-                                      <option value="15">15개</option>
-                                      <option value="20">20개</option>
-                                  </select>
-                              </div>
-                          
-                              <div class="col previousMeasureDay">과거</div>
-                              <div class="col latestMeasureDay">현재</div>
-                              <div class="col">차이</div>
-                          </div>
+                             	  <div class="col"></div>
+
+	                              <div class="col">
+                              		  <div id="showBeforeDay"></div>
+                                      <select id="beforeMeasureDay" class="col-sm-12 col-md-10" onchange="beforeDayIschanged()"> 
+                                      <option value="default" disabled selected>비교 측정일1</option>   
+                                  	  </select>   	  
+	                              </div>
+	                              
+	                              <div class="col">
+                              		  <div id="showAfterDay"></div>
+                              		  <select id="afterMeasureDay" class="col-sm-12 col-md-10" onchange="afterDayIschanged()"> 
+                                      <option value="default" disabled selected>비교 측정일2</option>   
+                                  	  </select>	                               	  
+	                              </div>
+	                              <div class="col">차이</div>
+	                          </div>
                       </div>
 
                       <div class="card-body p-md-2  d-flex align-items-center">
@@ -138,12 +139,8 @@
     <script src="/myPT/js/scripts.js"></script>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
-<!--     chart demo -->
-<!--     <script src="/myPT/assets/chartDemo/chart-line-demo.js"></script> -->
-<!--     <script src="/myPT/assets/chartDemo/chart-line-demo2.js"></script> -->
-<!--     <script src="/myPT/assets/chartDemo/chart-line-demo3.js"></script> -->
-<!--     <script src="/myPT/assets/chartDemo/chart-bar-demo.js"></script> -->
-    
+   
+    <script src="/myPT/js/chartjs-plugin-datalabels.js"></script>
     <script src="/myPT/js/inbody.js"></script>
     
     

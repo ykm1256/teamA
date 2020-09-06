@@ -1,6 +1,6 @@
 @media screen and (max-width: 640px) 
 { 
-    #comparison
+    #comparison, #profile
     {
         font-size: 0.75rem;
     }
