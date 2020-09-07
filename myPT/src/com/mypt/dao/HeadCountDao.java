@@ -135,5 +135,33 @@ public class HeadCountDao {
 		
 		return result;
 	}
+	
+	
+	public int crowdedCheck(String date) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs=null;
+		
+		int result=0;
+		
+		try {
+			con = db.getConnection();
+			String sql = "select count(*) from headcount where intime like '%"+date+"%' and outtime is null;";
+			ps = con.prepareStatement(sql);
+			rs=ps.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);				
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.closeConnection(rs, ps, con);
+		}
+		
+		return result;
+	}
+	
+	
 
 }

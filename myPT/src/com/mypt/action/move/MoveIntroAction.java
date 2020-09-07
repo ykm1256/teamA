@@ -10,7 +10,7 @@ public class MoveIntroAction implements Action{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
-		return "intro/intro";
+		return "common/intro";
 	}
 
 }
