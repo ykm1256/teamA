@@ -67,7 +67,7 @@ $(function(){
 					
 					
 				}else if(data==1){					
-					location.href="trainerMain.jsp";
+					location.href="ptUserList.do";
 				}
 			},
 			error: function(e){

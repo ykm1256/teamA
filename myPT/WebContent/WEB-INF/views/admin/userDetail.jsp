@@ -48,7 +48,7 @@
                   </div>
 
                   <div class="card-body">
-                  <form action="userManage.do" method="post" onsubmit="return check(this)">              
+                  <form action="adminUserUpdate.do" method="post" onsubmit="return check(this)">              
                       <div class="form-row">
                         <div class="col-md-6">
                           <div class="form-group">
@@ -108,13 +108,13 @@
                               required
                             >                            
                             <c:choose>
-                            <c:when test="${user.gender==0 }" >                            
-                              <option value="0" selected>남성</option>
-                              <option value="1">여성</option>                            
+                            <c:when test="${user.gender=='남성' }" >                            
+                              <option value="남성" selected>남성</option>
+                              <option value="여성">여성</option>                            
                             </c:when>
                             <c:otherwise>                           
-                              <option value="0">남성</option>
-                              <option value="1" selected>여성</option>                            
+                              <option value="남성">남성</option>
+                              <option value="여성" selected>여성</option>                            
                             </c:otherwise>
                             </c:choose>
                             </select> 

@@ -6,6 +6,15 @@ import java.util.Map;
 import com.mypt.action.check.EmailCheckAction;
 import com.mypt.action.check.NickCheckAction;
 import com.mypt.action.inbody.UserInbodyResultAction;
+import com.mypt.action.detail.AdminTrainerDetailAction;
+import com.mypt.action.detail.AdminTrainerUpdateAction;
+import com.mypt.action.detail.AdminUserDetailAction;
+import com.mypt.action.detail.AdminUserUpdateAction;
+import com.mypt.action.detail.UserMyDetailAction;
+import com.mypt.action.detail.UserMyUpdateAction;
+import com.mypt.action.income.IncomeAction;
+import com.mypt.action.income.IncomeTrainerAction;
+import com.mypt.action.income.MoveIncomeAction;
 import com.mypt.action.list.AdminTrainerListViewAction;
 import com.mypt.action.list.AdminUserListViewAction;
 import com.mypt.action.list.TrainerUserListViewAction;
@@ -13,9 +22,11 @@ import com.mypt.action.login.TrainerLoginAction;
 import com.mypt.action.login.UserLoginAction;
 import com.mypt.action.move.MoveInbody;
 import com.mypt.action.move.MoveIntroAction;
-import com.mypt.action.move.MoveUserList;
+import com.mypt.action.move.MoveSchedule;
 import com.mypt.action.move.MoveUserMain;
 import com.mypt.action.move.MoveUserRegister;
+import com.mypt.action.qr.QrCheckAction;
+import com.mypt.action.qr.QrViewAction;
 import com.mypt.action.register.AdminUserRegisterAction;
 
 
@@ -41,25 +52,47 @@ public class ActionFactory
 		map.put("/ptUserList", new TrainerUserListViewAction());
 		
 		// 인트로 화면
-		map.put("/moveIntro", new MoveIntroAction());
+//		map.put("/moveIntro", new MoveIntroAction());
 		map.put("/moveInbody", new MoveInbody());
 		//userLogin
 		map.put("/userLogin", new UserLoginAction());
 		map.put("/userMain", new MoveUserMain());
 		map.put("/getInbodyResult", new UserInbodyResultAction());
-		
-		
-		
+			
 		//trainerLogin
 		map.put("/trainerLogin", new TrainerLoginAction());
 		
 		//회원가입
-		map.put("/moveUserRegister", new MoveUserRegister());
-		map.put("/moveUserList", new MoveUserList());
+		map.put("/moveUserRegister", new MoveUserRegister());		
 
 		map.put("/userInsertAction", new AdminUserRegisterAction());
 		map.put("/nickCheck", new NickCheckAction());
 		map.put("/emailCheck", new EmailCheckAction());
+		
+		//매출
+		map.put("/moveIncome", new MoveIncomeAction());
+		map.put("/incomeChart", new IncomeAction());
+		map.put("/incomeTrainerChart", new IncomeTrainerAction());
+		
+		//detail
+		map.put("/adminTrainerDetail", new AdminTrainerDetailAction());
+		map.put("/adminUserDetail", new AdminUserDetailAction());
+		map.put("/userMyDetail", new UserMyDetailAction());
+		
+		//update
+		map.put("/userMyUpdate", new UserMyUpdateAction());
+		map.put("/adminTrainerUpdate", new AdminTrainerUpdateAction());
+		map.put("/adminUserUpdate", new AdminUserUpdateAction());
+		
+		//qr코드
+		map.put("/qrGet",new QrViewAction());
+		
+		// 출석
+		map.put("/qrCheck",new QrCheckAction());
+		
+		// 스케줄 관리
+		map.put("/moveSchedule",new MoveSchedule());
+		
 		
 	}
 	

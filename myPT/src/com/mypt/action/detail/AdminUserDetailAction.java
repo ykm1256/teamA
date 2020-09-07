@@ -20,11 +20,14 @@ public class AdminUserDetailAction implements Action {
 		UserDao udao = UserDao.getInstance();
 		UserDto user = udao.getUserByEmail(email);
 		
+
+		
+		
 		TrainerDao tdao = TrainerDao.getInstance();
 		ArrayList<TrainerDto> arr = tdao.trainerList();
 		request.setAttribute("user", user);
 		request.setAttribute("arr", arr);
-		return "userDetail";
+		return "admin/userDetail";
 	}
 	
 	

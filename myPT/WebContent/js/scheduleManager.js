@@ -206,3 +206,5 @@ if (window.matchMedia("(max-width: 574px)").matches == true) {
 } else {
   $(".custom-submit").attr("style", "width:");
 }
+
+// 달이랑 주차 정하면 해당 날짜

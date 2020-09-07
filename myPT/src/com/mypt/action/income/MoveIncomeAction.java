@@ -44,7 +44,7 @@ public class MoveIncomeAction implements Action {
 		request.setAttribute("nowUser", usercnt);
 		request.setAttribute("newUser", newuser);		
 		
-		return "income";
+		return "/admin/income";
 	}
 
 }

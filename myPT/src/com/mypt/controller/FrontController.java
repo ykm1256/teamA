@@ -69,9 +69,9 @@ public class FrontController extends HttpServlet {
 			String redirectPath = strView.substring("redirect:".length());
 			response.sendRedirect(redirectPath);
 		}else if(strView=="callback") {
-		      PrintWriter out = response.getWriter();    
-		      System.out.println(request.getAttribute("result"));
+		      PrintWriter out = response.getWriter();      
 		      out.println(request.getAttribute("result"));
+		      System.out.println(request.getAttribute("result"));
 		      
 		} else {
 			//디스패치 방식으로 jsp 바로 실행
@@ -86,7 +86,8 @@ public class FrontController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//post 방식 요청 파라미터 한글처리 . post 방식은 텍스트 뿐 아니라 파일 등도 전송.
-		request.setCharacterEncoding("utf-8");
+		//request.setCharacterEncoding("utf-8");
+		//response.setCharacterEncoding("utf-8");
 		doGet(request, response);
 	}
 	

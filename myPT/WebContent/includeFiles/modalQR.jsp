@@ -14,7 +14,8 @@
               <span aria-hidden="true">&times;</span>
             </button>
             <img
-              src="img/220px-QR_code_for_mobile_English_Wikipedia.svg.png"
+            	id="qrImg"
+              src=""
               class="w-100"
             />
           </div>

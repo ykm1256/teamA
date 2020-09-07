@@ -13,26 +13,25 @@ import com.mypt.controller.Action;
 import com.mypt.dao.HistoryDao;
 import com.mypt.dto.HistoryDto;
 
-public class UserCountAction implements Action{
+public class IncomeTrainerAction implements Action{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
-		Calendar cal = Calendar.getInstance();
-		int year = cal.get(Calendar.YEAR);
-		int month = cal.get(Calendar.MONTH)+1;
+		
+		request.setCharacterEncoding("utf-8");
+		int year = Integer.parseInt(request.getParameter("year"));
+		int month = Integer.parseInt(request.getParameter("month"));
 		System.out.println(year);
 		HistoryDao dao = HistoryDao.getInstance();
-		ArrayList<HistoryDto> arr = dao.getUser(year,month);
-		for(HistoryDto dto: arr) {
-			System.out.println(dto.getMonth());
-			System.out.println(dto.getIncome());
-		}
+		ArrayList<HistoryDto> arr = dao.getTrainerIncome(year,month);		
 		
 		JSONArray jarr = new JSONArray();
 		for(HistoryDto dto: arr) {
-			JSONObject obj = new JSONObject();			
-			obj.put("user", dto.getUsercnt());
+			JSONObject obj = new JSONObject();
+			obj.put("tid", dto.getT_id());
+			obj.put("income", dto.getIncome());
+			obj.put("tname", dto.getT_name());
 			jarr.add(obj);
 		}
 		request.setAttribute("result", jarr);

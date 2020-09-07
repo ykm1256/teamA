@@ -16,7 +16,7 @@ public class AdminTrainerDetailAction implements Action {
 		TrainerDao tdao = TrainerDao.getInstance();
 		TrainerDto trainer = tdao.trainerSelect(id);
 		request.setAttribute("t", trainer);		
-		return "trainerDetail";
+		return "admin/trainerDetail";
 	}
 	
 	

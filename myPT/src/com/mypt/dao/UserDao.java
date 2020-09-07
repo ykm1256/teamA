@@ -117,7 +117,7 @@ public class UserDao {
 
 		try {
 			con = db.getConnection();
-			sql = "update user set pw=?, zipcode=?,address=?,phone=? where email=?";
+			sql = "update user set pw=?, zipcode=?,address=?,tel=? where email=?";
 			ps = con.prepareStatement(sql);
 
 			ps.setString(1, userBean.getPw());
@@ -219,6 +219,7 @@ public class UserDao {
 				userBean.setTid(rs.getString("tid"));
 				userBean.setZipcode(rs.getString("zipcode"));
 				userBean.setTel(rs.getString("tel"));
+				userBean.setPtcount(Integer.parseInt(rs.getString("ptcount")));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -246,17 +247,8 @@ public class UserDao {
 				UserDto userBean = new UserDto();
 				userBean.setId(rs.getString("id"));
 				userBean.setPw(rs.getString("pw"));
-				userBean.setName(rs.getString("name"));
-
-				// 성별 구분
-				String gender = "";
-				if (rs.getString("gender").equals("M")) {
-					gender = "남자";
-				} else {
-					gender = "여자";
-				}
-				userBean.setGender(gender);
-
+				userBean.setName(rs.getString("name"));				
+				userBean.setGender(rs.getNString("gender"));
 				userBean.setEmail(rs.getString("email"));
 
 				// 나이 계산
@@ -490,4 +482,33 @@ public class UserDao {
 		return result;
 	}
 
+	// QR 값을 받아오기
+	public String getQR(String id) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql=null;
+		
+		String result = null;
+
+		try {
+			sql= "select qr from user where id=?";
+			con = db.getConnection();
+			ps = con.prepareStatement(sql);
+
+			ps.setString(1,id);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				result = rs.getString("qr");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.closeConnection(rs, ps, con);
+		}
+
+		return result;
+	}
+	
 }

@@ -40,7 +40,7 @@ public class AdminUserUpdateAction implements Action{
 		dao.manageUser(dto);
 		
 		
-		return "redirect:moveUserList.do";
+		return "redirect:userList.do";
 	}
 
 }

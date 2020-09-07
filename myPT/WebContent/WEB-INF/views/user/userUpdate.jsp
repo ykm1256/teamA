@@ -13,9 +13,9 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>템플릿</title>
-    <link href="/project/css/styles.css" rel="stylesheet" />
-    <link href="/project/css/index.css" rel="stylesheet"/>
-    <link href="/project/css/widget.css" rel="stylesheet"/>
+    <link href="/myPT/css/styles.css" rel="stylesheet" />
+    <link href="/myPT/css/index.css" rel="stylesheet"/>
+    <link href="/myPT/css/widget.css" rel="stylesheet"/>
 
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
@@ -45,7 +45,7 @@
                     <h3 class="text-center font-weight-light my-4">회원정보</h3>
                   </div>
                   <div class="card-body">
-                    <form action="userUpdate.do" method="post" onsubmit="return check(this)">
+                    <form action="userMyUpdate.do" method="post" onsubmit="return check(this)">
                       <div class="form-row">
                         <div class="col-md-6">
                           <div class="form-group">
@@ -93,13 +93,13 @@
                               disabled
                             >                            
                             <c:choose>
-                            <c:when test="${user.gender==0 }" >                            
-                              <option value="0" selected>남성</option>
-                              <option value="1">여성</option>                            
+                            <c:when test="${user.gender=='남성' }" >                            
+                              <option value="남성" selected>남성</option>
+                              <option value="여성">여성</option>                            
                             </c:when>
                             <c:otherwise>                           
-                              <option value="0">남성</option>
-                              <option value="1" selected>여성</option>                            
+                              <option value="남성">남성</option>
+                              <option value="여성" selected>여성</option>                            
                             </c:otherwise>
                             </c:choose>
                             </select> 
@@ -242,7 +242,7 @@
     <script
       src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js">
     </script>
-    <script src="/project/js/scripts.js"></script>
-    <script src="/project/js/userUpdate.js"></script>
+    <script src="/myPT/js/scripts.js"></script>
+    <script src="/myPT/js/userUpdate.js"></script>
   </body>
 </html>
