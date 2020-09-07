@@ -17,6 +17,7 @@ import com.mypt.action.income.MoveIncomeAction;
 import com.mypt.action.list.AdminTrainerListViewAction;
 import com.mypt.action.list.AdminUserListViewAction;
 import com.mypt.action.list.TrainerUserListViewAction;
+import com.mypt.action.login.LogoutAction;
 import com.mypt.action.login.TrainerLoginAction;
 import com.mypt.action.login.UserLoginAction;
 import com.mypt.action.move.MoveIntroAction;
@@ -88,6 +89,9 @@ public class ActionFactory
 		
 		// 스케줄 관리
 		map.put("/moveSchedule",new MoveSchedule());
+		
+		//로그아웃
+		map.put("/logout",new LogoutAction());
 		
 		
 	}
