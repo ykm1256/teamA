@@ -69,6 +69,9 @@ $(function(){
 				}else if(data==1){					
 					location.href="ptUserList.do";
 				}
+				else if(data==2){					
+					location.href="userList.do";
+				}
 			},
 			error: function(e){
 				alert("에러가 발생했습니다.")
