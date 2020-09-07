@@ -13,7 +13,7 @@ public class LogoutAction implements Action {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		session.invalidate();
-		return "intro/intro";
+		return "redirect:moveIntro.do";
 	}
 
 }
