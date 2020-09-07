@@ -48,7 +48,7 @@
                   <a class="nav-link" href="question.jsp">Q & A</a>
                 </nav>
               </div>
-              <a class="nav-link" href="payment.jsp">
+              <a class="nav-link" href="movePayment.do">
                 <div class="sb-nav-link-icon">
                   <i class="fas fa-chart-area"></i>
                 </div>

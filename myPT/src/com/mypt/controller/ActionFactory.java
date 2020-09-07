@@ -23,6 +23,7 @@ import com.mypt.action.login.TrainerLoginAction;
 import com.mypt.action.login.UserLoginAction;
 import com.mypt.action.move.MoveInbody;
 import com.mypt.action.move.MoveIntroAction;
+import com.mypt.action.move.MovePayment;
 import com.mypt.action.move.MoveSchedule;
 import com.mypt.action.move.MoveUserMain;
 import com.mypt.action.move.MoveUserRegister;
@@ -58,17 +59,22 @@ public class ActionFactory
 		//userLogin
 		map.put("/userLogin", new UserLoginAction());
 		map.put("/userMain", new MoveUserMain());
-		map.put("/getInbodyResult", new UserInbodyResultAction());
 			
 		//trainerLogin
 		map.put("/trainerLogin", new TrainerLoginAction());
 		
 		//회원가입
 		map.put("/moveUserRegister", new MoveUserRegister());		
-
 		map.put("/userInsertAction", new AdminUserRegisterAction());
 		map.put("/nickCheck", new NickCheckAction());
 		map.put("/emailCheck", new EmailCheckAction());
+		
+		//인바디
+		map.put("/getInbodyResult", new UserInbodyResultAction());
+		
+		//결제
+		map.put("/movePayment", new MovePayment());
+
 		
 		//매출
 		map.put("/moveIncome", new MoveIncomeAction());

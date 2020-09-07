@@ -40,12 +40,8 @@
       
         <main>
           <div class="container-fluid">
-          
-		      <div class="row text-center mb-5">
-		        <h1>결제</h1>
-		      </div>
 		
-		      <div class="d-flex flex-column align-items-center mb-4">
+		      <div class="d-flex flex-column align-items-center m-4">
 		        <label for="startDate" class="d-inline">시작 날짜</label>
 		        <input
 		          type="date"
@@ -55,112 +51,107 @@
 		      </div>
 		
 		      <div class="row">
-		        <div class="col-lg-3 col-md-6 col-sm-6 mb-md-3 mb-sm-3 pTableWrapper">
+		        <div class="col-lg-3 col-md-6 col-sm-6 mb-4 pTableWrapper">
 		          <div class="pricingTable">
-		            <div class="pricingTable-header p-4">
-		              <h3>Standard</h3>
+		            <div class="pricingTable-header mt-3">
+		              <h3>10회/1개월</h3>
 		            </div>
 		
 		            <div class="price-value">
-		              <span>10</span>
-		              <span class="subtitle">per month</span>
+		              <span>39만원</span>
+		              <span class="subtitle">기본 이용권</span>
 		            </div>
 		
 		            <div class="pricingContent">
 		              <ul>
-		                <li><b>50GB</b> Disk Space</li>
-		                <li><b>50</b> Email Accounts</li>
-		                <li><b>50GB</b> Monthly Bandwidth</li>
-		                <li><b>10</b> subdomains</li>
-		                <li><b>50</b> Domains</li>
+		                <li><b>10회</b> PT</li>
+		                <li><b>1개월</b> 헬스 이용</li>
+		                <li><b>락커, 운동복</b> 대여 무료</li>
 		              </ul>
 		            </div>
 		
 		            <div class="pricingTable-sign-up">
-		              <a href="#" class="btn btn-block btn-default">sign up</a>
+		              <input type="button" class="btn btn-block btn-default" value="결제" id="pay1" onclick="pay(this)">결제</button>
 		            </div>
 		          </div>
 		        </div>
 		
-		        <div class="col-lg-3 col-md-6 col-sm-6 mb-md-3 mb-sm-3 pTableWrapper">
+		        <div class="col-lg-3 col-md-6 col-sm-6 mb-4 pTableWrapper">
 		          <div class="pricingTable">
-		            <div class="pricingTable-header p-4">
-		              <h3>Business</h3>
+		            <div class="pricingTable-header mt-3">
+		              <h3>20+3회/2개월</h3>
 		            </div>
 		
 		            <div class="price-value">
-		              <span>20</span>
-		              <span class="subtitle">per month</span>
+		              <span>73만원</span>
+		              <span class="subtitle"><del>89만 7,000원</del></span>
 		            </div>
 		
 		            <div class="pricingContent">
 		              <ul>
-		                <li><b>70GB</b> Disk Space</li>
-		                <li><b>70</b> Email Accounts</li>
-		                <li><b>70GB</b> Monthly Bandwidth</li>
-		                <li><b>20</b> subdomains</li>
-		                <li><b>70</b> Domains</li>
+		                <li><b>23회</b> PT</li>
+		                <li><b>2개월</b> 헬스 이용</li>
+		                <li><b>락커, 운동복</b> 대여 무료</li>
+
 		              </ul>
 		            </div>
 		
 		            <div class="pricingTable-sign-up">
-		              <a href="#" class="btn btn-block btn-default">sign up</a>
+		              <input type="button" class="btn btn-block btn-default" value="결제" id="pay2" onclick="pay(this)">결제</button>
 		            </div>
 		          </div>
 		        </div>
 		
-		        <div class="col-lg-3 col-md-6 col-sm-6 mb-md-3 mb-sm-3 pTableWrapper">
+		        <div class="col-lg-3 col-md-6 col-sm-6 mb-4 pTableWrapper">
 		          <div class="pricingTable">
-		            <div class="pricingTable-header p-4">
-		              <div class="best-offer">best offers</div>
-		              <h3>Premium</h3>
+		            <div class="pricingTable-header mt-3">
+		              <div class="best-offer">인기 상품</div>
+		              <h3>30+5회권/3개월</h3>
 		            </div>
 		
 		            <div class="price-value">
-		              <span>30</span>
-		              <span class="subtitle">per month</span>
+		              <span>103만원</span>
+		              <span class="subtitle"><del>136만 5000원</del></span>
 		            </div>
 		
 		            <div class="pricingContent">
-		              <ul>
-		                <li><b>80GB</b> Disk Space</li>
-		                <li><b>80</b> Email Accounts</li>
-		                <li><b>80GB</b> Monthly Bandwidth</li>
-		                <li><b>30</b> subdomains</li>
-		                <li><b>80</b> Domains</li>
+		               <ul>
+		                <li><b>35회</b> PT</li>
+		                <li><b>3개월</b> 헬스 이용</li>
+		                <li><b>락커, 운동복</b> 대여 무료</li>
+		                <li><b>프로틴</b> 증정</li>
 		              </ul>
 		            </div>
 		
 		            <div class="pricingTable-sign-up">
-		              <a href="#" class="btn btn-block btn-default">sign up</a>
-		            </div>
+				<input type="button" class="btn btn-block btn-default" value="결제" id="pay3" onclick="pay(this)">결제</button>	
+	            </div>
 		          </div>
 		        </div>
 		
-		        <div class="col-lg-3 col-md-6 col-sm-6 mb-md-3 mb-sm-3 pTableWrapper">
+		        <div class="col-lg-3 col-md-6 col-sm-6 mb-4 pTableWrapper">
 		          <div class="pricingTable">
-		            <div class="pricingTable-header p-4">
-		              <h3>Extra</h3>
+		            <div class="pricingTable-header mt-3">
+		              <h3>50+10회권/6개월</h3>
 		            </div>
 		
 		            <div class="price-value">
-		              <small class="fa fa-usd"></small>
-		              <span>40</span>
-		              <span class="subtitle">per month</span>
-		            </div>
+		              <span>164만원</span>
+					 <span class="subtitle"><del>234만원</del></span>		            
+					 </div>
 		
 		            <div class="pricingContent">
-		              <ul>
-		                <li><b>90GB</b> Disk Space</li>
-		                <li><b>90</b> Email Accounts</li>
-		                <li><b>90GB</b> Monthly Bandwidth</li>
-		                <li><b>40</b> subdomains</li>
-		                <li><b>90</b> Domains</li>
+		             <ul>
+		                <li><b>60회</b> PT</li>
+		                <li><b>6개월</b> 헬스 이용</li>
+		                <li><b>락커, 운동복</b> 대여 무료</li>
+		                <li><b>프로틴</b> 증정</li>
+		                <li><b>프로필 사진</b> 촬영 무료</li>
 		              </ul>
 		            </div>
 		
 		            <div class="pricingTable-sign-up">
-		              <a href="#" class="btn btn-block btn-default">sign up</a>
+		              <input type="button" class="btn btn-block btn-default" value="결제" id="pay4" onclick="pay(this)">
 		            </div>
 		          </div>
 		        </div>
@@ -176,7 +167,10 @@
     <script
       src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js">
     </script>
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+    
     <script src="/myPT/js/scripts.js"></script>
     <script src="/myPT/js/payment.js"></script>
+    
   </body>
 </html>
