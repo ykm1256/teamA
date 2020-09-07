@@ -208,3 +208,6 @@ if (window.matchMedia("(max-width: 574px)").matches == true) {
 }
 
 // 달이랑 주차 정하면 해당 날짜
+var date= new Date();
+console.log(date);
+
