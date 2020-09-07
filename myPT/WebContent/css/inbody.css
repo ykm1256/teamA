@@ -1,3 +1,4 @@
+
 @media screen and (max-width: 640px) 
 { 
     #comparison, #profile
@@ -5,3 +6,10 @@
         font-size: 0.75rem;
     }
 } 
+
+
+.card-deck {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: .5rem;
+}

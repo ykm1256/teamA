@@ -85,7 +85,6 @@ public class FrontController extends HttpServlet {
 	} // doGet()
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//post 방식 요청 파라미터 한글처리 . post 방식은 텍스트 뿐 아니라 파일 등도 전송.
 		//request.setCharacterEncoding("utf-8");
 		//response.setCharacterEncoding("utf-8");
 		doGet(request, response);

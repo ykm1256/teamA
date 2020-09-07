@@ -52,8 +52,8 @@
 	                  
 	
 	              <div class="card mb-4">
-	                  <div class="card-body p-1">
-	                      <canvas id="inbodyChart" width="100%" height="300"></canvas>
+	                  <div class="card-body p-1" style="width:100%; height:250px">
+	                      <canvas id="inbodyChart"></canvas>
 	                  </div>
 	                  <div class="card-footer">
 	                      측정일: <span id="latestMeasureDay"></span>
@@ -62,17 +62,17 @@
 	
 		             
 		          <div class="card-deck mb-4">
-	                  <div class="card pt-3">
+	                  <div class="card pt-3 w-100">
 	                      <h6 class="card-title">체중(kg)</h6>
 	                      <canvas id="weightChart" width="100%"></canvas>                            
 	                  </div>
 	
-	                  <div class="card pt-3">
+	                  <div class="card pt-3 w-100">
 	                      <h6 class="card-title">골격근량(kg)</h6>
 	                      <canvas id="muscleChart" width="100%"></canvas>                            
 	                  </div>
 	
-	                  <div class="card pt-3">
+	                  <div class="card pt-3 w-100">
 	                      <h6 class="card-title">체지방량(kg)</h6>
 	                      <canvas id="fatChart" width="100%"></canvas>                            
 	                  </div>
@@ -101,7 +101,7 @@
 	                          </div>
                       </div>
 
-                      <div class="card-body p-md-2  d-flex align-items-center">
+                      <div class="card-body p-sm-1 p-md-2 d-flex align-items-center">
                           <div class="w-100">
                               <div class="row">
                                   <div class="col">체중</div>

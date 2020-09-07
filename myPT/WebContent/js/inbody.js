@@ -1,10 +1,4 @@
-
 //숫자 반올림 num자리까지 표시 
-//function numRound(x,num) 
-//{
-//  return Number.parseFloat(x).toFixed(num); 
-//}
-
 function numRound(x) 
 {
   return Math.round(x*1e1)/1e1;
@@ -107,52 +101,6 @@ function getDifference()
 }
 
 
-function setMinMaxforChartDatas()
-{
-	getMinMax("weight");
-	getMinMax("muscle");
-	getMinMax("fat");
-}
-function getMinMax(status)
-{
-	let min=0;
-	let max=0;
-	
-	min = resultArray[0].inbody[status];
-
-	for(let i=0, length=resultArray.length; i<length;i++)
-	{
-		if(resultArray[i].inbody[status]<min)
-		{
-			min=resultArray[i].inbody[status];
-		}
-		
-		if(resultArray[i].inbody[status]>max)
-		{
-			max=resultArray[i].inbody[status];
-		}			
-	}
-	
-	switch(status)
-	{
-		case "weight":
-			weightmm.push(min);
-			weightmm.push(max);
-			break;
-		case "muscle":
-			musclemm.push(min);
-			musclemm.push(max);
-			break;
-
-		case "fat":
-			fatmm.push(min);
-			fatmm.push(max);
-			break;
-	}
-
-	
-}
-
 //계산 기준
 
 //표준 체중 : 키-100 * 0.9
@@ -237,11 +185,6 @@ var myWeightChart="";
 var myMuscleChart="";
 var myFatChart="";
 var myInbodyChart="";
-
-var weightmm=[];
-var musclemm=[];
-var fatmm=[];
-var minMaxDatas={"weight": weightmm, "muscle":musclemm, "fat":fatmm }
 
 //비교표 -비포 or 애프터 데이터 세팅
 function setBeforeAfterDatas(BAtype, num)
@@ -420,7 +363,6 @@ function getDatas()
 		getDifference();
 
 //		차트용 데이터 담기
-//		addInbodyChartDatas();
 		addInbodyChartDatas(0);	
 	
 		if(resultArray.length>=6)
@@ -434,8 +376,6 @@ function getDatas()
 			numOfMyChartDatas= resultArray.length;
 		}
 		
-//      차트 tick 설정용 min,max데이터 세팅			
-		setMinMaxforChartDatas();
 			
 	},
 	error: function(e) {
@@ -446,7 +386,7 @@ function getDatas()
 
 
 
-var xMap= ["","","표준이하","","","표준", "","", "표준이상","",""];
+var xMap= ["","","표준이하","","","","표준", "","","", "표준이상","",""];
 
 //인바디 차트	
 	function createInbodyChart()
@@ -483,7 +423,7 @@ var xMap= ["","","표준이하","","","표준", "","", "표준이상","",""];
 						color: "black",
 	                    anchor: "end",
 	                    align: "right",
-	                    offset: 20,
+	                    offset: 5,
  						display: function (context) {
 	                        return context.dataset.data[context.dataIndex];
 	                    },
@@ -499,8 +439,8 @@ var xMap= ["","","표준이하","","","표준", "","", "표준이상","",""];
 		        scales: {
 		            xAxes: [{
 		                ticks: {
-		                    min: 50,
-		                    max: 150,
+		                    min: 40,
+		                    max: 160,
 		                    stepSize: 5
 		               		 },
 		           		 	},
@@ -513,7 +453,7 @@ var xMap= ["","","표준이하","","","표준", "","", "표준이상","",""];
 						        display: true,
 									  ticks: {
 								      min: 0,
-								      max: xMap.length - 1,
+								      max: xMap.length-1,
 								      callback: function(value) {
 								        return xMap[value];
 								      }
@@ -534,7 +474,7 @@ var xMap= ["","","표준이하","","","표준", "","", "표준이상","",""];
 
 
 //차트 설정
-function createMyChartConfig(dataSet, minMaxLabel){	
+function createMyChartConfig(dataSet){	
 return {
 		type: 'line',
 	  	data: {
@@ -542,12 +482,11 @@ return {
 	    datasets: dataSet,
 	  },
 	  options: {
-		responsive: true,
-//		maintainAspectRatio: false,
+    		responsive: true,
 	            plugins: {
 	                datalabels: {
 						color: "black",
-	                    anchor: "end",
+	                    anchor: "top",
 	                    align: "center",
 	                    offset: 20,
  						display: function (context) {
@@ -574,8 +513,10 @@ return {
 	      }],
 	      yAxes: [{
 	        ticks: {
-	          min: minMaxDatas[minMaxLabel][0]-2,
-	          max: minMaxDatas[minMaxLabel][1]+2,
+//	          min: minMaxDatas[minMaxLabel][0]-1,
+//	          max: minMaxDatas[minMaxLabel][1]+1,
+	          suggetedmin: 0,
+	          suggestedmax: 200,
 	          stepSize: 1,
 	        },
 	        gridLines: {
@@ -590,6 +531,9 @@ return {
 	}
 }
 
+	
+
+
 function createMyCharts()
 {
 myWeightChart= new Chart(weightChart, createMyChartConfig(
@@ -603,7 +547,7 @@ myWeightChart= new Chart(weightChart, createMyChartConfig(
 	      pointBorderColor: "rgba(255,255,255,0.8)",
 	      pointHoverBackgroundColor: "rgba(2,117,216,1)",
 	      data: weightChartDatas
-	    }], "weight"));
+	    }]));
 
 myMuscleChart= new Chart(muscleChart, createMyChartConfig(
 			[{
@@ -616,20 +560,20 @@ myMuscleChart= new Chart(muscleChart, createMyChartConfig(
 		      pointBorderColor: "rgba(255,255,255,0.8)",
 		      pointHoverBackgroundColor: "rgba(2,117,216,1)",
 		      data: muscleChartDatas,
-	    }], "muscle"));
+		    }]));
 
 myFatChart= new Chart(fatChart, createMyChartConfig(
 		[{
 	      label: "체지방량(kg)",
 	      lineTension: 0.5,
 	      backgroundColor: "rgba(255,255,255,0)",
-	      borderColor: "rgba(150,80,110,1)",
+	      borderColor: "rgba(200,80,110,1)",
 	      pointRadius: 5,
-	      pointBackgroundColor: "rgba(120,80,110,1)",
+	      pointBackgroundColor: "rgba(230,80,110,0.87)",
 	      pointBorderColor: "rgba(255,255,255,0.8)",
 	      pointHoverBackgroundColor: "rgba(2,117,216,1)",
 	      data: fatChartDatas
-	    }], "fat"));
+	    }]));
 				
 }
 
