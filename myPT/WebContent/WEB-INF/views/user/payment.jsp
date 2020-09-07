@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -22,7 +24,7 @@
 
   </head>
   <body class="sb-nav-fixed">
-    <!-- nav -->
+   <!-- nav -->
     <jsp:include page="/includeFiles/nav.jsp"></jsp:include>
     <!-- nav -->
 
@@ -32,33 +34,61 @@
 
     <div id="layoutSidenav">
       <!-- sideNav -->
-      <jsp:include page="/includeFiles/sideNav.jsp"></jsp:include>
+      <jsp:include page="/includeFiles/userSideNav.jsp"></jsp:include>
       <!-- /sideNav -->
-      <div id="layoutSidenav_content">
       
       
-      
+      <div id="layoutSidenav_content">     
         <main>
           <div class="container-fluid">
-		
-		      <div class="d-flex flex-column align-items-center m-4">
-		        <label for="startDate" class="d-inline">시작 날짜</label>
-		        <input
-		          type="date"
-		          id="startDate"
-		          name="startDate"
-		          class="form-control w-50"/>
-		      </div>
-		
+          	<h2>결제</h2>
+			
+			<div class="my-3">
+			
+			<div class="row">
+<!-- 		      <div class="d-flex flex-column align-items-center m-4"> -->
+		        <label for="startDate" class="d-inline col-6">시작 날짜</label>
+				<label for="trainer" class="d-inline col-6">담당 트레이너</label>   
+<!-- 		      </div> -->
+		    </div>
+		    
+		    <div class="row">
+<!-- 		      <div class="d-flex flex-column align-items-center m-4"> -->
+				<div class="col-6">
+			         <input
+			          type="date"
+			          id="startDate"
+			          name="startDate"
+			          class="form-control w-100"/>
+			     </div>
+		          
+		          <div class="col-6">	    
+					<c:choose>
+				      <c:when test="${not empty user.tid}">
+				      	  <input type="text" id="trainer" class="form-control w-100" value="${user.tid}" readonly>
+				      </c:when>
+					  <c:otherwise>
+					  <select class="form-control" id="trainer" class="form-control w-100">
+		               <c:forEach items="${trainer}" var="t">
+		                 <option value="${t.t_id}">${t.t_name}</option>                              
+		               </c:forEach>
+				        </select>
+					  </c:otherwise>
+			 		 </c:choose>
+			 	 </div>
+<!-- 		      </div> -->
+		    </div>
+		   </div>
+					
 		      <div class="row">
 		        <div class="col-lg-3 col-md-6 col-sm-6 mb-4 pTableWrapper">
 		          <div class="pricingTable">
 		            <div class="pricingTable-header mt-3">
-		              <h3>10회/1개월</h3>
+		              <h3 id="pruductName1">10회/1개월</h3>
 		            </div>
 		
 		            <div class="price-value">
-		              <span>39만원</span>
+		              <span><span id="price1">39</span>만원</span>
 		              <span class="subtitle">기본 이용권</span>
 		            </div>
 		
@@ -71,7 +101,7 @@
 		            </div>
 		
 		            <div class="pricingTable-sign-up">
-		              <input type="button" class="btn btn-block btn-default" value="결제" id="pay1" onclick="pay(this)">결제</button>
+		              <input type="button" class="btn btn-block btn-default" value="결제" id="1" onclick="pay(this)">
 		            </div>
 		          </div>
 		        </div>
@@ -79,12 +109,12 @@
 		        <div class="col-lg-3 col-md-6 col-sm-6 mb-4 pTableWrapper">
 		          <div class="pricingTable">
 		            <div class="pricingTable-header mt-3">
-		              <h3>20+3회/2개월</h3>
+		              <h3 id="pruductName2">20+3회/2개월</h3>
 		            </div>
 		
 		            <div class="price-value">
-		              <span>73만원</span>
-		              <span class="subtitle"><del>89만 7,000원</del></span>
+					<span><span id="price2">73</span>만원</span>		              
+					<span class="subtitle"><del>89만 7,000원</del></span>
 		            </div>
 		
 		            <div class="pricingContent">
@@ -97,7 +127,7 @@
 		            </div>
 		
 		            <div class="pricingTable-sign-up">
-		              <input type="button" class="btn btn-block btn-default" value="결제" id="pay2" onclick="pay(this)">결제</button>
+		              <input type="button" class="btn btn-block btn-default" value="결제" id="2" onclick="pay(this)">
 		            </div>
 		          </div>
 		        </div>
@@ -106,11 +136,11 @@
 		          <div class="pricingTable">
 		            <div class="pricingTable-header mt-3">
 		              <div class="best-offer">인기 상품</div>
-		              <h3>30+5회권/3개월</h3>
+		              <h3 id="pruductName3">30+5회권/3개월</h3>
 		            </div>
 		
 		            <div class="price-value">
-		              <span>103만원</span>
+		              <span><span id="price3">103</span>만원</span>
 		              <span class="subtitle"><del>136만 5000원</del></span>
 		            </div>
 		
@@ -124,7 +154,7 @@
 		            </div>
 		
 		            <div class="pricingTable-sign-up">
-				<input type="button" class="btn btn-block btn-default" value="결제" id="pay3" onclick="pay(this)">결제</button>	
+				<input type="button" class="btn btn-block btn-default" value="결제" id="3" onclick="pay(this)">
 	            </div>
 		          </div>
 		        </div>
@@ -132,11 +162,11 @@
 		        <div class="col-lg-3 col-md-6 col-sm-6 mb-4 pTableWrapper">
 		          <div class="pricingTable">
 		            <div class="pricingTable-header mt-3">
-		              <h3>50+10회권/6개월</h3>
+		              <h3 id="pruductName4">50+10회권/6개월</h3>
 		            </div>
 		
 		            <div class="price-value">
-		              <span>164만원</span>
+		              <span><span id="price4">164</span>만원</span>
 					 <span class="subtitle"><del>234만원</del></span>		            
 					 </div>
 		
@@ -151,7 +181,7 @@
 		            </div>
 		
 		            <div class="pricingTable-sign-up">
-		              <input type="button" class="btn btn-block btn-default" value="결제" id="pay4" onclick="pay(this)">
+		              <input type="button" class="btn btn-block btn-default" value="결제" id="4" onclick="pay(this)">
 		            </div>
 		          </div>
 		        </div>
@@ -169,6 +199,12 @@
     </script>
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
     
+    <script>
+    
+    var userId= '${user.id}';
+ 
+    
+    </script>
     <script src="/myPT/js/scripts.js"></script>
     <script src="/myPT/js/payment.js"></script>
     

@@ -446,7 +446,7 @@ var xMap= ["","","표준이하","","","","표준", "","","", "표준이상","","
 		           		 	},
 						  {
 							gridLines: {
-							color: 'skyblue', 
+							color: 'black', 
 								},
 						        type: 'linear',
 						        position: 'bottom',

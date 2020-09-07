@@ -26,7 +26,9 @@ import com.mypt.action.move.MoveIntroAction;
 import com.mypt.action.move.MovePayment;
 import com.mypt.action.move.MoveSchedule;
 import com.mypt.action.move.MoveUserMain;
+import com.mypt.action.move.MoveUserMyProfile;
 import com.mypt.action.move.MoveUserRegister;
+import com.mypt.action.payment.UserCheckForPaymentAction;
 import com.mypt.action.qr.QrCheckAction;
 import com.mypt.action.qr.QrViewAction;
 import com.mypt.action.register.AdminUserRegisterAction;
@@ -74,6 +76,7 @@ public class ActionFactory
 		
 		//결제
 		map.put("/movePayment", new MovePayment());
+		map.put("/checkForPayment", new UserCheckForPaymentAction());
 
 		
 		//매출
@@ -84,6 +87,8 @@ public class ActionFactory
 		//detail
 		map.put("/adminTrainerDetail", new AdminTrainerDetailAction());
 		map.put("/adminUserDetail", new AdminUserDetailAction());
+		
+		map.put("/moveMyProfile", new MoveUserMyProfile());
 		map.put("/userMyDetail", new UserMyDetailAction());
 		
 		//update
