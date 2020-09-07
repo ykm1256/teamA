@@ -10,7 +10,7 @@
                 </div>
                 메인페이지
               </a>
-              <a class="nav-link" href="inbody.jsp">
+              <a class="nav-link" href="moveInbody.do">
                 <div class="sb-nav-link-icon">
                   <i class="fas fa-chart-area"></i>
                 </div>

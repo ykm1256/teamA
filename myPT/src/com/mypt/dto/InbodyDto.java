@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 public class InbodyDto {
 	private String i_id;
 	private Timestamp i_date;
+	private String strDate;
 	private float muscle;
 	private float fat;
 	private float height;
@@ -46,6 +47,18 @@ public class InbodyDto {
 	public void setWeight(float weight) {
 		this.weight = weight;
 	}
+	
+	
+	public String getStrDate() 
+	{
+		return strDate;
+	}
+	public void setStrDate(String strDate) 
+	{
+		this.strDate = strDate;
+	}
+	
+	
 	
 	
 }

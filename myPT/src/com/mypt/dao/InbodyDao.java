@@ -24,6 +24,7 @@ public class InbodyDao {
 	private InbodyDao() {
 		db = DBConnection.getInstance();
 	}
+	
 
 	public void insertInbody(InbodyDto inbodyBean) {
 		Connection con = null;
@@ -49,7 +50,7 @@ public class InbodyDao {
 		}
 	}
 
-//	회원 정보+인바디 정보 가져오기, limit 10 (이)
+//	회원 정보+인바디 정보 가져오기, limit 30 (이)
 //	public ArrayList<UserDto> getUserInbodyList(String id) {
 	public JsonArray getUserInbodyList(String id) {
 		Connection con = null;
@@ -71,7 +72,7 @@ public class InbodyDao {
 		sb.append("JOIN inbody AS i ");
 		sb.append("ON u.id = i.i_id ");
 		sb.append("WHERE u.id=? ");
-		sb.append("ORDER BY i.i_date DESC LIMIT 10");
+		sb.append("ORDER BY i.i_date DESC LIMIT 30");
 
 		String sql = sb.toString();
 
@@ -97,8 +98,9 @@ public class InbodyDao {
 				inbody.setWeight(rs.getFloat(6));
 				inbody.setFat(rs.getFloat(7));
 				inbody.setMuscle(rs.getFloat(8));
-				inbody.setI_date(rs.getTimestamp(9));
+				inbody.setStrDate(rs.getTimestamp(9).toString());
 
+				System.out.println(rs.getTimestamp(9).toString());
 				user.setInbody(inbody);
 
 //				arr.add(user);  //일반 ArrayList<UserDto>

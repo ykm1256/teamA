@@ -29,7 +29,7 @@
     <Resource maxWait="-1"
            maxIdle="20" 
            maxActive="100" 
-           password="1234"
+           password="0000"
 	       username="root" 
 	       url="jdbc:mysql://localhost:3306/mypt"
 	       driverClassName="com.mysql.jdbc.Driver" 

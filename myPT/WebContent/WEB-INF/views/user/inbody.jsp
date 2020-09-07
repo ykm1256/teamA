@@ -35,51 +35,46 @@
       <!-- /sideNav -->
       
       
-      
-      <div id="layoutSidenav_content">
+       <div id="layoutSidenav_content">
          
          <main>
        		 <div class="container-fluid text-center">
-	              <div class="row border border-dark rounded-top my-3 mx-auto p-1">
-	                  <div class="col border-right border-dark">
-	                      멍멍
+	              <div class="row border border-dark rounded-top my-3 mx-auto p-1" id="profile">
+	                  <div class="col border-right border-dark" id="userName">
 	                  </div>
-	                  <div class="col border-right border-dark">
-	                      111세
+	                  <div class="col border-right border-dark" id="age">
 	                  </div>
-	                  <div class="col border-right border-dark">
-	                      무성
+	                  <div class="col border-right border-dark" id="gender">
 	                  </div>
-	                  <div class="col">
-	                      213cm
+	                  <div class="col" id="height">
 	                  </div>
 	              </div>
 	                  
 	
 	              <div class="card mb-4">
-	                  <div class="card-body p-1">
-	                      <canvas id="myBarChart" width="100%" height="25"></canvas>
+	                  <div class="card-body p-1" style="width:100%; height:250px">
+	                      <canvas id="inbodyChart"></canvas>
 	                  </div>
 	                  <div class="card-footer">
-	                      측정일: <span id="latestMeasureDay">20.8.26</span>
+	                      측정일: <span id="latestMeasureDay"></span>
 	                  </div>
 	              </div>
 	
-	
-	              <div class="card-deck mb-4">
-	                  <div class="card pt-3">
+		             
+		          <div class="card-deck mb-4">
+	                  <div class="card pt-3 w-100">
 	                      <h6 class="card-title">체중(kg)</h6>
-	                      <canvas id="weight" width="100%"></canvas>                            
+	                      <canvas id="weightChart" width="100%"></canvas>                            
 	                  </div>
 	
-	                  <div class="card pt-3">
+	                  <div class="card pt-3 w-100">
 	                      <h6 class="card-title">골격근량(kg)</h6>
-	                      <canvas id="muscleMass" width="100%"></canvas>                            
+	                      <canvas id="muscleChart" width="100%"></canvas>                            
 	                  </div>
 	
-	                  <div class="card pt-3">
+	                  <div class="card pt-3 w-100">
 	                      <h6 class="card-title">체지방량(kg)</h6>
-	                      <canvas id="fatMass" width="100%"></canvas>                            
+	                      <canvas id="fatChart" width="100%"></canvas>                            
 	                  </div>
              	 </div>
 
@@ -87,48 +82,45 @@
                       <div class="card-header bg-dark text-white">
 
                           <div class="row">
-                              <div class="col">
-                                  <select id="previousMeasureDay" onchange="preDayIschanged()"> 
-                                      <option value="default" disabled selected>이전 측정일</option>
-                                      <option value="1">20.8.20</option>
-                                      <option value="2">20.8.10</option>
-                                      <option value="3">20.7.27</option>
-                                  </select>
-                      
-                                  <select id="numOfResult" onchange="numOfResultIschanged()"> 
-                                      <option value="10" selected>10개</option>
-                                      <option value="15">15개</option>
-                                      <option value="20">20개</option>
-                                  </select>
-                              </div>
-                          
-                              <div class="col previousMeasureDay">과거</div>
-                              <div class="col latestMeasureDay">현재</div>
-                              <div class="col">차이</div>
-                          </div>
+                             	  <div class="col"></div>
+
+	                              <div class="col">
+                              		  <div id="showBeforeDay"></div>
+                                      <select id="beforeMeasureDay" class="col-sm-12 col-md-10" onchange="beforeDayIschanged()"> 
+                                      <option value="default" disabled selected>비교 측정일1</option>   
+                                  	  </select>   	  
+	                              </div>
+	                              
+	                              <div class="col">
+                              		  <div id="showAfterDay"></div>
+                              		  <select id="afterMeasureDay" class="col-sm-12 col-md-10" onchange="afterDayIschanged()"> 
+                                      <option value="default" disabled selected>비교 측정일2</option>   
+                                  	  </select>	                               	  
+	                              </div>
+	                              <div class="col">차이</div>
+	                          </div>
                       </div>
 
-                      <div class="card-body p-md-2  d-flex align-items-center">
+                      <div class="card-body p-sm-1 p-md-2 d-flex align-items-center">
                           <div class="w-100">
                               <div class="row">
                                   <div class="col">체중</div>
-                                  <div class="col"><span class="before">63</span>kg</div>
-                                  <div class="col"><span class="after">60</span>kg</div>
+                                  <div class="col"><span class="before weight" id="beforeWeight"></span>kg</div>
+                                  <div class="col"><span class="after" id="afterWeight"></span>kg</div>
                                   <div class="col"><span class="result"></span>kg</div>
                               </div>
                               <div class="row">
                                   <div class="col">골격근량</div>
-                                  <div class="col"><span class="before">17</span>kg</div>
-                                  <div class="col"><span class="after">20</span>kg</div>
+                                  <div class="col"><span class="before muscle" id="beforeMuscle"></span>kg</div>
+                                  <div class="col"><span class="after" id="afterMuscle"></span>kg</div>
                                   <div class="col"><span class="result"></span>kg</div>
                               </div>
                               <div class="row">
                                   <div class="col">체지방량</div>
-                                  <div class="col"><span class="before">12</span>kg</div>
-                                  <div class="col"><span class="after">13</span>kg</div>
+                                  <div class="col"><span class="before fat" id="beforeFat"></span>kg</div>
+                                  <div class="col"><span class="after" id="afterFat"></span>kg</div>
                                   <div class="col"><span class="result"></span>kg</div>
-                              </div>
-    
+                              </div>    
                           </div>
                       </div>
                   </div> 
@@ -138,6 +130,7 @@
      </div>    
   </div>
 
+
     <script
       src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script
@@ -146,12 +139,8 @@
     <script src="/myPT/js/scripts.js"></script>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
-<!--     chart demo -->
-    <script src="/myPT/assets/chartDemo/chart-line-demo.js"></script>
-    <script src="/myPT/assets/chartDemo/chart-line-demo2.js"></script>
-    <script src="/myPT/assets/chartDemo/chart-line-demo3.js"></script>
-    <script src="/myPT/assets/chartDemo/chart-bar-demo.js"></script>
-    
+   
+    <script src="/myPT/js/chartjs-plugin-datalabels.js"></script>
     <script src="/myPT/js/inbody.js"></script>
     
     

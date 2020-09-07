@@ -13,13 +13,14 @@ import com.mypt.controller.Action;
 import com.mypt.dao.InbodyDao;
 import com.mypt.dto.UserDto;
 
-public class MoveInbody implements Action
+public class MovePayment implements Action
 {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception 
 	{
-		return "user/inbody";
+		
+		return "user/payment";
 	}
 
 }
