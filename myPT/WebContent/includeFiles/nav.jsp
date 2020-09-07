@@ -42,7 +42,7 @@
                   data-target="#QRModal"
                   >QR</a
                 >
-                <a class="dropdown-item" href="login.html">Logout</a>
+                <a class="dropdown-item" href="logout.do">Logout</a>
               </div>
             </li>
           </ul>

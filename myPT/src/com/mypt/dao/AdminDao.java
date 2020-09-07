@@ -9,8 +9,8 @@ import com.mypt.dto.AdminDto;
 
 public class AdminDao {
 	private DBConnection db;
-	private AdminDao instance = new AdminDao();
-	public AdminDao getInstance() {
+	private static AdminDao instance = new AdminDao();
+	public static AdminDao getInstance() {
 		return instance;
 	}
 
@@ -105,5 +105,30 @@ public class AdminDao {
 			db.closeConnection(null, ps, con);
 		}
 	}
+	
+	//관리자 로그인 (윤)
+		public int adminLogin(String id, String pw) {
+			Connection con=null;
+			PreparedStatement ps=null;
+			ResultSet rs=null;
+			String sql=null;
+			int flag = 0;			
+			
+			try {
+				con=db.getConnection();
+				sql="select * from admin where id=? and pw=?";
+				ps=con.prepareStatement(sql);
+				ps.setString(1, id);
+				ps.setString(2, pw);
+				rs=ps.executeQuery();
+				if(rs.next()) {
+					flag = 2;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			return flag;
+		}
 
 }
