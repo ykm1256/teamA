@@ -17,7 +17,7 @@ public class TrainerLoginAction implements Action{
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
-		
+		HttpSession session = request.getSession();		
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
 		int flag = 0;
@@ -27,8 +27,9 @@ public class TrainerLoginAction implements Action{
 			flag = dao.adminLogin(id, pw);
 			if(flag==2) {
 				 AdminDto dto = dao.getAdmin(id);	
-				 HttpSession session = request.getSession();
-				 session.setAttribute("nick", "관리자");				 
+				 
+				 session.setAttribute("nick", "관리자");
+				 session.setAttribute("grade", 0);
 				}			
 			
 		}else {
@@ -36,14 +37,17 @@ public class TrainerLoginAction implements Action{
 			flag = dao.trainerLogin(id, pw);
 			System.out.println(flag);
 			if(flag==1) {
-			 TrainerDto trainer = dao.trainerSelect(id);	
-			 HttpSession session = request.getSession();
+			 TrainerDto trainer = dao.trainerSelect(id);			 
 			 session.setAttribute("name", trainer.getT_name());
 			 session.setAttribute("nick", trainer.getT_nick());
 			 session.setAttribute("id", trainer.getT_id());
+			 session.setAttribute("grade", 0);
+			 
 			}
 			
 		}
+		
+		
 		
 		
 		

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.mypt.action.check.EmailCheckAction;
 import com.mypt.action.check.NickCheckAction;
+import com.mypt.action.crowded.CrowdedAction;
 import com.mypt.action.inbody.UserInbodyResultAction;
 import com.mypt.action.detail.AdminTrainerDetailAction;
 import com.mypt.action.detail.AdminTrainerUpdateAction;
@@ -53,7 +54,7 @@ public class ActionFactory
 		map.put("/ptUserList", new TrainerUserListViewAction());
 		
 		// 인트로 화면
-//		map.put("/moveIntro", new MoveIntroAction());
+		map.put("/moveIntro", new MoveIntroAction());
 		map.put("/moveInbody", new MoveInbody());
 		//userLogin
 		map.put("/userLogin", new UserLoginAction());
@@ -96,6 +97,9 @@ public class ActionFactory
 		
 		//로그아웃
 		map.put("/logout",new LogoutAction());
+		
+		// 혼잡도
+		map.put("/crowded",new CrowdedAction());
 		
 		
 	}
