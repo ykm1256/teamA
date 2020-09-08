@@ -70,4 +70,21 @@ $(document).ready(function() {
    $('#test').click(function(){
        var markupStr = $('.summernote').summernote('code');
            $('#result').html(markupStr);
+
    });
+
+//function postForm() {
+//    $('#content').val($('#summer').summernote('code'));
+//}
+
+
+
+// 글쓰기 (윤)
+function postForm(){
+	var content = $(".note-editable").html();
+	$("#content").val(content);
+return true;	
+}
+
+
+

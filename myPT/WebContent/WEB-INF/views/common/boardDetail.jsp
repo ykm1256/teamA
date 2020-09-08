@@ -40,7 +40,7 @@
           <div>
             <header class="px-4">
               <h3>글보기</h3>
-              <div class="text-right">목록으로</div>
+              <div class="text-right"><a href="#" class="mr-2">답변</a>/<a href="#" class="ml-2">목록으로</a></div>
             </header>
           </div>
 
