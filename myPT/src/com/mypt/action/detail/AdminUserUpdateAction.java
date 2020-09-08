@@ -29,6 +29,7 @@ public class AdminUserUpdateAction implements Action{
 		dto.setEnddate(Date.valueOf(request.getParameter("endDate")));
 		dto.setPtcount(Integer.parseInt(request.getParameter("remainNum")));
 		dto.setId(request.getParameter("hiddenUserID"));
+		dto.setAddrdetail(request.getParameter("addrdetail"));
 		System.out.println(dto.getId());
 		System.out.println(dto.getTid());
 		System.out.println(dto.getPw());

@@ -2,7 +2,7 @@ package com.mypt.dto;
 
 public class TrainerDto {
 	
-	private String t_id, t_pw, t_name, t_email, t_birth, t_address, t_nick,t_gender,t_tel,t_zipcode;
+	private String t_id, t_pw, t_name, t_email, t_birth, t_address, t_nick,t_gender,t_tel,t_zipcode,t_addrdetail;
 	
 	public String getT_id() {
 		return t_id;
@@ -63,6 +63,12 @@ public class TrainerDto {
 	}
 	public void setT_zipcode(String t_zipcode) {
 		this.t_zipcode = t_zipcode;
+	}
+	public String getT_addrdetail() {
+		return t_addrdetail;
+	}
+	public void setT_addrdetail(String t_addrdetail) {
+		this.t_addrdetail = t_addrdetail;
 	}
 	
 	

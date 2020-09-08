@@ -9,10 +9,12 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
 <title>트레이너 등록</title>
-<link href="css/styles.css" rel="stylesheet" />
-<link href="css/index.css" rel="stylesheet" />
-<link href="css/widget.css" rel="stylesheet" />
+<link href="/myPT/css/styles.css" rel="stylesheet" />
+<link href="/myPT/css/index.css" rel="stylesheet" />
+<link href="/myPT/css/widget.css" rel="stylesheet" />
 
+ <!-- 주소  api -->
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
 
@@ -121,10 +123,11 @@
                                                         <input class="form-control py-2" id="zipcode" name="zipcode" type="text">
                                                     </div>
                                                     <div class="col-md-3 mb-sm-2">
-                                                        <button class="btn btn-outline-primary btn-block" type="button">주소찾기</button>
-                                                    </div>
-                                                </div>    
-                                                    <input class="form-control py-2 mb-2" id="address" name="address" type="text">
+                                                        <button class="btn btn-outline-primary btn-block" type="button" onclick="searchZipcode()">주소찾기</button>
+                                          </div>
+                                      </div>    
+                                          <input class="form-control py-2 mb-2" id="address" name="address" type="text">
+                                          <input class="form-control py-2 mb-2" id="addrdetail" name="addrdetail" type="text">
                                             </div>
 
 
@@ -148,8 +151,9 @@
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js">
     </script>
-	<script src="js/scripts.js"></script>
-	<script src="js/register.js"></script>
+	<script src="/myPT/js/scripts.js"></script>
+	<script src="/myPT/js/register.js"></script>
+	<script src="/myPT/js/zipcode.js"></script>
 
 </body>
 </html>

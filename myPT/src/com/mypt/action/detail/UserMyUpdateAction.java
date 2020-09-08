@@ -18,6 +18,7 @@ public class UserMyUpdateAction implements Action{
 		dto.setZipcode(request.getParameter("zipcode"));
 		dto.setAddress(request.getParameter("address"));
 		dto.setTel(request.getParameter("tel"));
+		dto.setAddrdetail(request.getParameter("addrdetail"));
 		
 		UserDao dao = UserDao.getInstance();
 		dao.updateUser(dto);
