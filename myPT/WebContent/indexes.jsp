@@ -6,6 +6,7 @@
 <button onclick="location.href='userMyDetail.do'">유저정보관리</button><br>
 <button onclick="location.href='moveIncome.do'">매출</button><br>
 <!-- <button onclick="location.href='moveIncome.do'">인트로</button><br> -->
+<button onclick="location.href='community.do'">커뮤니티</button><br>
 
 
 

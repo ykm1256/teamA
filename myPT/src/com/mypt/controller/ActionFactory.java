@@ -3,6 +3,7 @@ package com.mypt.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.mypt.action.board.WriteAction;
 import com.mypt.action.check.EmailCheckAction;
 import com.mypt.action.check.NickCheckAction;
 import com.mypt.action.crowded.CrowdedAction;
@@ -22,6 +23,7 @@ import com.mypt.action.list.TrainerUserListViewAction;
 import com.mypt.action.login.LogoutAction;
 import com.mypt.action.login.TrainerLoginAction;
 import com.mypt.action.login.UserLoginAction;
+import com.mypt.action.move.MoveCommunityAction;
 import com.mypt.action.move.MoveInbody;
 import com.mypt.action.move.MoveIntroAction;
 import com.mypt.action.move.MoveSchedule;
@@ -100,6 +102,13 @@ public class ActionFactory
 		
 		// 혼잡도
 		map.put("/crowded",new CrowdedAction());
+		
+		map.put("/community",new MoveCommunityAction());
+		
+		// 글쓰기
+		map.put("/write",new WriteAction());	
+		
+		
 		
 		
 	}

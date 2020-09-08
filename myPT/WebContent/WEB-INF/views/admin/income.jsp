@@ -189,6 +189,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   <div class="card-body">
                     <div class="card">
                       <img src="img/황철순.jpg" class="card-img-top" />
+                      <img src="img/황철순.jpg" class="card-img-top" />
                       <div class="card-body">
                       <div id="tmonthname">                   
                         <h5 class="card-title">

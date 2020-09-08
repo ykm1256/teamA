@@ -17,8 +17,7 @@ public class IncomeAction implements Action{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub		
 		int year = Integer.parseInt(request.getParameter("year"));
 		int month = Integer.parseInt(request.getParameter("month"));
 		System.out.println(year);
@@ -39,6 +38,7 @@ public class IncomeAction implements Action{
 			jarr.add(obj);
 		}
 		request.setAttribute("result", jarr);
+		
 		
 		
 		return "callback";
