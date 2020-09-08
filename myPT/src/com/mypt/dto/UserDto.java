@@ -22,6 +22,7 @@ public class UserDto {
 	private String tid;
 	private String zipcode;
 	private String tel;
+	private String addrdetail;
 	
 	
 	public UserDto() {};
@@ -131,6 +132,12 @@ public class UserDto {
 	}
 	public void setTel(String tel) {
 		this.tel = tel;
+	}
+	public String getAddrdetail() {
+		return addrdetail;
+	}
+	public void setAddrdetail(String addrdetail) {
+		this.addrdetail = addrdetail;
 	}
 	
 	
