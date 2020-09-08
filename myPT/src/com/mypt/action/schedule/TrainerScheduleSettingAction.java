@@ -9,7 +9,18 @@ public class TrainerScheduleSettingAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
+		String[] pt=request.getParameterValues("time");
+		String[] program=request.getParameterValues("program");
+		String[] proMention=request.getParameterValues("proMention");
+		
+		String[] date=request.getParameterValues("date");
+		for(int i=0;i<5;i++) {
+			System.out.println(pt[i]);
+			System.out.println(program[i]);
+			System.out.println(proMention[i]);
+			System.out.println(date[i]);
+		}
+		
 		return null;
 	}
 

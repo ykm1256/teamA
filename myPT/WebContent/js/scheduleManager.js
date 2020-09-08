@@ -224,6 +224,7 @@ var firstWeekNum;
 var lastWeekNum;
 var firstWeekDif=0;
 var lastWeekDif=0;
+var isFourWeeks=false;
 
 // 월 선택
 $("select[id=monthSelect]").on("change",function(){
@@ -245,13 +246,16 @@ $("select[id=monthSelect]").on("change",function(){
 	}
 	$("#weekSelect").empty();
 	$("#weekSelect").append("<option selected disabled>주</option>");
-	if(firstWeekDif==1&&lastWeekDif==1){
+	let innerDate=new Date(year,month-1,1);
+	if(firstWeekDif==1&&lastWeekDif==1&&innerDate.getDay()==6){
 		for(var i=1;i<=4;i++){
 			$("#weekSelect").append("<option value='"+(i+1)+"'>"+i+"주차</option>");
+			isFourWeeks=true;
 		}
 	}else{
 		for(var i=1;i<=5;i++){
 			$("#weekSelect").append("<option value='"+i+"'>"+i+"주차</option>");
+			isFourWeeks=false;
 		}
 	}
 	
@@ -262,7 +266,11 @@ $("select[id=weekSelect]").on("change",function(){
 	weekend=this.value;
 	monthWeek+=month;
 	monthWeek+="월 ";
-	monthWeek+=weekend;
+	if(isFourWeeks==true){
+		monthWeek+=weekend-1;
+	}else{
+		monthWeek+=weekend;
+	}
 	monthWeek+="주차";
 	if($("#weekend").text()!=""){
 		$("#weekend").text("");
@@ -369,17 +377,24 @@ $("select[id=weekSelect]").on("change",function(){
 		}
 	}else if(weekend==5){
 		if(lastWeekDif==1){
-			for(var i=0;i<dateDif;i++){
-			date.setDate(day[i]+(7*(weekend-1))-dateDif);
+			let lastDate=dayLen[month-1];
+			let count=0;
+			let inerCount=0;
+			for(var i=0;i<5;i++){
+				count++;
+				date.setDate(day[i]+(7*(weekend-1))-dateDif);				
 				$("#"+week[i]).text($("#"+week[i]).text().substr(0,1));
 				$("#"+week[i]).append(month+"/"+date.getDate());
 				$("#date"+i).val(year+"-"+month+"-"+date.getDate());
+				if(date.getDate()==lastDate){
+					break;
+				}
 			}
-			for(var i=dateDif;i<week.length;i++){
-				date.setDate(day[i-dateDif]+(7*(weekend-1)));
+			for(var i=count;i<week.length;i++){
+				inerCount++;
 				$("#"+week[i]).text($("#"+week[i]).text().substr(0,1));
-				$("#"+week[i]).append(month+"/"+date.getDate());
-				$("#date"+i).val(year+"-"+month+"-"+date.getDate());
+				$("#"+week[i]).append((Number(month)+1)+"/"+inerCount);
+				$("#date"+i).val(year+"-"+(Number(month)+1)+"-"+inerCount);
 			}
 		}else{
 			date.setDate(dayLen[month-1]);
@@ -495,5 +510,18 @@ function isLeapYear(thisyear){
 	return result;
 }
 
-
+// 스케줄 세팅 이동
+function setting(){
+	$.ajax({
+	url:"scheduleSetting.do",
+	type:"post",
+	data:{""}
+	success:function(data){
+		$("#qrImg").attr("src",data);
+	},
+	error:function(e){
+		alert(e);
+	}
+})
+}
 
