@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -22,7 +24,7 @@
 
   </head>
   <body class="sb-nav-fixed">
-    <!-- nav -->
+   <!-- nav -->
     <jsp:include page="/includeFiles/nav.jsp"></jsp:include>
     <!-- nav -->
 
@@ -32,135 +34,154 @@
 
     <div id="layoutSidenav">
       <!-- sideNav -->
-      <jsp:include page="/includeFiles/sideNav.jsp"></jsp:include>
+      <jsp:include page="/includeFiles/userSideNav.jsp"></jsp:include>
       <!-- /sideNav -->
-      <div id="layoutSidenav_content">
       
       
-      
+      <div id="layoutSidenav_content">     
         <main>
           <div class="container-fluid">
-          
-		      <div class="row text-center mb-5">
-		        <h1>결제</h1>
-		      </div>
-		
-		      <div class="d-flex flex-column align-items-center mb-4">
-		        <label for="startDate" class="d-inline">시작 날짜</label>
-		        <input
-		          type="date"
-		          id="startDate"
-		          name="startDate"
-		          class="form-control w-50"/>
-		      </div>
-		
+          	<h2>결제</h2>
+			
+			<div class="my-3">
+			
+			<div class="row">
+<!-- 		      <div class="d-flex flex-column align-items-center m-4"> -->
+		        <label for="startDate" class="d-inline col-6">시작 날짜</label>
+				<label for="trainer" class="d-inline col-6">담당 트레이너</label>   
+<!-- 		      </div> -->
+		    </div>
+		    
+		    <div class="row">
+<!-- 		      <div class="d-flex flex-column align-items-center m-4"> -->
+				<div class="col-6">
+			         <input
+			          type="date"
+			          id="startDate"
+			          name="startDate"
+			          class="form-control w-100"/>
+			     </div>
+		          
+		          <div class="col-6">	    
+					<c:choose>
+				      <c:when test="${not empty user.tid}">
+				      	  <input type="text" id="trainer" class="form-control w-100" value="${user.tid}" readonly>
+				      </c:when>
+					  <c:otherwise>
+					  <select class="form-control" id="trainer" class="form-control w-100">
+		               <c:forEach items="${trainer}" var="t">
+		                 <option value="${t.t_id}">${t.t_name}</option>                              
+		               </c:forEach>
+				        </select>
+					  </c:otherwise>
+			 		 </c:choose>
+			 	 </div>
+<!-- 		      </div> -->
+		    </div>
+		   </div>
+					
 		      <div class="row">
-		        <div class="col-lg-3 col-md-6 col-sm-6 mb-md-3 mb-sm-3 pTableWrapper">
+		        <div class="col-lg-3 col-md-6 col-sm-6 mb-4 pTableWrapper">
 		          <div class="pricingTable">
-		            <div class="pricingTable-header p-4">
-		              <h3>Standard</h3>
+		            <div class="pricingTable-header mt-3">
+		              <h3 id="pruductName1">10회/1개월</h3>
 		            </div>
 		
 		            <div class="price-value">
-		              <span>10</span>
-		              <span class="subtitle">per month</span>
+		              <span><span id="price1">39</span>만원</span>
+		              <span class="subtitle">기본 이용권</span>
 		            </div>
 		
 		            <div class="pricingContent">
 		              <ul>
-		                <li><b>50GB</b> Disk Space</li>
-		                <li><b>50</b> Email Accounts</li>
-		                <li><b>50GB</b> Monthly Bandwidth</li>
-		                <li><b>10</b> subdomains</li>
-		                <li><b>50</b> Domains</li>
+		                <li><b>10회</b> PT</li>
+		                <li><b>1개월</b> 헬스 이용</li>
+		                <li><b>락커, 운동복</b> 대여 무료</li>
 		              </ul>
 		            </div>
 		
 		            <div class="pricingTable-sign-up">
-		              <a href="#" class="btn btn-block btn-default">sign up</a>
+		              <input type="button" class="btn btn-block btn-default" value="결제" id="1" onclick="pay(this)">
 		            </div>
 		          </div>
 		        </div>
 		
-		        <div class="col-lg-3 col-md-6 col-sm-6 mb-md-3 mb-sm-3 pTableWrapper">
+		        <div class="col-lg-3 col-md-6 col-sm-6 mb-4 pTableWrapper">
 		          <div class="pricingTable">
-		            <div class="pricingTable-header p-4">
-		              <h3>Business</h3>
+		            <div class="pricingTable-header mt-3">
+		              <h3 id="pruductName2">20+3회/2개월</h3>
 		            </div>
 		
 		            <div class="price-value">
-		              <span>20</span>
-		              <span class="subtitle">per month</span>
+					<span><span id="price2">73</span>만원</span>		              
+					<span class="subtitle"><del>89만 7,000원</del></span>
 		            </div>
 		
 		            <div class="pricingContent">
 		              <ul>
-		                <li><b>70GB</b> Disk Space</li>
-		                <li><b>70</b> Email Accounts</li>
-		                <li><b>70GB</b> Monthly Bandwidth</li>
-		                <li><b>20</b> subdomains</li>
-		                <li><b>70</b> Domains</li>
+		                <li><b>23회</b> PT</li>
+		                <li><b>2개월</b> 헬스 이용</li>
+		                <li><b>락커, 운동복</b> 대여 무료</li>
+
 		              </ul>
 		            </div>
 		
 		            <div class="pricingTable-sign-up">
-		              <a href="#" class="btn btn-block btn-default">sign up</a>
+		              <input type="button" class="btn btn-block btn-default" value="결제" id="2" onclick="pay(this)">
 		            </div>
 		          </div>
 		        </div>
 		
-		        <div class="col-lg-3 col-md-6 col-sm-6 mb-md-3 mb-sm-3 pTableWrapper">
+		        <div class="col-lg-3 col-md-6 col-sm-6 mb-4 pTableWrapper">
 		          <div class="pricingTable">
-		            <div class="pricingTable-header p-4">
-		              <div class="best-offer">best offers</div>
-		              <h3>Premium</h3>
+		            <div class="pricingTable-header mt-3">
+		              <div class="best-offer">인기 상품</div>
+		              <h3 id="pruductName3">30+5회권/3개월</h3>
 		            </div>
 		
 		            <div class="price-value">
-		              <span>30</span>
-		              <span class="subtitle">per month</span>
+		              <span><span id="price3">103</span>만원</span>
+		              <span class="subtitle"><del>136만 5000원</del></span>
 		            </div>
 		
 		            <div class="pricingContent">
-		              <ul>
-		                <li><b>80GB</b> Disk Space</li>
-		                <li><b>80</b> Email Accounts</li>
-		                <li><b>80GB</b> Monthly Bandwidth</li>
-		                <li><b>30</b> subdomains</li>
-		                <li><b>80</b> Domains</li>
+		               <ul>
+		                <li><b>35회</b> PT</li>
+		                <li><b>3개월</b> 헬스 이용</li>
+		                <li><b>락커, 운동복</b> 대여 무료</li>
+		                <li><b>프로틴</b> 증정</li>
 		              </ul>
 		            </div>
 		
 		            <div class="pricingTable-sign-up">
-		              <a href="#" class="btn btn-block btn-default">sign up</a>
-		            </div>
+				<input type="button" class="btn btn-block btn-default" value="결제" id="3" onclick="pay(this)">
+	            </div>
 		          </div>
 		        </div>
 		
-		        <div class="col-lg-3 col-md-6 col-sm-6 mb-md-3 mb-sm-3 pTableWrapper">
+		        <div class="col-lg-3 col-md-6 col-sm-6 mb-4 pTableWrapper">
 		          <div class="pricingTable">
-		            <div class="pricingTable-header p-4">
-		              <h3>Extra</h3>
+		            <div class="pricingTable-header mt-3">
+		              <h3 id="pruductName4">50+10회권/6개월</h3>
 		            </div>
 		
 		            <div class="price-value">
-		              <small class="fa fa-usd"></small>
-		              <span>40</span>
-		              <span class="subtitle">per month</span>
-		            </div>
+		              <span><span id="price4">164</span>만원</span>
+					 <span class="subtitle"><del>234만원</del></span>		            
+					 </div>
 		
 		            <div class="pricingContent">
-		              <ul>
-		                <li><b>90GB</b> Disk Space</li>
-		                <li><b>90</b> Email Accounts</li>
-		                <li><b>90GB</b> Monthly Bandwidth</li>
-		                <li><b>40</b> subdomains</li>
-		                <li><b>90</b> Domains</li>
+		             <ul>
+		                <li><b>60회</b> PT</li>
+		                <li><b>6개월</b> 헬스 이용</li>
+		                <li><b>락커, 운동복</b> 대여 무료</li>
+		                <li><b>프로틴</b> 증정</li>
+		                <li><b>프로필 사진</b> 촬영 무료</li>
 		              </ul>
 		            </div>
 		
 		            <div class="pricingTable-sign-up">
-		              <a href="#" class="btn btn-block btn-default">sign up</a>
+		              <input type="button" class="btn btn-block btn-default" value="결제" id="4" onclick="pay(this)">
 		            </div>
 		          </div>
 		        </div>
@@ -176,7 +197,16 @@
     <script
       src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js">
     </script>
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+    
+    <script>
+    
+    var userId= '${user.id}';
+ 
+    
+    </script>
     <script src="/myPT/js/scripts.js"></script>
     <script src="/myPT/js/payment.js"></script>
+    
   </body>
 </html>
