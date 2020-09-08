@@ -245,9 +245,16 @@ $("select[id=monthSelect]").on("change",function(){
 	}
 	$("#weekSelect").empty();
 	$("#weekSelect").append("<option selected disabled>주</option>");
-	for(var i=1;i<=5;i++){
-		$("#weekSelect").append("<option value='"+i+"'>"+i+"주차</option>");
+	if(firstWeekDif==1&&lastWeekDif==1){
+		for(var i=1;i<=4;i++){
+			$("#weekSelect").append("<option value='"+(i+1)+"'>"+i+"주차</option>");
+		}
+	}else{
+		for(var i=1;i<=5;i++){
+			$("#weekSelect").append("<option value='"+i+"'>"+i+"주차</option>");
+		}
 	}
+	
 })
 
 // 주차 선택
