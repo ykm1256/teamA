@@ -1,10 +1,8 @@
 package com.mypt.dto;
 
-import java.sql.Date;
-
 public class ProgramDto {
 	private String p_id;
-	private Date p_date;
+	private String p_date;
 	private String p_mention;
 	private String p_part;
 	
@@ -14,10 +12,10 @@ public class ProgramDto {
 	public void setP_id(String p_id) {
 		this.p_id = p_id;
 	}
-	public Date getP_date() {
+	public String getP_date() {
 		return p_date;
 	}
-	public void setP_date(Date p_date) {
+	public void setP_date(String p_date) {
 		this.p_date = p_date;
 	}
 	public String getP_mention() {
