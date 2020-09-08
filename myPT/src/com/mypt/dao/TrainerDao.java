@@ -28,7 +28,7 @@ return instance;
 		PreparedStatement ps = null;
 		try {
 			con = db.getConnection();
-			String sql = "insert into trainer values(?,?,?,?,?,?,?,?,?,?)";
+			String sql = "insert into trainer values(?,?,?,?,?,?,?,?,?,?,?)";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, td.getT_id());
 			ps.setString(2, td.getT_pw());
@@ -40,6 +40,7 @@ return instance;
 			ps.setString(8, td.getT_nick());
 			ps.setString(9, td.getT_zipcode());
 			ps.setString(10, td.getT_tel());
+			ps.setString(11, td.getT_addrdetail());
 			ps.executeUpdate();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -71,6 +72,7 @@ return instance;
 				td.setT_nick(rs.getString("t_nick"));
 				td.setT_zipcode(rs.getString("t_zipcode"));
 				td.setT_tel(rs.getString("t_tel"));
+				td.setT_addrdetail(rs.getString("t_addrdetail"));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -86,7 +88,7 @@ return instance;
 		PreparedStatement ps = null;
 		try {
 			con = db.getConnection();
-			String sql = "update trainer set t_pw=?, t_name=?, t_gender=?, t_email=?, t_birth=?, t_address=?, t_nick=?,t_zipcode=?, t_tel=? where t_id=?";
+			String sql = "update trainer set t_pw=?, t_name=?, t_gender=?, t_email=?, t_birth=?, t_address=?, t_nick=?,t_zipcode=?, t_tel=?, t_addrdetail=? where t_id=?";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, td.getT_pw());
 			ps.setString(2, td.getT_name());
@@ -97,7 +99,8 @@ return instance;
 			ps.setString(7, td.getT_nick());
 			ps.setString(8, td.getT_zipcode());
 			ps.setString(9, td.getT_tel());
-			ps.setString(10, td.getT_id());
+			ps.setString(10, td.getT_addrdetail());
+			ps.setString(11, td.getT_id());
 			ps.executeUpdate();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -138,14 +141,16 @@ return instance;
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				td = new TrainerDto();
-				td.setT_id(rs.getString(1));
-				td.setT_pw(rs.getString(2));
-				td.setT_name(rs.getString(3));
-				td.setT_gender(rs.getString(4));
-				td.setT_email(rs.getString(5));
-				td.setT_birth(rs.getString(6));
-				td.setT_address(rs.getString(7));
-				td.setT_nick(rs.getString(8));
+				td.setT_id(rs.getString("t_id"));
+				td.setT_pw(rs.getString("t_pw"));
+				td.setT_name(rs.getString("t_name"));
+				td.setT_gender(rs.getString("t_gender"));
+				td.setT_email(rs.getString("t_email"));
+				td.setT_birth(rs.getString("t_birth"));
+				td.setT_address(rs.getString("t_address"));
+				td.setT_nick(rs.getString("t_nick"));
+				td.setT_addrdetail(rs.getString("t_addrdetail"));
+				td.setT_zipcode(rs.getString("t_zipcode"));
 				arr.add(td);
 			}
 			
