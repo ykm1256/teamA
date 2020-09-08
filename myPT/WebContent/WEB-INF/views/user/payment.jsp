@@ -54,27 +54,37 @@
 		    
 		    <div class="row">
 <!-- 		      <div class="d-flex flex-column align-items-center m-4"> -->
+
 				<div class="col-6">
-			         <input
-			          type="date"
-			          id="startDate"
-			          name="startDate"
-			          class="form-control w-100"/>
+					<c:choose>
+				      <c:when test="${not empty user.startdate}">
+				      	  <input type="text" id="startdate1" class="form-control w-100" value="${user.startdate}" disabled>
+				      </c:when>				      
+					  <c:otherwise>
+						  <input
+				          type="date"
+				          id="startdate2"
+				          name="startdate"
+				          class="form-control w-100"/>
+					  </c:otherwise>
+			 		 </c:choose>	         
 			     </div>
 		          
 		          <div class="col-6">	    
 					<c:choose>
 				      <c:when test="${not empty user.tid}">
-				      	  <input type="text" id="trainer" class="form-control w-100" value="${user.tid}" readonly>
+				      	  <input type="text" id="trainer1" class="form-control w-100" value="${user.tid}" disabled>
 				      </c:when>
 					  <c:otherwise>
-					  <select class="form-control" id="trainer" class="form-control w-100">
+					  <select class="form-control" id="trainer2" class="form-control w-100" onchange="changeTrainer()">
+		               <option value="" selected disabled>트레이너 선택</option>
 		               <c:forEach items="${trainer}" var="t">
 		                 <option value="${t.t_id}">${t.t_name}</option>                              
 		               </c:forEach>
 				        </select>
 					  </c:otherwise>
 			 		 </c:choose>
+<!-- 			 		 <input type="text" id="selectedTrainer" hidden="true"> -->
 			 	 </div>
 <!-- 		      </div> -->
 		    </div>
@@ -84,11 +94,11 @@
 		        <div class="col-lg-3 col-md-6 col-sm-6 mb-4 pTableWrapper">
 		          <div class="pricingTable">
 		            <div class="pricingTable-header mt-3">
-		              <h3 id="pruductName1">10회/1개월</h3>
+		              <h3><span>10</span>회권/1개월</h3>
 		            </div>
 		
 		            <div class="price-value">
-		              <span><span id="price1">39</span>만원</span>
+		              <p><span class="price">39</span>만원</p>
 		              <span class="subtitle">기본 이용권</span>
 		            </div>
 		
@@ -101,7 +111,7 @@
 		            </div>
 		
 		            <div class="pricingTable-sign-up">
-		              <input type="button" class="btn btn-block btn-default" value="결제" id="1" onclick="pay(this)">
+		              <input type="button" class="btn btn-block btn-default" value="결제" id="0" onclick="pay(this)">
 		            </div>
 		          </div>
 		        </div>
@@ -109,12 +119,12 @@
 		        <div class="col-lg-3 col-md-6 col-sm-6 mb-4 pTableWrapper">
 		          <div class="pricingTable">
 		            <div class="pricingTable-header mt-3">
-		              <h3 id="pruductName2">20+3회/2개월</h3>
+		              <h3><span>23</span>회권/2개월</h3>
 		            </div>
 		
 		            <div class="price-value">
-					<span><span id="price2">73</span>만원</span>		              
-					<span class="subtitle"><del>89만 7,000원</del></span>
+		              <p><span class="price">73</span>만원</p>
+					<span class="subtitle">20+3회 <del>89만 7,000원</del></span>
 		            </div>
 		
 		            <div class="pricingContent">
@@ -127,7 +137,7 @@
 		            </div>
 		
 		            <div class="pricingTable-sign-up">
-		              <input type="button" class="btn btn-block btn-default" value="결제" id="2" onclick="pay(this)">
+		              <input type="button" class="btn btn-block btn-default" value="결제" id="1" onclick="pay(this)">
 		            </div>
 		          </div>
 		        </div>
@@ -136,12 +146,12 @@
 		          <div class="pricingTable">
 		            <div class="pricingTable-header mt-3">
 		              <div class="best-offer">인기 상품</div>
-		              <h3 id="pruductName3">30+5회권/3개월</h3>
+		              <h3><span>35</span>회권/3개월</h3>
 		            </div>
 		
 		            <div class="price-value">
-		              <span><span id="price3">103</span>만원</span>
-		              <span class="subtitle"><del>136만 5000원</del></span>
+		              <p><span class="price">103</span>만원</p>
+		              <span class="subtitle">30+5회 <del>136만 5000원</del></span>
 		            </div>
 		
 		            <div class="pricingContent">
@@ -154,7 +164,7 @@
 		            </div>
 		
 		            <div class="pricingTable-sign-up">
-				<input type="button" class="btn btn-block btn-default" value="결제" id="3" onclick="pay(this)">
+				<input type="button" class="btn btn-block btn-default" value="결제" id="2" onclick="pay(this)">
 	            </div>
 		          </div>
 		        </div>
@@ -162,12 +172,12 @@
 		        <div class="col-lg-3 col-md-6 col-sm-6 mb-4 pTableWrapper">
 		          <div class="pricingTable">
 		            <div class="pricingTable-header mt-3">
-		              <h3 id="pruductName4">50+10회권/6개월</h3>
+		              <h3><span>60</span>회권/6개월</h3>
 		            </div>
 		
 		            <div class="price-value">
-		              <span><span id="price4">164</span>만원</span>
-					 <span class="subtitle"><del>234만원</del></span>		            
+		              <p><span class="price">164</span>만원</p>
+					 <span class="subtitle">50+10회권 <del>234만원</del></span>		            
 					 </div>
 		
 		            <div class="pricingContent">
@@ -181,7 +191,7 @@
 		            </div>
 		
 		            <div class="pricingTable-sign-up">
-		              <input type="button" class="btn btn-block btn-default" value="결제" id="4" onclick="pay(this)">
+		              <input type="button" class="btn btn-block btn-default" value="결제" id="3" onclick="pay(this)">
 		            </div>
 		          </div>
 		        </div>
@@ -202,7 +212,11 @@
     <script>
     
     var userId= '${user.id}';
- 
+	var userEmail= '${user.email}';
+	var userName= '${user.name}';
+	var userTel= '${user.tel}';
+	var merchant_uid= '${merchant_uid}';
+	
     
     </script>
     <script src="/myPT/js/scripts.js"></script>

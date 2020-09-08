@@ -55,8 +55,12 @@ public class UserDao {
 			ps.setString(7, userBean.getAddress());
 			ps.setString(8, userBean.getQr());
 			ps.setString(9, userBean.getNick());
-			ps.setDate(10, userBean.getStartdate());
-			ps.setDate(11, userBean.getEnddate());
+			
+//			ps.setDate(10, userBean.getStartdate());
+//			ps.setDate(11, userBean.getEnddate());			
+			ps.setString(10, userBean.getStartdate());
+			ps.setString(11, userBean.getEnddate());
+			
 			ps.setInt(12, userBean.getPtcount());
 			ps.setString(13, userBean.getTid());
 			ps.setString(14, userBean.getZipcode());
@@ -94,8 +98,12 @@ public class UserDao {
 				userBean.setQr(rs.getString("qr"));
 				userBean.setSigndate(rs.getTimestamp("signdate"));
 				userBean.setNick(rs.getString("nick"));
-				userBean.setStartdate(rs.getDate("startdate"));
-				userBean.setEnddate(rs.getDate("enddate"));
+				
+//				userBean.setStartdate(rs.getDate("startdate"));
+//				userBean.setEnddate(rs.getDate("enddate"));
+				userBean.setStartdate(rs.getString("startdate"));
+				userBean.setEnddate(rs.getString("enddate"));
+				
 				userBean.setPtcount(rs.getInt("ptcount"));
 				userBean.setTid(rs.getString("tid"));
 				userBean.setTel(rs.getString("tel"));
@@ -155,8 +163,12 @@ public class UserDao {
 			ps.setString(5, userBean.getBirth());
 			ps.setString(6, userBean.getAddress());
 			ps.setString(7, userBean.getNick());
-			ps.setDate(8, userBean.getStartdate());
-			ps.setDate(9, userBean.getEnddate());
+			
+//			ps.setDate(8, userBean.getStartdate());
+//			ps.setDate(9, userBean.getEnddate());
+			ps.setString(8, userBean.getStartdate());
+			ps.setString(9, userBean.getEnddate());
+			
 			ps.setInt(10, userBean.getPtcount());
 			ps.setString(11, userBean.getTid());
 			ps.setString(12, userBean.getZipcode());
@@ -169,6 +181,67 @@ public class UserDao {
 			db.closeConnection(null, ps, con);
 		}
 	}
+	
+	
+	
+	//enddate가 지난 회원 전부에 대해 startdate, enddate, ptcount 설정(이)
+	public void updateForEnddateUser() 
+	{
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = null;
+
+		try {
+			con = db.getConnection();
+			sql = "update user SET startdate=NULL, enddate= NULL, ptcount=0 WHERE enddate<NOW()";
+			ps = con.prepareStatement(sql);
+			
+			ps.executeUpdate();
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		} 
+		finally 
+		{
+			db.closeConnection(null, ps, con);
+		}
+	}
+	
+	// 결제 후 (이)
+		public void updateAfterPayment(UserDto userBean) 
+		{
+			Connection con = null;
+			PreparedStatement ps = null;
+			String sql = null;
+
+			try {
+				con = db.getConnection();
+				sql = "update user set startdate=?,enddate=?,ptcount=ptcount+?, tid=? where id=?";
+				ps = con.prepareStatement(sql);
+		
+//				ps.setDate(8, userBean.getStartdate());
+//				ps.setDate(9, userBean.getEnddate());
+				ps.setString(1, userBean.getStartdate());
+				ps.setString(2, userBean.getEnddate());			
+				ps.setInt(3, userBean.getHistory().getHcount());
+				ps.setString(4, userBean.getTid());
+				ps.setString(5, userBean.getId());
+				
+				ps.executeUpdate();
+			} 
+			catch (Exception e) 
+			{
+				e.printStackTrace();
+			} 
+			finally 
+			{
+				db.closeConnection(null, ps, con);
+			}
+		}
+		
+	
+	
 
 	public void deleteUser(String id) {
 		Connection con = null;
@@ -214,12 +287,19 @@ public class UserDao {
 				userBean.setQr(rs.getString("qr"));
 				userBean.setSigndate(rs.getTimestamp("signdate"));
 				userBean.setNick(rs.getString("nick"));
-				userBean.setStartdate(rs.getDate("startdate"));
-				userBean.setEnddate(rs.getDate("enddate"));
+				
+//				userBean.setStartdate(rs.getDate("startdate"));
+//				userBean.setEnddate(rs.getDate("enddate"));
+				userBean.setStartdate(rs.getString("startdate"));
+				userBean.setEnddate(rs.getString("enddate"));
+				
 				userBean.setTid(rs.getString("tid"));
 				userBean.setZipcode(rs.getString("zipcode"));
 				userBean.setTel(rs.getString("tel"));
-				userBean.setPtcount(Integer.parseInt(rs.getString("ptcount")));
+
+//				userBean.setPtcount(Integer.parseInt(rs.getString("ptcount")));
+				userBean.setPtcount(rs.getInt("ptcount"));
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -263,8 +343,12 @@ public class UserDao {
 				userBean.setQr(rs.getString("qr"));
 				userBean.setSigndate(rs.getTimestamp("signdate"));
 				userBean.setNick(rs.getString("nick"));
-				userBean.setStartdate(rs.getDate("startdate"));
-				userBean.setEnddate(rs.getDate("enddate"));
+				
+//				userBean.setStartdate(rs.getDate("startdate"));
+//				userBean.setEnddate(rs.getDate("enddate"));
+				userBean.setStartdate(rs.getString("startdate"));
+				userBean.setEnddate(rs.getString("enddate"));
+				
 				userBean.setPtcount(rs.getInt("ptcount"));
 				userBean.setTid(rs.getString("t_name"));
 				userBean.setZipcode(rs.getString("zipcode"));
@@ -281,6 +365,8 @@ public class UserDao {
 		return arr;
 	}
 
+	
+	
 	// 트레이너 아이디별 유저 검색
 	public ArrayList<UserDto> ptUserList(String tid) {
 		Connection con = null;
@@ -324,8 +410,12 @@ public class UserDao {
 				userBean.setQr(rs.getString("qr"));
 				userBean.setSigndate(rs.getTimestamp("signdate"));
 				userBean.setNick(rs.getString("nick"));
-				userBean.setStartdate(rs.getDate("startdate"));
-				userBean.setEnddate(rs.getDate("enddate"));
+				
+//				userBean.setStartdate(rs.getDate("startdate"));
+//				userBean.setEnddate(rs.getDate("enddate"));
+				userBean.setStartdate(rs.getString("startdate"));
+				userBean.setEnddate(rs.getString("enddate"));
+				
 				userBean.setPtcount(rs.getInt("ptcount"));
 				userBean.setTid(rs.getString("tid"));
 				userBean.setTel(rs.getString("tel"));

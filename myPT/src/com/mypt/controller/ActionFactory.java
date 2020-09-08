@@ -6,13 +6,13 @@ import java.util.Map;
 import com.mypt.action.check.EmailCheckAction;
 import com.mypt.action.check.NickCheckAction;
 import com.mypt.action.crowded.CrowdedAction;
-import com.mypt.action.inbody.UserInbodyResultAction;
 import com.mypt.action.detail.AdminTrainerDetailAction;
 import com.mypt.action.detail.AdminTrainerUpdateAction;
 import com.mypt.action.detail.AdminUserDetailAction;
 import com.mypt.action.detail.AdminUserUpdateAction;
 import com.mypt.action.detail.UserMyDetailAction;
 import com.mypt.action.detail.UserMyUpdateAction;
+import com.mypt.action.inbody.UserInbodyResultAction;
 import com.mypt.action.income.IncomeAction;
 import com.mypt.action.income.IncomeTrainerAction;
 import com.mypt.action.income.MoveIncomeAction;
@@ -29,7 +29,7 @@ import com.mypt.action.move.MoveSchedule;
 import com.mypt.action.move.MoveUserMain;
 import com.mypt.action.move.MoveUserMyProfile;
 import com.mypt.action.move.MoveUserRegister;
-import com.mypt.action.payment.UserCheckForPaymentAction;
+import com.mypt.action.payment.UserPaymentDataAction;
 import com.mypt.action.qr.QrCheckAction;
 import com.mypt.action.qr.QrViewAction;
 import com.mypt.action.register.AdminUserRegisterAction;
@@ -77,7 +77,7 @@ public class ActionFactory
 		
 		//결제
 		map.put("/movePayment", new MovePayment());
-		map.put("/checkForPayment", new UserCheckForPaymentAction());
+		map.put("/paymentData", new UserPaymentDataAction());
 
 		
 		//매출

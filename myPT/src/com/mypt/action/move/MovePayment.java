@@ -1,6 +1,7 @@
 package com.mypt.action.move;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,7 +28,10 @@ public class MovePayment implements Action
 		TrainerDao tdao = TrainerDao.getInstance();
 		ArrayList<TrainerDto> trainer = tdao.trainerList();
 		
+		String merchantId= user.getId()+ new Date().getTime();
+		
 		request.setAttribute("user", user);
+		request.setAttribute("merchant_uid", merchantId);
 		request.setAttribute("trainer", trainer);
 		
 		return "user/payment";
