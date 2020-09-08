@@ -79,7 +79,7 @@
 						<div class="card-group text-center">
 							<div class="card">
 								<div class="card-header bg-dark text-white" id="mon">월</div>
-								<input type="text" name="date0" disabled
+								<input type="text" name="date" disabled
 										id="date0" style="display: none" />
 								<div class="card-body" id="week1">
 									<div class="btn btn-danger" id="btnPT" data-toggle="modal"
@@ -96,7 +96,7 @@
 							</div>
 							<div class="card">
 								<div class="card-header bg-dark text-white" id="tue">화</div>
-								<input type="text" name="date1" disabled
+								<input type="text" name="date" disabled
 										id="date1" style="display: none" />
 								<div class="card-body" id="week2">
 									<div class="btn btn-danger" id="btnPT" data-toggle="modal"
@@ -113,7 +113,7 @@
 							</div>
 							<div class="card">
 								<div class="card-header bg-dark text-white" id="wed">수</div>
-								<input type="text" name="date2" disabled
+								<input type="text" name="date" disabled
 										id="date2" style="display: none" />
 								<div class="card-body" id="week3">
 									<div class="btn btn-danger" id="btnPT" data-toggle="modal"
@@ -130,7 +130,7 @@
 							</div>
 							<div class="card">
 								<div class="card-header bg-dark text-white" id="thu">목</div>
-								<input type="text" name="date3" disabled
+								<input type="text" name="date" disabled
 										id="date3" style="display: none" />
 								<div class="card-body" id="week4">
 									<div class="btn btn-danger" id="btnPT" data-toggle="modal"
@@ -147,7 +147,7 @@
 							</div>
 							<div class="card">
 								<div class="card-header bg-dark text-white" id="fri">금</div>
-								<input type="text" name="date4" disabled
+								<input type="text" name="date" disabled
 										id="date4" style="display: none" />
 								<div class="card-body" id="week5">
 									<div class="btn btn-danger" id="btnPT" data-toggle="modal"
@@ -163,9 +163,12 @@
 								</div>
 							</div>
 						</div>
-						<button type="submit"
-							class="btn btn-success mt-2 mb-5 float-right custom-submit">
-							완료</button>
+						<div
+							class="btn btn-success mt-2 mb-5 float-right custom-submit"
+							id="confirm"
+							onclick="setting()"
+						>
+							완료</div>
 					</form>
 				</div>
 			</main>

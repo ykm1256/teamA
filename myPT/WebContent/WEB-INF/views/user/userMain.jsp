@@ -218,7 +218,7 @@
                             class="widget-numbers"
                             style="color: #3ac47d !important"
                           >
-                            20회
+                            ${ptcount}
                           </div>
                         </div>
                       </div>
@@ -229,10 +229,10 @@
                       <div class="widget-content-wrapper">
                         <div class="widget-content-left">
                           <div class="widget-heading">담당 트레이너</div>
-                          <div class="widget-subheading">서브글</div>
+                          <div class="widget-subheading">${t_nick }</div>
                         </div>
                         <div class="widget-content-right">
-                          <div class="widget-numbers text-primary">김갑환</div>
+                          <div class="widget-numbers text-primary">${t_name }</div>
                         </div>
                       </div>
                     </div>
@@ -246,7 +246,7 @@
                         </div>
                         <div class="widget-content-right">
                           <div class="widget-numbers text-warning">
-                            2020.08.01
+                            ${startdate }
                           </div>
                         </div>
                       </div>
@@ -260,7 +260,7 @@
                           <div class="widget-subheading"></div>
                         </div>
                         <div class="widget-content-right">
-                          <div class="widget-numbers text-dark">2020.11.01</div>
+                          <div class="widget-numbers text-dark">${enddate }</div>
                         </div>
                       </div>
                     </div>

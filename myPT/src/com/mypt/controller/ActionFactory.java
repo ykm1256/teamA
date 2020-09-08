@@ -32,6 +32,7 @@ import com.mypt.action.move.MoveUserRegister;
 import com.mypt.action.qr.QrCheckAction;
 import com.mypt.action.qr.QrViewAction;
 import com.mypt.action.register.AdminUserRegisterAction;
+import com.mypt.action.schedule.TrainerScheduleSettingAction;
 
 
 public class ActionFactory 
@@ -96,6 +97,7 @@ public class ActionFactory
 		
 		// 스케줄 관리
 		map.put("/moveSchedule",new MoveSchedule());
+		map.put("/scheduleSetting",new TrainerScheduleSettingAction());
 		
 		//로그아웃
 		map.put("/logout",new LogoutAction());
