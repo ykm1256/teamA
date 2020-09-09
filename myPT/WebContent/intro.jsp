@@ -48,26 +48,27 @@
                 >
                   <div class="card-header">
                     <h2 class="text-center font-weight-light my-4 text-white">
-                      	트레이너 로그인 
+                      TRAINER LOGIN
                     </h2>
                   </div>
                   <div class="card-body">
                     
                       <div class="form-group">
-                        <label class="small mb-1 text-white" for="id">아이디</label>
+                        <label class="small mb-1 text-white" for="id">ID</label>
                         
                         <input
                           class="form-control py-4 text-white rounded-0 border-top-0 border-right-0 border-left-0"
                           id="id"
                           name="id"
                           style="background-color: black"
+                          placeholder="Enter ID"
                         />
                       </div>
                       <div class="form-group">
                         <label
                           class="small mb-1 text-white"
                           for="pw1"
-                          >비밀번호</label
+                          >Password</label
                         >
                         <input
                           class="form-control py-4 text-white rounded-0 border-top-0 border-right-0 border-left-0"
@@ -86,7 +87,7 @@
                             type="checkbox"
                           />
                           <label class="text-muted" for="rememberPasswordCheck1"
-                            >로그인 유지</label
+                            >Remember password</label
                           >
                         </div>
                       </div>
@@ -102,7 +103,7 @@
                           id="btntrainer"
                           
                         >
-                        	  로그인
+                          로그인
                         </button>
                       </div>
                     
@@ -130,7 +131,7 @@
             </div>
 
             <a href="#demo" data-slide="prev" style="text-decoration: none">
-              <h5 class="text-white-50 mt-3">트레이너 로그인</h5>
+              <h5 class="text-white-50 mt-3">Trainer Login</h5>
             </a>
           </div>
         </div>
@@ -154,7 +155,7 @@
                 >
                   <div class="card-header">
                     <h2 class="text-center font-weight-light my-4 text-white">
-                     	 로그인
+                      LOGIN
                     </h2>
                   </div>
                   <div class="card-body">
@@ -163,26 +164,28 @@
                         <label
                           class="small mb-1 text-white"
                           for="email"
-                          >이메일</label
+                          >Email</label
                         >
                         <input
                           class="form-control py-4 text-white rounded-0 border-top-0 border-right-0 border-left-0"
                           id="email"                          
                           style="background-color: black"
                           type="email"
+                          placeholder="Enter email address"
                         />
                       </div>
                       <div class="form-group">
                         <label
                           class="small mb-1 text-white"
                           for="pw2"
-                          >비밀번호</label
+                          >Password</label
                         >
                         <input
                           class="form-control py-4 text-white rounded-0 border-top-0 border-right-0 border-left-0"
                           style="background-color: black"
                           id="pw2"                          
                           type="password"
+                          placeholder="Enter password"
                         />
                       </div>
                       <div class="form-group">
@@ -193,7 +196,7 @@
                             type="checkbox"
                           />
                           <label class="text-muted" for="rememberPasswordCheck2"
-                            >로그인 유지</label
+                            >Remember password</label
                           >
                         </div>
                       </div>
