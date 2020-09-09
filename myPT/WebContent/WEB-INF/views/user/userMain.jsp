@@ -12,9 +12,9 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>메인 페이지</title>
-    <link href="css/styles.css" rel="stylesheet" />
-    <link href="css/index.css" rel="stylesheet"/>
-    <link href="css/widget.css" rel="stylesheet"/>
+    <link href="/myPT/css/styles.css" rel="stylesheet" />
+    <link href="/myPT/css/index.css" rel="stylesheet"/>
+    <link href="/myPT/css/widget.css" rel="stylesheet"/>
 
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
@@ -42,7 +42,7 @@
               <div class="card mb-4 p-0" id="week1">
                 <div class="card-header bg-dark text-white">월요일</div>
                 <div class="card-body">
-                  <div class="card bg-danger text-white">
+                  <div class="card bg-danger text-white" id="btnMon">
                     <div class="card-body p-0">
                       PT
                       <a
@@ -53,21 +53,12 @@
                       ></a>
                     </div>
                   </div>
-                </div>
-                <div
-                  class="card-footer clickable-row"
-                  data-toggle="modal"
-                  data-target="#schedule"
-                  style="display: none"
-                  id="weekView1"
-                >
-                  전체보기
                 </div>
               </div>
               <div class="card mb-4 p-0" id="week2">
                 <div class="card-header bg-dark text-white">화요일</div>
                 <div class="card-body">
-                  <div class="card bg-light">
+                  <div class="card bg-light" id="btnTue">
                     <div class="card-body p-0">
                       프로그램
                       <a
@@ -78,21 +69,12 @@
                       ></a>
                     </div>
                   </div>
-                </div>
-                <div
-                  class="card-footer clickable-row"
-                  data-toggle="modal"
-                  data-target="#schedule"
-                  style="display: none"
-                  id="weekView2"
-                >
-                  전체보기
                 </div>
               </div>
               <div class="card mb-4 p-0" id="week3">
                 <div class="card-header bg-dark text-white">수요일</div>
                 <div class="card-body">
-                  <div class="card bg-light">
+                  <div class="card bg-light" id="btnWed">
                     <div class="card-body p-0">
                       프로그램
                       <a
@@ -104,20 +86,11 @@
                     </div>
                   </div>
                 </div>
-                <div
-                  class="card-footer clickable-row"
-                  data-toggle="modal"
-                  data-target="#schedule"
-                  style="display: none"
-                  id="weekView3"
-                >
-                  전체보기
-                </div>
               </div>
               <div class="card mb-4 p-0" id="week4">
                 <div class="card-header bg-dark text-white">목요일</div>
                 <div class="card-body">
-                  <div class="card bg-danger text-white">
+                  <div class="card bg-danger text-white" id="btnThu">
                     <div class="card-body p-0">
                       PT
                       <a
@@ -129,20 +102,11 @@
                     </div>
                   </div>
                 </div>
-                <div
-                  class="card-footer clickable-row"
-                  data-toggle="modal"
-                  data-target="#schedule"
-                  style="display: none"
-                  id="weekView4"
-                >
-                  전체보기
-                </div>
               </div>
               <div class="card mb-4 p-0" id="week5">
                 <div class="card-header bg-dark text-white">금요일</div>
                 <div class="card-body">
-                  <div class="card bg-light">
+                  <div class="card bg-light" id="btnFri">
                     <div class="card-body p-0">
                       프로그램
                       <a
@@ -153,15 +117,6 @@
                       ></a>
                     </div>
                   </div>
-                </div>
-                <div
-                  class="card-footer clickable-row"
-                  data-toggle="modal"
-                  data-target="#schedule"
-                  style="display: none"
-                  id="weekView5"
-                >
-                  전체보기
                 </div>
               </div>
 
@@ -261,7 +216,8 @@
     <script
       src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js">
     </script>
-    <script src="js/scripts.js"></script>
-    <script src="js/userAttendance.js"></script>
+    <script src="/myPT/js/scripts.js"></script>
+    <script src="/myPT/js/userAttendance.js"></script>
+    <script src="/myPT/js/userMain.js"></script>
   </body>
 </html>
