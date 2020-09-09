@@ -10,7 +10,7 @@ pageEncoding="UTF-8"%>
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <c:set var="board" value="${board }"/>
+    
 
     <title>글 쓰기</title>
     <link
@@ -69,7 +69,7 @@ pageEncoding="UTF-8"%>
                         <li class="list-group-item">
                           <div class="row">
                             <div class="col-lg-2 col-sm-6">
-                              <select class="form-control" name="head">
+                              <select class="form-control" name="writeHead" id="writeHead">
                                 <option value="default" selected disabled>말머리</option>
                                 <option value="잡담">잡담</option>
                                 <option value="정보">정보</option>
@@ -95,6 +95,7 @@ pageEncoding="UTF-8"%>
                           />
                         </li>
                       </ul>
+                      <input type="text" name="board" value="${param.board}" hidden="true">
                       <div
                         class="text-right px-4 d-flex justify-content-end align-items-center"
                       >

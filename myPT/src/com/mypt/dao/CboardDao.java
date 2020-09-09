@@ -25,7 +25,7 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 			Connection con = null;
 			PreparedStatement ps = null;
 
-			String sql = "insert into cboard(cb_title, cb_writer, cb_head, cb_content, hit, cb_like, cb_cb_ref, cb_cb_depth, cb_cb_pos) values(?,?,?,?,?,?,?,?,?)";
+			String sql = "insert into cboard(cb_title, cb_writer, cb_head, cb_content, cb_hit, cb_like, cb_ref, cb_depth, cb_pos) values(?,?,?,?,?,?,?,?,?)";
 			try {
 				con = db.getConnection();
 				ps = con.prepareStatement(sql);
@@ -293,13 +293,14 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 				int ref = getMaxNum() + 1;
 				con = db.getConnection();
 				sql = "insert into cboard(cb_writer,cb_content,cb_title,cb_ref,cb_pos,cb_depth,";
-				sql += "cb_hit, cb_like)";
-				sql += "values(?, ?, ?, ?, 0, 0, 0, 0)";
+				sql += "cb_hit, cb_like, cb_head)";
+				sql += "values(?, ?, ?, ?, 0, 0, 0, 0,?)";
 				ps = con.prepareStatement(sql);
 				ps.setString(1, dto.getWriter());
 				ps.setString(2, dto.getContent());
 				ps.setString(3, dto.getTitle());
 				ps.setInt(4, ref);				
+				ps.setString(5, dto.getHead());				
 				ps.executeUpdate();
 			} catch (Exception e) {
 				e.printStackTrace();
