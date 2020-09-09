@@ -423,7 +423,7 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 					bean.setPos(rs.getInt("cb_pos"));
 					bean.setRef(rs.getInt("cb_ref"));
 					bean.setDepth(rs.getInt("cb_depth"));
-					bean.setDate(rs.getTimestamp(12));
+					bean.setDate(rs.getTimestamp("cb_date"));
 					bean.setHit(rs.getInt("cb_hit"));				
 					bean.setHead(rs.getString("cb_head"));				
 					vlist.addElement(bean);

@@ -1,3 +1,4 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.sql.Timestamp"%>
 <%@page import="com.mypt.dao.CboardDao"%>
 <%@page import="com.mypt.dto.CboardDto"%>
