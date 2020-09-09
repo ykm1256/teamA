@@ -39,23 +39,6 @@
           <div class="container-fluid">
           	<h1 class="mt-4 mb-4">메인 페이지</h1>
             <div class="card-group text-center p-0" id="weekSchedule">
-              <div class="card mb-4 p-0" id="week0">
-                <div class="card-header bg-dark text-white">일요일</div>
-                <div class="card-body">
-                  <div class="card">
-                    <div class="card-body p-0">쉬는 날</div>
-                  </div>
-                </div>
-                <div
-                  class="card-footer clickable-row"
-                  data-toggle="modal"
-                  data-target="#schedule"
-                  style="display: none"
-                  id="weekView0"
-                >
-                  전체보기
-                </div>
-              </div>
               <div class="card mb-4 p-0" id="week1">
                 <div class="card-header bg-dark text-white">월요일</div>
                 <div class="card-body">
@@ -181,23 +164,7 @@
                   전체보기
                 </div>
               </div>
-              <div class="card mb-4 p-0" id="week6">
-                <div class="card-header bg-dark text-white">토요일</div>
-                <div class="card-body">
-                  <div class="card">
-                    <div class="card-body p-0">쉬는 날</div>
-                  </div>
-                </div>
-                <div
-                  class="card-footer clickable-row"
-                  data-toggle="modal"
-                  data-target="#schedule"
-                  style="display: none"
-                  id="weekView6"
-                >
-                  <b>전체보기</b>
-                </div>
-              </div>
+
             </div>
             <div class="card mb-4">
               <div class="card-header bg-dark text-white">

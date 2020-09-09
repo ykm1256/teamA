@@ -251,7 +251,7 @@ $("select[id=monthSelect]").on("change",function(){
 	$("#weekSelect").empty();
 	$("#weekSelect").append("<option selected disabled>주</option>");
 	let innerDate=new Date(year,month-1,1);
-	if(firstWeekDif==1&&lastWeekDif==1&&innerDate.getDay()==6){
+	if((firstWeekDif==1&&lastWeekDif==1&&innerDate.getDay()==6)||lastWeekNum.weekNo==4){
 		for(var i=1;i<=4;i++){
 			$("#weekSelect").append("<option value='"+(i+1)+"'>"+i+"주차</option>");
 			isFourWeeks=true;
@@ -292,6 +292,8 @@ $("select[id=weekSelect]").on("change",function(){
 	}
 	if(date.getDay()!=1){
 		dateDif=date.getDay()-1;
+	}else{
+		dateDif=0;
 	}
 	if(weekend==1){
 		if(firstWeekDif==1){
@@ -406,6 +408,9 @@ $("select[id=weekSelect]").on("change",function(){
 		}else{
 			date.setDate(dayLen[month-1]);
 			var lastDay=date.getDay()+0;
+			if(lastDay==0){
+				lastDay=5;
+			}
 			for(var i=0;i<lastDay;i++){
 				date.setDate(day[i]+(7*(weekend-1))-dateDif);
 				$("#"+week[i]).text($("#"+week[i]).text().substr(0,1));
