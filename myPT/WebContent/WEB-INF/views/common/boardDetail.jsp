@@ -15,6 +15,7 @@
     <link href="/myPT/css/styles.css" rel="stylesheet" />
     <link href="/myPT/css/index.css" rel="stylesheet"/>
     <link href="/myPT/css/widget.css" rel="stylesheet"/>
+    <link href="/myPT/css/like.css" rel="stylesheet"/>
 
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
@@ -54,7 +55,191 @@
                         <li class="list-group-item">
                           <div class="row">
                             <div class="col-lg-12">
-                              <h3 class="mt-3 ml-2 mb-0">제목입니다.</h3>
+                            <div class="row ml-2 mt-3 mb-0 d-flex justify-content-between">
+                              <h3 class=" ">제목입니다.</h3>
+                              <!-- 좋아요버튼 -->
+                        <div class="row m-0 likebutton">
+                          <input type="checkbox" class="like"/>
+                          <div>
+                            <svg
+                              id="heart-svg"
+                              viewBox="467 392 58 57"
+                              xmlns="http://www.w3.org/2000/svg"
+                              style="width: 50px"
+                            >
+                              <g
+                                id="Group"
+                                fill="none"
+                                fill-rule="evenodd"
+                                transform="translate(467 392)"
+                              >
+                                <path
+                                  d="M29.144 20.773c-.063-.13-4.227-8.67-11.44-2.59C7.63 28.795 28.94 43.256 29.143 43.394c.204-.138 21.513-14.6 11.44-25.213-7.214-6.08-11.377 2.46-11.44 2.59z"
+                                  id="heart"
+                                  fill="#AAB8C2"
+                                />
+                                <circle
+                                  id="main-circ"
+                                  fill="#E2264D"
+                                  opacity="0"
+                                  cx="29.5"
+                                  cy="29.5"
+                                  r="1.5"
+                                />
+
+                                <g
+                                  id="grp7"
+                                  opacity="0"
+                                  transform="translate(7 6)"
+                                >
+                                  <circle
+                                    id="oval1"
+                                    fill="#9CD8C3"
+                                    cx="2"
+                                    cy="6"
+                                    r="2"
+                                  />
+                                  <circle
+                                    id="oval2"
+                                    fill="#8CE8C3"
+                                    cx="5"
+                                    cy="2"
+                                    r="2"
+                                  />
+                                </g>
+
+                                <g
+                                  id="grp6"
+                                  opacity="0"
+                                  transform="translate(0 28)"
+                                >
+                                  <circle
+                                    id="oval1"
+                                    fill="#CC8EF5"
+                                    cx="2"
+                                    cy="7"
+                                    r="2"
+                                  />
+                                  <circle
+                                    id="oval2"
+                                    fill="#91D2FA"
+                                    cx="3"
+                                    cy="2"
+                                    r="2"
+                                  />
+                                </g>
+
+                                <g
+                                  id="grp3"
+                                  opacity="0"
+                                  transform="translate(52 28)"
+                                >
+                                  <circle
+                                    id="oval2"
+                                    fill="#9CD8C3"
+                                    cx="2"
+                                    cy="7"
+                                    r="2"
+                                  />
+                                  <circle
+                                    id="oval1"
+                                    fill="#8CE8C3"
+                                    cx="4"
+                                    cy="2"
+                                    r="2"
+                                  />
+                                </g>
+
+                                <g
+                                  id="grp2"
+                                  opacity="0"
+                                  transform="translate(44 6)"
+                                >
+                                  <circle
+                                    id="oval2"
+                                    fill="#CC8EF5"
+                                    cx="5"
+                                    cy="6"
+                                    r="2"
+                                  />
+                                  <circle
+                                    id="oval1"
+                                    fill="#CC8EF5"
+                                    cx="2"
+                                    cy="2"
+                                    r="2"
+                                  />
+                                </g>
+
+                                <g
+                                  id="grp5"
+                                  opacity="0"
+                                  transform="translate(14 50)"
+                                >
+                                  <circle
+                                    id="oval1"
+                                    fill="#91D2FA"
+                                    cx="6"
+                                    cy="5"
+                                    r="2"
+                                  />
+                                  <circle
+                                    id="oval2"
+                                    fill="#91D2FA"
+                                    cx="2"
+                                    cy="2"
+                                    r="2"
+                                  />
+                                </g>
+
+                                <g
+                                  id="grp4"
+                                  opacity="0"
+                                  transform="translate(35 50)"
+                                >
+                                  <circle
+                                    id="oval1"
+                                    fill="#F48EA7"
+                                    cx="6"
+                                    cy="5"
+                                    r="2"
+                                  />
+                                  <circle
+                                    id="oval2"
+                                    fill="#F48EA7"
+                                    cx="2"
+                                    cy="2"
+                                    r="2"
+                                  />
+                                </g>
+
+                                <g
+                                  id="grp1"
+                                  opacity="0"
+                                  transform="translate(24)"
+                                >
+                                  <circle
+                                    id="oval1"
+                                    fill="#9FC7FA"
+                                    cx="2.5"
+                                    cy="3"
+                                    r="2"
+                                  />
+                                  <circle
+                                    id="oval2"
+                                    fill="#9FC7FA"
+                                    cx="7.5"
+                                    cy="2"
+                                    r="2"
+                                  />
+                                </g>
+                              </g>
+                            </svg>
+                          </div>                          
+                        </div>
+                        <!-- 좋아요버튼 -->
+                        </div>
+                              
                               <h5 class="mt-2 ml-2">OOO 회원</h5>
                               <div class="row mt-2 ml-2 mb-0">
                                 <div class="container pl-0 mb-0">
@@ -204,6 +389,7 @@
       src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js">
     </script>
     <script src="/myPT/js/scripts.js"></script>
+    <script src="/myPT/js/like.js"></script>
     <!-- 게시판 관련 -->
     <script src="/myPT/js/detail.js"></script>
   <script type="text/javascript" src="assets/summernote-0.8.18-dist/summernote-bs4.js"></script>
