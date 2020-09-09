@@ -39,7 +39,7 @@
 		}		
 		
 		totalRecord = dao.getTotalCount(keyField, keyWord,shead);
-		//out.print("totalRecord : " + totalRecord);
+		System.out.println("totalRecord : " + totalRecord);
 		
 		//nowPage 요청 처리
 		if(request.getParameter("nowPage")!=null){
@@ -49,6 +49,8 @@
 		//sql문에 들어가는 start, cnt 선언
 		int start = (nowPage*numPerPage)-numPerPage;
 		int cnt = numPerPage;
+		System.out.println(start);
+		System.out.println(cnt);
 		
 		
 		//전체페이지 개수
@@ -187,9 +189,10 @@
                       </thead>
                       <tbody class="customtable text-center">
                       <%
-                      Vector<CboardDto> vlist = 
-      				dao.getBoardList(keyField, keyWord, start, cnt,shead);
+                      Vector<CboardDto> vlist = dao.getBoardList(keyField, keyWord, start, cnt,shead);
+                    
       				int listSize = vlist.size();//브라우저 화면에 표시될 게시물 번호
+      				System.out.println(vlist.size());
       				if(vlist.isEmpty()){
       					out.println("등록된 게시물이 없습니다.");
       				}else{
@@ -292,7 +295,7 @@
 				</li>
 			<%}%>
 		<%}//---if1%>
-		<!-- 페이징 및 블럭 End -->
+				<!-- 페이징 및 블럭 End -->
 <!--                   <li class="page-item"> -->
 <!--                     <a class="page-link" href="#">이전</a> -->
 <!--                   </li> -->
@@ -307,7 +310,24 @@
 <!--                   </li> -->
                 </ul>
                 
-                <form name="listFrm" method="post">
+                <!-- 검색 -->
+                <form name="searchFrm" class="mb-3">
+                <div class="row justify-content-center">
+					<select name="keyField">
+                                <option value="default" selected disabled>카테고리</option>
+                                <option value="cb_writer">작성자</option>
+                                <option value="cb_title">제목</option>
+                                <option value="cb_content">내용</option>
+                    </select>
+                    <input type="text" name="keyWord" class="mr-2">
+                    <input type="button" class="btn btn-primary" value="검색" onClick="javascript:check()" >
+                    <input type="hidden" name="nowPage" value="1">
+				</div>
+				</form>
+                
+                
+
+<form name="listFrm" method="post">
 	<input type="hidden" name="reload" value="true">
 	<input type="hidden" name="nowPage" value="1">
 </form>
