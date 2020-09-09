@@ -1,15 +1,28 @@
 package com.mypt.dao;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
 
 import com.mypt.connection.DBConnection;
 import com.mypt.dto.TrainerDto;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 public class TrainerDao {
+	
 	private DBConnection db;
+	
+	public static final String saveFolder = "C:/Users/admin/Desktop/photos/";
+	public static final String encoding = "UTF-8";
+	public static final int maxSize =  1024*1024*5;//5MB
 	
 //////////dao 싱글톤 (이)
 private static TrainerDao instance = new TrainerDao();
@@ -22,15 +35,18 @@ return instance;
 		db = DBConnection.getInstance();
 	}
 
-	public void trainerInsert(TrainerDto td) {
+	public void insertTrainer(TrainerDto td, HttpServletRequest request) {
 
 		Connection con = null;
 		PreparedStatement ps = null;
 		try {
 			con = db.getConnection();
-			String sql = "insert into trainer values(?,?,?,?,?,?,?,?,?,?,?)";
+			String sql = "insert into trainer values(?,?,?,?,?,?,?,?,?,?,?,?)";
 			ps = con.prepareStatement(sql);
-			ps.setString(1, td.getT_id());
+			
+			//파일처리해야함
+								
+			ps.setString(1, makeID());
 			ps.setString(2, td.getT_pw());
 			ps.setString(3, td.getT_name());
 			ps.setString(4, td.getT_gender());
@@ -38,18 +54,29 @@ return instance;
 			ps.setString(6, td.getT_birth());
 			ps.setString(7, td.getT_address());
 			ps.setString(8, td.getT_nick());
-			ps.setString(9, td.getT_zipcode());
-			ps.setString(10, td.getT_tel());
+			ps.setString(9, td.getT_tel());
+			ps.setString(10, td.getT_zipcode());			
 			ps.setString(11, td.getT_addrdetail());
+				
+			MultipartRequest multi = 
+					new MultipartRequest(request, saveFolder, maxSize,
+							encoding, new DefaultFileRenamePolicy());
+			String t_photo = multi.getFilesystemName("photo");
+			File f = multi.getFile("photo");
+			
+			ps.setString(12, t_photo);
+			
 			ps.executeUpdate();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
+		} 
+		catch (Exception e) 
+		{
 			e.printStackTrace();
 		} finally {
 			db.closeConnection(null, ps, con);
 		}
 
 	}
+	
 
 	public TrainerDto trainerSelect(String t_id) {
 		Connection con = null;
@@ -189,6 +216,59 @@ return instance;
 		}
 		
 		return flag;
+	}
+	
+	
+	// 트레이너  수 세기 (이)
+		public int countTrainer() {
+			Connection con = null;
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+
+			int result = 2;
+
+			String sql = "select count(*) from trainer";
+			try {
+				con = db.getConnection();
+				ps = con.prepareStatement(sql);
+				rs = ps.executeQuery();
+
+				if (rs.next()) 
+				{
+					result = rs.getInt(1);
+					System.out.println(result);
+				} else 
+				{
+					result = 0;
+				}
+			} 
+			catch (Exception e) 
+			{
+				e.printStackTrace();
+			} 
+			finally
+			{
+				db.closeConnection(rs, ps, con);
+			}
+
+			return result;
+		}
+		
+		
+	
+//	트레이너 아이디 생성. T+000포맷+1) (이)
+	public String makeID() {
+		SimpleDateFormat sf = new SimpleDateFormat("yyMM");
+		Date today = new Date();
+
+		String signYearAndMonth = sf.format(today);
+
+		SimpleDateFormat sf2 = new SimpleDateFormat("yyyy-MM");
+		String signYearAndMonth2 = sf2.format(today);
+		
+
+		return "T"+String.format("%04d", countTrainer() + 1);
+
 	}
 
 }

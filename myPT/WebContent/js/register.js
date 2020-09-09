@@ -179,13 +179,11 @@ $('input[type=text], input[type=password], input[type=email]').on('keyup', funct
 	});
 	
 
+	
+	
 
-	
-	
-	
-function check(form)
+function checkValidation()
 {
-
     if($('#confirmNick').val()!=$('#nickname').val() || $("#confirmNick").val()=="")
 	{
 		alert("닉네임을 중복체크해주세요");
@@ -202,14 +200,30 @@ function check(form)
 		alert("비밀번호가 서로 다릅니다");
 		return false;
 	}
+}
 	
-// 공백값 처리
+//공백값 처리
 //현재보다 이후 날짜의 생년/현재보다 이전 날짜의 시작일 불가하도록 설정 - 유효값확인 전에 가능할 지도
-
+function checkUser(form)
+{
+	checkValidation();
+	
 	//생성된 qr코드의 src 값을 qrcode에 넣어줌
 	$("#qrcode").val($("#qrcode img").attr("src"));
+
+	return true;		       
+}
+
+function checkTrainer(form)
+{
+	checkValidation();	
 	
+	if($('#photo').val()==0)
+	{
+		alert("파일을 선택하세요.");
+		return false;
+	}
 	return true;
-		       
+	
 }
 	

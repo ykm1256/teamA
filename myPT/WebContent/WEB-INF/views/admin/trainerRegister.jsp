@@ -45,12 +45,22 @@
 
                                     <div class="card-body">
 
-                                        <form>
+                                        <form action="trainerRegisterAction.do" method="post" enctype="multipart/form-data" onsubmit="return checkTrainer(this)">
+                                         <div class="form-row">
+                                                <div class="col-md-6"> 
+                                                    <div class="form-group">
+                                                        <label class="small mb-1" for="photo">사진*</label>
+                                                        <input class="py-2" id="photo" minlength="2" maxlength="10" name="userName" type="file" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        
                                             <div class="form-row">
                                                 <div class="col-md-6"> 
                                                     <div class="form-group">
-                                                        <label class="small mb-1" for="userName">이름</label>
-                                                        <input class="form-control py-2" id="userName" name="userName" type="text" required>
+                                                        <label class="small mb-1" for="userName">이름*</label>
+                                                        <input class="form-control py-2" id="userName" minlength="2" maxlength="10" name="userName" type="text" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -58,7 +68,7 @@
                                             <div class="form-row">
                                                 <div class="col-md-6"> 
                                                     <div class="form-group">
-                                                        <label class="small mb-1" for="gender">성별</label>
+                                                        <label class="small mb-1" for="gender">성별*</label>
                                                         <select class="form-control" id="gender" name="gender" required>
                                                         <option value="남성" selected>남성</option>
                                                         <option value="여성">여성</option>
@@ -67,7 +77,7 @@
                                                 </div>
                                                 <div class="col-md-6"> 
                                                     <div class="form-group">
-                                                        <label class="small mb-1" for="birthdate">생년월일</label>
+                                                        <label class="small mb-1" for="birthdate">생년월일*</label>
                                                         <input class="form-control py-2" id="birthdate" name="birthdate" type="date" required/>
                                                     </div>
                                                 </div>
@@ -75,65 +85,80 @@
 
 
                                             <div class="form-group">
-                                                <label class="small mb-1" for="nickname">닉네임</label>
+                                                <label class="small mb-1" for="nickname">닉네임*</label>
                                                 <div class="form-row">
                                                     <div class="col-md-9">
-                                                        <input class="form-control py-2 mb-sm-2" id="nickname" name="nickname" type="text" required>
+                                                       <input class="form-control py-2 mb-sm-2" id="nickname" name="nickname" type="text" minlength="2" maxlength="10" required title="한글,숫자,영문자">
+		                                              <input class="form-control py-2 mb-sm-2" id="confirmNick" type="text" hidden="true">
+		                                              <div></div>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <button class="btn btn-outline-primary btn-block" type="button">중복확인</button>
+                                                        <button class="btn btn-outline-primary btn-block" type="button" id="nickCheck">중복확인</button>
                                                     </div>
                                                 </div>    
                                             </div>
 
+
+										<div class="form-group">
+	                                      <label class="small mb-1" for="tel">HP(-)*</label>
+	                                      <div class="form-row">
+	                                          <div class="col-md-6">
+	                                 				 <input type="text" class="form-control py-2" pattern="01\d{1}-\d{3,4}-\d{4}" placeholder="01X-000(0)-0000" id="tel" name="tel">
+	                                        		<div></div>
+	                                          
+	                                          </div>
+	                                      </div>    
+	                                  </div>
                                             
-                                            <div class="form-group">
-                                                <label class="small mb-1" for="email">이메일</label>
-                                                <div class="form-row">
-                                                    <div class="col-md-9">
-                                                        <input class="form-control py-2 mb-sm-2" id="email" name="email" type="email" aria-describedby="emailHelp" required>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                            <Button type="button" class="btn btn-outline-primary btn-block">중복확인</button>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                       <div class="form-group">
+	                                      <label class="small mb-1" for="email">이메일*</label>
+	                                      <div class="form-row">
+	                                          <div class="col-md-9">
+	                                              <input class="form-control py-2 mb-sm-2" id="email" name="email" type="email" aria-describedby="emailHelp" required>
+	                                              <input class="form-control py-2 mb-sm-2" id="confirmEmail" type="email" hidden="true">    
+	                                             <div></div>       
+	                                          </div>
+	                                          <div class="col-md-3">
+	                                             <Button type="button" class="btn btn-outline-primary btn-block" id="emailCheck">중복확인</button>
+	                                          </div>
+	                                      </div>
+	                                  </div>
                                         
-                                            <div class="form-row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="password">비밀번호</label>
-                                                        <input class="form-control py-2" id="password" name="password" type="password" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="confirmPassword">비밀번호 확인</label>
-                                                        <input class="form-control py-2" id="confirmPassword" name="confirmPassword" type="password" required>
-                                                        <div id="message"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-                                            <div class="form-group">
-                                                <label class="small mb-1" for="address">주소</label>
-                                                <div class="form-row">
-                                                    <div class="col-md-9 mb-sm-2">
-                                                        <input class="form-control py-2" id="zipcode" name="zipcode" type="text">
-                                                    </div>
-                                                    <div class="col-md-3 mb-sm-2">
-                                                        <button class="btn btn-outline-primary btn-block" type="button" onclick="searchZipcode()">주소찾기</button>
+                                    <div class="form-row">
+                                      <div class="col-md-6">
+                                          <div class="form-group">
+                                              <label class="small mb-1" for="password">비밀번호*</label>
+                                              <input class="form-control py-2" id="password" name="password" type="password" required>
                                           </div>
-                                      </div>    
-                                          <input class="form-control py-2 mb-2" id="address" name="address" type="text">
-                                          <input class="form-control py-2 mb-2" id="addrdetail" name="addrdetail" type="text">
-                                            </div>
+                                      </div>
+                                      <div class="col-md-6">
+                                          <div class="form-group">
+                                              <label class="small mb-1" for="confirmPassword">비밀번호 확인*</label>
+                                              <input class="form-control py-2" id="confirmPassword" type="password" required>
+                                              <div></div>
+                                          </div>
+                                      </div>
+                                  </div>
 
 
-                                            <div class="form-group mt-4 mb-2">
-                                               <button class="btn btn-primary btn-block">트레이너 등록</button>
-                                            </div>
+                                      <div class="form-group">
+	                                      <label class="small mb-1" for="address">주소</label>
+	                                      <div class="form-row">
+	                                          <div class="col-md-9 mb-sm-2">
+	                                              <input class="form-control py-2" id="zipcode" name="zipcode" type="text">
+	                                          </div>
+	                                          <div class="col-md-3 mb-sm-2">
+	                                              <button class="btn btn-outline-primary btn-block" type="button" onclick="searchZipcode()">주소찾기</button>
+	                                          </div>
+	                                      </div>    
+	                                          <input class="form-control py-2 mb-2" id="address" name="address" type="text">
+	                                          <input class="form-control py-2 mb-2" id="addrdetail" name="addrdetail" type="text">
+                                  	</div>
+
+
+                                            <div class="form-group mt-4 mb-0">
+		                                     <input type="submit" class="btn btn-primary btn-block" value="트레이너 등록">
+		                                  </div>
                                         </form>
                                     </div>
 
