@@ -13,12 +13,15 @@ public class WriteAction implements Action{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
+		System.out.println(request.getParameter("board"));
+		//커뮤니티 write
+		if(request.getParameter("board").equals("'c'")) {
 		CboardDto dto = new CboardDto();
 		dto.setHead(request.getParameter("head"));
-		dto.setWriter("길동이");
+//		dto.setWriter("길동이");
 		
-//		HttpSession session = request.getSession();		
-//		dto.setWriter(session.getAttribute("nick").toString());
+		HttpSession session = request.getSession();		
+		dto.setWriter(session.getAttribute("nick").toString());
 		
 		dto.setTitle(request.getParameter("title"));
 		dto.setContent(request.getParameter("content"));
@@ -28,6 +31,9 @@ public class WriteAction implements Action{
 		
 		
 		return "common/community";
+		}else {
+			return null;
+		}
 	}
 
 }

@@ -329,7 +329,7 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 		}
 		
 		//Board Total Count : 총 게시물수
-		public int getTotalCount(String keyField, String keyWord) {
+		public int getTotalCount(String keyField, String keyWord,String head) {
 			Connection con = null;
 			PreparedStatement ps = null;
 			ResultSet rs = null;
@@ -337,14 +337,25 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 			int totalCount = 0;
 			try {
 				con = db.getConnection();
+				//검색이 아닌경우
 				if(keyWord.trim().equals("")||keyWord==null) {
-					//검색이 아닌경우
-					sql = "select count(*) from cboard";
+					//말머리 전체보기
+					if(head.equals("all")) {
+						sql = "select count(*) from cboard";
+					}else { // 말머리 선택됨
+						sql = "select count(*) from cboard where cb_head='"+head+"'";
+					}					
 					ps = con.prepareStatement(sql);
 				}else {
 					//검색인 경우
-					sql = "select count(*) from cboard where " 
-					+ keyField +" like ?";
+					if(head.equals("all")) {
+						sql = "select count(*) from cboard where " 
+								+ keyField +" like ?";
+					}else { // 말머리 선택됨
+						sql = "select count(*) from cboard where " 
+								+ keyField +" like ? and cb_head='"+head+"'";
+					}	
+					
 					ps = con.prepareStatement(sql);
 					ps.setString(1, "%"+keyWord+"%");
 				}
@@ -363,7 +374,7 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 		//keyWord : 검색어
 		//start : 시작번호, cnt : 한 페이지당 가져올 게시물 개수 
 		public Vector<CboardDto> getBoardList(String keyField, 
-				String keyWord,int start, int cnt){
+				String keyWord,int start, int cnt,String head){
 			Connection con = null;
 			PreparedStatement ps = null;
 			ResultSet rs = null;
@@ -371,22 +382,38 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 			Vector<CboardDto> vlist = new Vector<CboardDto>();
 			try {
 				con = db.getConnection();
+				//검색이 아닌경우
 				if(keyWord.trim().equals("")||keyWord==null) {
-					//검색이 아닌경우
-					sql = "select * from cboard order by cb_ref desc, cb_pos "
-							+ "limit ?,?";
-					ps = con.prepareStatement(sql);
+					// 말머리 전체보기
+					if(head.equals("all")) {
+					sql = "select *,date_format(cb_date,'%Y-%m-%d %H:%i') from cboard order by cb_ref desc, cb_pos "
+								+ "limit ?,?";
+					}else {
+						sql = "select *,date_format(cb_date,'%Y-%m-%d %H:%i') from cboard where cb_head='"+head+"' order by cb_ref desc, cb_pos "
+								+ "limit ?,?";
+					}
+					
+					ps = con.prepareStatement(sql);					
 					ps.setInt(1, start);
 					ps.setInt(2, cnt);
-				}else {
-					//검색인 경우
-					sql = "select * from cboard where " + keyField 
-							+" like ? order by cb_ref desc, cb_pos limit ?,?";
+				}else {//검색인 경우
+					//말머리 전체보기
+					if(head.equals("all")) {
+						sql = "select *,date_format(cb_date,'%Y-%m-%d %H:%i') from cboard where ? like ? order by cb_ref desc, cb_pos "
+									+ "limit ?,?";
+					}else {
+							sql = "select *,date_format(cb_date,'%Y-%m-%d %H:%i') from cboard where ? like ? and cb_head='"+head+"' order by cb_ref desc, cb_pos "
+									+ "limit ?,?";
+					}
+//					sql = "select * from cboard where " + keyField 
+//							+" like ? order by cb_ref desc, cb_pos limit ?,?";
 					ps = con.prepareStatement(sql);
-					ps.setString(1, "%"+keyWord+"%");
-					ps.setInt(2, start);
-					ps.setInt(3, cnt);
+					ps.setString(1, keyField);
+					ps.setString(2, "%"+keyWord+"%");					
+					ps.setInt(3, start);
+					ps.setInt(4, cnt);
 				}
+				System.out.println(sql);
 				rs = ps.executeQuery();
 				while(rs.next()) {
 					CboardDto bean = new CboardDto();
