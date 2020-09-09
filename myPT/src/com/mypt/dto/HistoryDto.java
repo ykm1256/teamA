@@ -1,15 +1,12 @@
 package com.mypt.dto;
 
-import java.sql.Timestamp;
-
 public class HistoryDto {
 	private String hid;
-	private Timestamp paydate;
+	private String paydate;
 	private int price;
 	private int hcount;
-	private String tid;
+	private String t_id;
 
-//	private String payMethod;
 	
 
 	// 월, 트레이너이름, 수입 추가, 회원수 (윤)
@@ -58,35 +55,20 @@ public class HistoryDto {
 		this.hid = hid;
 	}
 
-  
-
-	public Timestamp getPaydate() {
+	public String getPaydate() {
 		return paydate;
 	}
 
-	public void setPaydate(Timestamp paydate) {
+	public void setPaydate(String paydate) {
 		this.paydate = paydate;
 	}
 
-	
 	public int getPrice() {
 		return price;
 	}
 
 	public void setPrice(int price) {
 		this.price = price;
-	}
-
-	
-
-	
-
-	public String getTid() {
-		return tid;
-	}
-
-	public void setTid(String tid) {
-		this.tid = tid;
 	}
 
 	public int getHcount() {
@@ -97,6 +79,12 @@ public class HistoryDto {
 		this.hcount = hcount;
 	}
 	
-	
+	public String getT_id() {
+		return t_id;
+	}
+
+	public void setT_id(String t_id) {
+		this.t_id = t_id;
+	}
 
 }

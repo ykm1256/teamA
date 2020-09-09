@@ -5,7 +5,6 @@ import java.sql.Timestamp;
 
 public class UserDto {
 	private InbodyDto inbody;
-	private HistoryDto history;
 	
 	private String id;
 	private String pw;
@@ -17,13 +16,8 @@ public class UserDto {
 	private String qr;
 	private Timestamp signdate;
 	private String nick;
-
-	//date->String
-	private String startdate;
-	private String enddate;	
-//	private Date startdate;
-//	private Date enddate;
-
+	private Date startdate;
+	private Date enddate;
 	private int ptcount;
 	private String tid;
 	private String zipcode;
@@ -35,11 +29,6 @@ public class UserDto {
 	public UserDto(InbodyDto inbody)
 	{
 		this.inbody= inbody; 
-	}
-	
-	public UserDto(HistoryDto history)
-	{
-		this.history= history; 
 	}
 	
 	public InbodyDto getInbody() {
@@ -114,41 +103,21 @@ public class UserDto {
 	public void setNick(String nick) {
 		this.nick = nick;
 	}
-	
-	
-//	public Date getStartdate() {
-//		return startdate;
-//	}
-//	public void setStartdate(Date startdate) {
-//		this.startdate = startdate;
-//	}
-//	public Date getEnddate() {
-//		return enddate;
-//	}
-//	public void setEnddate(java.util.Date date) {
-//		this.enddate = (Date) date;
-//	}
-	
-	
-	public String getStartdate() {
+	public Date getStartdate() {
 		return startdate;
 	}
-	public void setStartdate(String startdate) {
+	public void setStartdate(Date startdate) {
 		this.startdate = startdate;
 	}
-	public String getEnddate() {
+	public Date getEnddate() {
 		return enddate;
 	}
-	public void setEnddate(String enddate) {
+	public void setEnddate(Date enddate) {
 		this.enddate = enddate;
 	}
-	
-	
-	
 	public String getTid() {
 		return tid;
 	}
-	
 	public void setTid(String tid) {
 		this.tid = tid;
 	}
@@ -170,16 +139,6 @@ public class UserDto {
 	public void setAddrdetail(String addrdetail) {
 		this.addrdetail = addrdetail;
 	}
-	
-	
-	public HistoryDto getHistory() {
-		return history;
-	}
-	public void setHistory(HistoryDto history) {
-		this.history = history;
-	}
-	
-	
 	
 	
 	 

@@ -25,6 +25,8 @@ public class UserInbodyResultAction implements Action {
 	    response.setContentType("application/json; charset=utf-8");
 		request.setAttribute("result", jarr);
 
+//		response.setContentType("text/html;charset=utf-8");
+//		request.setAttribute("result", jarr.toString());
 		
 		return "callback";
 	}
