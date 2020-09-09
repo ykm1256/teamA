@@ -3,6 +3,7 @@ package com.mypt.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.mypt.action.board.ViewAction;
 import com.mypt.action.board.WriteAction;
 import com.mypt.action.check.EmailCheckAction;
 import com.mypt.action.check.NickCheckAction;
@@ -23,6 +24,7 @@ import com.mypt.action.list.TrainerUserListViewAction;
 import com.mypt.action.login.LogoutAction;
 import com.mypt.action.login.TrainerLoginAction;
 import com.mypt.action.login.UserLoginAction;
+import com.mypt.action.move.MoveBoardDetailAction;
 import com.mypt.action.move.MoveCommunityAction;
 import com.mypt.action.move.MoveInbody;
 import com.mypt.action.move.MoveIntroAction;
@@ -112,6 +114,8 @@ public class ActionFactory
 		map.put("/write",new WriteAction());
 		
 		map.put("/moveWrite",new MoveWriteAction());
+		
+		map.put("/boardView",new ViewAction());
 		
 		
 		
