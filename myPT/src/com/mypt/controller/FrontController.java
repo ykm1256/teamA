@@ -33,7 +33,7 @@ public class FrontController extends HttpServlet {
 		
 		
 		Action action = null;
-		String strView = null;
+		String strView = null; 
 		
 		
 		//명령어에 해당하는 Action 타입 객체 구하기

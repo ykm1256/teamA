@@ -34,7 +34,17 @@
 
     <div id="layoutSidenav">
       <!-- sideNav -->
-      <jsp:include page="/includeFiles/sideNav.jsp"></jsp:include>
+      <c:choose>
+      <c:when test="${sessionScope.grade==0 }">
+      <jsp:include page="/includeFiles/adminSideNav.jsp"></jsp:include>
+      </c:when>
+      <c:when test="${sessionScope.grade==1 }" >
+      <jsp:include page="/includeFiles/trainerSideNav.jsp"></jsp:include>
+      </c:when>
+      <c:otherwise>
+      <jsp:include page="/includeFiles/userSideNav.jsp"></jsp:include>
+      </c:otherwise>
+      </c:choose> 
       <!-- /sideNav -->
       <div id="layoutSidenav_content">
         
@@ -270,7 +280,7 @@
                           </div>
                         </li>
                         <li class="list-group-item">
-                          <div id="result"></div>
+                          <div id="result">${dto.content }</div>
                         </li>
                       </ul>
                     </div>
