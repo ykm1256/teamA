@@ -35,8 +35,8 @@ public class UserDao {
 			con = db.getConnection();
 			sql = "insert user(id,pw,name,gender,email,birth,"
 					+ "address,qr,nick,startdate,enddate,"
-					+ "ptcount,tid,zipcode,tel) "
-					+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+					+ "ptcount,tid,zipcode,tel,addrdetail) "
+					+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 			ps = con.prepareStatement(sql);
 
@@ -65,6 +65,7 @@ public class UserDao {
 			ps.setString(13, userBean.getTid());
 			ps.setString(14, userBean.getZipcode());
 			ps.setString(15, userBean.getTel());
+			ps.setString(16, userBean.getAddrdetail());
 
 			ps.execute();
 		} catch (Exception e) {
@@ -107,6 +108,7 @@ public class UserDao {
 				userBean.setPtcount(rs.getInt("ptcount"));
 				userBean.setTid(rs.getString("tid"));
 				userBean.setTel(rs.getString("tel"));
+				userBean.setAddrdetail(rs.getString("addrdetail"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -125,14 +127,15 @@ public class UserDao {
 
 		try {
 			con = db.getConnection();
-			sql = "update user set pw=?, zipcode=?,address=?,tel=? where email=?";
+			sql = "update user set pw=?, zipcode=?,address=?,addrdetail=?,tel=? where email=?";
 			ps = con.prepareStatement(sql);
 
 			ps.setString(1, userBean.getPw());
 			ps.setString(2, userBean.getZipcode());
 			ps.setString(3, userBean.getAddress());
-			ps.setString(4, userBean.getTel());
-			ps.setString(5, userBean.getEmail());
+			ps.setString(4, userBean.getAddrdetail());
+			ps.setString(5, userBean.getTel());
+			ps.setString(6, userBean.getEmail());
 
 			ps.executeUpdate();
 		} catch (Exception e) {
@@ -153,7 +156,7 @@ public class UserDao {
 		try {
 			con = db.getConnection();
 			sql = "update user set pw=?,name=?,gender=?,email=?," + "birth=?,address=?,nick=?,"
-					+ "startdate=?,enddate=?,ptcount=?,tid=?,zipcode=?,tel=? " + " where id=?";
+					+ "startdate=?,enddate=?,ptcount=?,tid=?,zipcode=?,tel=?,addrdetail=? " + " where id=?";
 			ps = con.prepareStatement(sql);
 
 			ps.setString(1, userBean.getPw());
@@ -164,8 +167,6 @@ public class UserDao {
 			ps.setString(6, userBean.getAddress());
 			ps.setString(7, userBean.getNick());
 			
-//			ps.setDate(8, userBean.getStartdate());
-//			ps.setDate(9, userBean.getEnddate());
 			ps.setString(8, userBean.getStartdate());
 			ps.setString(9, userBean.getEnddate());
 			
@@ -173,7 +174,8 @@ public class UserDao {
 			ps.setString(11, userBean.getTid());
 			ps.setString(12, userBean.getZipcode());
 			ps.setString(13, userBean.getTel());
-			ps.setString(14, userBean.getId());
+			ps.setString(14, userBean.getAddrdetail());
+			ps.setString(15, userBean.getId());
 			ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -297,9 +299,13 @@ public class UserDao {
 				userBean.setZipcode(rs.getString("zipcode"));
 				userBean.setTel(rs.getString("tel"));
 
+
 //				userBean.setPtcount(Integer.parseInt(rs.getString("ptcount")));
 				userBean.setPtcount(rs.getInt("ptcount"));
-				
+
+				userBean.setPtcount(Integer.parseInt(rs.getString("ptcount")));
+				userBean.setAddrdetail(rs.getString("addrdetail"));
+
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -353,6 +359,7 @@ public class UserDao {
 				userBean.setTid(rs.getString("t_name"));
 				userBean.setZipcode(rs.getString("zipcode"));
 				userBean.setTel(rs.getString("tel"));
+				userBean.setAddrdetail(rs.getString("addrdetail"));
 
 				arr.add(userBean);
 			}
@@ -419,6 +426,8 @@ public class UserDao {
 				userBean.setPtcount(rs.getInt("ptcount"));
 				userBean.setTid(rs.getString("tid"));
 				userBean.setTel(rs.getString("tel"));
+				userBean.setZipcode(rs.getString("zipcode"));
+				userBean.setAddrdetail(rs.getString("addrdetail"));
 
 				arr.add(userBean);
 			}

@@ -16,7 +16,9 @@
     <link href="/myPT/css/styles.css" rel="stylesheet" />
     <link href="/myPT/css/index.css" rel="stylesheet"/>
     <link href="/myPT/css/widget.css" rel="stylesheet"/>
-
+    
+<!-- 주소  api -->
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
     ></script>
@@ -252,6 +254,7 @@
                             <button
                               class="btn btn-outline-primary btn-block"
                               type="button"
+                              onclick="searchZipcode()"
                             >
                               주소찾기
                             </button>
@@ -264,6 +267,7 @@
                           type="text"
                           value="${t.t_address }"
                         />
+                        <input class="form-control py-2 mb-2" id="addrdetail" name="addrdetail" type="text" value="${t.t_addrdetail }">
                       </div>
 
                       <div class="form-row mt-4 mb-0">
@@ -297,5 +301,6 @@
     </script>
     <script src="/myPT/js/scripts.js"></script>
     <script src="/myPT/js/trainerdetail.js"></script>
+    <script src="/myPT/js/zipcode.js"></script>
   </body>
 </html>

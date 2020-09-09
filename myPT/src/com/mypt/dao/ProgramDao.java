@@ -31,7 +31,7 @@ public class ProgramDao {
 			sql = "insert program(p_id,p_date,p_mention,p_part) " + "valuse(?,?,?,?)";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, programBean.getP_id());
-			ps.setDate(2, programBean.getP_date());
+			ps.setString(2, programBean.getP_date());
 			ps.setString(3, programBean.getP_mention());
 			ps.setString(4, programBean.getP_part());
 
@@ -43,7 +43,7 @@ public class ProgramDao {
 		}
 	}
 
-	public ProgramDto getProgram(String p_id) {
+	public ProgramDto getProgram(String p_id,String p_date) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -52,13 +52,14 @@ public class ProgramDao {
 
 		try {
 			con = db.getConnection();
-			sql = "select * from program where p_id=?";
+			sql = "select * from program where p_id=? and p_date=?";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, p_id);
+			ps.setString(2, p_date);
 			rs = ps.executeQuery();
 			if (rs.next()) {
 				programBean.setP_id(rs.getString("p_id"));
-				programBean.setP_date(rs.getDate("p_date"));
+				programBean.setP_date(rs.getString("p_date"));
 				programBean.setP_mention(rs.getString("p_mention"));
 				programBean.setP_part(rs.getString("p_part"));
 			}
@@ -81,7 +82,7 @@ public class ProgramDao {
 			sql = "update program set p_date=?,p_mention=?,p_part=? where p_id=?";
 			ps = con.prepareStatement(sql);
 
-			ps.setDate(1, programBean.getP_date());
+			ps.setString(1, programBean.getP_date());
 			ps.setString(2, programBean.getP_mention());
 			ps.setString(3, programBean.getP_part());
 			ps.setString(4, programBean.getP_id());

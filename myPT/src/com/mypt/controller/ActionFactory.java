@@ -3,6 +3,7 @@ package com.mypt.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.mypt.action.board.WriteAction;
 import com.mypt.action.check.EmailCheckAction;
 import com.mypt.action.check.NickCheckAction;
 import com.mypt.action.crowded.CrowdedAction;
@@ -22,6 +23,7 @@ import com.mypt.action.list.TrainerUserListViewAction;
 import com.mypt.action.login.LogoutAction;
 import com.mypt.action.login.TrainerLoginAction;
 import com.mypt.action.login.UserLoginAction;
+import com.mypt.action.move.MoveCommunityAction;
 import com.mypt.action.move.MoveInbody;
 import com.mypt.action.move.MoveIntroAction;
 import com.mypt.action.move.MovePayment;
@@ -33,6 +35,7 @@ import com.mypt.action.payment.UserPaymentDataAction;
 import com.mypt.action.qr.QrCheckAction;
 import com.mypt.action.qr.QrViewAction;
 import com.mypt.action.register.AdminUserRegisterAction;
+import com.mypt.action.schedule.TrainerScheduleSettingAction;
 
 
 public class ActionFactory 
@@ -105,12 +108,20 @@ public class ActionFactory
 		
 		// 스케줄 관리
 		map.put("/moveSchedule",new MoveSchedule());
+		map.put("/scheduleSetting",new TrainerScheduleSettingAction());
 		
 		//로그아웃
 		map.put("/logout",new LogoutAction());
 		
 		// 혼잡도
 		map.put("/crowded",new CrowdedAction());
+		
+		map.put("/community",new MoveCommunityAction());
+		
+		// 글쓰기
+		map.put("/write",new WriteAction());	
+		
+		
 		
 		
 	}

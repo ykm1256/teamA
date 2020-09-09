@@ -23,6 +23,7 @@ public class AdminTrainerUpdateAction implements Action{
 		dto.setT_pw(request.getParameter("password"));
 		dto.setT_zipcode(request.getParameter("zipcode"));
 		dto.setT_address(request.getParameter("address"));
+		dto.setT_addrdetail(request.getParameter("addrdetail"));
 		
 		TrainerDao dao = TrainerDao.getInstance();
 		dao.trainerUpdate(dto);

@@ -17,8 +17,7 @@ public class IncomeTrainerAction implements Action{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub		
 		request.setCharacterEncoding("utf-8");
 		int year = Integer.parseInt(request.getParameter("year"));
 		int month = Integer.parseInt(request.getParameter("month"));

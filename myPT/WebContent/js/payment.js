@@ -55,7 +55,7 @@ function pay(input)
 		 return false;
 		}
 	
-	if(	$('#trainer').val()=="" || $('#trainer').val()==null)
+	if(	$('#trainer1').val()=="" || $('#trainer').val()==null)
 	{
 	 alert("트레이너를 입력해주세요.");
 	 return false;
