@@ -16,10 +16,21 @@ var weekDates=new Array();
 var week=getWeekNo(today);
 var days=new Array();
 
-for(var i=1;i<=5;i++){
-	weekDates[i-1]=date-thisDay+i;
-	console.log(weekDates[i-1]);
+if(thisDay==0){
+	for(var i=1;i<=5;i++){
+		weekDates[i-1]=date+i;
+	}
+}else if(thisDay==6){
+	for(var i=0;i<5;i++){
+		weekDates[i-1]=date+i+1;
+	}
+}else{
+	for(var i=1;i<=5;i++){
+		weekDates[i-1]=date-thisDay+i;
+		console.log(weekDates[i-1]);
+	}
 }
+
 
 
 
@@ -27,13 +38,31 @@ $.ajax({
 		url:"userSchedule.do",
 		type:"post",
 		data:{
-			"today":year+"-"+month+"-"+date,
+			"today":year+"-"+month+"-",
 			"day":thisDay,
 			"weekDates":weekDates,
 			"week":week
 		},
 		success:function(data){
-			alert("성공"+data);
+			var obj=JSON.parse(data);
+			var arr=new Array();
+			$.each(obj,function(index,value){
+				console.log(value);
+				if(value.hasOwnProperty("time")){
+					console.log("PT "+value.time);
+					$("#btn"+index).text("PT");
+					$("#btn"+index).attr("class","card bg-danger text-white");
+					$("#btn"+index).attr("data-target","#PT");
+				}else if(value.hasOwnProperty("part")){
+					console.log("program "+value.part);
+					$("#btn"+index).text("프로그램");
+					$("#btn"+index).attr("class","card bg-light");
+					$("#btn"+index).attr("data-target","#program");
+				}else{
+					console.log("아무것도 없음");
+					$("#btn"+index).attr("style","display:none");
+				}
+			})		
 		},
 		error:function(e){
 			alert("실패");
