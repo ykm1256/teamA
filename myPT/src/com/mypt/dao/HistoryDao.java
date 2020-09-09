@@ -30,14 +30,14 @@ public class HistoryDao {
 
 		try {
 			con = db.getConnection();
-			sql = "insert history(hid,price,hcount,t_id) values(?,?,?,?)";
+			sql = "insert history(hid,price,hcount,tid) values(?,?,?,?)";
 			
 			ps = con.prepareStatement(sql);
 	
 			ps.setString(1, historyBean.getHid());
 			ps.setInt(2, historyBean.getPrice());
 			ps.setInt(3, historyBean.getHcount());
-			ps.setString(4, historyBean.getT_id());
+			ps.setString(4, historyBean.getTid());
 
 			ps.execute();
 			
@@ -191,7 +191,7 @@ public class HistoryDao {
 				historyBean = new HistoryDto();
 				System.out.println(rs.getString(1));
 				historyBean.setIncome(Integer.parseInt(rs.getString(1)));
-				historyBean.setT_id(rs.getString(2));
+				historyBean.setTid(rs.getString(2));
 				historyBean.setT_name(rs.getString(3));
 				arr.add(historyBean);
 

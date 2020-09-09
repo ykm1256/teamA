@@ -38,6 +38,7 @@ import com.mypt.action.register.AdminUserRegisterAction;
 import com.mypt.action.schedule.TrainerScheduleSettingAction;
 
 
+
 public class ActionFactory 
 {
 	

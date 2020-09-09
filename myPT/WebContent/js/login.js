@@ -23,6 +23,7 @@ $(function(){
 			data : {"email":$("#email").val(), "pw":$("#pw2").val()},
 			success: function(data){
 				
+				console.log(data);
 				
 				data=data.trim();
 				if(data==0){
