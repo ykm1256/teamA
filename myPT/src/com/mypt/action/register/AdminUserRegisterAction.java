@@ -27,8 +27,8 @@ public class AdminUserRegisterAction implements Action {
 		dto.setZipcode(request.getParameter("zipcode"));
 		dto.setAddress(request.getParameter("address"));
 		dto.setQr(request.getParameter("qrcode"));
-		// null값 처리
-		dto.setStartdate(Date.valueOf(request.getParameter("startdate")));
+
+		dto.setStartdate(request.getParameter("startdate"));
 		dto.setTid(request.getParameter("trainer"));
 		dto.setTel(request.getParameter("tel"));
 		
