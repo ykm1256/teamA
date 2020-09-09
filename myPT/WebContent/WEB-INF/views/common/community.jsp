@@ -17,6 +17,11 @@
 		int nowBlock = 1;//현재 블럭
 		CboardDao dao = CboardDao.getInstance();
 		
+		//처음 shead 설정
+		String shead = "all";
+		if(request.getParameter("head")!=null){
+			shead = request.getParameter("head");
+		}
 				
 		//검색에 필요한 변수
 		String keyField = "", keyWord = "";
@@ -32,7 +37,7 @@
 			keyField = ""; keyWord = "";
 		}		
 		
-		totalRecord = dao.getTotalCount(keyField, keyWord);
+		totalRecord = dao.getTotalCount(keyField, keyWord,shead);
 		//out.print("totalRecord : " + totalRecord);
 		
 		//nowPage 요청 처리
@@ -43,6 +48,7 @@
 		//sql문에 들어가는 start, cnt 선언
 		int start = (nowPage*numPerPage)-numPerPage;
 		int cnt = numPerPage;
+		
 		
 		//전체페이지 개수
 		totalPage = (int)Math.ceil((double)totalRecord/numPerPage);
@@ -104,6 +110,10 @@
 		document.readFrm.action = "read.jsp";
 		document.readFrm.submit();
 	}
+	function headFn(head){
+		document.readFrm.head.value = head;
+		document.readFrm.submit();
+	}
 </script>
 
   </head>
@@ -141,10 +151,14 @@
                   <div class="card-body">
                     <h3 class="card-title text-center">커뮤니티</h3>
                   </div>
-                  <select class="form-control text-center col-md-2" id="head">
+                  <form name="headFrm" method="post">
+                  <select class="form-control text-center col-md-2" id="head" name="head"
+                  onchange="headFn(this.form.head.value)">
+                    <option value="all" selected>전체보기</option>
                     <option value="정보">정보</option>
                     <option value="잡담">잡담</option>
                   </select>
+                  </form>
                   <div class="table-responsive">
                     <table class="table mb-0">
                       <thead class="thead-light text-center">
@@ -160,7 +174,7 @@
                       <tbody class="customtable text-center">
                       <%
                       Vector<CboardDto> vlist = 
-      				dao.getBoardList(keyField, keyWord, start, cnt);
+      				dao.getBoardList(keyField, keyWord, start, cnt,shead);
       				int listSize = vlist.size();//브라우저 화면에 표시될 게시물 번호
       				if(vlist.isEmpty()){
       					out.println("등록된 게시물이 없습니다.");
@@ -221,7 +235,7 @@
                 </div>
 
                 <div class="form-group mt-3 float-right">
-                  <a class="btn btn-primary text-white">글쓰기</a>
+                  <a class="btn btn-primary text-white" href="moveWrite.do?board='c'">글쓰기</a>
                 </div>
 
                 <ul class="pagination mt-5 ml-5 justify-content-center">
@@ -290,6 +304,8 @@
 	<input type="hidden" name="keyField" value="<%=keyField%>">
 	<input type="hidden" name="keyWord" value="<%=keyWord%>">
 	<input type="hidden" name="num">
+	<input type="hidden" name="head" value="<%=shead%>">
+	
 </form>
                 
               </div>
