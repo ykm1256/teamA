@@ -76,9 +76,20 @@ $(document).ready(function() {
 
 // 글쓰기 (윤)
 function postForm(){
+	var head = $("#writeHead").val()
+	var subject = $("#subject").val()
+	
+	if(head== null){
+		alert("말머리를 선택하세요!")
+		return false;
+	}else if(subject.trim() == "" | subject==null){
+		alert("올바른 제목을 입력하세요!")
+		return false;
+	}else{
 	var content = $(".note-editable").html();
 	$("#content").val(content);
-return true;	
+	return true;
+	}	
 }
 
 

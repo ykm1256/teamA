@@ -17,7 +17,8 @@ public class WriteAction implements Action{
 		//커뮤니티 write
 		if(request.getParameter("board").equals("'c'")) {
 		CboardDto dto = new CboardDto();
-		dto.setHead(request.getParameter("head"));
+		System.out.println(request.getParameter("writeHead"));
+		dto.setHead(request.getParameter("writeHead"));
 //		dto.setWriter("길동이");
 		
 		HttpSession session = request.getSession();		
