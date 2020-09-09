@@ -208,7 +208,8 @@ if (window.matchMedia("(max-width: 574px)").matches == true) {
 }
 
 // 드롭다운 선택시 화면 출력
-var year= new Date().getFullYear();
+var nowDate=new Date();
+var year= nowDate.getFullYear();
 var monthWeek="";
 var month;
 var weekend;
@@ -228,6 +229,9 @@ var isFourWeeks=false;
 
 // 월 선택
 $("select[id=monthSelect]").on("change",function(){
+	//주차 선택시 까지 완료버튼 사라짐
+	$("#confirm").attr("style","display:none !important");
+	
 	month=this.value;
 	console.log(month);
 	firstWeekNum=weekNumberByMonth(new Date(year,month-1,1));
@@ -263,6 +267,9 @@ $("select[id=monthSelect]").on("change",function(){
 
 // 주차 선택
 $("select[id=weekSelect]").on("change",function(){
+	//선택시 완료버튼 생김
+	$("#confirm").attr("style","display:inline-block !important");
+	
 	weekend=this.value;
 	monthWeek+=month;
 	monthWeek+="월 ";
@@ -420,12 +427,7 @@ $("select[id=weekSelect]").on("change",function(){
 			}
 		}
 				
-	}
-	
-	for (var i=0;i<5;i++){
-		
-	}
-	
+	}	
 	
 })
 
@@ -512,16 +514,55 @@ function isLeapYear(thisyear){
 
 // 스케줄 세팅 이동
 function setting(){
-	$.ajax({
-	url:"scheduleSetting.do",
-	type:"post",
-	data:{""}
-	success:function(data){
-		$("#qrImg").attr("src",data);
-	},
-	error:function(e){
-		alert(e);
+	const date= new Array();
+	for(var i=0;i<5;i++){
+		date[i]=$("#date"+i).val();
+		console.log(date[i]);
 	}
-})
+	const time=new Array();
+	for(var i=1;i<=5;i++){
+		if($("#time"+i).val()==null){
+			time[i]="";
+		}else{
+			time[i]=$("#time"+i).val();
+		}
+		console.log(time[i]);
+	}
+	const program=new Array();
+	for(var i=1;i<=5;i++){
+		if($("#pro"+i).val()==null){
+			program[i]="";
+		}else{
+			program[i]=$("#pro"+i).val();
+		}
+		console.log(program[i]);
+	}
+	const proMention=new Array();
+	for(var i=1;i<=5;i++){
+		if($("#proMention"+i).val()==null){
+			proMention[i]="";
+		}else{
+			proMention[i]=$("#proMention"+i).val();
+		}
+		console.log(proMention[i]);
+	}
+	
+	$.ajax({
+		url:"scheduleSetting.do",
+		type:"post",
+		data:{
+			"date":date,
+			"time":time,
+			"program":program,
+			"proMention":proMention
+		},
+		success:function(data){
+			alert("성공"+data);
+		},
+		error:function(e){
+			alert("실패");
+			alert(e);
+		}
+	})
 }
 

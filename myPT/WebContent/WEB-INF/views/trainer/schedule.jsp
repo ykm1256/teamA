@@ -164,7 +164,7 @@
 							</div>
 						</div>
 						<div
-							class="btn btn-success mt-2 mb-5 float-right custom-submit"
+							class="btn btn-success mt-2 mb-5 float-right custom-submit btn-confirm"
 							id="confirm"
 							onclick="setting()"
 						>
