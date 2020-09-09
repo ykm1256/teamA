@@ -1,3 +1,18 @@
+function isMobile() 
+{
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+var myPg= "";
+if (isMobile()) 
+{
+	myPg="kakaopay";
+} 
+else 
+{
+	myPg="inicis";	
+}
+
 
 //	날짜 포맷 yy-MM-dd	
 	function getFormattedDate()
@@ -30,12 +45,12 @@ $(".pTableWrapper").click(function ()
 
 
 
-//$('#selectedTrainer').val($('#trainer1').val());
+$('#selectedTrainer').val($('#trainer1').val());
 
-//function changeTrainer()
-//{
-//	$('#selectedTrainer').val($('#trainer2').val());
-//}
+function changeTrainer()
+{
+	$('#selectedTrainer').val($('#trainer2').val());
+}
 
 //시작일을 오늘자 이전으로 할 수 없도록 
 //$('#startDate').attr('min', getFormattedDate());
@@ -55,33 +70,25 @@ function pay(input)
 		 return false;
 		}
 	
-	if(	$('#trainer1').val()=="" || $('#trainer').val()==null)
+	if(	$('#selectedTrainer').val()=="")
 	{
 	 alert("트레이너를 입력해주세요.");
 	 return false;
 	}
-	
-//	if(	$('#selectedTrainer').val()=="")
-//	{
-//	 alert("트레이너를 입력해주세요.");
-//	 return false;
-//	}
-	
-		
+			
 	  var IMP = window.IMP;
 	  IMP.init('imp50784155'); // 가맹점 식별코드
 		    
 	     IMP.request_pay({
-	         pg : 'inicis',
+	         pg : myPg,
 	         pay_method : 'card',
 	         merchant_uid : merchant_uid,
-	         name : $(productNames[input.id]).text(),
+	         name : $(productNames[input.id]).parent().text(),
 	         amount : $(price[input.id]).text(),
 //	         buyer_email : userEmail,
 	         buyer_email : 'tlstprl1806@naver.com',
 	         buyer_name : userName,
 	         buyer_tel : userTel,
-	         m_redirect_url : 'http://www.naver.com'
 	     },  function(rsp) 
 		     {
 		         if (rsp.success)
@@ -92,7 +99,7 @@ function pay(input)
 			     				"paydate": new Date(),
 			     				"price": $(price[input.id]).text(), 
 			     				"hcount": $(productNames[input.id]).text(), 
-			     				"t_id": $('#selectedTrainer').val()
+			     				"tid": $('#selectedTrainer').val()
 		     					},
 		     		  "startdate": $('#startdate').val()
 		        	 };
@@ -102,7 +109,7 @@ function pay(input)
 	            	  msg = '결제가 완료되었습니다.';
 	                  msg += '\n고유ID : ' + rsp.imp_uid;
 	                  msg += '\n상점 거래ID : ' + rsp.merchant_uid;
-	                  msg += '\결제 금액 : ' + rsp.paid_amount;
+	                  msg += '\n결제 금액 : ' + rsp.paid_amount + "원";
 	                  msg += '\n카드 승인번호 : ' + rsp.apply_num;
 	                  alert(msg);	 
 	                  

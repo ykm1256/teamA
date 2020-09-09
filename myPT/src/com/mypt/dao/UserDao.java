@@ -195,7 +195,7 @@ public class UserDao {
 
 		try {
 			con = db.getConnection();
-			sql = "update user SET startdate=NULL, enddate= NULL, ptcount=0 WHERE enddate<NOW()";
+			sql = "update user SET startdate=NULL, enddate= NULL, ptcount=0 WHERE enddate<curdate()";
 			ps = con.prepareStatement(sql);
 			
 			ps.executeUpdate();

@@ -19,10 +19,12 @@ public class MovePayment implements Action
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception 
 	{
-		
 		HttpSession session= request.getSession();
 		
-		UserDao dao = UserDao.getInstance();
+		//enddate가 지난 회원-> ptcount를 없앰. startdate,enddate null, ptcount 0
+		UserDao dao = UserDao.getInstance();		
+		dao.updateForEnddateUser();
+
 		UserDto user = dao.getUserById((String)session.getAttribute("id"));
 		
 		TrainerDao tdao = TrainerDao.getInstance();

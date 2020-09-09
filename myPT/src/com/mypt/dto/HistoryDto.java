@@ -7,7 +7,7 @@ public class HistoryDto {
 	private Timestamp paydate;
 	private int price;
 	private int hcount;
-	private String t_id;
+	private String tid;
 
 //	private String payMethod;
 	
@@ -78,15 +78,16 @@ public class HistoryDto {
 	}
 
 	
-	public String getT_id() {
-		return t_id;
-	}
-
-	public void setT_id(String t_id) {
-		this.t_id = t_id;
-	}
 
 	
+
+	public String getTid() {
+		return tid;
+	}
+
+	public void setTid(String tid) {
+		this.tid = tid;
+	}
 
 	public int getHcount() {
 		return hcount;

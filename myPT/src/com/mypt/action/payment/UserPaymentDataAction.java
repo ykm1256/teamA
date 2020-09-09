@@ -22,13 +22,12 @@ public class UserPaymentDataAction implements Action {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception 
 	{
 			
-		//enddate가 지난 회원-> ptcount를 없앰. startdate,enddate null, ptcount 0
 		UserDao userDao = UserDao.getInstance();
-		userDao.updateForEnddateUser();
 		
 		Gson gson = new Gson();	
+		
 		String jsonStr = readJSONFromRequestBody(request);
-	
+		
 		HistoryDao dao= HistoryDao.getInstance();		
 		UserDto payUser= gson.fromJson(jsonStr, UserDto.class);
 
@@ -42,32 +41,32 @@ public class UserPaymentDataAction implements Action {
 		dao.insertHistory(history);
 		
 		payUser.setId(beforeUser.getId());
-		payUser.setTid(history.getT_id());
+		payUser.setTid(history.getTid());
 		
 		
 		
         //결제한 상품(pt횟수)		
 		int count= history.getHcount();
 		
-		//결제한 개월수
-		int months =0;
+		//결제한 일수
+		int days =0;
 		
 		switch(count)
 		{				
 			case 10:
-				months= 1;
+				days= 30;
 				break;
 				
 			case 23:
-				months= 2;
+				days= 60;
 				break;
 				
 			case 35:
-				months =3;
+				days =90;
 				break;
 				
 			case 60:
-				months= 6;
+				days= 180;
 				break;
 		}
 		
@@ -79,7 +78,7 @@ public class UserPaymentDataAction implements Action {
 		{
 			//enddate+enddate, +ptcount
 			cal.setTime(sf.parse(beforeUser.getEnddate()));
-			cal.add(Calendar.MONTH, months);
+			cal.add(Calendar.DATE, days);
 			beforeUser.setEnddate(sf.format(cal.getTime()));
 				
 			userDao.updateAfterPayment(beforeUser);
@@ -88,7 +87,7 @@ public class UserPaymentDataAction implements Action {
 		else
 		{
 			cal.setTime(sf.parse(payUser.getStartdate()));
-			cal.add(Calendar.MONTH, months);
+			cal.add(Calendar.DATE, days);
 			payUser.setEnddate(sf.format(cal.getTime()));
 		
 			userDao.updateAfterPayment(payUser);

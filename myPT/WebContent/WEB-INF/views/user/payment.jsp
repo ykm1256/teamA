@@ -58,22 +58,22 @@
 				<div class="col-6">
 					<c:choose>
 				      <c:when test="${not empty user.startdate}">
-				      	  <input type="text" id="startdate1" class="form-control w-100" value="${user.startdate}" disabled>
+				      	  <input type="text" class="form-control w-100" value="${user.startdate}" readonly>
 				      </c:when>				      
 					  <c:otherwise>
 						  <input
 				          type="date"
-				          id="startdate2"
+				          id="startdate"
 				          name="startdate"
 				          class="form-control w-100"/>
 					  </c:otherwise>
-			 		 </c:choose>	         
+			 		 </c:choose>	  
 			     </div>
 		          
 		          <div class="col-6">	    
 					<c:choose>
 				      <c:when test="${not empty user.tid}">
-				      	  <input type="text" id="trainer1" class="form-control w-100" value="${user.tid}" disabled>
+				      	  <input type="text" id="trainer1" class="form-control w-100" value="${user.tid}" readonly>
 				      </c:when>
 					  <c:otherwise>
 					  <select class="form-control" id="trainer2" class="form-control w-100" onchange="changeTrainer()">
@@ -84,7 +84,7 @@
 				        </select>
 					  </c:otherwise>
 			 		 </c:choose>
-<!-- 			 		 <input type="text" id="selectedTrainer" hidden="true"> -->
+			 		 <input type="text" id="selectedTrainer" hidden="true">
 			 	 </div>
 <!-- 		      </div> -->
 		    </div>
@@ -94,7 +94,7 @@
 		        <div class="col-lg-3 col-md-6 col-sm-6 mb-4 pTableWrapper">
 		          <div class="pricingTable">
 		            <div class="pricingTable-header mt-3">
-		              <h3><span>10</span>회권/1개월</h3>
+		              <h3><span>10</span>회권/30일</h3>
 		            </div>
 		
 		            <div class="price-value">
@@ -105,7 +105,7 @@
 		            <div class="pricingContent">
 		              <ul>
 		                <li><b>10회</b> PT</li>
-		                <li><b>1개월</b> 헬스 이용</li>
+		                <li><b>30일</b> 헬스 이용</li>
 		                <li><b>락커, 운동복</b> 대여 무료</li>
 		              </ul>
 		            </div>
@@ -119,7 +119,7 @@
 		        <div class="col-lg-3 col-md-6 col-sm-6 mb-4 pTableWrapper">
 		          <div class="pricingTable">
 		            <div class="pricingTable-header mt-3">
-		              <h3><span>23</span>회권/2개월</h3>
+		              <h3><span>23</span>회권/60일</h3>
 		            </div>
 		
 		            <div class="price-value">
@@ -130,7 +130,7 @@
 		            <div class="pricingContent">
 		              <ul>
 		                <li><b>23회</b> PT</li>
-		                <li><b>2개월</b> 헬스 이용</li>
+		                <li><b>60일</b> 헬스 이용</li>
 		                <li><b>락커, 운동복</b> 대여 무료</li>
 
 		              </ul>
@@ -146,7 +146,7 @@
 		          <div class="pricingTable">
 		            <div class="pricingTable-header mt-3">
 		              <div class="best-offer">인기 상품</div>
-		              <h3><span>35</span>회권/3개월</h3>
+		              <h3><span>35</span>회권/90일</h3>
 		            </div>
 		
 		            <div class="price-value">
@@ -157,7 +157,7 @@
 		            <div class="pricingContent">
 		               <ul>
 		                <li><b>35회</b> PT</li>
-		                <li><b>3개월</b> 헬스 이용</li>
+		                <li><b>90일</b> 헬스 이용</li>
 		                <li><b>락커, 운동복</b> 대여 무료</li>
 		                <li><b>프로틴</b> 증정</li>
 		              </ul>
@@ -172,7 +172,7 @@
 		        <div class="col-lg-3 col-md-6 col-sm-6 mb-4 pTableWrapper">
 		          <div class="pricingTable">
 		            <div class="pricingTable-header mt-3">
-		              <h3><span>60</span>회권/6개월</h3>
+		              <h3><span>60</span>회권/180일</h3>
 		            </div>
 		
 		            <div class="price-value">
@@ -183,7 +183,7 @@
 		            <div class="pricingContent">
 		             <ul>
 		                <li><b>60회</b> PT</li>
-		                <li><b>6개월</b> 헬스 이용</li>
+		                <li><b>180일</b> 헬스 이용</li>
 		                <li><b>락커, 운동복</b> 대여 무료</li>
 		                <li><b>프로틴</b> 증정</li>
 		                <li><b>프로필 사진</b> 촬영 무료</li>
