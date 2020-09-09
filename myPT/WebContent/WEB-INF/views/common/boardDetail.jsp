@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -56,7 +57,7 @@
                           <div class="row">
                             <div class="col-lg-12">
                             <div class="row ml-2 mt-3 mb-0 d-flex justify-content-between">
-                              <h3 class=" ">제목입니다.</h3>
+                              <h3 class=" ">${dto.title }</h3>
                               <!-- 좋아요버튼 -->
                         <div class="row m-0 likebutton">
                           <input type="checkbox" class="like"/>
@@ -240,21 +241,21 @@
                         <!-- 좋아요버튼 -->
                         </div>
                               
-                              <h5 class="mt-2 ml-2">OOO 회원</h5>
+                              <h5 class="mt-2 ml-2">${dto.writer }</h5>
                               <div class="row mt-2 ml-2 mb-0">
                                 <div class="container pl-0 mb-0">
                                   <p class="text-muted mb-0 float-left">
-                                    2020-08-27 17:28
+                                    ${dto.date }
                                   </p>
                                   <div class="row float-right">
                                     <p class="mb-0">
                                       조회수<span id="readnum" class=""
-                                        >56 ｜</span
+                                        >${dto.hit } ｜</span
                                       >
                                     </p>
                                     <p class="mb-0 ml-2">
                                       추천수<span id="likenum" class=""
-                                        >30 ｜</span
+                                        >${dto.like } ｜</span
                                       >
                                     </p>
                                     <p class="mb-0 ml-2 mr-1">

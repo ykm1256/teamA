@@ -79,6 +79,7 @@
     ></script>
     
     <script type="text/javascript">
+    
 	function check() {
 		if(document.searchFrm.keyWord.value==""){
 			alert("검색어를 입력하세요.");
@@ -155,9 +156,21 @@
                   <form name="headFrm" method="post">
                   <select class="form-control text-center col-md-2" id="head" name="head"
                   onchange="headFn(this.form.head.value)">
+                  <%if(shead.equals("all")) {%>
                     <option value="all" selected>전체보기</option>
                     <option value="정보">정보</option>
                     <option value="잡담">잡담</option>
+                    <%}else if(shead.equals("정보")){ %>
+                    
+                    <option value="all">전체보기</option>
+                    <option value="정보" selected>정보</option>
+                    <option value="잡담">잡담</option>
+                    <%}else if(shead.equals("잡담")) {%>
+                    
+                    <option value="all">전체보기</option>
+                    <option value="정보">정보</option>
+                    <option value="잡담"selected>잡담</option>
+                    <%} %>
                   </select>
                   </form>
                   <div class="table-responsive">

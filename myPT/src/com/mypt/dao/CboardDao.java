@@ -134,7 +134,7 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 			
 			CboardDto dto= null;
 			
-			String sql = "select cb_title, cb_writer, cb_cb_date, hit, cb_content, cb_like from cboard where cb_num=?";
+			String sql = "select * from cboard where cb_num=?";
 			try 
 			{
 				con = db.getConnection();
@@ -147,12 +147,13 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 				{
 					dto = new CboardDto();
 									
-					dto.setTitle(rs.getString(1));
-					dto.setWriter(rs.getString(2));
-					dto.setDate(rs.getTimestamp(3));
-					dto.setHit(rs.getInt(4)+1);
-					dto.setContent(rs.getString(5));
-					dto.setLike(rs.getInt(6));	
+					dto.setTitle(rs.getString("cb_title"));
+					dto.setWriter(rs.getString("cb_writer"));
+					dto.setDate(rs.getTimestamp("cb_date"));
+					dto.setHit(rs.getInt("cb_hit")+1);
+					dto.setContent(rs.getString("cb_content"));
+					dto.setLike(rs.getInt("cb_like"));	
+					dto.setHead(rs.getString("cb_head"));	
 					
 					updateHit(num, "cboard");
 				}
