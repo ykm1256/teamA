@@ -159,7 +159,7 @@
                                               <label class="small mb-1" for="trainer">담당 트레이너</label>
                                               <select class="form-control" id="trainer" name="trainer">
                                               <option selected>미정</option>
-                                               <c:if test="${result!=null}">
+                                               <c:if test="${not empty result}">
 						                           <c:forEach items="${result}" var="t">
 						                             <option value="${t.t_id}">${t.t_name }</option>                              
 						                           </c:forEach>
