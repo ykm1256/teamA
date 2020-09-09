@@ -29,6 +29,7 @@ import com.mypt.action.move.MoveIntroAction;
 import com.mypt.action.move.MoveSchedule;
 import com.mypt.action.move.MoveUserMain;
 import com.mypt.action.move.MoveUserRegister;
+import com.mypt.action.move.MoveWriteAction;
 import com.mypt.action.qr.QrCheckAction;
 import com.mypt.action.qr.QrViewAction;
 import com.mypt.action.register.AdminUserRegisterAction;
@@ -105,10 +106,12 @@ public class ActionFactory
 		// 혼잡도
 		map.put("/crowded",new CrowdedAction());
 		
-		map.put("/community",new MoveCommunityAction());
+		map.put("/moveCommunity",new MoveCommunityAction());
 		
 		// 글쓰기
-		map.put("/write",new WriteAction());	
+		map.put("/write",new WriteAction());
+		
+		map.put("/moveWrite",new MoveWriteAction());
 		
 		
 		
