@@ -27,7 +27,7 @@ public class UserLoginAction implements Action{
 		 session.setAttribute("name", user.getName());
 		 session.setAttribute("nick", user.getNick());		
 		 session.setAttribute("email", user.getEmail());
-		 session.setAttribute("grade", 1);
+		 session.setAttribute("grade", 2);
 		}
 		
 		response.setContentType("text/html;charset=utf-8");

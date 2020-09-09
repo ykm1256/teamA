@@ -38,7 +38,8 @@ function searchZipcode() {
                 document.getElementById('zipcode').value = data.zonecode;
                 document.getElementById("address").value = addr;
                 // 커서를 상세주소 필드로 이동한다.
-                document.getElementById("addressdetail").focus();
+				document.getElementById("addrdetail").value = '';
+                document.getElementById("addrdetail").focus();
             }
         }).open();
     }

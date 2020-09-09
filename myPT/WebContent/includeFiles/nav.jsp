@@ -27,7 +27,7 @@
 						aria-labelledby="userDropdown">
 						
 						<c:choose>
-							<c:when test="${sessionScope.grade==1}">
+							<c:when test="${sessionScope.grade==2}">
 								<a class="dropdown-item" data-toggle="modal"
 									data-target="#QRModal">QR</a>
 							</c:when>

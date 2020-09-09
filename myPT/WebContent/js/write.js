@@ -73,11 +73,6 @@ $(document).ready(function() {
 
    });
 
-//function postForm() {
-//    $('#content').val($('#summer').summernote('code'));
-//}
-
-
 
 // 글쓰기 (윤)
 function postForm(){
