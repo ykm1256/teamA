@@ -26,7 +26,7 @@ public class TrainerScheduleSettingAction implements Action {
 		String[] date=request.getParameterValues("date[]");
 		
 		for(int i=0;i<date.length;i++) {
-			if(pt[i].equals("")) {
+			if(pt[i].equals("")&&!program[i].equals("")) {
 				ProgramDto pdto=new ProgramDto();
 				pdto.setP_id(id);
 				pdto.setP_date(date[i]);
@@ -44,7 +44,7 @@ public class TrainerScheduleSettingAction implements Action {
 				}else {
 					pdao.insertProgram(pdto);
 				}
-			}else if(program[i].equals("")){
+			}else if(program[i].equals("")&&!pt[i].equals("")){
 				ScheduleDto sdto=new ScheduleDto();
 				sdto.setS_id(id);
 				sdto.setS_date(date[i]);

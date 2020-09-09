@@ -522,34 +522,30 @@ function setting(){
 	const date= new Array();
 	for(var i=0;i<5;i++){
 		date[i]=$("#date"+i).val();
-		console.log(date[i]);
 	}
 	const time=new Array();
 	for(var i=1;i<=5;i++){
 		if($("#time"+i).val()==null){
-			time[i]="";
+			time[i-1]="";
 		}else{
-			time[i]=$("#time"+i).val();
+			time[i-1]=$("#time"+i).val();
 		}
-		console.log(time[i]);
 	}
 	const program=new Array();
 	for(var i=1;i<=5;i++){
 		if($("#pro"+i).val()==null){
-			program[i]="";
+			program[i-1]="";
 		}else{
-			program[i]=$("#pro"+i).val();
+			program[i-1]=$("#pro"+i).val();
 		}
-		console.log(program[i]);
 	}
 	const proMention=new Array();
 	for(var i=1;i<=5;i++){
 		if($("#proMention"+i).val()==null){
-			proMention[i]="";
+			proMention[i-1]="";
 		}else{
-			proMention[i]=$("#proMention"+i).val();
+			proMention[i-1]=$("#proMention"+i).val();
 		}
-		console.log(proMention[i]);
 	}
 	
 	$.ajax({
