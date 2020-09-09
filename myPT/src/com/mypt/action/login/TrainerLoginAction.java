@@ -41,7 +41,7 @@ public class TrainerLoginAction implements Action{
 			 session.setAttribute("name", trainer.getT_name());
 			 session.setAttribute("nick", trainer.getT_nick());
 			 session.setAttribute("id", trainer.getT_id());
-			 session.setAttribute("grade", 0);
+			 session.setAttribute("grade", 1);
 			 
 			}
 			

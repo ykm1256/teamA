@@ -4,9 +4,10 @@
 <%@page import="java.util.Vector"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <%
-		request.setCharacterEncoding("EUC-KR");
+		request.setCharacterEncoding("utf-8");
 		int totalRecord = 0;//총게시물수
 		int numPerPage = 10;//페이지당 레코드 개수(5,10,15,30)
 		int pagePerBlock = 15;//블럭당 페이지 개수
@@ -117,8 +118,19 @@
 
     <div id="layoutSidenav">
       <!-- sideNav -->
-      <jsp:include page="/includeFiles/sideNav.jsp"></jsp:include>
+      <c:choose>
+      <c:when test="${sessionScope.grade==0 }">
+      <jsp:include page="/includeFiles/adminSideNav.jsp"></jsp:include>
+      </c:when>
+      <c:when test="${sessionScope.grade==1 }" >
+      <jsp:include page="/includeFiles/trainerSideNav.jsp"></jsp:include>
+      </c:when>
+      <c:otherwise>
+      <jsp:include page="/includeFiles/userSideNav.jsp"></jsp:include>
+      </c:otherwise>
+      </c:choose> 
       <!-- /sideNav -->
+      
       <div id="layoutSidenav_content">
         <main>
           <div class="container-fluid mt-3">
