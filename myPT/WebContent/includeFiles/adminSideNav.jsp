@@ -74,7 +74,7 @@
                 data-parent="#sidenavAccordion"
               >
                 <nav class="sb-sidenav-menu-nested nav">
-                  <a class="nav-link" href="community.jsp"
+                  <a class="nav-link" href="community.do"
                     >커뮤니티 게시판</a
                   >
                   <a class="nav-link" href="photoBoard.jsp"
