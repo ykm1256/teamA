@@ -155,7 +155,7 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 					dto.setLike(rs.getInt("cb_like"));	
 					dto.setHead(rs.getString("cb_head"));	
 					
-					updateHit(num, "cboard");
+					upCount(num);
 				}
 			} 
 			catch (Exception e) 
