@@ -39,7 +39,7 @@
                 data-parent="#sidenavAccordion"
               >
                 <nav class="sb-sidenav-menu-nested nav">
-                  <a class="nav-link" href="moveCommunity.do"
+                  <a class="nav-link" href="community.do"
                     >커뮤니티 게시판</a
                   >
                   <a class="nav-link" href="photoBoard.jsp"
@@ -48,13 +48,13 @@
                   <a class="nav-link" href="question.jsp">Q & A</a>
                 </nav>
               </div>
-              <a class="nav-link" href="payment.jsp">
+              <a class="nav-link" href="movePayment.do">
                 <div class="sb-nav-link-icon">
                   <i class="fas fa-chart-area"></i>
                 </div>
                 결제
               </a>
-              <a class="nav-link" href="profile.jsp">
+              <a class="nav-link" href="moveMyProfile.do">
                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                 마이페이지
               </a>
