@@ -18,7 +18,6 @@ public class AdminTrainerRegisterAction implements Action {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception 
 	{
 		
-		
 		TrainerDto dto= new TrainerDto();
 		
 		dto.setT_pw(request.getParameter("password"));
