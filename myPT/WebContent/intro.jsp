@@ -60,7 +60,7 @@
                           class="form-control py-4 text-white rounded-0 border-top-0 border-right-0 border-left-0"
                           id="id"
                           name="id"
-                          style="background-color: black"
+                          style="background-color: black;"
                         />
                       </div>
                       <div class="form-group">

@@ -50,16 +50,20 @@
         
           <div class="container py-3">
           <div>
+         
             <header class="px-4">
               <h3>글보기</h3>
-              <div class="text-right"><a href="#" class="mr-2">답변</a>/<a href="#" class="ml-2">목록으로</a></div>
+              <div class="text-right">              
+              <a href="reply.do" class="mr-2" type="submit()">답변</a>/
+              <a href="#" class="ml-2">목록으로</a>
+              </div>
             </header>
           </div>
 
           <div>
-            <main>
-              <form>
+            <main>             
                 <div class="cardWrapper p-2">
+                 <form>
                   <div class="card h-100">
                     <div class="card-body p-1">
                       <ul class="list-group list-group-flush h-100">
@@ -67,10 +71,19 @@
                           <div class="row">
                             <div class="col-lg-12">
                             <div class="row ml-2 mt-3 mb-0 d-flex justify-content-between">
+                            <input type="text" id="num" name="num" hidden="true" value="${dto.num }">                            
+                            <input type="text" id="board" name="board" hidden="true" value="cboard">
                               <h3 class=" ">${dto.title }</h3>
                               <!-- 좋아요버튼 -->
                         <div class="row m-0 likebutton">
-                          <input type="checkbox" class="like"/>
+                        <c:choose>
+                        <c:when test="${lflag==1 }">
+                          <input type="checkbox" class="like" id="like" checked="checked"/>
+                          </c:when>
+                          <c:otherwise>
+                          <input type="checkbox" class="like" id="like"/>
+                          </c:otherwise>
+                          </c:choose>
                           <div>
                             <svg
                               id="heart-svg"
@@ -259,17 +272,17 @@
                                   </p>
                                   <div class="row float-right">
                                     <p class="mb-0">
-                                      조회수<span id="readnum" class=""
-                                        >${dto.hit } ｜</span
-                                      >
+                                      조회수 <span id="readnum" class=""
+                                        >${dto.hit }</span
+                                      >  ｜
                                     </p>
                                     <p class="mb-0 ml-2">
-                                      추천수<span id="likenum" class=""
-                                        >${dto.like } ｜</span
-                                      >
+                                      추천수 <span id="likenum" class=""
+                                        >${dto.like }</span
+                                      > ｜
                                     </p>
                                     <p class="mb-0 ml-2 mr-1">
-                                      댓글<span id="commentnum" class=""
+                                      댓글 <span id="commentnum" class=""
                                         >10</span
                                       >
                                     </p>
@@ -285,6 +298,7 @@
                       </ul>
                     </div>
                   </div>
+                  </form>
                   <div class="card">
                     <div class="table-responsive">
                       <table class="table mb-0">
@@ -361,11 +375,10 @@
                       </table>
                     </div>
                   </div>
-                  <div class="card">
-                    <form>
+                  <div class="card">                    
                       <table>
                         <tr>
-                          <td style="width: 85%">
+                          <td>
                             <textarea
                               name=""
                               id=""
@@ -380,15 +393,13 @@
                               type="submit"
                               value="등록"
                               class="float-right"
-                              style="width: 100%; height: 125px"
+                              style="width:100%; height: 125px"
                             />
                           </td>
                         </tr>
-                      </table>
-                    </form>
+                      </table>                    
                   </div>
-                </div>
-              </form>
+                </div>              
             </main>
           </div>
         </div>
@@ -402,7 +413,7 @@
     <script src="/myPT/js/scripts.js"></script>
     <script src="/myPT/js/like.js"></script>
     <!-- 게시판 관련 -->
-    <script src="/myPT/js/detail.js"></script>
+    <script src="/myPT/js/boardDetail.js"></script>
   <script type="text/javascript" src="assets/summernote-0.8.18-dist/summernote-bs4.js"></script>
   <script src="assets/summernote-0.8.18-dist/lang/summernote-ko-KR.js"></script>
   </body>
