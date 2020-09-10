@@ -21,6 +21,20 @@
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
     ></script>
+    
+    <style>
+    
+    .comments
+    {
+      margin: 15px 0px;
+    }
+    
+    .commentDate
+    {
+    	font-size: 0.8rem;
+    	opacity: 0.8;
+    }
+    </style>
 
   </head>
   <body class="sb-nav-fixed">
@@ -299,113 +313,129 @@
                     </div>
                   </div>
                   </form>
-                  
-                  
+                            
+
+                      <div class="card my-4 border border-secondary">
+		                  <div class="card-body p-1" style="width:100%;">
+			            
+			                  <textarea name="commentContent" id="commentContent" cols="30" rows="5" maxlength="500"
+		                              style="width: 100%; resize:none" class="border-0"></textarea>
+	                      </div>
+			           
+	             	 	  <div class="card-footer bg-white">
+		                      <input type="button" class="btn btn-dark float-right" id="commentBtn" value="등록">
+		                  </div>
+		               </div>
+
+	    
+	             	 
+
+    
                   
                   <div class="card">
-                    <div class="table-responsive">
-                      <table class="table mb-0">
-                        <tbody>
-                          <tr>
-                            <td class="text-left">
-                              <p class="mb-0 ml-3">홍길동</p>
-                            </td>
-                            <td class="text-left" style="width: 60%">
-                              <p class="mb-0">안녕하세요</p>
-                            </td>
-                            <td class="text-right">
-                              <p class="text-muted mb-0">2020-08-25 12:40</p>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="text-left">
-                              <p class="mb-0 ml-3">아이유</p>
-                            </td>
-                            <td class="text-left" style="width: 60%">
-                              <p class="mb-0">반갑습니다</p>
-                            </td>
-                            <td class="text-right">
-                              <p class="text-muted mb-0">2020-08-24 11:30</p>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="text-left">
-                              <p class="mb-0 ml-3">아이유</p>
-                            </td>
-                            <td class="text-left" style="width: 60%">
-                              <p class="mb-0">
-                                반갑습니다 아이유입니다. 반갑습니다.
-                                아이유입니다. 반갑습니다. 아이유입니다.
-                                반갑습니다.아이유입니다.
-                              </p>
-                            </td>
-                            <td class="text-right">
-                              <p class="text-muted mb-0 mr-1">
-                                2020-08-24 11:30
-                                <a href="#"
-                                  ><i
-                                    class="fas fa-edit ml-1 mr-1 text-success"
-                                  ></i
-                                ></a>
-                                <a href="#"
-                                  ><i class="fas fa-times text-danger"></i
-                                ></a>
-                              </p>
-                            </td>
-                          </tr>
-
-                          <tr>
-                            <td colspan="3">
-                              <ul
-                                class="pagination justify-content-center mb-0"
-                              >
-                                <li class="page-item">
-                                  <a class="page-link" href="#">이전</a>
-                                </li>
-                                <li class="page-item">
-                                  <a class="page-link" href="#">1</a>
-                                </li>
-                                <li class="page-item">
-                                  <a class="page-link" href="#">2</a>
-                                </li>
-                                <li class="page-item">
-                                  <a class="page-link" href="#">다음</a>
-                                </li>
-                              </ul>
-                            </td>
-                          </tr>
- 
-                        </tbody>
-                      </table>
-                    </div>
+                  	<div class="card-body">
+                  	
+                  	<div class="comments">
+                  		<div class="row">
+                  			<div class="row col-9">
+                  				<div class="col-12 font-weight-bold">홍길동</div>
+                  				<div class="col-12 text-secondary commentDate">2020-08-25 12:40</div>
+                  			</div>
+                  			<div class="col-3 text-right">신고/수정/삭제 메뉴</div>
+                  		</div>	
+                  		<div class="row">
+                  			<div class="col-12 py-3">안녕하세요. 안녕하세요. 안녕하세요</div>  
+                  		</div>
+                  		
+                  		<div class="row">
+                  			<div class="col-9 text-secondary">답글 (수)</div>
+                  			<div class="col-3 text-right">좋아요 아이콘/수</div>
+                  		</div>
+                  			
+                  	</div>
+                  		
+                  	<div class="comments">
+                  		<div class="row">
+                  			<div class="row col-9">
+                  				<div class="col-12 font-weight-bold">아이유</div>
+                  				<div class="col-12 text-secondary commentDate">2020-08-25 12:40</div>
+                  			</div>
+							<div class="col-3 text-right">신고/수정/삭제 메뉴</div>                  		
+						</div>	
+                  		<div class="row">
+                  			<div class="col-12 py-3">반갑습니다 아이유입니다. 반갑습니다.</div>  
+                  		</div>
+                  		
+                  		<div class="row">
+                  			<div class="col-9 text-secondary">답글 (수)</div>
+                  			<div class="col-3 text-right">좋아요 아이콘/수</div>
+                  		</div>
+                  			
+                  	</div>
+                  		
+                  	</div>
+                  		
+                  		
+<!--                     <div class="table-responsive"> -->
+<!--                       <table class="table mb-0"> -->
+<!--                         <tbody> -->
+<!--                           <tr> -->
+<!--                             <td class="text-left"> -->
+<!--                               <p class="mb-0 ml-3">홍길동</p> -->
+<!--                             </td> -->
+<!--                             <td class="text-left" style="width: 60%"> -->
+<!--                               <p class="mb-0">안녕하세요</p> -->
+<!--                             </td> -->
+<!--                             <td class="text-right"> -->
+<!--                               <p class="text-muted mb-0">2020-08-25 12:40</p> -->
+<!--                             </td> -->
+<!--                           </tr> -->
+<!--                           <tr> -->
+<!--                             <td class="text-left"> -->
+<!--                               <p class="mb-0 ml-3">아이유</p> -->
+<!--                             </td> -->
+<!--                             <td class="text-left" style="width: 60%"> -->
+<!--                               <p class="mb-0">반갑습니다</p> -->
+<!--                             </td> -->
+<!--                             <td class="text-right"> -->
+<!--                               <p class="text-muted mb-0">2020-08-24 11:30</p> -->
+<!--                             </td> -->
+<!--                           </tr> -->
+<!--                           <tr> -->
+<!--                             <td class="text-left"> -->
+<!--                               <p class="mb-0 ml-3">아이유</p> -->
+<!--                             </td> -->
+<!--                             <td class="text-left" style="width: 60%"> -->
+<!--                               <p class="mb-0"> -->
+<!--                                 반갑습니다 아이유입니다. 반갑습니다. -->
+<!--                                 아이유입니다. 반갑습니다. 아이유입니다. -->
+<!--                                 반갑습니다.아이유입니다. -->
+<!--                               </p> -->
+<!--                             </td> -->
+<!--                             <td class="text-right"> -->
+<!--                               <p class="text-muted mb-0 mr-1"> -->
+<!--                                 2020-08-24 11:30 -->
+<!--                                 <a href="#" -->
+<!--                                   ><i -->
+<!--                                     class="fas fa-edit ml-1 mr-1 text-success" -->
+<!--                                   ></i -->
+<!--                                 ></a> -->
+<!--                                 <a href="#" -->
+<!--                                   ><i class="fas fa-times text-danger"></i -->
+<!--                                 ></a> -->
+<!--                               </p> -->
+<!--                             </td> -->
+<!--                           </tr>  -->
+<!--                         </tbody> -->
+<!--                       </table> -->
+<!--                     </div> -->
+                    
+                    <div class="card-footer bg-white">
+                        <input type="button" class="btn col-12 text-center" value="더보기">
+                    </div>    
                   </div>
                   
-                  <div class="card">                    
-                      <table>
-                        <tr>
-                          <td>
-                            <textarea
-                              name=""
-                              id=""
-                              cols="30"
-                              rows="5"
-                              class="float-left"
-                              style="width: 100%"
-                            ></textarea>
-                          </td>
-                          <td>
-                            <input
-                              type="submit"
-                              value="등록"
-                              class="float-right"
-                              style="width:100%; height: 125px"
-                            />
-                          </td>
-                        </tr>
-                      </table>                    
-                  </div>
-                  
-                  
+    
                 </div>              
             </main>
           </div>

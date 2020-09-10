@@ -31,7 +31,8 @@ public class ViewAction implements Action {
 		request.setAttribute("lflag", lflag);
 		}
 		
-		return "common/boardDetail";
+//		return "common/boardDetail";
+		return "common/boardDetail2";
 	}
 
 }
