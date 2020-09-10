@@ -104,7 +104,7 @@ public class QboardDao extends AbstractBoardDao<QboardDto>
 
 				dto.setTitle(rs.getString("qb_title"));
 				dto.setWriter(rs.getString("qb_writer"));
-				dto.setDate(rs.getTimestamp("qb_date"));
+				dto.setDate(rs.getTimestamp("qb_date").toString());
 				dto.setHit(rs.getInt("hit"));
 
 				arr.add(dto);
@@ -147,7 +147,7 @@ public class QboardDao extends AbstractBoardDao<QboardDto>
 
 				dto.setTitle(rs.getString(1));
 				dto.setWriter(rs.getString(2));
-				dto.setDate(rs.getTimestamp(3));
+				dto.setDate(rs.getTimestamp(3).toString());
 				dto.setHit(rs.getInt(4)+1);
 				dto.setContent(rs.getString(5));
 				
