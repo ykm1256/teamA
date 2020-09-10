@@ -26,7 +26,8 @@
     <!--
     <Manager pathname="" />
     -->
-    <Resource maxWait="-1"
+    
+        <Resource maxWait="-1"
            maxIdle="20" 
            maxActive="100" 
            password="1234"
@@ -35,6 +36,6 @@
 	       driverClassName="com.mysql.jdbc.Driver" 
 	       type="javax.sql.DataSource"
 	       auth="Container" 
-	       name="jdbc/mysql" />
-    
+	       name="jdbc/mysql" /> 
+
 </Context>

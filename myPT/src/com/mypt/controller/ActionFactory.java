@@ -31,13 +31,16 @@ import com.mypt.action.move.MoveIntroAction;
 import com.mypt.action.move.MovePayment;
 import com.mypt.action.move.MoveReplyAction;
 import com.mypt.action.move.MoveSchedule;
+import com.mypt.action.move.MoveTrainerRegister;
 import com.mypt.action.move.MoveUserMain;
 import com.mypt.action.move.MoveUserRegister;
 import com.mypt.action.move.MoveWriteAction;
 import com.mypt.action.payment.UserPaymentDataAction;
 import com.mypt.action.qr.QrCheckAction;
 import com.mypt.action.qr.QrViewAction;
+import com.mypt.action.register.AdminTrainerRegisterAction;
 import com.mypt.action.register.AdminUserRegisterAction;
+import com.mypt.action.schedule.ScheduleLoadAction;
 import com.mypt.action.schedule.TrainerScheduleSettingAction;
 import com.mypt.action.schedule.UserScheduleViewAction;
 import com.mypt.dto.BoardDto;
@@ -68,6 +71,7 @@ public class ActionFactory
 		// 인트로 화면
 		map.put("/moveIntro", new MoveIntroAction());
 		map.put("/moveInbody", new MoveInbody());
+		
 		//userLogin
 		map.put("/userLogin", new UserLoginAction());
 		map.put("/userMain", new MoveUserMain());
@@ -76,9 +80,13 @@ public class ActionFactory
 		//trainerLogin
 		map.put("/trainerLogin", new TrainerLoginAction());
 		
+		//트레이너 등록
+		map.put("/moveTrainerRegister", new MoveTrainerRegister());		
+		map.put("/trainerRegisterAction", new AdminTrainerRegisterAction());
+		
 		//회원가입
 		map.put("/moveUserRegister", new MoveUserRegister());		
-		map.put("/userInsertAction", new AdminUserRegisterAction());
+		map.put("/userRegisterAction", new AdminUserRegisterAction());
 		map.put("/nickCheck", new NickCheckAction());
 		map.put("/emailCheck", new EmailCheckAction());
 		
@@ -126,14 +134,17 @@ public class ActionFactory
 		
 		map.put("/boardView",new ViewAction());
 		
-		
 		// 유저 메인페이지 스케줄
 		map.put("/userSchedule", new UserScheduleViewAction());
-		
+				
+				
 		//게시판 좋아요
 		map.put("/boardLike", new LikeAction());
 		
 		map.put("/reply", new MoveReplyAction());
+		
+		//스케줄 불러오기
+		map.put("/scheduleLoad",new ScheduleLoadAction());
 		
 	}
 	

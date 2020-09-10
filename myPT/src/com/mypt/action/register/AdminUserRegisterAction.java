@@ -32,6 +32,7 @@ public class AdminUserRegisterAction implements Action {
 		dto.setTid(request.getParameter("trainer"));
 		dto.setTel(request.getParameter("tel"));
 		
+		dto.setAddrdetail(request.getParameter("addrdetail"));
 
 		UserDao dao= UserDao.getInstance();		
 		dao.insertUser(dto);

@@ -42,9 +42,10 @@ public class UserDao {
 
 			String gender = userBean.getGender();
 			String newUserID = makeID(gender, userBean.getBirth().substring(2, 4));
-
+	
 			ps.setString(1, newUserID);
 
+			
 			ps.setString(2, userBean.getPw());
 			ps.setString(3, userBean.getName());
 
@@ -333,8 +334,8 @@ public class UserDao {
 				UserDto userBean = new UserDto();
 				userBean.setId(rs.getString("id"));
 				userBean.setPw(rs.getString("pw"));
-				userBean.setName(rs.getString("name"));				
-				userBean.setGender(rs.getNString("gender"));
+				userBean.setName(rs.getString("name"));		
+				userBean.setGender(rs.getString("gender"));
 				userBean.setEmail(rs.getString("email"));
 
 				// 나이 계산
@@ -395,13 +396,13 @@ public class UserDao {
 				userBean.setName(rs.getString("name"));
 
 				// 성별 구분
-				String gender = "";
-				if (rs.getString("gender").equals("M")) {
-					gender = "남자";
-				} else {
-					gender = "여자";
-				}
-				userBean.setGender(gender);
+//				String gender = "";
+//				if (rs.getString("gender").equals("M")) {
+//					gender = "남자";
+//				} else {
+//					gender = "여자";
+//				}
+				userBean.setGender(rs.getString("gender"));
 
 				userBean.setEmail(rs.getString("email"));
 
@@ -476,8 +477,19 @@ public class UserDao {
 
 		SimpleDateFormat sf2 = new SimpleDateFormat("yyyy-MM");
 		String signYearAndMonth2 = sf2.format(today);
+		
+		String genderInit = "";
+		
+		if(gender.equals("남성"))
+		{
+			genderInit= "M";
+		}
+		else
+		{
+			genderInit= "F";
+		}
 
-		return gender + birthYear + signYearAndMonth + String.format("%03d", countUser(signYearAndMonth2) + 1);
+		return genderInit + birthYear + signYearAndMonth + String.format("%03d", countUser(signYearAndMonth2) + 1);
 
 	}
 

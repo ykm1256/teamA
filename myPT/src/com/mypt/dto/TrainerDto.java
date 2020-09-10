@@ -2,8 +2,9 @@ package com.mypt.dto;
 
 public class TrainerDto {
 	
-	private String t_id, t_pw, t_name, t_email, t_birth, t_address, t_nick,t_gender,t_tel,t_zipcode,t_addrdetail;
+	private String t_id, t_pw, t_name, t_email, t_birth, t_address, t_nick,t_gender,t_tel,t_zipcode,t_addrdetail, t_photo;
 	
+
 	public String getT_id() {
 		return t_id;
 	}
@@ -71,6 +72,12 @@ public class TrainerDto {
 		this.t_addrdetail = t_addrdetail;
 	}
 	
+	public String getT_photo() {
+		return t_photo;
+	}
+	public void setT_photo(String t_photo) {
+		this.t_photo = t_photo;
+	}
 	
 	
 

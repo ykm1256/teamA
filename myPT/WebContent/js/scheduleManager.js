@@ -1,171 +1,3 @@
-jQuery(document).ready(function () {
-  $(".btn").on("click", function () {
-    if ($(this).is("#btnProgram")) {
-      let cardId = $(this).parent().attr("id");
-      let num = cardId[4];
-      let dayPart = $("#" + cardId)
-        .find("#pro" + num)
-        .attr("id");
-      let dayMention = $("#" + cardId)
-        .find("#proMention" + num)
-        .attr("id");
-      if ($("#" + dayPart).val() == "") {
-        let modalBody = $("#proSubmit").parent().prev().attr("class");
-        $("." + modalBody)
-          .find("#proPart")
-          .val("");
-        $("." + modalBody)
-          .find("#proMention")
-          .val("");
-        $("#proSubmit").on("click", function () {
-          $("#" + cardId)
-            .find("#btnPT")
-            .hide();
-          $("#" + cardId)
-            .find("#pro" + num)
-            .attr("style", "display:flex");
-          $("#" + dayPart).val(
-            $("." + modalBody)
-              .find("#proPart")
-              .val()
-          );
-          $("#" + dayMention).val(
-            $("." + modalBody)
-              .find("#proMention")
-              .val()
-          );
-          dayMention = "undefined";
-          dayPart = "undefined";
-          num = "undefined";
-          cardId = "undefined";
-        });
-      } else {
-        let modalBody = $("#proSubmit").parent().prev().attr("class");
-        $("." + modalBody)
-          .find("#proPart")
-          .val($("#" + dayPart).val());
-        $("." + modalBody)
-          .find("#proMention")
-          .val($("#" + dayMention).val());
-        $("#proSubmit").on("click", function () {
-          $("#" + cardId)
-            .find("#btnPT")
-            .hide();
-          $("#" + cardId)
-            .find("#pro" + num)
-            .attr("style", "display:flex");
-          $("#" + dayPart).val(
-            $("." + modalBody)
-              .find("#proPart")
-              .val()
-          );
-          $("#" + dayMention).val(
-            $("." + modalBody)
-              .find("#proMention")
-              .val()
-          );
-          dayMention = "undefined";
-          dayPart = "undefined";
-          num = "undefined";
-          cardId = "undefined";
-        });
-      }
-
-      $("#proCancel").on("click", function () {
-        $("#" + cardId)
-          .find("#btnPT")
-          .show();
-        $("#" + cardId)
-          .find("#pro" + num)
-          .attr("style", "display:none");
-
-        $("#" + dayPart).val("");
-        $("#" + dayMention).val("");
-        dayMention = "undefined";
-        dayPart = "undefined";
-        cardId = "undefined";
-        num = "undefined";
-      });
-
-      $(".close").on("click", function () {
-        dayMention = "undefined";
-        dayPart = "undefined";
-        cardId = "undefined";
-        num = "undefined";
-      });
-    }
-    if ($(this).is("#btnPT")) {
-      let cardId = $(this).parent().attr("id");
-      let num = cardId[4];
-      let dayTime = $("#" + cardId)
-        .find(".PT")
-        .attr("id");
-      if ($("#" + dayTime).val() == "") {
-        let modalBody = $("#ptSubmit").parent().prev().attr("class");
-        $("." + modalBody)
-          .find("#ptTime")
-          .val("");
-        $("#ptSubmit").on("click", function () {
-          $("#" + cardId)
-            .find("#btnProgram")
-            .hide();
-          $("#" + cardId)
-            .find("#time" + num)
-            .attr("style", "display:flex");
-          $("#" + dayTime).val(
-            $("." + modalBody)
-              .find("#ptTime")
-              .val()
-          );
-          dayTime = "undefined";
-          num = "undefined";
-          cardId = "undefined";
-        });
-      } else {
-        let modalBody = $("#ptSubmit").parent().prev().attr("class");
-        $("." + modalBody)
-          .find("#ptTime")
-          .val($("#" + dayTime).val());
-        $("#ptSubmit").on("click", function () {
-          $("#" + cardId)
-            .find("#btnProgram")
-            .hide();
-          $("#" + cardId)
-            .find("#time" + num)
-            .attr("style", "display:flex");
-          $("#" + dayTime).val(
-            $("." + modalBody)
-              .find("#ptTime")
-              .val()
-          );
-          dayTime = "undefined";
-          num = "undefined";
-          cardId = "undefined";
-        });
-      }
-
-      $("#ptCancel").on("click", function () {
-        $("#" + cardId)
-          .find("#btnProgram")
-          .show();
-        $("#" + cardId)
-          .find("#time" + num)
-          .attr("style", "display:none");
-
-        $("#" + dayTime).val("");
-        dayTime = "undefined";
-        num = "undefined";
-        cardId = "undefined";
-      });
-      $(".close").on("click", function () {
-        dayMention = "undefined";
-        dayPart = "undefined";
-        cardId = "undefined";
-        num = "undefined";
-      });
-    }
-  });
-});
 
 $(".custom-select").css("width", "auto");
 // $(this).attr("data-target", "#PT");
@@ -227,6 +59,15 @@ var firstWeekDif=0;
 var lastWeekDif=0;
 var isFourWeeks=false;
 
+//오늘 몇주차인지
+const todaydate=new Date();
+nowWeekNum=weekNumberByMonth(todaydate);
+console.log(todaydate+"는 "+nowWeekNum.month+"월 "+nowWeekNum.weekNo+"주차 입니다.");
+
+//json값 받을 변수
+var json;
+
+
 // 월 선택
 $("select[id=monthSelect]").on("change",function(){
 	//주차 선택시 까지 완료버튼 사라짐
@@ -267,8 +108,18 @@ $("select[id=monthSelect]").on("change",function(){
 
 // 주차 선택
 $("select[id=weekSelect]").on("change",function(){
-	//선택시 완료버튼 생김
-	$("#confirm").attr("style","display:inline-block !important");
+	//현재 달보다 이전 달은 스케줄 변경 못함
+	if(month<nowWeekNum.month){
+		$("#confirm").attr("style","display:none !important");
+	}else{
+		$("#confirm").attr("style","display:inline-block !important");
+	}
+
+	//주차 선택시 각 버튼 초기화
+	for(var i=1;i<=5;i++){
+		$("#btnPT"+i).attr("style","display:inline-block");
+		$("#btnProgram"+i).attr("style","display:inline-block");
+	}
 	
 	weekend=this.value;
 	monthWeek+=month;
@@ -432,11 +283,128 @@ $("select[id=weekSelect]").on("change",function(){
 			}
 		}
 				
-	}	
+	}
+
+	//선택시 해당 월 주차에 데이터 있는지 확인
+	var alldate=new Array();
+	for(var i=0;i<5;i++){
+		alldate[i]=$("#date"+i).val();
+		console.log(alldate[i]);
+	}
 	
+	$.ajax({
+		url:"scheduleLoad.do",
+		type:"post",
+		async:false,
+		data:{
+			"alldate":alldate
+		},
+		success:function(data){
+			json=JSON.parse(data);
+		},
+		error:function(e){
+			alert("실패");
+			alert(e);
+		}
+	})
+	btnDisplay(json);
+	btnClick(json);
+	btnModal();
 })
 
 
+// 버튼 표시
+function btnDisplay(json){
+	$.each(json,function(index,value){
+		console.log(index);
+		if(value.hasOwnProperty("time")){
+			$("#btnPT"+index).attr("style","display:inline-block");
+			$("#btnProgram"+index).attr("style","display:none");
+			$("#time"+index).val(value.time);
+		}else if(value.hasOwnProperty("part")){
+			$("#btnProgram"+index).attr("style","display:inline-block");
+			$("#btnPT"+index).attr("style","display:none");
+			$("#pro"+index).val(value.part);
+			$("#proMention"+index).val(value.mention);
+		}else{		
+			
+		}	
+	});
+}
+
+//pt 또는 프로그램 버튼 누를 시 동작
+function btnClick(json){
+	$.each(json,function(index,value){
+		if(value.hasOwnProperty("time")){
+			$("#btnPT"+index).on("click",function(){
+				$("#ptTime").val($("#time"+index).val());
+				$("#ptTime").attr("data-location",index);
+			})
+		}else if(value.hasOwnProperty("part")){
+			$("#btnProgram"+index).on("click",function(){
+				$("#proPart").val($("#pro"+index).val());
+				$("#proPart").attr("data-location",index);
+				$("#proMention").val($("#proMention"+index).val());
+				$("#proMention").attr("data-location",index);
+			})
+		}else{		
+			$("#btnPT"+index).on("click",function(){
+				$("#ptTime").val($("#time"+index).val());
+				$("#ptTime").attr("data-location",index);
+			})
+			$("#btnProgram"+index).on("click",function(){
+				$("#proPart").val($("#pro"+index).val());
+				$("#proPart").attr("data-location",index);
+				$("#proMention").val($("#proMention"+index).val());
+				$("#proMention").attr("data-location",index);
+			})
+		}	
+	});
+}
+
+
+
+//모달에서 확인버튼 누를 시 해당 값을 넣어주고 반대 버튼은 사라지게한다.
+function btnModal(){
+	$("#ptSubmit").on("click",function(){
+		if($("#ptTime").val()==""){
+			alert("값을 넣어주세요");
+			return false;
+		}else{
+			const dataLocation=$("#ptTime").attr("data-location");
+			$("#time"+dataLocation).val($("#ptTime").val());
+			$("#btnPT"+dataLocation).attr("style","display:inline-block");
+			$("#btnProgram"+dataLocation).attr("style","display:none");
+		}
+	})
+	$("#ptCancel").on("click",function(){
+		const dataLocation=$("#ptTime").attr("data-location");
+		$("#time"+dataLocation).val("");
+		$("#btnPT"+dataLocation).attr("style","display:inline-block");
+		$("#btnProgram"+dataLocation).attr("style","display:inline-block");
+	})
+	$("#proSubmit").on("click",function(){
+		if($("#proPart").val()==""){
+			alert("운동할 부위를 적어주세요");
+			return false;
+		}else{
+			const dataLocation=$("#proPart").attr("data-location");
+			$("#pro"+dataLocation).val($("#proPart").val());
+			$("#proMention"+dataLocation).val($("#proMention").val());
+			$("#btnPT"+dataLocation).attr("style","display:none");
+			$("#btnProgram"+dataLocation).attr("style","display:inline-block");
+		}
+	})
+	$("#proCancel").on("click",function(){
+		const dataLocation=$("#proPart").attr("data-location");
+		$("#pro"+dataLocation).val("");
+		$("#proMention"+dataLocation).val("");
+		$("#btnPT"+dataLocation).attr("style","display:inline-block");
+		$("#btnProgram"+dataLocation).attr("style","display:inline-block");
+	})
+}
+
+//주차 구하기
 function weekNumberByMonth(dateFormat) {
   const inputDate = new Date(dateFormat);
  
@@ -522,34 +490,30 @@ function setting(){
 	const date= new Array();
 	for(var i=0;i<5;i++){
 		date[i]=$("#date"+i).val();
-		console.log(date[i]);
 	}
 	const time=new Array();
 	for(var i=1;i<=5;i++){
 		if($("#time"+i).val()==null){
-			time[i]="";
+			time[i-1]="";
 		}else{
-			time[i]=$("#time"+i).val();
+			time[i-1]=$("#time"+i).val();
 		}
-		console.log(time[i]);
 	}
 	const program=new Array();
 	for(var i=1;i<=5;i++){
 		if($("#pro"+i).val()==null){
-			program[i]="";
+			program[i-1]="";
 		}else{
-			program[i]=$("#pro"+i).val();
+			program[i-1]=$("#pro"+i).val();
 		}
-		console.log(program[i]);
 	}
 	const proMention=new Array();
 	for(var i=1;i<=5;i++){
 		if($("#proMention"+i).val()==null){
-			proMention[i]="";
+			proMention[i-1]="";
 		}else{
-			proMention[i]=$("#proMention"+i).val();
+			proMention[i-1]=$("#proMention"+i).val();
 		}
-		console.log(proMention[i]);
 	}
 	
 	$.ajax({
