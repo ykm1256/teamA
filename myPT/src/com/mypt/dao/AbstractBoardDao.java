@@ -32,12 +32,11 @@ public abstract class AbstractBoardDao<T extends BoardDto>
 		Connection con = null;
 		PreparedStatement ps = null;
 
-		String sql = "delete from ? where num=?";
+		String sql = "delete from "+boardName+ " where num=?";
 		try {
 			con = db.getConnection();
 			ps = con.prepareStatement(sql);
 			
-			ps.setString(1, boardName);
 			ps.setInt(1, num);
 
 			ps.executeUpdate();
@@ -60,14 +59,13 @@ public abstract class AbstractBoardDao<T extends BoardDto>
 
 		int hit=0;
 
-		String sql = "update ? set hit=hit+1 where num=?";
+		String sql = "update "+ boardName+" set hit=hit+1 where num=?";
 		try 
 		{
 			con = db.getConnection();
 			ps = con.prepareStatement(sql);
 			
-			ps.setString(1, boardName);
-			ps.setInt(2, num);
+			ps.setInt(1, num);
 			
 			ps.executeUpdate();
 

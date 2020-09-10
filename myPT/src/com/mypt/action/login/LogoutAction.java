@@ -10,10 +10,11 @@ public class LogoutAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		session.invalidate();
-		return "redirect:moveIntro.do";
+		
+//		return "redirect:moveIntro.do";
+		return "redirect:intro.jsp";
 	}
 
 }

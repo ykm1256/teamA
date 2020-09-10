@@ -6,8 +6,11 @@ import java.util.Map;
 import com.mypt.action.board.DeleteAction;
 import com.mypt.action.board.LikeAction;
 import com.mypt.action.board.ReplyAction;
+import com.mypt.action.board.TestViewAction;
 import com.mypt.action.board.ViewAction;
 import com.mypt.action.board.WriteAction;
+import com.mypt.action.board.comment.CommentDeleteAction;
+import com.mypt.action.board.comment.CommentInsertAction;
 import com.mypt.action.check.EmailCheckAction;
 import com.mypt.action.check.NickCheckAction;
 import com.mypt.action.crowded.CrowdedAction;
@@ -158,6 +161,10 @@ public class ActionFactory
 		
 		// 포토게시판 이동
 		map.put("/movePhoto",new MovePhotoAction());
+		
+		map.put("/testCboardView",new TestViewAction());
+		map.put("/commentInsert", new CommentInsertAction());
+		map.put("/commentDelete", new CommentDeleteAction());
 		
 	}
 	
