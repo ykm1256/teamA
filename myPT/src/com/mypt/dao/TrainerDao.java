@@ -35,7 +35,7 @@ return instance;
 		db = DBConnection.getInstance();
 	}
 
-	public void insertTrainer(TrainerDto td, HttpServletRequest request) {
+	public void insertTrainer(HttpServletRequest request) {
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -43,27 +43,24 @@ return instance;
 			con = db.getConnection();
 			String sql = "insert into trainer values(?,?,?,?,?,?,?,?,?,?,?,?)";
 			ps = con.prepareStatement(sql);
-			
-			//파일처리해야함
-								
-			ps.setString(1, makeID());
-			ps.setString(2, td.getT_pw());
-			ps.setString(3, td.getT_name());
-			ps.setString(4, td.getT_gender());
-			ps.setString(5, td.getT_email());
-			ps.setString(6, td.getT_birth());
-			ps.setString(7, td.getT_address());
-			ps.setString(8, td.getT_nick());
-			ps.setString(9, td.getT_tel());
-			ps.setString(10, td.getT_zipcode());			
-			ps.setString(11, td.getT_addrdetail());
-				
+
 			MultipartRequest multi = 
 					new MultipartRequest(request, saveFolder, maxSize,
 							encoding, new DefaultFileRenamePolicy());
 			String t_photo = multi.getFilesystemName("photo");
 			File f = multi.getFile("photo");
 			
+			ps.setString(1, makeID());
+			ps.setString(2, multi.getParameter("password"));
+			ps.setString(3, multi.getParameter("userName"));
+			ps.setString(4, multi.getParameter("gender"));
+			ps.setString(5, multi.getParameter("email"));
+			ps.setString(6, multi.getParameter("birthdate"));
+			ps.setString(7, multi.getParameter("address"));
+			ps.setString(8, multi.getParameter("nickname"));
+			ps.setString(9, multi.getParameter("tel"));
+			ps.setString(10, multi.getParameter("zipcode"));			
+			ps.setString(11, multi.getParameter("addrdetail"));					
 			ps.setString(12, t_photo);
 			
 			ps.executeUpdate();
@@ -269,6 +266,12 @@ return instance;
 
 		return "T"+String.format("%04d", countTrainer() + 1);
 
+	}
+	
+	
+	public void uploadTrainerPhoto()
+	{
+		
 	}
 
 }

@@ -50,7 +50,7 @@
                                                 <div class="col-md-6"> 
                                                     <div class="form-group">
                                                         <label class="small mb-1" for="photo">사진*</label>
-                                                        <input class="py-2" id="photo" minlength="2" maxlength="10" name="userName" type="file" required>
+                                                        <input class="py-2" id="photo" name="photo" type="file" required>
                                                     </div>
                                                 </div>
                                             </div>
