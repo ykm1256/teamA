@@ -90,7 +90,7 @@ public class PboardDao extends AbstractBoardDao<PboardDto>{
 		
 		ArrayList<PboardDto> arr= new ArrayList<PboardDto>();
 
-		String sql = "select * from pboard";
+		String sql = "select * from pboard order by pb_num desc";
 
 		try {
 			con = db.getConnection();
@@ -100,13 +100,16 @@ public class PboardDao extends AbstractBoardDao<PboardDto>{
 			while(rs.next()) 
 			{
 				PboardDto dto = new PboardDto();
-
+				
+				dto.setNum(rs.getInt("pb_num"));
 				dto.setTitle(rs.getString("pb_title"));
 				dto.setWriter(rs.getString("pb_writer"));
-				dto.setDate(rs.getTimestamp("pb_date"));
+				String date=rs.getTimestamp("pb_date").toString();
+				dto.setDate(date.substring(0, 10));
 				dto.setPhoto(rs.getString("pb_photo"));
-				dto.setLike(rs.getInt("like"));
-				dto.setHit(rs.getInt("hit"));	
+				dto.setContent(rs.getString("pb_content"));
+				dto.setLike(rs.getInt("pb_like"));
+				dto.setHit(rs.getInt("pb_hit"));	
 				
 				arr.add(dto);
 			}
@@ -146,7 +149,7 @@ public class PboardDao extends AbstractBoardDao<PboardDto>{
 								
 				dto.setTitle(rs.getString(1));
 				dto.setWriter(rs.getString(2));
-				dto.setDate(rs.getTimestamp(3));
+				dto.setDate(rs.getTimestamp(3).toString());
 				dto.setHit(rs.getInt(4)+1);
 				dto.setContent(rs.getString(5));
 				dto.setLike(rs.getInt(6));	
@@ -197,10 +200,10 @@ public class PboardDao extends AbstractBoardDao<PboardDto>{
 					
 					dto.setTitle(rs.getString("pb_title"));
 					dto.setWriter(rs.getString("pb_writer"));
-					dto.setDate(rs.getTimestamp("pb_date"));
+					dto.setDate(rs.getTimestamp("pb_date").toString());
 					dto.setPhoto(rs.getString("pb_photo"));
-					dto.setLike(rs.getInt("like"));
-					dto.setHit(rs.getInt("hit"));	
+					dto.setLike(rs.getInt("pb_like"));
+					dto.setHit(rs.getInt("pb_hit"));	
 										
 					arr.add(dto);
 				}	
@@ -220,6 +223,36 @@ public class PboardDao extends AbstractBoardDao<PboardDto>{
 		return arr;
 	}
 
-	
+	//댓글 수 확인
+	public int commentNum(int pb_num) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int result=0;
+
+		String sql = "SELECT count(*) FROM pcomment where pb_cbnum="+pb_num;
+
+		try {
+			con = db.getConnection();
+			ps = con.prepareStatement(sql);
+//			ps.setInt(1, pb_num);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt(1);
+			}else {
+				result=0;
+			}
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		} 
+		finally 
+		{
+			db.closeConnection(rs, ps, con);
+		}
+
+		return result;
+	}
 
 }

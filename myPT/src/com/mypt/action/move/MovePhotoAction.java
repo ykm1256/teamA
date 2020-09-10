@@ -17,9 +17,13 @@ public class MovePhotoAction implements Action {
 		HttpSession session=request.getSession();
 		PboardDao pdao=PboardDao.getInstance();
 		ArrayList<PboardDto> parr=pdao.getList();
-		
-
-		
+		ArrayList<Integer> coments=new ArrayList<Integer>();
+		for(int i=0;i<parr.size();i++) {
+			int pb_num=parr.get(i).getNum();
+			coments.add(pdao.commentNum(pb_num));
+		}
+		request.setAttribute("photoList", parr);
+		request.setAttribute("comment", coments);
 		return "common/photoBoard";
 	}
 
