@@ -305,9 +305,8 @@
               </div>
               </c:when>
               <c:when test="${sessionScope.nick=='관리자'}">
-                    <div class="text-right mb-1 mr-1">
-              <a href="#" class="mr-2 btn btn-light btn-sm font-weight-bold">수정</a>
-              <a href="boardDelete.do" class="ml-2 btn btn-danger btn-sm font-weight-bold">삭제</a>              
+                    <div class="text-right mb-1 mr-1">             
+              <a href="boardDelete.do" class="ml-2 btn btn-danger btn-sm font-weight-bold">삭제</a>            
               </div>
               </c:when>
               </c:choose>
@@ -427,7 +426,7 @@
     <script src="/myPT/js/scripts.js"></script>
     <script src="/myPT/js/like.js"></script>
     <!-- 게시판 관련 -->
-    <script src="/myPT/js/boardDetail.js"></script>
+    
   <script type="text/javascript" src="assets/summernote-0.8.18-dist/summernote-bs4.js"></script>
   <script src="assets/summernote-0.8.18-dist/lang/summernote-ko-KR.js"></script>
   </body>

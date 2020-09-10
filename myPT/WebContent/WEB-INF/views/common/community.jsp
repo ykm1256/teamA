@@ -202,7 +202,7 @@
 					int num = bean.getNum();//게시물 번호
 					String title = bean.getTitle();//제목
 					String writer = bean.getWriter();//이름
-					Timestamp date = bean.getDate();//날짜
+					String date = bean.getDate();//날짜
 					int depth = bean.getDepth();//답변의 깊이
 					int hit = bean.getHit();//조회수
 					String head = bean.getHead();
