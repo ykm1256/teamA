@@ -68,7 +68,7 @@
                         >
                         <input
                           class="form-control py-4 text-white rounded-0 border-top-0 border-right-0 border-left-0"
-                          style="background-color: black"
+                          style="background-color: black;"
                           id="pw1"
                           name="pw"
                           type="password"

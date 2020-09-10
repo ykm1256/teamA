@@ -15,3 +15,5 @@ $(window).resize(function () {
     $(".card-img-top").css("height", "80vw");
   }
 });
+
+

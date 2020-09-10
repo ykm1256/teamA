@@ -16,11 +16,11 @@ public class LikeAction implements Action {
 		// TODO Auto-generated method stub
 		int num = Integer.parseInt(request.getParameter("num"));
 		int flag = Integer.parseInt(request.getParameter("flag"));
-		String board = request.getParameter("board");
-		String lboard= "";
-//		HttpSession session = request.getSession();
-//		String nick = session.getAttribute("nick").toString();
-		String nick = "길동이";
+		HttpSession session = request.getSession();
+		String board = session.getAttribute("board").toString();
+		String lboard= "";		
+		String nick = session.getAttribute("nick").toString();
+//		String nick = "길동이";
 		if(board.equals("cboard")) {
 			lboard = "cblike";
 		}else {

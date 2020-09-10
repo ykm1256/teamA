@@ -107,7 +107,7 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 					dto.setWriter(rs.getString("cb_writer"));					
 					dto.setHead(rs.getString("cb_head"));
 					dto.setHit(rs.getInt("hit"));
-					dto.setDate(rs.getTimestamp("cb_cb_date"));
+					dto.setDate(rs.getTimestamp("cb_cb_date").toString());
 					dto.setLike(rs.getInt("cb_like"));
 										
 					arr.add(dto);
@@ -149,7 +149,7 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 					dto.setNum(num);
 					dto.setTitle(rs.getString("cb_title"));
 					dto.setWriter(rs.getString("cb_writer"));
-					dto.setDate(rs.getTimestamp("cb_date"));
+					dto.setDate(rs.getTimestamp("cb_date").toString());
 					dto.setHit(rs.getInt("cb_hit")+1);
 					dto.setContent(rs.getString("cb_content"));
 					dto.setLike(rs.getInt("cb_like"));	
@@ -265,7 +265,7 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 				dto.setWriter(rs.getString("cb_writer"));					
 				dto.setHead(rs.getString("cb_head"));
 				dto.setHit(rs.getInt("cb_hit"));
-				dto.setDate(rs.getTimestamp("cb_cb_date"));
+				dto.setDate(rs.getTimestamp("cb_date").toString());
 				dto.setLike(rs.getInt("cb_cb_like"));
 										
 					arr.add(dto);
@@ -417,10 +417,9 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 					ps.setInt(1, start);
 					ps.setInt(2, cnt);
 				}
-				System.out.println(sql);
+				
 				rs = ps.executeQuery();
-				while(rs.next()) {
-					System.out.println("들어옴");
+				while(rs.next()) {					
 					CboardDto bean = new CboardDto();
 					bean.setNum(rs.getInt("cb_num"));
 					bean.setWriter(rs.getString("cb_writer"));
@@ -428,11 +427,10 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 					bean.setPos(rs.getInt("cb_pos"));
 					bean.setRef(rs.getInt("cb_ref"));
 					bean.setDepth(rs.getInt("cb_depth"));
-					bean.setDate(rs.getTimestamp("cb_date"));
+					bean.setDate(rs.getTimestamp("cb_date").toString());
 					bean.setHit(rs.getInt("cb_hit"));				
 					bean.setHead(rs.getString("cb_head"));
-					System.out.println("출력중");
-					System.out.println(rs.getString("cb_title"));
+					bean.setLike(rs.getInt("cb_like"));					
 					vlist.addElement(bean);
 				}
 			} catch (Exception e) {
@@ -464,7 +462,7 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 					bean.setPos(rs.getInt("cb_pos"));
 					bean.setRef(rs.getInt("cb_ref"));
 					bean.setDepth(rs.getInt("cb_depth"));
-					bean.setDate(rs.getTimestamp("cb_date"));									
+					bean.setDate(rs.getTimestamp("cb_date").toString());									
 					bean.setHit(rs.getInt("cb_hit"));
 				}
 			} catch (Exception e) {
@@ -527,17 +525,17 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 				}
 			}
 		
-		//Board Delete : 업로드 파일 삭제
-		public void deleteBoard(int num) {
+		//Board Delete 원본글
+		public void deleteBoard(int ref, int depth) {
 			Connection con = null;
 			PreparedStatement ps = null;
 			String sql = null;
-			try {
-				
+			try {				
 				con = db.getConnection();
-				sql = "delete from cboard where cb_num=?";
+				sql = "delete from cboard where cb_ref=? and cb_depth>=?";
 				ps = con.prepareStatement(sql);
-				ps.setInt(1, num);
+				ps.setInt(1, ref);
+				ps.setInt(2, depth);
 				ps.executeUpdate();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -545,6 +543,25 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 				db.closeConnection(null,ps,con);
 			}
 		}
+		
+		//Board Delete 답글
+				public void deletereply(int num) {
+					Connection con = null;
+					PreparedStatement ps = null;
+					String sql = null;
+					try {
+						
+						con = db.getConnection();
+						sql = "delete from cboard where cb_num=?";
+						ps = con.prepareStatement(sql);
+						ps.setInt(1, num);
+						ps.executeUpdate();
+					} catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						db.closeConnection(null,ps,con);
+					}
+				}
 		
 		//Board Update : name, subject, content 3개만 수정
 		public void updateBoard(CboardDto bean) {
@@ -576,8 +593,8 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 			String sql = null;
 			try {
 				con = db.getConnection();
-				sql = "insert cboard(cb_writer,cb_content,cb_title,cb_ref,cb_pos,cb_depth,cb_date,"
-						+ "cb_hit)values(?, ?, ?, ?, ?, ?, now(), 0)";
+				sql = "insert cboard(cb_writer,cb_content,cb_title,cb_ref,cb_pos,cb_depth,"
+						+ "cb_hit,cb_like)values(?, ?, ?, ?, ?, ?, 0, 0)";
 				ps = con.prepareStatement(sql);
 				ps.setString(1, bean.getWriter());
 				ps.setString(2, bean.getContent());

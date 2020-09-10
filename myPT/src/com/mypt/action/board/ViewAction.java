@@ -14,11 +14,12 @@ public class ViewAction implements Action {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub		
-		int num = 20;
-		String board = "cboard";
-		
 		HttpSession session = request.getSession();
-		session.setAttribute("nick", "길동이");
+		int num = Integer.parseInt(request.getParameter("num"));
+		String board = session.getAttribute("board").toString();
+		
+		
+//		session.setAttribute("nick", "길동이");
 		String nick = session.getAttribute("nick").toString();
 		
 		if(board.equals("cboard")) {		
@@ -29,6 +30,7 @@ public class ViewAction implements Action {
 		dto = dao.detailView(num);
 		request.setAttribute("dto", dto);
 		request.setAttribute("lflag", lflag);
+		session.setAttribute("dto", dto);
 		}
 		
 //		return "common/boardDetail";

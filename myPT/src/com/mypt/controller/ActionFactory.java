@@ -3,7 +3,9 @@ package com.mypt.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.mypt.action.board.DeleteAction;
 import com.mypt.action.board.LikeAction;
+import com.mypt.action.board.ReplyAction;
 import com.mypt.action.board.ViewAction;
 import com.mypt.action.board.WriteAction;
 import com.mypt.action.check.EmailCheckAction;
@@ -29,6 +31,7 @@ import com.mypt.action.move.MoveCommunityAction;
 import com.mypt.action.move.MoveInbody;
 import com.mypt.action.move.MoveIntroAction;
 import com.mypt.action.move.MovePayment;
+import com.mypt.action.move.MovePhotoAction;
 import com.mypt.action.move.MoveReplyAction;
 import com.mypt.action.move.MoveSchedule;
 import com.mypt.action.move.MoveTrainerRegister;
@@ -43,7 +46,6 @@ import com.mypt.action.register.AdminUserRegisterAction;
 import com.mypt.action.schedule.ScheduleLoadAction;
 import com.mypt.action.schedule.TrainerScheduleSettingAction;
 import com.mypt.action.schedule.UserScheduleViewAction;
-import com.mypt.dto.BoardDto;
 
 
 
@@ -141,10 +143,21 @@ public class ActionFactory
 		//게시판 좋아요
 		map.put("/boardLike", new LikeAction());
 		
-		map.put("/reply", new MoveReplyAction());
+		map.put("/moveReply", new MoveReplyAction());
 		
 		//스케줄 불러오기
-		map.put("/scheduleLoad",new ScheduleLoadAction());
+		map.put("/scheduleLoad",new ScheduleLoadAction());	
+		
+		//답글쓰기
+		map.put("/boardReply",new ReplyAction());
+		
+		//글 삭제
+		map.put("/boardDelete",new DeleteAction());
+		
+		
+		
+		// 포토게시판 이동
+		map.put("/movePhoto",new MovePhotoAction());
 		
 	}
 	
