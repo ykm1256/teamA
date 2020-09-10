@@ -52,7 +52,7 @@ public class UserScheduleViewAction implements Action {
 			}else {
 				jobj.put("none","none");
 			}
-			schdule.put(weekend[i], jobj);
+			schdule.put(i, jobj);
 		}
 		request.setAttribute("result", schdule);
 		
