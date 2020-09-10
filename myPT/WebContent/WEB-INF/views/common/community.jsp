@@ -228,14 +228,14 @@
 <%-- 						<%}%> --%>
 					</td>
 					<%if(depth>0){%>
-					<td>
+					<td align="left">
 					<div class="badge badge-light mr-2">답변</div>
 					<a href="javascript:read('<%=num%>')">
 					<%=title%>
 					</a>
 					</td>	
 					<% } else{%>
-					<td><a href="javascript:read('<%=num%>')"><%=title%></a></td>
+					<td align="left"><a href="boardView.do"><%=title%></a></td>
 					<%}
 					
 					 %>					

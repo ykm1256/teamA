@@ -88,15 +88,19 @@ public abstract class AbstractBoardDao<T extends BoardDto>
 	{
 		Connection con = null;
 		PreparedStatement ps = null;
+		String sql = "";
 
-		String sql = "update ? set like=like+? where num=?";
+		if(boardName.equals("cboard")){
+			sql = "update "+boardName+" set cb_like=cb_like+? where cb_num=?";
+		}else{
+			sql = "update "+boardName+" set pb_like=pb_like+? where pb_num=?";
+		}
 		try {
 			con = db.getConnection();
 			ps = con.prepareStatement(sql);
-
-			ps.setString(1, boardName);
-			ps.setInt(2, numForCal);
-			ps.setInt(3, num);
+			
+			ps.setInt(1, numForCal);
+			ps.setInt(2, num);
 
 			ps.executeUpdate();
 

@@ -34,15 +34,14 @@ public class LikeDao
 		
 		int result= 0;
 
-		String sql = "insert into ? values(?,?)";
+		String sql = "insert into "+likeTblName+" values(?,?)";
 		try 
 		{
 			con = db.getConnection();
 			ps = con.prepareStatement(sql);
 
-			ps.setString(1, likeTblName);
-			ps.setString(2, dto.getNick());
-			ps.setInt(3, dto.getNum() );
+			ps.setString(1, dto.getNick());
+			ps.setInt(2, dto.getNum() );
 			
 			result= ps.executeUpdate();
 			
@@ -111,23 +110,27 @@ public class LikeDao
 	{
 		Connection con = null;
 		PreparedStatement ps = null;
+		String sql = "";
 
 		int result= 0;
 		
-		String sql = "delete from ? where num=? and nick=?";
+		if(likeTblName.equals("cblike")) {
+			sql = "delete from "+likeTblName+" where cbl_num=? and cbl_nick=?";
+		}else {
+			sql = "delete from "+likeTblName+" where pbl_num=? and pbl_nick=?";
+		}
 		try {
 			con = db.getConnection();
 			ps = con.prepareStatement(sql);
 			
-			ps.setString(1, likeTblName);
-			ps.setInt(2,dto.getNum());
-			ps.setString(3,dto.getNick());
+			ps.setInt(1,dto.getNum());
+			ps.setString(2,dto.getNick());
 			
 			result= ps.executeUpdate();
 			
 			if(result==1)
 			{
-				QboardDao.getInstance().updateLike(dto.getNum(), boardName, -1);
+				PboardDao.getInstance().updateLike(dto.getNum(), boardName, -1);
 			}
 
 		} 
@@ -142,4 +145,46 @@ public class LikeDao
 		
 		return result;
 	}
+	
+	//해당 유저 좋아요 여부
+		public int selectLike(String nickName, String likeTblName, int num)
+		{
+			Connection con = null;
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			int flag=0;			
+			String sql = "";
+			
+			if(likeTblName.equals("cblike")) {
+				sql="select * from "+likeTblName+" where cbl_nick=? and cbl_num=?";
+			}else {
+				sql="select * from "+likeTblName+" where pbl_nick=? and pbl_num=?";
+			}
+			
+			
+			try {
+				con = db.getConnection();
+				ps = con.prepareStatement(sql);			
+				
+				ps.setString(1, nickName);				
+				ps.setInt(2, num);				
+				rs = ps.executeQuery();
+
+				if(rs.next()) 
+				{
+					flag=1;
+				}
+				
+			} 
+			catch (Exception e) 
+			{
+				e.printStackTrace();
+			} 
+			finally 
+			{
+				db.closeConnection(rs, ps, con);
+			}
+
+			return flag;
+		}
 }
