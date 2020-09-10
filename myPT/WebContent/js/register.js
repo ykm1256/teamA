@@ -223,7 +223,27 @@ function checkTrainer(form)
 		alert("파일을 선택하세요.");
 		return false;
 	}
+	
+
+       
+	
+	
 	return true;
 	
 }
 	
+$("#photo").change(function () 
+{
+	var maxSize  = 2 * 1024 * 1024	 
+    var fileSize = this.files[0].size;
+	    
+    if (fileSize > maxSize) 
+    {
+        alert("첨부파일 사이즈는 2MB 이내로 등록 가능합니다.");
+        $("#photo").val("");
+        return;
+    }   
+
+});
+
+

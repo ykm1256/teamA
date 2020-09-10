@@ -49,8 +49,8 @@
                                          <div class="form-row">
                                                 <div class="col-md-6"> 
                                                     <div class="form-group">
-                                                        <label class="small mb-1" for="photo">사진*</label>
-                                                        <input class="py-2" id="photo" name="photo" type="file" required>
+                                                        <label class="small mb-1" for="photo">사진* (2mb미만의 .jpg .png)</label>
+                                                        <input class="py-2" id="photo" name="photo" type="file" accept=".jpg, .png" required>
                                                     </div>
                                                 </div>
                                             </div>

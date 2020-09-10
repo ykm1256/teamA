@@ -1,12 +1,13 @@
 package com.mypt.dao;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,9 +21,6 @@ public class TrainerDao {
 	
 	private DBConnection db;
 	
-	public static final String saveFolder = "C:/Users/admin/Desktop/photos/";
-	public static final String encoding = "UTF-8";
-	public static final int maxSize =  1024*1024*5;//5MB
 	
 //////////dao 싱글톤 (이)
 private static TrainerDao instance = new TrainerDao();
@@ -35,22 +33,72 @@ return instance;
 		db = DBConnection.getInstance();
 	}
 
+	
+	//사진 등록 추가
 	public void insertTrainer(HttpServletRequest request) {
 
+		String encoding = "UTF-8";
+		int maxSize= 2*1024*1024; //2MB
+		
+//		절대경로로 해당 path를 지정 할 경우
+//		String saveFolder = "C:/myPTImages/TrainerPhoto/";
+		
+		String saveFolder= request.getServletContext().getRealPath("img/TrainerPhoto/");  
+//서버 옵션에서 serve modules without publishing. 현재 컴 기준  
+//E:\Work\ProjectA\.metadata\.plugins\org.eclipse.wst.server.core\tmp2\wtpwebapps\myPT\img\TrainerPhoto\
+
+//serve modules without publishing 체크 //체크 여부 상관 없이 배포한 것을 실행할 땐 아래의 경로로 인식됨.
+//C:\Users\admin\git\teamA\myPT\WebContent\img\TrainerPhoto\		
+								
 		Connection con = null;
 		PreparedStatement ps = null;
+		
+		byte[] byteArr = new byte[1024];
+        FileInputStream fin = null;
+        FileOutputStream fout = null;
+        int read= 0;
+		
 		try {
 			con = db.getConnection();
 			String sql = "insert into trainer values(?,?,?,?,?,?,?,?,?,?,?,?)";
 			ps = con.prepareStatement(sql);
 
+			File dir = new File(saveFolder);			
+			if(!dir.exists()) //디렉터리 없으면 생성
+			{
+				org.apache.commons.io.FileUtils.forceMkdir(dir);
+			}
+			
 			MultipartRequest multi = 
 					new MultipartRequest(request, saveFolder, maxSize,
 							encoding, new DefaultFileRenamePolicy());
-			String t_photo = multi.getFilesystemName("photo");
-			File f = multi.getFile("photo");
 			
-			ps.setString(1, makeID());
+			String t_photo = multi.getFilesystemName("photo"); //input태그-> 서버상에 실제로 업로드된 파일 이름
+			File curFile = multi.getFile("photo");  //실제 업로드된 파일 객체 반환
+
+			String t_Id= makeID(); //트레이너 아이디 생성
+						
+			//파일이름 t_ID
+			String newFileName= t_Id+"."+t_photo.substring(t_photo.lastIndexOf(".")+1);
+	        File newFile = new File(saveFolder + newFileName);
+
+	        // 파일명 rename
+	        if(!curFile.renameTo(newFile)){
+	            // rename이 되지 않을경우 강제로 파일을 복사하고 기존파일은 삭제
+	            byteArr = new byte[maxSize];
+	            fin = new FileInputStream(curFile);
+	            fout = new FileOutputStream(newFile);
+	            while((read=fin.read(byteArr,0,byteArr.length))!=-1)
+	            {
+	                fout.write(byteArr, 0, read);
+	            }
+	             
+	            fin.close();
+	            fout.close();
+	            curFile.delete();
+	        }  
+	        	
+			ps.setString(1, t_Id);
 			ps.setString(2, multi.getParameter("password"));
 			ps.setString(3, multi.getParameter("userName"));
 			ps.setString(4, multi.getParameter("gender"));
@@ -60,15 +108,19 @@ return instance;
 			ps.setString(8, multi.getParameter("nickname"));
 			ps.setString(9, multi.getParameter("tel"));
 			ps.setString(10, multi.getParameter("zipcode"));			
-			ps.setString(11, multi.getParameter("addrdetail"));					
-			ps.setString(12, t_photo);
+			ps.setString(11, multi.getParameter("addrdetail"));		
 			
+//			ps.setString(12, saveFolder+t_photo); // 경로 모두 포함해서 db에 저장
+			ps.setString(12, newFileName); //파일명만 db에 저장
+				
 			ps.executeUpdate();
 		} 
 		catch (Exception e) 
 		{
 			e.printStackTrace();
-		} finally {
+		} 
+		finally 
+		{
 			db.closeConnection(null, ps, con);
 		}
 
