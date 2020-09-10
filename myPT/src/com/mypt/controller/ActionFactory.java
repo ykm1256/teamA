@@ -3,6 +3,7 @@ package com.mypt.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.mypt.action.board.LikeAction;
 import com.mypt.action.board.ViewAction;
 import com.mypt.action.board.WriteAction;
 import com.mypt.action.check.EmailCheckAction;
@@ -28,6 +29,7 @@ import com.mypt.action.move.MoveCommunityAction;
 import com.mypt.action.move.MoveInbody;
 import com.mypt.action.move.MoveIntroAction;
 import com.mypt.action.move.MovePayment;
+import com.mypt.action.move.MoveReplyAction;
 import com.mypt.action.move.MoveSchedule;
 import com.mypt.action.move.MoveUserMain;
 import com.mypt.action.move.MoveUserRegister;
@@ -38,6 +40,7 @@ import com.mypt.action.qr.QrViewAction;
 import com.mypt.action.register.AdminUserRegisterAction;
 import com.mypt.action.schedule.TrainerScheduleSettingAction;
 import com.mypt.action.schedule.UserScheduleViewAction;
+import com.mypt.dto.BoardDto;
 
 
 
@@ -126,6 +129,11 @@ public class ActionFactory
 		
 		// 유저 메인페이지 스케줄
 		map.put("/userSchedule", new UserScheduleViewAction());
+		
+		//게시판 좋아요
+		map.put("/boardLike", new LikeAction());
+		
+		map.put("/reply", new MoveReplyAction());
 		
 	}
 	

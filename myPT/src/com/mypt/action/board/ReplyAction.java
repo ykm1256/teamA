@@ -8,7 +8,7 @@ import com.mypt.controller.Action;
 import com.mypt.dao.CboardDao;
 import com.mypt.dto.CboardDto;
 
-public class WriteAction implements Action{
+public class ReplyAction implements Action{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

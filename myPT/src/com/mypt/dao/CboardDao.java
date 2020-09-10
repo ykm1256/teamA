@@ -146,7 +146,7 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 				if(rs.next())
 				{
 					dto = new CboardDto();
-									
+					dto.setNum(num);
 					dto.setTitle(rs.getString("cb_title"));
 					dto.setWriter(rs.getString("cb_writer"));
 					dto.setDate(rs.getTimestamp("cb_date"));
@@ -154,6 +154,9 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 					dto.setContent(rs.getString("cb_content"));
 					dto.setLike(rs.getInt("cb_like"));	
 					dto.setHead(rs.getString("cb_head"));	
+					dto.setRef(rs.getInt("cb_ref"));	
+					dto.setDepth(rs.getInt("cb_depth"));	
+					dto.setPos(rs.getInt("cb_pos"));	
 					
 					upCount(num);
 				}
@@ -489,6 +492,40 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 				db.closeConnection(null,ps,con);
 			}
 		}
+		//좋아요 증가
+				public void upLike(int num) {
+					Connection con = null;
+					PreparedStatement ps = null;
+					String sql = null;
+					try {
+						con = db.getConnection();
+						sql = "update cboard set cb_like = cb_like +1 where cb_num = ?";
+						ps = con.prepareStatement(sql);
+						ps.setInt(1, num);
+						ps.executeUpdate();
+					} catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						db.closeConnection(null,ps,con);
+					}
+				}
+			//좋아요 감소
+			public void downLike(int num) {
+				Connection con = null;
+				PreparedStatement ps = null;
+				String sql = null;
+				try {
+					con = db.getConnection();
+					sql = "update cboard set cb_like = cb_like -1 where cb_num = ?";
+					ps = con.prepareStatement(sql);
+					ps.setInt(1, num);
+					ps.executeUpdate();
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					db.closeConnection(null,ps,con);
+				}
+			}
 		
 		//Board Delete : 업로드 파일 삭제
 		public void deleteBoard(int num) {
