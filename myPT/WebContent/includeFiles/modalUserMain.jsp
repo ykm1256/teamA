@@ -22,8 +22,8 @@
                       <div
                         class="widget-numbers"
                         style="color: #3ac47d !important"
+                        id="ptTime"
                       >
-                        14:00
                       </div>
                     </div>
                   </div>
@@ -54,13 +54,12 @@
               <li class="list-group-item">
                 <div class="row">
                   <div class="text-left h4 col-6">목표 부위</div>
-                  <div class="text-right h5 col-6 text-danger">
-                    가슴, 이두, 어깨
+                  <div class="text-right h5 col-6 text-danger" id="part">
                   </div>
                 </div>
               </li>
               <li class="list-group-item text-center">
-                <div class="h5">밴치프레스, 바벨, 덤벨 이용하시면 됩니다.</div>
+                <div class="h5" id="mention"></div>
               </li>
             </ul>
           </div>

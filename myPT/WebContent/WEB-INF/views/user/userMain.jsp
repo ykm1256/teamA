@@ -42,7 +42,7 @@
               <div class="card mb-4 p-0" id="week1">
                 <div class="card-header bg-dark text-white">월요일</div>
                 <div class="card-body">
-                  <div class="card"id="btnMon"
+                  <div class="card"id="btn0"
                   		data-toggle="modal">
                   </div>
                 </div>
@@ -50,7 +50,7 @@
               <div class="card mb-4 p-0" id="week2">
                 <div class="card-header bg-dark text-white">화요일</div>
                 <div class="card-body">
-                  <div class="card" id="btnTue"
+                  <div class="card" id="btn1"
                   		data-toggle="modal">
                   </div>
                 </div>
@@ -58,7 +58,7 @@
               <div class="card mb-4 p-0" id="week3">
                 <div class="card-header bg-dark text-white">수요일</div>
                 <div class="card-body">
-                  <div class="card" id="btnWed"
+                  <div class="card" id="btn2"
                   data-toggle="modal">
                   </div>
                 </div>
@@ -66,15 +66,15 @@
               <div class="card mb-4 p-0" id="week4">
                 <div class="card-header bg-dark text-white">목요일</div>
                 <div class="card-body">
-                  <div class="card" id="btnThu"
+                  <div class="card" id="btn3"
                   	data-toggle="modal">
-                  </div>
+                  </div>                  
                 </div>
               </div>
               <div class="card mb-4 p-0" id="week5">
                 <div class="card-header bg-dark text-white">금요일</div>
                 <div class="card-body">
-                  <div class="card" id="btnFri"
+                  <div class="card" id="btn4"
                   data-toggle="modal">
                   </div>
                 </div>

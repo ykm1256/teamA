@@ -19,7 +19,6 @@ public class TrainerScheduleSettingAction implements Action {
 		ProgramDao pdao=ProgramDao.getInstance();
 		ScheduleDao sdao=ScheduleDao.getInstance();
 		
-		
 		String[] pt=request.getParameterValues("time[]");
 		String[] program=request.getParameterValues("program[]");
 		String[] proMention=request.getParameterValues("proMention[]");	
@@ -63,7 +62,12 @@ public class TrainerScheduleSettingAction implements Action {
 				}
 				
 			}else {
-				System.out.println("둘다 비었음");
+				System.out.println("둘다 비어 삭제함");
+				if(pdao.isProgramExist(id, date[i])==1) {
+					pdao.deleteProgram(id, date[i]);
+				}else if(sdao.isScheduleExist(id, date[i])==1) {
+					sdao.ScheduleDelete(id, date[i]);
+				}
 			}
 		}
 		
