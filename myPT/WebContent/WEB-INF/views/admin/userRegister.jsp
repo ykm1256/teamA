@@ -47,7 +47,7 @@
                 		<div class="card-header"><h3 class="text-center font-weight-light my-1">회원등록</h3></div>
 
                         <div class="card-body">
-                              <form action="userInsertAction.do" method="post" onsubmit="return check(this)">
+                              <form action="userRegisterAction.do" method="post" onsubmit="return checkUser(this)">
                                   <div class="form-row">
                                       <div class="col-md-6"> 
                                           <div class="form-group">
@@ -66,8 +66,8 @@
                                               <select class="form-control" id="gender" name="gender" required >
 <!--                                               <option value="1" selected>남성</option> -->
 <!--                                               <option value="2">여성</option> -->
-                                              <option value="M" selected>남성</option>
-                                              <option value="F">여성</option>
+                                              <option value="남성" selected>남성</option>
+                                              <option value="여성">여성</option>
                                               </select>
                                           </div>
                                       </div>
