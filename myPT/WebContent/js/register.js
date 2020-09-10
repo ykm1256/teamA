@@ -224,14 +224,11 @@ function checkTrainer(form)
 		return false;
 	}
 	
-
-       
-	
-	
 	return true;
 	
 }
 	
+
 $("#photo").change(function () 
 {
 	var maxSize  = 2 * 1024 * 1024	 
@@ -243,7 +240,20 @@ $("#photo").change(function ()
         $("#photo").val("");
         return;
     }   
-
+    
 });
+
+
+
+
+
+
+	
+
+	  
+	  
+
+
+
 
 

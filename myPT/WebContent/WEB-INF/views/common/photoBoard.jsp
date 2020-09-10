@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -11,7 +11,7 @@
     />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>템플릿</title>
+    <title>포토 게시판</title>
     <link href="/myPT/css/styles.css" rel="stylesheet" />
     <link href="/myPT/css/index.css" rel="stylesheet"/>
     <link href="/myPT/css/widget.css" rel="stylesheet"/>
@@ -35,15 +35,13 @@
       <!-- sideNav -->
       <jsp:include page="/includeFiles/sideNav.jsp"></jsp:include>
       <!-- /sideNav -->
+      
       <div id="layoutSidenav_content">
         <main>
           <div class="container-fluid mt-3">
-            <!-- ============================================================== -->
-            <!-- Start Page Content -->
-            <!-- ============================================================== -->
             <div class="row">
               <div class="col-12">
-                <h3 class="mb-5 mt-3">포토게시판</h3>
+                <h3 class="mb-5 mt-3">포토 게시판</h3>
 
                 <div class="row">
                   <div class="col-md-6 col-xs-12 col-lg-4">

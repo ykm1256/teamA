@@ -28,6 +28,7 @@ import com.mypt.action.move.MoveCommunityAction;
 import com.mypt.action.move.MoveInbody;
 import com.mypt.action.move.MoveIntroAction;
 import com.mypt.action.move.MovePayment;
+import com.mypt.action.move.MovePhotoBoardAction;
 import com.mypt.action.move.MoveSchedule;
 import com.mypt.action.move.MoveTrainerRegister;
 import com.mypt.action.move.MoveUserMain;
@@ -136,6 +137,10 @@ public class ActionFactory
 		
 		//스케줄 불러오기
 		map.put("/scheduleLoad",new ScheduleLoadAction());
+		
+		//포토 게시판
+		map.put("/movePhotoBoard", new MovePhotoBoardAction());
+		
 		
 	}
 	

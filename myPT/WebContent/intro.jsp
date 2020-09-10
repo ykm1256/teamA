@@ -9,8 +9,6 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
     <title>myPT</title>
     <link href="css/styles.css" rel="stylesheet" />
     <link href="css/index.css" rel="stylesheet"/>
@@ -55,8 +53,7 @@
                     
                       <div class="form-group">
                         <label class="small mb-1 text-white" for="id">아이디</label>
-                        
-                        <input
+                        <input                 
                           class="form-control py-4 text-white rounded-0 border-top-0 border-right-0 border-left-0"
                           id="id"
                           name="id"
