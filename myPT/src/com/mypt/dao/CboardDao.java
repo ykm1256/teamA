@@ -107,7 +107,7 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 					dto.setWriter(rs.getString("cb_writer"));					
 					dto.setHead(rs.getString("cb_head"));
 					dto.setHit(rs.getInt("hit"));
-					dto.setDate(rs.getTimestamp("cb_cb_date"));
+					dto.setDate(rs.getTimestamp("cb_cb_date").toString());
 					dto.setLike(rs.getInt("cb_like"));
 										
 					arr.add(dto);
@@ -149,7 +149,7 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 					dto.setNum(num);
 					dto.setTitle(rs.getString("cb_title"));
 					dto.setWriter(rs.getString("cb_writer"));
-					dto.setDate(rs.getTimestamp("cb_date"));
+					dto.setDate(rs.getTimestamp("cb_date").toString());
 					dto.setHit(rs.getInt("cb_hit")+1);
 					dto.setContent(rs.getString("cb_content"));
 					dto.setLike(rs.getInt("cb_like"));	
@@ -265,7 +265,7 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 				dto.setWriter(rs.getString("cb_writer"));					
 				dto.setHead(rs.getString("cb_head"));
 				dto.setHit(rs.getInt("cb_hit"));
-				dto.setDate(rs.getTimestamp("cb_cb_date"));
+				dto.setDate(rs.getTimestamp("cb_date").toString());
 				dto.setLike(rs.getInt("cb_cb_like"));
 										
 					arr.add(dto);
@@ -428,7 +428,7 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 					bean.setPos(rs.getInt("cb_pos"));
 					bean.setRef(rs.getInt("cb_ref"));
 					bean.setDepth(rs.getInt("cb_depth"));
-					bean.setDate(rs.getTimestamp("cb_date"));
+					bean.setDate(rs.getTimestamp("cb_date").toString());
 					bean.setHit(rs.getInt("cb_hit"));				
 					bean.setHead(rs.getString("cb_head"));
 					System.out.println("출력중");
@@ -464,7 +464,7 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 					bean.setPos(rs.getInt("cb_pos"));
 					bean.setRef(rs.getInt("cb_ref"));
 					bean.setDepth(rs.getInt("cb_depth"));
-					bean.setDate(rs.getTimestamp("cb_date"));									
+					bean.setDate(rs.getTimestamp("cb_date").toString());									
 					bean.setHit(rs.getInt("cb_hit"));
 				}
 			} catch (Exception e) {

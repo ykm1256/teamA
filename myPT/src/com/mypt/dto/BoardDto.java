@@ -10,7 +10,7 @@ public class BoardDto
 	private String head;
 	private String content;
 	private int hit;
-	private Timestamp date;
+	private String date;
 	
 	public int getNum() {
 		return num;
@@ -49,10 +49,10 @@ public class BoardDto
 	public void setHit(int hit) {
 		this.hit = hit;
 	}
-	public Timestamp getDate() {
+	public String getDate() {
 		return date;
 	}
-	public void setDate(Timestamp date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 	
