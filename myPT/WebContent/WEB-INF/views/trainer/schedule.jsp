@@ -82,11 +82,11 @@
 								<input type="text" name="date" disabled
 										id="date0" style="display: none" />
 								<div class="card-body" id="week1">
-									<div class="btn btn-danger" id="btnPT" data-toggle="modal"
+									<div class="btn btn-danger" id="btnPT1" data-toggle="modal"
 										data-target="#PT">PT</div>
 									<input class="PT text-center" type="time" name="time" disabled
 										id="time1" style="display: none" />
-									<div class="btn btn-light" id="btnProgram" data-toggle="modal"
+									<div class="btn btn-light" id="btnProgram1" data-toggle="modal"
 										data-target="#program">프로그램</div>
 									<input class="pro text-center" type="text" name="program"
 										disabled id="pro1" style="display: none" />
@@ -99,11 +99,11 @@
 								<input type="text" name="date" disabled
 										id="date1" style="display: none" />
 								<div class="card-body" id="week2">
-									<div class="btn btn-danger" id="btnPT" data-toggle="modal"
+									<div class="btn btn-danger" id="btnPT2" data-toggle="modal"
 										data-target="#PT">PT</div>
 									<input class="PT text-center" type="time" name="time" disabled
 										id="time2" style="display: none" />
-									<div class="btn btn-light" id="btnProgram" data-toggle="modal"
+									<div class="btn btn-light" id="btnProgram2" data-toggle="modal"
 										data-target="#program">프로그램</div>
 									<input class="pro text-center" type="text" name="program"
 										disabled id="pro2" style="display: none" />
@@ -116,11 +116,11 @@
 								<input type="text" name="date" disabled
 										id="date2" style="display: none" />
 								<div class="card-body" id="week3">
-									<div class="btn btn-danger" id="btnPT" data-toggle="modal"
+									<div class="btn btn-danger" id="btnPT3" data-toggle="modal"
 										data-target="#PT">PT</div>
 									<input class="PT text-center" type="time" name="time" disabled
 										id="time3" style="display: none" />
-									<div class="btn btn-light" id="btnProgram" data-toggle="modal"
+									<div class="btn btn-light" id="btnProgram3" data-toggle="modal"
 										data-target="#program">프로그램</div>
 									<input class="pro text-center" type="text" name="program"
 										disabled id="pro3" style="display: none" />
@@ -133,11 +133,11 @@
 								<input type="text" name="date" disabled
 										id="date3" style="display: none" />
 								<div class="card-body" id="week4">
-									<div class="btn btn-danger" id="btnPT" data-toggle="modal"
+									<div class="btn btn-danger" id="btnPT4" data-toggle="modal"
 										data-target="#PT">PT</div>
 									<input class="PT text-center" type="time" name="time" disabled
 										id="time4" style="display: none" />
-									<div class="btn btn-light" id="btnProgram" data-toggle="modal"
+									<div class="btn btn-light" id="btnProgram4" data-toggle="modal"
 										data-target="#program">프로그램</div>
 									<input class="pro text-center" type="text" name="program"
 										disabled id="pro4" style="display: none" />
@@ -150,11 +150,11 @@
 								<input type="text" name="date" disabled
 										id="date4" style="display: none" />
 								<div class="card-body" id="week5">
-									<div class="btn btn-danger" id="btnPT" data-toggle="modal"
+									<div class="btn btn-danger" id="btnPT5" data-toggle="modal"
 										data-target="#PT">PT</div>
 									<input class="PT text-center" type="time" name="time" disabled
 										id="time5" style="display: none" />
-									<div class="btn btn-light" id="btnProgram" data-toggle="modal"
+									<div class="btn btn-light" id="btnProgram5" data-toggle="modal"
 										data-target="#program">프로그램</div>
 									<input class="pro text-center" type="text" name="program"
 										disabled id="pro5" style="display: none" />

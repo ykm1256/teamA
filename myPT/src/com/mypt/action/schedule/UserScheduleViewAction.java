@@ -24,8 +24,6 @@ public class UserScheduleViewAction implements Action {
 		
 		//오늘 날짜 및 해당 월 주차, 오늘 요일
 		String today=request.getParameter("today");
-		int week=Integer.parseInt(request.getParameter("week"));
-		int day=Integer.parseInt(request.getParameter("day"));
 		String[] weekDates=request.getParameterValues("weekDates[]");
 		String[] arrDay = new String[5];
 		for(int i=0;i<weekDates.length;i++) {
@@ -34,7 +32,6 @@ public class UserScheduleViewAction implements Action {
 		}
 		// pt와 프로그램을 날짜별로 데이터를 받을 json
 		JSONObject schdule=new JSONObject();
-		String weekend[]= {"Mon","Tue","Wed","Thu","Fri"};
 		// pt
 		ScheduleDao sdao=ScheduleDao.getInstance();
 		// 프로그램

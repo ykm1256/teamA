@@ -1,4 +1,4 @@
-jQuery(document).ready(function () {
+/*jQuery(document).ready(function () {
   $(".btn").on("click", function () {
     if ($(this).is("#btnProgram")) {
       let cardId = $(this).parent().attr("id");
@@ -165,7 +165,7 @@ jQuery(document).ready(function () {
       });
     }
   });
-});
+});*/
 
 $(".custom-select").css("width", "auto");
 // $(this).attr("data-target", "#PT");
@@ -227,6 +227,10 @@ var firstWeekDif=0;
 var lastWeekDif=0;
 var isFourWeeks=false;
 
+//json값 받을 변수
+var json;
+
+
 // 월 선택
 $("select[id=monthSelect]").on("change",function(){
 	//주차 선택시 까지 완료버튼 사라짐
@@ -269,6 +273,12 @@ $("select[id=monthSelect]").on("change",function(){
 $("select[id=weekSelect]").on("change",function(){
 	//선택시 완료버튼 생김
 	$("#confirm").attr("style","display:inline-block !important");
+	
+	//주차 선택시 각 버튼 초기화
+	for(var i=1;i<=5;i++){
+		$("#btnPT"+i).attr("style","display:inline-block");
+		$("#btnProgram"+i).attr("style","display:inline-block");
+	}
 	
 	weekend=this.value;
 	monthWeek+=month;
@@ -432,11 +442,128 @@ $("select[id=weekSelect]").on("change",function(){
 			}
 		}
 				
-	}	
+	}
+
+	//선택시 해당 월 주차에 데이터 있는지 확인
+	var alldate=new Array();
+	for(var i=0;i<5;i++){
+		alldate[i]=$("#date"+i).val();
+		console.log(alldate[i]);
+	}
 	
+	$.ajax({
+		url:"scheduleLoad.do",
+		type:"post",
+		async:false,
+		data:{
+			"alldate":alldate
+		},
+		success:function(data){
+			json=JSON.parse(data);
+		},
+		error:function(e){
+			alert("실패");
+			alert(e);
+		}
+	})
+	btnDisplay(json);
+	btnClick(json);
+	btnModal(json);
 })
 
 
+// 버튼 표시
+function btnDisplay(json){
+	$.each(json,function(index,value){
+		console.log(index);
+		if(value.hasOwnProperty("time")){
+			$("#btnPT"+index).attr("style","display:inline-block");
+			$("#btnProgram"+index).attr("style","display:none");
+			$("#time"+index).val(value.time);
+		}else if(value.hasOwnProperty("part")){
+			$("#btnProgram"+index).attr("style","display:inline-block");
+			$("#btnPT"+index).attr("style","display:none");
+			$("#pro"+index).val(value.part);
+			$("#proMention"+index).val(value.mention);
+		}else{		
+			
+		}	
+	});
+}
+
+//pt 또는 프로그램 버튼 누를 시 동작
+function btnClick(json){
+	$.each(json,function(index,value){
+		if(value.hasOwnProperty("time")){
+			$("#btnPT"+index).on("click",function(){
+				$("#ptTime").val($("#time"+index).val());
+				$("#ptTime").attr("data-location",index);
+			})
+		}else if(value.hasOwnProperty("part")){
+			$("#btnProgram"+index).on("click",function(){
+				$("#proPart").val($("#pro"+index).val());
+				$("#proPart").attr("data-location",index);
+				$("#proMention").val($("#proMention"+index).val());
+				$("#proMention").attr("data-location",index);
+			})
+		}else{		
+			$("#btnPT"+index).on("click",function(){
+				$("#ptTime").val($("#time"+index).val());
+				$("#ptTime").attr("data-location",index);
+			})
+			$("#btnProgram"+index).on("click",function(){
+				$("#proPart").val($("#pro"+index).val());
+				$("#proPart").attr("data-location",index);
+				$("#proMention").val($("#proMention"+index).val());
+				$("#proMention").attr("data-location",index);
+			})
+		}	
+	});
+}
+
+
+
+//모달에서 확인버튼 누를 시 해당 값을 넣어주고 반대 버튼은 사라지게한다.
+function btnModal(json){
+	$("#ptSubmit").on("click",function(){
+		if($("#ptTime").val()==""){
+			alert("값을 넣어주세요");
+			return false;
+		}else{
+			const dataLocation=$("#ptTime").attr("data-location");
+			$("#time"+dataLocation).val($("#ptTime").val());
+			$("#btnPT"+dataLocation).attr("style","display:inline-block");
+			$("#btnProgram"+dataLocation).attr("style","display:none");
+		}
+	})
+	$("#ptCancel").on("click",function(){
+		const dataLocation=$("#ptTime").attr("data-location");
+		$("#time"+dataLocation).val("");
+		$("#btnPT"+dataLocation).attr("style","display:inline-block");
+		$("#btnProgram"+dataLocation).attr("style","display:inline-block");
+	})
+	$("#proSubmit").on("click",function(){
+		if($("#proPart").val()==""){
+			alert("운동할 부위를 적어주세요");
+			return false;
+		}else{
+			const dataLocation=$("#proPart").attr("data-location");
+			$("#pro"+dataLocation).val($("#proPart").val());
+			$("#proMention"+dataLocation).val($("#proMention").val());
+			$("#btnPT"+dataLocation).attr("style","display:none");
+			$("#btnProgram"+dataLocation).attr("style","display:inline-block");
+		}
+	})
+	$("#proCancel").on("click",function(){
+		const dataLocation=$("#proPart").attr("data-location");
+		$("#pro"+dataLocation).val("");
+		$("#proMention"+dataLocation).val("");
+		$("#btnPT"+dataLocation).attr("style","display:inline-block");
+		$("#btnProgram"+dataLocation).attr("style","display:inline-block");
+	})
+}
+
+//주차 구하기
 function weekNumberByMonth(dateFormat) {
   const inputDate = new Date(dateFormat);
  

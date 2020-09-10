@@ -36,6 +36,7 @@ import com.mypt.action.payment.UserPaymentDataAction;
 import com.mypt.action.qr.QrCheckAction;
 import com.mypt.action.qr.QrViewAction;
 import com.mypt.action.register.AdminUserRegisterAction;
+import com.mypt.action.schedule.ScheduleLoadAction;
 import com.mypt.action.schedule.TrainerScheduleSettingAction;
 import com.mypt.action.schedule.UserScheduleViewAction;
 
@@ -123,9 +124,11 @@ public class ActionFactory
 		
 		map.put("/boardView",new ViewAction());
 		
-		
 		// 유저 메인페이지 스케줄
 		map.put("/userSchedule", new UserScheduleViewAction());
+		
+		//스케줄 불러오기
+		map.put("/scheduleLoad",new ScheduleLoadAction());
 		
 	}
 	

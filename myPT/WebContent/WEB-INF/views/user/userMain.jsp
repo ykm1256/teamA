@@ -45,7 +45,6 @@
                   <div class="card"id="btn0"
                   		data-toggle="modal">
                   </div>
-                  <input type="text" id="modaldata1" style="display:none"></input>
                 </div>
               </div>
               <div class="card mb-4 p-0" id="week2">
@@ -54,7 +53,6 @@
                   <div class="card" id="btn1"
                   		data-toggle="modal">
                   </div>
-                  <input type="text" id="modaldata2" style="display:none"></input>
                 </div>
               </div>
               <div class="card mb-4 p-0" id="week3">
@@ -63,7 +61,6 @@
                   <div class="card" id="btn2"
                   data-toggle="modal">
                   </div>
-                  <input type="text" id="modaldata3" style="display:none"></input>
                 </div>
               </div>
               <div class="card mb-4 p-0" id="week4">
@@ -71,8 +68,7 @@
                 <div class="card-body">
                   <div class="card" id="btn3"
                   	data-toggle="modal">
-                  </div>
-                  <input type="text" id="modaldata4" style="display:none"></input>
+                  </div>                  
                 </div>
               </div>
               <div class="card mb-4 p-0" id="week5">
@@ -81,7 +77,6 @@
                   <div class="card" id="btn4"
                   data-toggle="modal">
                   </div>
-                  <input type="text" id="modaldata5" style="display:none"></input>
                 </div>
               </div>
 

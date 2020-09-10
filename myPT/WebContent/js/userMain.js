@@ -39,9 +39,7 @@ $.ajax({
 		async:false,
 		data:{
 			"today":year+"-"+month+"-",
-			"day":thisDay,
 			"weekDates":weekDates,
-			"week":week
 		},
 		success:function(data){
 			var obj=JSON.parse(data);
