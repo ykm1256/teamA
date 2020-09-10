@@ -43,25 +43,17 @@ public class UserDao {
 			String gender = userBean.getGender();
 			String newUserID = makeID(gender, userBean.getBirth().substring(2, 4));
 	
-			ps.setString(1, newUserID);
-
-			
+			ps.setString(1, newUserID);	
 			ps.setString(2, userBean.getPw());
 			ps.setString(3, userBean.getName());
-
 			ps.setString(4, gender);
-
 			ps.setString(5, userBean.getEmail());
 			ps.setString(6, userBean.getBirth());
 			ps.setString(7, userBean.getAddress());
 			ps.setString(8, userBean.getQr());
-			ps.setString(9, userBean.getNick());
-			
-//			ps.setDate(10, userBean.getStartdate());
-//			ps.setDate(11, userBean.getEnddate());			
+			ps.setString(9, userBean.getNick());				
 			ps.setString(10, userBean.getStartdate());
-			ps.setString(11, userBean.getEnddate());
-			
+			ps.setString(11, userBean.getEnddate());			
 			ps.setInt(12, userBean.getPtcount());
 			ps.setString(13, userBean.getTid());
 			ps.setString(14, userBean.getZipcode());
@@ -99,13 +91,9 @@ public class UserDao {
 				userBean.setAddress(rs.getString("address"));
 				userBean.setQr(rs.getString("qr"));
 				userBean.setSigndate(rs.getTimestamp("signdate"));
-				userBean.setNick(rs.getString("nick"));
-				
-//				userBean.setStartdate(rs.getDate("startdate"));
-//				userBean.setEnddate(rs.getDate("enddate"));
+				userBean.setNick(rs.getString("nick"));			
 				userBean.setStartdate(rs.getString("startdate"));
-				userBean.setEnddate(rs.getString("enddate"));
-				
+				userBean.setEnddate(rs.getString("enddate"));				
 				userBean.setPtcount(rs.getInt("ptcount"));
 				userBean.setTid(rs.getString("tid"));
 				userBean.setTel(rs.getString("tel"));
@@ -223,8 +211,6 @@ public class UserDao {
 				sql = "update user set startdate=?,enddate=?,ptcount=ptcount+?, tid=? where id=?";
 				ps = con.prepareStatement(sql);
 		
-//				ps.setDate(8, userBean.getStartdate());
-//				ps.setDate(9, userBean.getEnddate());
 				ps.setString(1, userBean.getStartdate());
 				ps.setString(2, userBean.getEnddate());			
 				ps.setInt(3, userBean.getHistory().getHcount());
@@ -290,21 +276,14 @@ public class UserDao {
 				userBean.setQr(rs.getString("qr"));
 				userBean.setSigndate(rs.getTimestamp("signdate"));
 				userBean.setNick(rs.getString("nick"));
-				
-//				userBean.setStartdate(rs.getDate("startdate"));
-//				userBean.setEnddate(rs.getDate("enddate"));
+
 				userBean.setStartdate(rs.getString("startdate"));
 				userBean.setEnddate(rs.getString("enddate"));
 				
 				userBean.setTid(rs.getString("tid"));
 				userBean.setZipcode(rs.getString("zipcode"));
 				userBean.setTel(rs.getString("tel"));
-
-
-//				userBean.setPtcount(Integer.parseInt(rs.getString("ptcount")));
 				userBean.setPtcount(rs.getInt("ptcount"));
-
-				userBean.setPtcount(Integer.parseInt(rs.getString("ptcount")));
 				userBean.setAddrdetail(rs.getString("addrdetail"));
 
 			}
@@ -351,8 +330,6 @@ public class UserDao {
 				userBean.setSigndate(rs.getTimestamp("signdate"));
 				userBean.setNick(rs.getString("nick"));
 				
-//				userBean.setStartdate(rs.getDate("startdate"));
-//				userBean.setEnddate(rs.getDate("enddate"));
 				userBean.setStartdate(rs.getString("startdate"));
 				userBean.setEnddate(rs.getString("enddate"));
 				
@@ -418,9 +395,7 @@ public class UserDao {
 				userBean.setQr(rs.getString("qr"));
 				userBean.setSigndate(rs.getTimestamp("signdate"));
 				userBean.setNick(rs.getString("nick"));
-				
-//				userBean.setStartdate(rs.getDate("startdate"));
-//				userBean.setEnddate(rs.getDate("enddate"));
+
 				userBean.setStartdate(rs.getString("startdate"));
 				userBean.setEnddate(rs.getString("enddate"));
 				
@@ -565,7 +540,6 @@ public class UserDao {
 
 		int result = 2;
 
-//		String sql = "select count(*) from user";
 		String sql = "select count(*) from user where signdate>=? and signdate<=? ";
 		try {
 			con = db.getConnection();

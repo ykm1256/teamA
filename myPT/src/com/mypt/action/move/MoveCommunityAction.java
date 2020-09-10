@@ -13,7 +13,8 @@ public class MoveCommunityAction implements Action {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		session.setAttribute("board", "cboard");
-		return "common/community";
+//		return "common/community";
+		return "common/testCommunityBoard";
 	}
 
 }

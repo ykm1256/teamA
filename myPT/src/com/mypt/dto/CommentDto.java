@@ -3,9 +3,10 @@ package com.mypt.dto;
 import java.sql.Timestamp;
 
 public class CommentDto {
-	int boardNum, c_num;
+	int  c_num, boardNum;
 	String c_nick, c_content;
 	Timestamp c_date;
+	int c_ref;
 	
 	public int getBoardNum() {
 		return boardNum;
@@ -37,6 +38,14 @@ public class CommentDto {
 	public void setC_date(Timestamp c_date) {
 		this.c_date = c_date;
 	}
+	public int getC_ref() {
+		return c_ref;
+	}
+	public void setC_ref(int c_ref) {
+		this.c_ref = c_ref;
+	}
+	
+	
 	
 
 	

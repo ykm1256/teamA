@@ -15,7 +15,6 @@ public class TrainerLoginAction implements Action{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();		
 		String id = request.getParameter("id");
@@ -47,10 +46,7 @@ public class TrainerLoginAction implements Action{
 			
 		}
 		
-		
-		
-		
-		
+			
 		response.setContentType("text/html;charset=utf-8");
 		request.setAttribute("result", flag);
 		
