@@ -111,7 +111,7 @@
 	//기존 조건 : keyField,keyWord,nowPage,numPerPage
 	function read(num) {
 		document.readFrm.num.value = num;
-		document.readFrm.action = "read.jsp";
+		document.readFrm.action = "boardView.do";
 		document.readFrm.submit();
 	}
 	function headFn(head){
@@ -206,13 +206,13 @@
 					int depth = bean.getDepth();//답변의 깊이
 					int hit = bean.getHit();//조회수
 					String head = bean.getHead();
+					int like = bean.getLike();
 					
 					//댓글 count
 					//int bcount = cmgr.getBCommentCount(num);
 		%>
 				<tr align="center">					
-					<td>
-						<%for(int j=0;j<depth;j++){out.println("&nbsp;&nbsp;");} %>
+					<td>						
 							<%if(depth>0){
 								
 							}else{
@@ -229,20 +229,21 @@
 					</td>
 					<%if(depth>0){%>
 					<td align="left">
+					<%for(int j=1;j<depth;j++){out.println("&nbsp;&nbsp;&nbsp;&nbsp;");} %>
 					<div class="badge badge-light mr-2">답변</div>
 					<a href="javascript:read('<%=num%>')">
 					<%=title%>
 					</a>
 					</td>	
 					<% } else{%>
-					<td align="left"><a href="boardView.do"><%=title%></a></td>
+					<td align="left"><a href="javascript:read('<%=num%>')"><%=title%></a></td>
 					<%}
 					
 					 %>					
 					<td><%=writer%></td>
 					<td><%=date%></td>
 					<td><%=hit%></td>
-					<td><%=hit%></td>
+					<td><%=like%></td>
 				</tr>
 		<%}}//---for%>                        
                         

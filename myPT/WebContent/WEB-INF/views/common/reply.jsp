@@ -61,9 +61,9 @@ pageEncoding="UTF-8"%>
                   
                     <div class="card-body p-1">
                     <form
-                    action="reply.do"
+                    action="boardReply.do"
                     method="post"
-                    onsubmit="return postForm()"                    
+                    onsubmit="return repForm()"                    
                   >
                       <ul class="list-group list-group-flush h-100">
                         <li class="list-group-item">
@@ -90,6 +90,9 @@ pageEncoding="UTF-8"%>
                         </li>
                       </ul>
                       <input type="text" name="board" value="${param.board}" hidden="true">
+                      <input type="text" name="ref" value="${sessionScope.dto.ref}" hidden="true">
+                      <input type="text" name="pos" value="${sessionScope.dto.pos}" hidden="true">
+                      <input type="text" name="depth" value="${sessionScope.dto.depth}" hidden="true">
                       <div
                         class="text-right px-4 d-flex justify-content-end align-items-center"
                       >

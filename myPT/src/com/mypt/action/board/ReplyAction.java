@@ -13,14 +13,12 @@ public class ReplyAction implements Action{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println(request.getParameter("board"));
-		//커뮤니티 write
-		if(request.getParameter("board").equals("'c'")) {
+		HttpSession session = request.getSession();
+		String board = session.getAttribute("board").toString();
+		//커뮤니티 
+		if(board.equals("cboard")) {
 			CboardDto dto = new CboardDto();
-			System.out.println(request.getParameter("writeHead"));
-			dto.setHead(request.getParameter("writeHead"));
-			
-			HttpSession session = request.getSession();		
+					
 			dto.setWriter(session.getAttribute("nick").toString());
 			if(dto.getWriter()==""|dto.getWriter()==null) {
 				dto.setWriter("길동이");
@@ -28,12 +26,16 @@ public class ReplyAction implements Action{
 			
 			dto.setTitle(request.getParameter("title"));
 			dto.setContent(request.getParameter("content"));
+			dto.setRef(Integer.parseInt(request.getParameter("ref")));
+			dto.setDepth(Integer.parseInt(request.getParameter("depth")));
+			dto.setPos(Integer.parseInt(request.getParameter("pos")));
 			
 			CboardDao dao = CboardDao.getInstance();
-			dao.insertBoard(dto);
+			dao.replyBoard(dto);
+			dao.replyUpBoard(dto.getRef(), dto.getPos());
 			
 			
-			return "common/community";
+			return "redirect:moveCommunity.do";
 			
 			// 다른 게시판 write
 		}else {
