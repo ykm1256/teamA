@@ -42,7 +42,7 @@
                   <a class="nav-link" href="moveCommunity.do"
                     >커뮤니티 게시판</a
                   >
-                  <a class="nav-link" href="photoBoard.jsp"
+                  <a class="nav-link" href="movePhoto.do"
                     >포토 게시판</a
                   >
                   <a class="nav-link" href="question.jsp">Q & A</a>

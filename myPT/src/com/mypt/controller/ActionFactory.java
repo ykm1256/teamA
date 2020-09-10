@@ -31,6 +31,7 @@ import com.mypt.action.move.MoveCommunityAction;
 import com.mypt.action.move.MoveInbody;
 import com.mypt.action.move.MoveIntroAction;
 import com.mypt.action.move.MovePayment;
+import com.mypt.action.move.MovePhotoAction;
 import com.mypt.action.move.MoveReplyAction;
 import com.mypt.action.move.MoveSchedule;
 import com.mypt.action.move.MoveTrainerRegister;
@@ -45,7 +46,6 @@ import com.mypt.action.register.AdminUserRegisterAction;
 import com.mypt.action.schedule.ScheduleLoadAction;
 import com.mypt.action.schedule.TrainerScheduleSettingAction;
 import com.mypt.action.schedule.UserScheduleViewAction;
-import com.mypt.dto.BoardDto;
 
 
 
@@ -155,6 +155,9 @@ public class ActionFactory
 		map.put("/boardDelete",new DeleteAction());
 		
 		
+		
+		// 포토게시판 이동
+		map.put("/movePhoto",new MovePhotoAction());
 		
 	}
 	
