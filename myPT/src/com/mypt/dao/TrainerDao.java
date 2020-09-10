@@ -41,9 +41,9 @@ return instance;
 		int maxSize= 2*1024*1024; //2MB
 		
 //		절대경로로 해당 path를 지정 할 경우
-//		String saveFolder = "C:/myPTImages/TrainerPhoto/";
+		String saveFolder = "C:/myPTImages/TrainerPhoto/";
 		
-		String saveFolder= request.getServletContext().getRealPath("img/TrainerPhoto/");  
+//		String saveFolder= request.getServletContext().getRealPath("img/TrainerPhoto/");  
 //서버 옵션에서 serve modules without publishing. 현재 컴 기준  
 //E:\Work\ProjectA\.metadata\.plugins\org.eclipse.wst.server.core\tmp2\wtpwebapps\myPT\img\TrainerPhoto\
 

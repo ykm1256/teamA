@@ -33,7 +33,8 @@ public class ViewAction implements Action {
 		session.setAttribute("dto", dto);
 		}
 		
-		return "common/boardDetail";
+//		return "common/boardDetail";
+		return "common/boardDetail2";
 	}
 
 }
