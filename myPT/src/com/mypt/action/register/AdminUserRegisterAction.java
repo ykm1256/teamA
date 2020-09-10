@@ -27,9 +27,22 @@ public class AdminUserRegisterAction implements Action {
 		dto.setZipcode(request.getParameter("zipcode"));
 		dto.setAddress(request.getParameter("address"));
 		dto.setQr(request.getParameter("qrcode"));
-
-		dto.setStartdate(request.getParameter("startdate"));
-		dto.setTid(request.getParameter("trainer"));
+		
+		
+		String startDate= request.getParameter("startdate");
+		String trainer = request.getParameter("trainer");
+		
+		if(startDate.equals(""))
+		{
+			startDate=null;
+		}
+		if(trainer.equals(""))
+		{
+			trainer= null;
+		}
+		
+		dto.setStartdate(startDate);
+		dto.setTid(trainer);
 		dto.setTel(request.getParameter("tel"));
 		
 		dto.setAddrdetail(request.getParameter("addrdetail"));

@@ -64,10 +64,8 @@
                                           <div class="form-group">
                                               <label class="small mb-1" for="gender">성별*</label>
                                               <select class="form-control" id="gender" name="gender" required >
-<!--                                               <option value="1" selected>남성</option> -->
-<!--                                               <option value="2">여성</option> -->
-                                              <option value="남성" selected>남성</option>
-                                              <option value="여성">여성</option>
+	                                              <option value="남성" selected>남성</option>
+	                                              <option value="여성">여성</option>
                                               </select>
                                           </div>
                                       </div>
@@ -158,7 +156,7 @@
                                           <div class="form-group">
                                               <label class="small mb-1" for="trainer">담당 트레이너</label>
                                               <select class="form-control" id="trainer" name="trainer">
-                                              <option selected>미정</option>
+                                              <option value="" selected>미정</option>
                                                <c:if test="${result!=null}">
 						                           <c:forEach items="${result}" var="t">
 						                             <option value="${t.t_id}">${t.t_name }</option>                              
