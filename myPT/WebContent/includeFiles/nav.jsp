@@ -19,7 +19,7 @@
 			<!--navbar 드롭다운-->
 			<ul class="navbar-nav order-lg-2 mx-1">
 				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" id="userDropdown" href="#"
+					class="nav-link dropdown-toggle mt-1" id="userDropdown" href="#"
 					role="button" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false"><i
 						class="fas fa-user fa-fw"></i></a>
