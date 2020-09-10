@@ -92,5 +92,19 @@ function postForm(){
 	}	
 }
 
+// 답글쓰기 (윤)
+function repForm(){	
+	var subject = $("#subject").val()
+	
+	if(subject.trim() == "" | subject==null){
+		alert("올바른 제목을 입력하세요!")
+		return false;
+	}else{
+	var content = $(".note-editable").html();
+	$("#content").val(content);
+	return true;
+	}	
+}
+
 
 

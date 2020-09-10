@@ -3,7 +3,9 @@ package com.mypt.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.mypt.action.board.DeleteAction;
 import com.mypt.action.board.LikeAction;
+import com.mypt.action.board.ReplyAction;
 import com.mypt.action.board.ViewAction;
 import com.mypt.action.board.WriteAction;
 import com.mypt.action.check.EmailCheckAction;
@@ -141,10 +143,18 @@ public class ActionFactory
 		//게시판 좋아요
 		map.put("/boardLike", new LikeAction());
 		
-		map.put("/reply", new MoveReplyAction());
+		map.put("/moveReply", new MoveReplyAction());
 		
 		//스케줄 불러오기
-		map.put("/scheduleLoad",new ScheduleLoadAction());
+		map.put("/scheduleLoad",new ScheduleLoadAction());	
+		
+		//답글쓰기
+		map.put("/boardReply",new ReplyAction());
+		
+		//글 삭제
+		map.put("/boardDelete",new DeleteAction());
+		
+		
 		
 		// 포토게시판 이동
 		map.put("/movePhoto",new MovePhotoAction());

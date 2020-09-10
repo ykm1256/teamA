@@ -12,7 +12,7 @@
     />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>템플릿</title>
+    <title>글 보기</title>
     <link href="/myPT/css/styles.css" rel="stylesheet" />
     <link href="/myPT/css/index.css" rel="stylesheet"/>
     <link href="/myPT/css/widget.css" rel="stylesheet"/>
@@ -51,11 +51,11 @@
           <div class="container py-3">
           <div>
          
-            <header class="px-4">
-              <h3>글보기</h3>
+            <header class="px-2">
+              <h3 class="ml-2">글보기</h3>                        
               <div class="text-right">              
-              <a href="reply.do" class="mr-2" type="submit()">답변</a>/
-              <a href="#" class="ml-2">목록으로</a>
+              <a href="moveReply.do" class="mr-2 btn btn-light btn-sm font-weight-bold">답변</a>
+              <a href="moveCommunity.do" class="btn btn-light btn-sm font-weight-bold mr-1">목록</a>             
               </div>
             </header>
           </div>
@@ -292,11 +292,25 @@
                             </div>
                           </div>
                         </li>
-                        <li class="list-group-item">
+                        <li class="list-group-item" style="min-height:330px">
                           <div id="result">${dto.content }</div>
                         </li>
-                      </ul>
+                      </ul>                      
                     </div>
+                    <c:choose>
+                    <c:when test="${sessionScope.nick==dto.writer}">
+                    <div class="text-right mb-1 mr-1">
+              <a href="#" class="mr-2 btn btn-light btn-sm font-weight-bold">수정</a>
+              <a href="boardDelete.do" class="ml-2 btn btn-danger btn-sm font-weight-bold">삭제</a>              
+              </div>
+              </c:when>
+              <c:when test="${sessionScope.nick=='관리자'}">
+                    <div class="text-right mb-1 mr-1">
+              <a href="#" class="mr-2 btn btn-light btn-sm font-weight-bold">수정</a>
+              <a href="boardDelete.do" class="ml-2 btn btn-danger btn-sm font-weight-bold">삭제</a>              
+              </div>
+              </c:when>
+              </c:choose>
                   </div>
                   </form>
                   <div class="card">
