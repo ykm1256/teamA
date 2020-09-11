@@ -6,8 +6,11 @@ import javax.servlet.http.HttpSession;
 
 import com.mypt.controller.Action;
 import com.mypt.dao.CboardDao;
+import com.mypt.dao.CommentDao;
 import com.mypt.dao.LikeDao;
+import com.mypt.dao.QboardDao;
 import com.mypt.dto.CboardDto;
+import com.mypt.dto.QboardDto;
 
 public class ViewAction implements Action {
 
@@ -23,18 +26,43 @@ public class ViewAction implements Action {
 		String nick = session.getAttribute("nick").toString();
 		
 		if(board.equals("cboard")) {		
-		CboardDto dto = new CboardDto();
-		CboardDao dao = CboardDao.getInstance();
-		LikeDao ldao = LikeDao.getInstance();
-		int lflag = ldao.selectLike(nick, "cblike",num);
-		dto = dao.detailView(num);
-		request.setAttribute("dto", dto);
-		request.setAttribute("lflag", lflag);
-		session.setAttribute("dto", dto);
+			CboardDto dto = new CboardDto();
+			CboardDao dao = CboardDao.getInstance();
+			LikeDao ldao = LikeDao.getInstance();
+			int lflag = ldao.selectLike(nick, "cblike",num);
+			dto = dao.detailView(num);
+			
+			CommentDao cdao = CommentDao.getInstance();
+			int comment = 0;
+			String s = "제발";
+			comment = cdao.countComment("ccomment", num);
+			System.out.println("댓글수");
+			System.out.println(comment);
+			System.out.println("댓글수");
+			request.setAttribute("s", s);
+			request.setAttribute("commentcount", comment);
+			request.setAttribute("comcnt", comment);
+			request.setAttribute("dto", dto);
+			request.setAttribute("lflag", lflag);			
+			session.setAttribute("dto", dto);
 		}
 		
-//		return "common/boardDetail";
-		return "common/boardDetail2";
+		else if(board.equals("qboard")) {
+			QboardDto dto = new QboardDto();
+			QboardDao dao = QboardDao.getInstance();			
+			dto = dao.detailView(num);
+			CommentDao cdao = CommentDao.getInstance();
+			int comment = cdao.countComment("qcomment", num);
+			
+			System.out.println("댓글수");
+			System.out.println(comment);
+			System.out.println("댓글수");
+			request.setAttribute("comcnt", comment);
+			request.setAttribute("dto", dto);			
+			session.setAttribute("dto", dto);
+		}
+		
+		return "redirect:moveBoardDetail.do";
 	}
 
 }

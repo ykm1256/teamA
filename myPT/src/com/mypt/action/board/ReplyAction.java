@@ -6,7 +6,9 @@ import javax.servlet.http.HttpSession;
 
 import com.mypt.controller.Action;
 import com.mypt.dao.CboardDao;
+import com.mypt.dao.QboardDao;
 import com.mypt.dto.CboardDto;
+import com.mypt.dto.QboardDto;
 
 public class ReplyAction implements Action{
 
@@ -38,7 +40,30 @@ public class ReplyAction implements Action{
 			return "redirect:moveCommunity.do";
 			
 			// 다른 게시판 write
-		}else {
+		}else if(board.equals("qboard")) {
+			QboardDto dto = new QboardDto();
+					
+			dto.setWriter(session.getAttribute("nick").toString());
+			if(dto.getWriter()==""|dto.getWriter()==null) {
+				dto.setWriter("길동이");
+			}
+			
+			dto.setTitle(request.getParameter("title"));
+			dto.setContent(request.getParameter("content"));
+			dto.setRef(Integer.parseInt(request.getParameter("ref")));
+			dto.setDepth(Integer.parseInt(request.getParameter("depth")));
+			dto.setPos(Integer.parseInt(request.getParameter("pos")));
+			
+			QboardDao dao = QboardDao.getInstance();
+			dao.replyBoard(dto);
+			dao.replyUpBoard(dto.getRef(), dto.getPos());
+			
+			
+			return "redirect:moveQuestion.do";
+			
+			// 다른 게시판 write
+		}
+		else {
 			return null;
 		}
 	}

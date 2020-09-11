@@ -42,7 +42,17 @@ pageEncoding="UTF-8"%>
 
     <div id="layoutSidenav">
       <!-- sideNav -->
-      <jsp:include page="/includeFiles/sideNav.jsp"></jsp:include>
+      <c:choose>
+      <c:when test="${sessionScope.grade==0 }">
+      <jsp:include page="/includeFiles/adminSideNav.jsp"></jsp:include>
+      </c:when>
+      <c:when test="${sessionScope.grade==1 }" >
+      <jsp:include page="/includeFiles/trainerSideNav.jsp"></jsp:include>
+      </c:when>
+      <c:otherwise>
+      <jsp:include page="/includeFiles/userSideNav.jsp"></jsp:include>
+      </c:otherwise>
+      </c:choose> 
       <!-- /sideNav -->
 
       <div id="layoutSidenav_content">
@@ -50,7 +60,7 @@ pageEncoding="UTF-8"%>
           <div>
             <header class="px-4">
               <h4>수정하기</h4>
-              <div class="text-right">목록으로</div>
+              <div class="text-right"><a class="btn btn-light btn-sm font-weight-bold mr-1" onclick="btnList()">목록으로</a></div>
             </header>
           </div>
 
@@ -61,7 +71,7 @@ pageEncoding="UTF-8"%>
                   
                     <div class="card-body p-1">
                     <form
-                    action="write.do"
+                    action="boardUpdate.do"
                     method="post"
                     onsubmit="return postForm()"                    
                   >
@@ -70,17 +80,28 @@ pageEncoding="UTF-8"%>
                           <div class="row">
                             <div class="col-lg-2 col-sm-6">
                               <select class="form-control" name="writeHead" id="writeHead">
-                                <option value="default" selected disabled>말머리</option>
-                                <option value="잡담">잡담</option>
+                              <c:choose>
+                              <c:when test="${sessionScope.dto.head=='잡담' }">
+                                <option value="default" disabled>말머리</option>
+                                <option value="잡담" selected>잡담</option>
                                 <option value="정보">정보</option>
+                                </c:when>
+                                <c:when test="${sessionScope.dto.head=='정보' }">
+                                <option value="default" disabled>말머리</option>
+                                <option value="잡담">잡담</option>
+                                <option value="정보" selected>정보</option>
+                                </c:when>
+                                </c:choose>
                               </select>
                             </div>
                             <div class="col-lg-10 pl-lg-0">
+                            <input type="text" hidden="true" name="num" id="num" value="${sessionScope.dto.num }"> 
                               <input
                                 class="form-control"
                                 id="subject"
                                 name="title"
                                 placeholder="제목"
+                                value="${sessionScope.dto.title }"
                               />
                             </div>
                           </div>
@@ -91,7 +112,7 @@ pageEncoding="UTF-8"%>
                             type="text"
                             name="content"
                             id="content"
-                            hidden="true"
+                            hidden="true"                           
                           />
                         </li>
                       </ul>                      
@@ -102,12 +123,11 @@ pageEncoding="UTF-8"%>
                         <input
                           type="submit"
                           class="btn btn-primary"
-                          value="글쓰기"
+                          value="수정하기"
                         />
                       </div>
                       </form>
-                    </div>
-                  
+                    </div>                  
                 </div>
               </div>
             </main>
@@ -135,5 +155,7 @@ pageEncoding="UTF-8"%>
     <script src="/myPT/assets/summernote-0.8.18-dist/lang/summernote-ko-KR.js"></script>
     <script src="/myPT/js/scripts.js"></script>
     <script src="/myPT/js/write.js"></script>
+    <script src="/myPT/js/boardupdate.js"></script>
+    <script src="/myPT/js/boardAlter.js"></script>
   </body>
 </html>
