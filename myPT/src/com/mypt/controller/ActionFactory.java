@@ -165,6 +165,7 @@ public class ActionFactory
 		map.put("/testCboardView",new TestViewAction());
 		map.put("/commentInsert", new CommentInsertAction());
 		map.put("/commentDelete", new CommentDeleteAction());
+
 		
 	}
 	

@@ -235,12 +235,44 @@ public class PboardDao extends AbstractBoardDao<PboardDto>{
 		try {
 			con = db.getConnection();
 			ps = con.prepareStatement(sql);
-//			ps.setInt(1, pb_num);
 			rs = ps.executeQuery();
 			if(rs.next()) {
 				result=rs.getInt(1);
 			}else {
 				result=0;
+			}
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		} 
+		finally 
+		{
+			db.closeConnection(rs, ps, con);
+		}
+
+		return result;
+	}
+	
+	// 포토 게시판 좋아요 눌렀는지 확인
+	public String photoLikeCheck(int pbl_num, String nick) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String result="";
+
+		String sql = "SELECT * FROM pblike where pbl_num=? and pbl_nick=?";
+
+		try {
+			con = db.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, pbl_num);
+			ps.setString(2, nick);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				result="checked=\"checked\"";
+			}else {
+				result="";
 			}
 		} 
 		catch (Exception e) 
