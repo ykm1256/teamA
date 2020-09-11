@@ -1,6 +1,7 @@
+<%@page import="com.mypt.dto.QboardDto"%>
+<%@page import="com.mypt.dao.QboardDao"%>>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.sql.Timestamp"%>
-<%@page import="com.mypt.dao.CboardDao"%>
 <%@page import="com.mypt.dto.CboardDto"%>
 <%@page import="java.util.Vector"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -16,14 +17,9 @@
 		int totalBlock = 0;//총 블럭 개수
 		int nowPage = 1;//현재 페이지
 		int nowBlock = 1;//현재 블럭
-		CboardDao dao = CboardDao.getInstance();
+		QboardDao dao = QboardDao.getInstance();
 		
-		//처음 shead 설정
-		String shead = "all";
-		if(request.getParameter("head")!=null){
-			shead = request.getParameter("head");
-		}
-				
+						
 		//검색에 필요한 변수
 		String keyField = "", keyWord = "";
 		//검색일때
@@ -38,8 +34,8 @@
 // 			keyField = ""; keyWord = "";
 // 		}		
 		
-		totalRecord = dao.getTotalCount(keyField, keyWord,shead);
-		System.out.println("totalRecord : " + totalRecord);
+		totalRecord = dao.getTotalCount(keyField, keyWord);
+		
 		
 		//nowPage 요청 처리
 		if(request.getParameter("nowPage")!=null){
@@ -49,9 +45,7 @@
 		//sql문에 들어가는 start, cnt 선언
 		int start = (nowPage*numPerPage)-numPerPage;
 		int cnt = numPerPage;
-		System.out.println(start);
-		System.out.println(cnt);
-		
+				
 		
 		//전체페이지 개수
 		totalPage = (int)Math.ceil((double)totalRecord/numPerPage);
@@ -71,7 +65,7 @@
     />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>커뮤니티 게시판</title>
+    <title>질문게시판</title>
     <link href="/myPT/css/styles.css" rel="stylesheet" />
     <link href="/myPT/css/index.css" rel="stylesheet"/>
     <link href="/myPT/css/widget.css" rel="stylesheet"/>
@@ -88,7 +82,7 @@
 			return false;
 		}
 		else if(document.searchFrm.keyWord.value==""){
-			window.location.href="moveCommunity.do"
+			window.location.href="moveQuestion.do"
 			return false;
 		}
 		document.searchFrm.submit();
@@ -101,24 +95,12 @@
 		document.readFrm.nowPage.value = 
 			<%=pagePerBlock%>*(block-1)+1;
 		document.readFrm.submit();
-	}
-// 	function  list() {
-// 		document.listFrm.action = "list.jsp";
-// 		document.listFrm.submit();
-// 	}
-	function numPerFn(numPerPage) {
-		document.readFrm.numPerPage.value = numPerPage;
-		document.readFrm.submit();
-	}
+	}	
 	//list.jsp에서 read.jsp로 요청이 될때 기존에 조건 같이 넘어감.
 	//기존 조건 : keyField,keyWord,nowPage,numPerPage
 	function read(num) {
 		document.readFrm.num.value = num;
 		document.readFrm.action = "boardView.do";
-		document.readFrm.submit();
-	}
-	function headFn(head){
-		document.readFrm.head.value = head;
 		document.readFrm.submit();
 	}
 </script>
@@ -156,84 +138,47 @@
               <div class="col-12">
                 <div class="card" style="overflow: auto">
                   <div class="card-body">
-                    <a href="moveCommunity.do" class="text-decoration-none text-dark"><h3 class="card-title text-center">커뮤니티</h3></a>
+                    <a href="moveCommunity.do" class="text-decoration-none text-dark"><h3 class="card-title text-center">질문게시판</h3></a>
                   </div>
-                  <form name="headFrm" method="post">
-                  <select class="form-control text-center col-md-2" id="head" name="head"
-                  onchange="headFn(this.form.head.value)">
-                  <%if(shead.equals("all")) {%>
-                    <option value="all" selected>전체보기</option>
-                    <option value="정보">정보</option>
-                    <option value="잡담">잡담</option>
-                    <%}else if(shead.equals("정보")){ %>
-                    
-                    <option value="all">전체보기</option>
-                    <option value="정보" selected>정보</option>
-                    <option value="잡담">잡담</option>
-                    <%}else if(shead.equals("잡담")) {%>
-                    
-                    <option value="all">전체보기</option>
-                    <option value="정보">정보</option>
-                    <option value="잡담"selected>잡담</option>
-                    <%} %>
-                  </select>
-                  </form>
+                  
                   <div class="table-responsive">
                     <table class="table mb-0">
                       <thead class="thead-light text-center">
                         <tr>
-                          <th>말머리</th>
+                          
                           <th id="title" style="width: 50%">제목</th>
                           <th>작성자</th>
                           <th>작성일자</th>
-                          <th>조회수</th>
-                          <th>좋아요</th>
+                          <th>조회수</th>                          
                         </tr>
                       </thead>
                       <tbody class="customtable text-center">
                       <%
-                      Vector<CboardDto> vlist = dao.getBoardList(keyField, keyWord, start, cnt,shead);
+                      Vector<QboardDto> vlist = dao.getBoardList(keyField, keyWord, start, cnt);
                     
       				int listSize = vlist.size();//브라우저 화면에 표시될 게시물 번호
       				System.out.println(vlist.size());
       				if(vlist.isEmpty()){
-      					%>
+      				%>
       					<tr align="center">
       					<td colspan="6">등록된 게시물이 없습니다.</td>
       					</tr>
-      				<%	
-      				}else{
+      				<%}else{
 				for(int i=0;i<numPerPage;i++){
 					if(i==listSize) break;
-					CboardDto bean = vlist.get(i);
+					QboardDto bean = vlist.get(i);
 					int num = bean.getNum();//게시물 번호
 					String title = bean.getTitle();//제목
 					String writer = bean.getWriter();//이름
 					String date = bean.getDate();//날짜
 					int depth = bean.getDepth();//답변의 깊이
-					int hit = bean.getHit();//조회수
-					String head = bean.getHead();
-					int like = bean.getLike();
+					int hit = bean.getHit();//조회수					
 					
 					//댓글 count
 					//int bcount = cmgr.getBCommentCount(num);
 		%>
 				<tr align="center">					
-					<td>						
-							<%if(depth>0){
-								
-							}else{
-							if(head.equals("정보")){
-							%>
-					<div class="badge badge-primary"><%=head %></div>
-						<%	}else{
-							%>
-					<div class="badge badge-success"><%=head %></div>
-							<%}}%>					
-<%-- 			댓글나중에처리	<%if(bcount>0){%> --%>
-<%-- 							<font color="red">(<%=bcount%>)</font> --%>
-<%-- 						<%}%> --%>
-					</td>
+					
 					<%if(depth>0){%>
 					<td align="left">
 					<%for(int j=1;j<depth;j++){out.println("&nbsp;&nbsp;&nbsp;&nbsp;");} %>
@@ -249,8 +194,7 @@
 					 %>					
 					<td><%=writer%></td>
 					<td><%=date%></td>
-					<td><%=hit%></td>
-					<td><%=like%></td>
+					<td><%=hit%></td>					
 				</tr>
 		<%}}//---for%>                        
                         
@@ -310,18 +254,7 @@
 			<%}%>
 		<%}//---if1%>
 				<!-- 페이징 및 블럭 End -->
-<!--                   <li class="page-item"> -->
-<!--                     <a class="page-link" href="#">이전</a> -->
-<!--                   </li> -->
-<!--                   <li class="page-item"> -->
-<!--                     <a class="page-link" href="#">1</a> -->
-<!--                   </li> -->
-<!--                   <li class="page-item"> -->
-<!--                     <a class="page-link" href="#">2</a> -->
-<!--                   </li> -->
-<!--                   <li class="page-item"> -->
-<!--                     <a class="page-link" href="#">다음</a> -->
-<!--                   </li> -->
+           
                 </ul>
                 
                 <!-- 검색 -->
@@ -329,9 +262,9 @@
                 <div class="row justify-content-center">
 					<select name="keyField">
                                 <option value="default" selected disabled>카테고리</option>
-                                <option value="cb_writer">작성자</option>
-                                <option value="cb_title">제목</option>
-                                <option value="cb_content">내용</option>
+                                <option value="qb_writer">작성자</option>
+                                <option value="qb_title">제목</option>
+                                <option value="qb_content">내용</option>
                     </select>
                     <input type="text" name="keyWord" class="mr-2">
                     <input type="button" class="btn btn-primary" value="검색" onClick="javascript:check()" >
@@ -352,8 +285,6 @@
 	<input type="hidden" name="keyField" value="<%=keyField%>">
 	<input type="hidden" name="keyWord" value="<%=keyWord%>">
 	<input type="hidden" name="num">
-	<input type="hidden" name="head" value="<%=shead%>">
-	
 </form>
                 
               </div>

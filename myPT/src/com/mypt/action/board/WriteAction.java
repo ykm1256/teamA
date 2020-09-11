@@ -6,7 +6,9 @@ import javax.servlet.http.HttpSession;
 
 import com.mypt.controller.Action;
 import com.mypt.dao.CboardDao;
+import com.mypt.dao.QboardDao;
 import com.mypt.dto.CboardDto;
+import com.mypt.dto.QboardDto;
 
 public class WriteAction implements Action{
 
@@ -23,7 +25,7 @@ public class WriteAction implements Action{
 				
 			dto.setWriter(session.getAttribute("nick").toString());
 //			if(dto.getWriter()==""|dto.getWriter()==null) {
-//				dto.setWriter("길동이");
+//				dto.setWriter("길동이"); 
 //			}
 			
 			dto.setTitle(request.getParameter("title"));
@@ -33,9 +35,24 @@ public class WriteAction implements Action{
 			dao.insertBoard(dto);
 			
 			
-			return "common/community";
+			return "redirect:moveCommunity.do";
 			
 			// 다른 게시판 write
+		}else if(board.equals("qboard")) {
+			QboardDto dto = new QboardDto();				
+				
+			dto.setWriter(session.getAttribute("nick").toString());
+//			if(dto.getWriter()==""|dto.getWriter()==null) {
+//				dto.setWriter("길동이");
+//			}
+			
+			dto.setTitle(request.getParameter("title"));
+			dto.setContent(request.getParameter("content"));
+			
+			QboardDao dao = QboardDao.getInstance();
+			dao.insertBoard(dto);			
+			
+			return "redirect:moveQuestion.do";
 		}else {
 			return null;
 		}

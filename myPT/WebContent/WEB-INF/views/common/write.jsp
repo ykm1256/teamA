@@ -42,7 +42,17 @@ pageEncoding="UTF-8"%>
 
     <div id="layoutSidenav">
       <!-- sideNav -->
-      <jsp:include page="/includeFiles/sideNav.jsp"></jsp:include>
+      <c:choose>
+      <c:when test="${sessionScope.grade==0 }">
+      <jsp:include page="/includeFiles/adminSideNav.jsp"></jsp:include>
+      </c:when>
+      <c:when test="${sessionScope.grade==1 }" >
+      <jsp:include page="/includeFiles/trainerSideNav.jsp"></jsp:include>
+      </c:when>
+      <c:otherwise>
+      <jsp:include page="/includeFiles/userSideNav.jsp"></jsp:include>
+      </c:otherwise>
+      </c:choose> 
       <!-- /sideNav -->
 
       <div id="layoutSidenav_content">
@@ -50,7 +60,19 @@ pageEncoding="UTF-8"%>
           <div>
             <header class="px-4">
               <h4>글쓰기</h4>
-              <div class="text-right">목록으로</div>
+              <div class="text-right">
+              <c:choose>
+              <c:when test="${sessionScope.board=='cboard' }">
+              <a href="moveCommunity.do" class="btn btn-light btn-sm font-weight-bold mr-1">목록</a>
+              </c:when>
+              <c:when test="${sessionScope.board=='qboard' }">
+              <a href="moveQuestion.do" class="btn btn-light btn-sm font-weight-bold mr-1">목록</a>
+              </c:when>
+              <c:when test="${sessionScope.board=='pboard' }">
+              <a href="movePhoto.do" class="btn btn-light btn-sm font-weight-bold mr-1">목록</a>
+              </c:when>             
+              </c:choose>             
+              </div>
             </header>
           </div>
 
@@ -60,21 +82,36 @@ pageEncoding="UTF-8"%>
                 <div class="card border border-secondary h-100">
                   
                     <div class="card-body p-1">
-                    <form
-                    action="write.do"
-                    method="post"
-                    onsubmit="return postForm()"                    
-                  >
+                    <c:choose>
+                    <c:when test="${sessionScope.board=='qboard'}">
+                    <form action="write.do" method="post" onsubmit="return qPostForm()">
+                  </c:when>
+                  <c:otherwise>
+                  <form action="write.do" method="post" onsubmit="return postForm()">
+                  </c:otherwise>
+                  </c:choose>
                       <ul class="list-group list-group-flush h-100">
-                        <li class="list-group-item">
-                          <div class="row">
-                            <div class="col-lg-2 col-sm-6">
+                        <li class="list-group-item">                          
+                          <c:choose>
+                          <c:when test="${sessionScope.board=='qboard' }"> 
+                          <div class="col-lg-12 pl-lg-0">
+                              <input
+                                class="form-control"
+                                id="subject"
+                                name="title"
+                                placeholder="제목"
+                              />
+                            </div>                            
+                            </c:when>
+                            <c:otherwise>
+                            <div class="row">
+                            <div class="col-lg-2 col-sm-6">                            
                               <select class="form-control" name="writeHead" id="writeHead">
                                 <option value="default" selected disabled>말머리</option>
                                 <option value="잡담">잡담</option>
                                 <option value="정보">정보</option>
                               </select>
-                            </div>
+                            </div>           
                             <div class="col-lg-10 pl-lg-0">
                               <input
                                 class="form-control"
@@ -82,8 +119,11 @@ pageEncoding="UTF-8"%>
                                 name="title"
                                 placeholder="제목"
                               />
-                            </div>
-                          </div>
+                            </div>   
+                            </div>              
+                            </c:otherwise>
+                            </c:choose>                            
+                          
                         </li>
                         <li class="list-group-item">
                           <textarea class="summernote" name="" id="summer"></textarea>
@@ -98,8 +138,7 @@ pageEncoding="UTF-8"%>
                       <input type="text" name="board" value="${param.board}" hidden="true">
                       <div
                         class="text-right px-4 d-flex justify-content-end align-items-center"
-                      >
-                        <!-- 										<button class="btn btn-outline-warning m-2">수정하기</button> -->
+                      >                        
                         <input
                           type="submit"
                           class="btn btn-primary"

@@ -42,7 +42,17 @@ pageEncoding="UTF-8"%>
 
     <div id="layoutSidenav">
       <!-- sideNav -->
-      <jsp:include page="/includeFiles/sideNav.jsp"></jsp:include>
+      <c:choose>
+      <c:when test="${sessionScope.grade==0 }">
+      <jsp:include page="/includeFiles/adminSideNav.jsp"></jsp:include>
+      </c:when>
+      <c:when test="${sessionScope.grade==1 }" >
+      <jsp:include page="/includeFiles/trainerSideNav.jsp"></jsp:include>
+      </c:when>
+      <c:otherwise>
+      <jsp:include page="/includeFiles/userSideNav.jsp"></jsp:include>
+      </c:otherwise>
+      </c:choose> 
       <!-- /sideNav -->
 
       <div id="layoutSidenav_content">
@@ -50,7 +60,16 @@ pageEncoding="UTF-8"%>
           <div>
             <header class="px-4">
               <h4>글쓰기</h4>
-              <div class="text-right">목록으로</div>
+              <div class="text-right">
+              <c:choose>
+              <c:when test="${sessionScope.board=='cboard' }">
+              <a href="moveCommunity.do" class="btn btn-light btn-sm font-weight-bold mr-1">목록</a>
+              </c:when>
+              <c:when test="${sessionScope.board=='qboard' }">
+              <a href="moveQuestion.do" class="btn btn-light btn-sm font-weight-bold mr-1">목록</a>
+              </c:when>                  
+              </c:choose>             
+              </div>
             </header>
           </div>
 
@@ -66,9 +85,8 @@ pageEncoding="UTF-8"%>
                     onsubmit="return repForm()"                    
                   >
                       <ul class="list-group list-group-flush h-100">
-                        <li class="list-group-item">
-                          <div class="row">                            
-                            <div class="col-lg-10 pl-lg-0">
+                        <li class="list-group-item">                                                     
+                            <div class="col-lg-12 pl-lg-0">
                               <input
                                 class="form-control"
                                 id="subject"
@@ -76,8 +94,7 @@ pageEncoding="UTF-8"%>
                                 placeholder="제목"
                                 value="${sessionScope.dto.title }"
                               />
-                            </div>
-                          </div>
+                            </div>                          
                         </li>
                         <li class="list-group-item">
                           <textarea class="summernote" name="" id="summer"></textarea>
@@ -88,8 +105,7 @@ pageEncoding="UTF-8"%>
                             hidden="true"
                           />
                         </li>
-                      </ul>
-                      <input type="text" name="board" value="${param.board}" hidden="true">
+                      </ul>                      
                       <input type="text" name="ref" value="${sessionScope.dto.ref}" hidden="true">
                       <input type="text" name="pos" value="${sessionScope.dto.pos}" hidden="true">
                       <input type="text" name="depth" value="${sessionScope.dto.depth}" hidden="true">
@@ -133,5 +149,6 @@ pageEncoding="UTF-8"%>
     <script src="/myPT/assets/summernote-0.8.18-dist/lang/summernote-ko-KR.js"></script>
     <script src="/myPT/js/scripts.js"></script>
     <script src="/myPT/js/write.js"></script>
+    <script src="/myPT/js/boardAlert.js"></script>
   </body>
 </html>
