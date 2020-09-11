@@ -312,19 +312,6 @@
                   </div>
                   </form>
                             
-
-                      <div class="card my-4 border border-secondary">
-		                  <div class="card-body p-3" style="width:100%;">
-			            	<div class="mb-2 font-weight-bold">${sessionScope.nick}</div>
-			                  <textarea name="commentContent" id="commentContent" cols="30" rows="5" maxlength="500"
-		                              style="width:100%; resize:none" class="border-0"></textarea>
-	                      </div>
-			           
-	             	 	  <div class="card-footer bg-white">
-		                      <input type="button" class="btn btn-dark float-right" id="commentBtn" value="등록">
-		                  </div>
-		               </div>
-
                   
                   <div class="card">
                   	<div class="card-body" id="commentsWrapper">
@@ -367,11 +354,125 @@
 					</c:forEach>
                   </div>
 
-                    <div class="card-footer bg-white" id="loadMore">
-                        <input type="button" class="btn col-12 text-center" value="더보기">
-                    </div>    
+<!--                     <div class="card-footer bg-white" id="loadMore"> -->
+<!--                         <input type="button" class="btn col-12 text-center" value="더보기"> -->
+<!--                     </div>     -->
 
-                </div>     
+                </div>   
+                
+                
+				<c:set var="totalRecord" value="${paging.totalRecord}"/>
+				<c:set var="totalPage" value="${paging.totalPage}"/>
+				<c:set var="numPerPage" value="${paging.numPerPage}"/>
+				<c:set var="nowBlock" value="${paging.nowBlock}"/>
+				<c:set var="pagePerBlock" value="${paging.pagePerBlock}"/>
+				<c:set var="totalBlock" value="${paging.totalBlock}"/>
+				
+				
+<%-- 				<c:set var="pageStart" value="${(nowBlock-1)*pagePerBlock+1}" /> --%>
+				<c:set var="pageStart" value="${(paging.nowPage-1)*numPerPage+1}" />
+				
+
+           <ul class="pagination mt-5 ml-5 justify-content-center">
+                <!-- 페이징 및 블럭 Start -->
+				<c:if test="${totalPage>0}">				
+						<c:choose>
+							<c:when test="${nowBlock>1}">
+								 <li class="page-item">
+<%-- 									<a class="page-link" href="javascript:block('${nowBlock-1}')">이전</a>     --%>
+								<a class="page-link" href="javascript:changeBlock()">이전</a>  
+								</li>	
+							 </c:when>						 									
+							<c:otherwise>
+								<li class="page-item">
+									<a class="page-link text-muted" >이전</a>
+								</li>
+							 </c:otherwise>							 
+						</c:choose>										
+				</c:if> 
+				
+				
+					<c:choose>
+							<c:when test="${(pageStart+pagePerBlock)<totalPage}">
+								<c:set var="pageEnd" value="${pageStart+pagePerBlock}" />
+							 </c:when>						 									
+							<c:otherwise>
+								<c:set var="pageEnd" value="${totalPage}" />
+							 </c:otherwise>							 
+					</c:choose>
+										
+		
+		
+<%-- 					<c:forEach var="i" begin="${pageStart}" end="${pageEnd}" step="1" varStatus="status">										 --%>
+<!-- 						<li class="page-item"> -->
+<%-- 							<a class="page-link" href="javascript:chagePage('${i}')">									 --%>
+<%-- 								<c:if test="${paging.nowPage==pageStart}"> --%>
+<!-- 	                  				<font color="black"> -->
+<%-- 	                 			</c:if>                    			      --%>
+<%-- 
+<%-- 										${i} --%>
+<%-- 	                 			<c:if test="${paging.nowPage==pageStart}"> --%>
+<!-- 	                  				</font> -->
+<%-- 	                 			</c:if> --%>
+<!-- 							</a> -->
+<!-- 						</li> -->
+<%-- 				    </c:forEach> --%>
+
+
+					<c:forEach var="i" begin="${pageStart}" end="${pageEnd}" step="1" varStatus="status">										
+						<li class="page-item">
+							<a class="page-link" href="javascript:chagePage('${i}')">									
+								<c:if test="${paging.nowPage==pageStart}">
+	                  				<div class="bg-secondary text-white">
+	                 			</c:if>                    			     
+										${i}
+	                 			<c:if test="${paging.nowPage==pageStart}">
+	                  				</div>
+	                 			</c:if>
+							</a>
+						</li>
+				    </c:forEach>
+							
+	                 	<c:choose>
+							<c:when test="${totalBlock>nowBlock}">
+								<li class="page-item">
+									<a class="page-link" href="javascript:block('${nowBlock+1}')">다음</a>
+								</li>
+							 </c:when>	
+							 					 									
+							<c:otherwise>
+								<li class="page-item">
+									<a class="page-link text-muted" >다음</a>
+								</li>
+							 </c:otherwise>							 
+						</c:choose>						
+              </ul>
+                
+                
+                       
+                <div class="card my-4 border border-secondary">
+                  <div class="card-body p-3" style="width:100%;">
+	            	<div class="mb-2 font-weight-bold">${sessionScope.nick}</div>
+	                  <textarea name="commentContent" id="commentContent" cols="30" rows="5" maxlength="500"
+                              style="width:100%; resize:none" class="border-0"></textarea>
+                     </div>
+	           
+            	 	  <div class="card-footer bg-white">
+                      <input type="button" class="btn btn-dark float-right" id="commentBtn" value="등록">
+                  </div>
+               </div>
+     
+     
+     
+     
+<form name="readFrm">
+	<input type="hidden" name="totalRecord" value="${totalRecord}">
+	<input type="hidden" name="nowPage" value="${paging.nowPage}">
+</form>
+     
+     
+                        
+                  
                          
             </main>
           </div>
@@ -390,8 +491,61 @@
   <script type="text/javascript" src="assets/summernote-0.8.18-dist/summernote-bs4.js"></script>
   <script src="assets/summernote-0.8.18-dist/lang/summernote-ko-KR.js"></script>
   
-  <script>
+  <script>  
   
+  
+  //눌렀을 때 발동을 해서
+  //아작스로 다른 값 가져오면 안되나?`
+  
+		  var totalRecord=${paging.totalRecord};
+		  var totalPage =${paging.totalPage};
+		  var nowBlock= ${paging.nowBlock};
+		  var pagePerBlock= ${paging.pagePerBlock};
+		  var totalBlock= ${paging.totalBlock};
+		  
+		  var startPageNum= ${(nowBlock-1)*pagePerBlock+1}; 
+		  
+		  var pageStart=  ${(paging.nowPage-1)*numPerPage+1};  //이건 그거임. 시작 글번호 
+		  var nowPage= ${paging.nowPage};
+		 
+		  
+// 		  <c:set var="totalRecord" value="${paging.totalRecord}"/>
+// 				<c:set var="totalPage" value="${paging.totalPage}"/>
+// 				<c:set var="nowBlock" value="${paging.nowBlock}"/>
+// 				<c:set var="pagePerBlock" value="${paging.pagePerBlock}"/>
+// 				<c:set var="totalBlock" value="${paging.totalBlock}"/>
+				
+// 				<c:set var="pageStart" value="${(nowBlock-1)*(pagePerBlock+1)}" />
+  	  
+
+  	
+  function changeBlock(block)
+  {
+	  nowPage= ${pagePerBlock}*(block-1)+1;	  
+	    
+  }
+  
+  function chagePage(page)
+  {
+	  nowPage= page;
+	  
+	  
+  }
+  
+  
+// 	function paging(page) 
+// 	{
+// 		document.readFrm.nowPage.value = page;
+// 		document.readFrm.submit();
+// 	}
+// 	function block(block) {
+// 		document.readFrm.nowPage.value = 
+<%-- 			<%=pagePerBlock%>*(block-1)+1; --%>
+// 		document.readFrm.submit();
+// 	}
+
+
+
   var boardNum= ${dto.num};
   
   $('#commentBtn').click(function(){

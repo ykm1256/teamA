@@ -5,13 +5,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.mypt.connection.DBConnection;
 import com.mypt.dto.CCommentDto;
+import com.mypt.dto.CboardDto;
 import com.mypt.dto.CommentDto;
+import com.mypt.dto.Paging;
 
 public class CommentDao {
 	private DBConnection db;
@@ -220,10 +223,13 @@ public class CommentDao {
 			ps.setString(1, cd.getcb_ccontent());
 			ps.setString(2, String.valueOf(cd.getcb_cdate()));
 			ps.executeUpdate();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
+		} 
+		catch (Exception e) 
+		{
 			e.printStackTrace();
-		} finally {
+		} 
+		finally 
+		{
 			db.closeConnection(null, ps, con);
 		}
 	}
@@ -231,42 +237,88 @@ public class CommentDao {
 
 	
 
+//하나의 게시글에 대한 댓글 수			
+	public int commentCountforOne(String commenttblName, int boardNum) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
 		
-	
+		int count= 0;
 		
-//	public int commentCountforOne(String commenttblName, int boardNum) {
-//		Connection con = null;
-//		PreparedStatement ps = null;
-//		ResultSet rs = null;
-//		
-//		int count= 0;
-//		
-//		try {
-//			con = db.getConnection();
-//			String sql = "select count(c_num) from "+ commenttblName+ " where boardnum=?";
-//			ps = con.prepareStatement(sql);
-//			
-//			ps.setInt(1, boardNum);
-//			
-//			rs = ps.executeQuery();
-//			
-//			
-//			if (rs.next()) 
-//			{
-//				count = rs.getInt(1);
-//			}
-//		} 
-//		catch (Exception e) 
-//		{
-//			e.printStackTrace();
-//		} 
-//		finally 
-//		{
-//			db.closeConnection(rs, ps, con);
-//		}
-//		return count;
-//	}
-	
+		try {
+			con = db.getConnection();
+			String sql = "select count(c_num) from "+ commenttblName+ " where boardnum=?";
+			ps = con.prepareStatement(sql);
+			
+			ps.setInt(1, boardNum);
+			
+			rs = ps.executeQuery();
+			
+			
+			if (rs.next()) 
+			{
+				count = rs.getInt(1);
+			}
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		} 
+		finally 
+		{
+			db.closeConnection(rs, ps, con);
+		}
+		return count;
+	}
 
+
+//start : 시작번호, cnt : 한 페이지당 가져올 게시물 개수
+//	한 페이지에 해당하는 댓글 가져오기  
+	public ArrayList<CommentDto> getCommentsForOneCommentPage(String commenttblName, int boardNum, int start, int cnt)
+	{
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		ArrayList<CommentDto> comments= new ArrayList<>();
+		CommentDto cd = null;
+		
+		String sql = "SELECT * FROM "+commenttblName+" WHERE boardNum=? ORDER BY c_num LIMIT ?,?";
+		
+		try {
+				con = db.getConnection();			
+				ps = con.prepareStatement(sql);
+				
+				ps.setInt(1, boardNum);
+				ps.setInt(2, start-1);
+				ps.setInt(3, cnt);
+					
+				rs = ps.executeQuery();
+				
+				while(rs.next()) 
+				{
+					cd = new CommentDto();
+					cd.setC_num(rs.getInt(1));
+					cd.setBoardNum(boardNum);
+					cd.setC_nick(rs.getString(3));
+					cd.setC_content(rs.getString(4));
+					cd.setC_date(rs.getTimestamp(5));
+					cd.setC_ref(rs.getInt(6));
+
+					comments.add(cd);							
+				}
+				
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		} 
+		finally 
+		{
+			db.closeConnection(rs,ps,con);
+		}
+		return comments;
+	}
+	
 
 }

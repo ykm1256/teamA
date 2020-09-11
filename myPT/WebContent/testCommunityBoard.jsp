@@ -111,7 +111,7 @@
 	//기존 조건 : keyField,keyWord,nowPage,numPerPage
 	function read(num) {
 		document.readFrm.num.value = num;
-		document.readFrm.action = "boardView.do";
+		document.readFrm.action = "testCboardView.do";
 		document.readFrm.submit();
 	}
 	function headFn(head){

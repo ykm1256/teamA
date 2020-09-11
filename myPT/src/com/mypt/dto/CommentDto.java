@@ -3,10 +3,22 @@ package com.mypt.dto;
 import java.sql.Timestamp;
 
 public class CommentDto {
-	int  c_num, boardNum;
-	String c_nick, c_content;
-	Timestamp c_date;
+	private int  c_num, boardNum;
+	private String c_nick, c_content;
+	private Timestamp c_date;
 	int c_ref;
+	
+	private Paging paging;
+		
+	public CommentDto() 
+	{
+		paging= new Paging();
+	}
+	
+	public CommentDto(Paging paging) 
+	{
+		this.paging = paging;
+	}
 	
 	public int getBoardNum() {
 		return boardNum;
@@ -44,6 +56,16 @@ public class CommentDto {
 	public void setC_ref(int c_ref) {
 		this.c_ref = c_ref;
 	}
+
+	public Paging getPaging() {
+		return paging;
+	}
+
+	public void setPaging(Paging paging) {
+		this.paging = paging;
+	}
+	
+	
 	
 	
 	
