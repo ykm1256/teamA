@@ -70,11 +70,16 @@
                         <li class="list-group-item">
                           <div class="row">
                             <div class="col-lg-12">
-                            <div class="row ml-2 mt-3 mb-0 d-flex justify-content-between">
-                            <input type="text" id="num" name="num" hidden="true" value="${dto.num }">                            
-                            <input type="text" id="board" name="board" hidden="true" value="cboard">
-                              <h3 class=" ">${dto.title }</h3>
-                              <!-- 좋아요버튼 -->
+                           <div class="row ml-2 mt-3 mb-0 d-flex justify-content-between">
+                            <input type="text" id="num" name="num" hidden="true" value="${dto.num }"> 
+                            <h3 class=" ">${dto.title }</h3>
+                              
+                            <c:choose>
+                              
+                              <c:when test="${sessionScope.board=='qboard'}">                                
+                              </c:when>                            
+                              <c:otherwise>
+                            <!-- 좋아요버튼 -->
                         <div class="row m-0 likebutton">
                         <c:choose>
                         <c:when test="${lflag==1 }">
@@ -260,9 +265,14 @@
                               </g>
                             </svg>
                           </div>                          
-                        </div>
-                        <!-- 좋아요버튼 -->
-                        </div>
+                        </div>                        
+                        
+                        <!-- 좋아요버튼 -->                            
+                            </c:otherwise>                            
+                            </c:choose> 
+                            </div>
+                              
+                              
                               
                               <h5 class="mt-2 ml-2">${dto.writer }</h5>
                               <div class="row mt-2 ml-2 mb-0">
@@ -272,21 +282,30 @@
                                   </p>
                                   <div class="row float-right">
                                     <p class="mb-0">
-                                      조회수 <span id="readnum" class=""
+                                      조회수 <span id="readnum"
                                         >${dto.hit }</span
                                       >  ｜
                                     </p>
+                                    
+                                    <c:choose>
+                                    <c:when test="${sessionScope.board=='qboard'}">
+                                    </c:when>
+                                    <c:otherwise>
                                     <p class="mb-0 ml-2">
-                                      추천수 <span id="likenum" class=""
+                                      좋아요 <span id="likenum" 
                                         >${dto.like }</span
                                       > ｜
                                     </p>
-                                    <p class="mb-0 ml-2 mr-1">
-                                      댓글 <span id="commentnum" class=""
-                                        >10</span
-                                      >
+                                   
+                                    </c:otherwise>
+                                    </c:choose>
+                                    
+                                    <p class="mb-0">
+                                      댓글 <span id="commentnum"
+                                        >${s}</span>                                      
                                     </p>
-                                  </div>
+                                    
+                                    </div>
                                 </div>
                               </div>
                             </div>
@@ -300,13 +319,13 @@
                     <c:choose>
                     <c:when test="${sessionScope.nick==dto.writer}">
                     <div class="text-right mb-1 mr-1">
-              <a href="#" class="mr-2 btn btn-light btn-sm font-weight-bold">수정</a>
-              <a href="boardDelete.do" class="ml-2 btn btn-danger btn-sm font-weight-bold">삭제</a>              
+              <a href="moveUpdateBoard.do" class="mr-2 btn btn-light btn-sm font-weight-bold">수정</a>
+              <a class="ml-2 btn btn-danger btn-sm font-weight-bold text-white" onclick="btnDel()">삭제</a>              
               </div>
               </c:when>
-              <c:when test="${sessionScope.nick=='관리자'}">
+              <c:when test="${sessionScope.nick=='관리자'&& sessionScope.nick!=dto.writer}">
                     <div class="text-right mb-1 mr-1">             
-              <a href="boardDelete.do" class="ml-2 btn btn-danger btn-sm font-weight-bold">삭제</a>            
+              <a class="ml-2 btn btn-danger btn-sm font-weight-bold text-white" onclick="btnDel()">삭제</a>            
               </div>
               </c:when>
               </c:choose>
@@ -425,7 +444,8 @@
     </script>
     <script src="/myPT/js/scripts.js"></script>
     <script src="/myPT/js/like.js"></script>
-    <!-- 게시판 관련 -->
+    <script src="/myPT/js/boardAlert.js"></script>
+
     
   <script type="text/javascript" src="assets/summernote-0.8.18-dist/summernote-bs4.js"></script>
   <script src="assets/summernote-0.8.18-dist/lang/summernote-ko-KR.js"></script>

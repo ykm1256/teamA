@@ -1,6 +1,60 @@
+<%@page import="com.mypt.dao.CboardDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+		request.setCharacterEncoding("utf-8");
+		int totalRecord = 0;//총게시물수
+		int numPerPage = 10;//페이지당 레코드 개수(5,10,15,30)
+		int pagePerBlock = 15;//블럭당 페이지 개수
+		int totalPage = 0;//총 페이지 개수
+		int totalBlock = 0;//총 블럭 개수
+		int nowPage = 1;//현재 페이지
+		int nowBlock = 1;//현재 블럭
+		CboardDao dao = CboardDao.getInstance();
+		
+		//처음 shead 설정
+		String shead = "all";
+		if(request.getParameter("head")!=null){
+			shead = request.getParameter("head");
+		}
+				
+		//검색에 필요한 변수
+		String keyField = "", keyWord = "";
+		//검색일때
+		if(request.getParameter("keyWord")!=null){
+			keyField = request.getParameter("keyField");
+			keyWord = request.getParameter("keyWord");
+		}
+		
+		//검색 후에 다시 처음화면 요청
+		if(request.getParameter("reload")!=null&&
+				request.getParameter("reload").equals("true")){
+			keyField = ""; keyWord = "";
+		}		
+		
+		totalRecord = dao.getTotalCount(keyField, keyWord,shead);
+		System.out.println("totalRecord : " + totalRecord);
+		
+		//nowPage 요청 처리
+		if(request.getParameter("nowPage")!=null){
+			nowPage = Integer.parseInt(request.getParameter("nowPage"));
+		}
+		
+		//sql문에 들어가는 start, cnt 선언
+		int start = (nowPage*numPerPage)-numPerPage;
+		int cnt = numPerPage;
+		System.out.println(start);
+		System.out.println(cnt);
+		
+		
+		//전체페이지 개수
+		totalPage = (int)Math.ceil((double)totalRecord/numPerPage);
+		//전체블럭 개수
+		 totalBlock = (int)Math.ceil((double)totalPage/pagePerBlock);
+		//현재블럭
+		nowBlock = (int)Math.ceil((double)nowPage/pagePerBlock);
+%>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -19,6 +73,49 @@
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
     ></script>
+    
+    <script type="text/javascript">
+    
+    function check() {
+		if(document.searchFrm.keyField.value=="default"){
+			alert("카테고리를 지정하세요.");			
+			return false;
+		}
+		else if(document.searchFrm.keyWord.value==""){
+			window.location.href="moveQuestion.do"
+			return false;
+		}
+		document.searchFrm.submit();
+	}
+	function pageing(page) {
+		document.readFrm.nowPage.value = page;
+		document.readFrm.submit();
+	}
+	function block(block) {
+		document.readFrm.nowPage.value = 
+			<%=pagePerBlock%>*(block-1)+1;
+		document.readFrm.submit();
+	}
+	function  list() {
+		document.listFrm.action = "list.jsp";
+		document.listFrm.submit();
+	}
+	function numPerFn(numPerPage) {
+		document.readFrm.numPerPage.value = numPerPage;
+		document.readFrm.submit();
+	}
+	//list.jsp에서 read.jsp로 요청이 될때 기존에 조건 같이 넘어감.
+	//기존 조건 : keyField,keyWord,nowPage,numPerPage
+	function read(num) {
+		document.readFrm.num.value = num;
+		document.readFrm.action = "boardView.do";
+		document.readFrm.submit();
+	}
+	function headFn(head){
+		document.readFrm.head.value = head;
+		document.readFrm.submit();
+	}
+</script>
 
   </head>
   <body class="sb-nav-fixed">

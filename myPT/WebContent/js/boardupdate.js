@@ -1,4 +1,4 @@
-$(document).ready(function() {
+
             
     $('#subject').focus();
 
@@ -59,19 +59,31 @@ $(document).ready(function() {
        }
      });
      
-   });
-
    // 이미지 사이즈 드래그로 조절
 //   $('img').parent().draggable();
    $('img').parent().addClass('resizeable')
 
 
-   // 테스트용
-   $('#test').click(function(){
-       var markupStr = $('.summernote').summernote('code');
-           $('#result').html(markupStr);
 
-   });
+// 글 정보 받아오기
+var num = $("#num").val();
+	$.ajax({
+	url: "updateView.do",
+	type: "post",	
+	data: {"num": num},
+	success: function(data) {
+		data = $.parseJSON(data);		
+			var content = data.content;
+			var note = document.querySelector(".note-editable");
+			note.innerHTML = content;
+	},
+	error: function(e) {
+		alert(e);
+	}
+});
+
+
+
 
 
 // 글쓰기 (윤)
@@ -83,53 +95,6 @@ function postForm(){
 		alert("말머리를 선택하세요!")
 		return false;
 	}else if(subject.trim() == "" | subject==null){
-		alert("올바른 제목을 입력하세요!")
-		return false;
-	}else{
-	var content = $(".note-editable").html();
-	$("#content").val(content);
-	return true;
-	}	
-}
-
-// 답글쓰기 (윤)
-function repForm(){	
-	var subject = $("#subject").val()
-	
-	if(subject.trim() == "" | subject==null){
-		alert("올바른 제목을 입력하세요!")
-		return false;
-	}else{
-	var content = $(".note-editable").html();
-	$("#content").val(content);
-	return true;
-	}	
-}
-
-// 글 수정하기
-function updateForm(){
-	var head = $("#writeHead").val()
-	var subject = $("#subject").val()
-	
-	if(subject.trim() == "" | subject==null){
-		alert("올바른 제목을 입력하세요!")
-		return false;
-	}else{
-		if(confirm("수정하시겠습니까?")){
-			var content = $(".note-editable").html();
-			$("#content").val(content);
-			return true;
-		}else {
-			return false;
-		}	
-	}	
-}
-
-// 질문게시판 글쓰기 (윤)
-function qPostForm(){	
-	var subject = $("#subject").val()
-	
-	if(subject.trim() == "" | subject==null){
 		alert("올바른 제목을 입력하세요!")
 		return false;
 	}else{

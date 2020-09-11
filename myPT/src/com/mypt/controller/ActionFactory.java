@@ -7,6 +7,8 @@ import com.mypt.action.board.DeleteAction;
 import com.mypt.action.board.LikeAction;
 import com.mypt.action.board.ReplyAction;
 import com.mypt.action.board.TestViewAction;
+import com.mypt.action.board.UpdateAction;
+import com.mypt.action.board.UpdateViewAction;
 import com.mypt.action.board.ViewAction;
 import com.mypt.action.board.WriteAction;
 import com.mypt.action.board.comment.CommentDeleteAction;
@@ -30,11 +32,14 @@ import com.mypt.action.list.TrainerUserListViewAction;
 import com.mypt.action.login.LogoutAction;
 import com.mypt.action.login.TrainerLoginAction;
 import com.mypt.action.login.UserLoginAction;
+import com.mypt.action.move.MoveBoardDetailAction;
+import com.mypt.action.move.MoveBoardUpdateAction;
 import com.mypt.action.move.MoveCommunityAction;
 import com.mypt.action.move.MoveInbody;
 import com.mypt.action.move.MoveIntroAction;
 import com.mypt.action.move.MovePayment;
 import com.mypt.action.move.MovePhotoAction;
+import com.mypt.action.move.MoveQuestionAction;
 import com.mypt.action.move.MoveReplyAction;
 import com.mypt.action.move.MoveSchedule;
 import com.mypt.action.move.MoveTrainerRegister;
@@ -167,6 +172,15 @@ public class ActionFactory
 		map.put("/commentDelete", new CommentDeleteAction());
 		
 
+		
+		//게시판 수정
+		map.put("/boardUpdate", new UpdateAction());
+		map.put("/moveUpdateBoard", new MoveBoardUpdateAction());
+		map.put("/updateView", new UpdateViewAction());
+		
+		//질문게시판
+		map.put("/moveQuestion", new MoveQuestionAction());
+		map.put("/moveBoardDetail", new MoveBoardDetailAction());
 		
 	}
 	

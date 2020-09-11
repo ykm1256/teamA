@@ -89,7 +89,7 @@
                   <a class="nav-link" href="movePhoto.do"
                     >포토 게시판</a
                   >
-                  <a class="nav-link" href="question.jsp">Q & A</a>
+                  <a class="nav-link" href="moveQuestion.do">Q & A</a>
                 </nav>
               </div>
             </div>
