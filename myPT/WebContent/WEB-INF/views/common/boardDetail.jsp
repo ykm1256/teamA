@@ -302,7 +302,7 @@
                                     
                                     <p class="mb-0">
                                       댓글 <span id="commentnum"
-                                        >${s}</span>                                      
+                                        >${comment }</span>
                                     </p>
                                     
                                     </div>
