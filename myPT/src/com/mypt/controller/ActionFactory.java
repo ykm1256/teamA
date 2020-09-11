@@ -171,6 +171,8 @@ public class ActionFactory
 		map.put("/commentInsert", new CommentInsertAction());
 		map.put("/commentDelete", new CommentDeleteAction());
 		
+
+		
 		//게시판 수정
 		map.put("/boardUpdate", new UpdateAction());
 		map.put("/moveUpdateBoard", new MoveBoardUpdateAction());
