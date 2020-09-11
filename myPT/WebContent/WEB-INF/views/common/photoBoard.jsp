@@ -64,7 +64,7 @@
 		                      >
 		                        ${item.date }
 		                      </p>
-		                      <img src="${item.photo }" class="card-img-top mb-1" />
+		                      ${item.photo }
 		                      <div class="card-body p-0 pt-2">
 		                        <h5 class="card-title mb-1 ml-2">${item.title }</h5>
 		                        <p class="card-text mb-1 ml-2">${item.writer }</p>
@@ -255,6 +255,7 @@
 			                        <div class="row m-0">
 			                        	<i
 			                            class="far fa-comment-dots fa-lg mt-2 ml-3 text-muted"
+			                            style="pointer-events:none"
 			                          	></i>
 			                          	<p class="mt-2 ml-2">${comment[status.count-1] }</p>
 			                        </div>
@@ -270,20 +271,58 @@
                   <a class="btn btn-primary text-white">글쓰기</a>
                 </div>
 
-                <ul class="pagination mt-5 ml-5 justify-content-center">
-                  <li class="page-item">
-                    <a class="page-link" href="#">이전</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">1</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">2</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">다음</a>
-                  </li>
-                </ul>
+
+				<!-- 페이징 시작 -->
+				<c:if test="${totalPage>0 }">
+	                <ul class="pagination mt-5 ml-5 justify-content-center">
+	                <!-- 이전 블럭 -->
+	                <c:choose>
+	                	<c:when test="${nowBlock>1 }">
+		                  <li class="page-item">
+		                    <a class="page-link" href="movePhoto.do?next=${nowBlock-1 }">&lt;</a>
+		                  </li>
+	                	</c:when>
+	                	<c:otherwise>
+	                		<li class="page-item">
+		                    <a class="page-link" style="pointer-events:none">&lt;</a>
+		                  </li>
+	                	</c:otherwise>
+	                </c:choose>
+	                
+	                <!-- 이전 블럭 끝 --> 
+	                  <!-- 번호 페이징 시작 -->
+	                  <c:forEach var="i" begin="${pageStart }" end="${pageEnd-1 }">
+	                  	<c:choose>
+	                  		<c:when test="${nowPage==i }">
+	                  			<li class="page-item active">
+	                    			<a class="page-link" style="pointer-events:none">${i }</a>
+	                  			</li>
+	                  		</c:when>
+	                  		<c:otherwise>
+	                  			<li class="page-item">
+	                    			<a class="page-link text-primary" id="page${i }" href="movePhoto.do?page=${i }">${i }</a>
+	                  			</li>
+	                  		</c:otherwise>
+	                  	</c:choose>
+	                  	
+	                  </c:forEach>
+	                  <!-- 번호 페이징 끝 -->
+	                  <!-- 다음 블럭 -->
+	                  <c:choose>
+	                  	<c:when test="${totalBlock>nowBlock }">
+		                  	<li class="page-item">
+		                    	<a class="page-link text-muted" href="movePhoto.do?next=${nowBlock+1 }">&gt;</a>
+		                  	</li>
+	                  	</c:when>
+	                  	<c:otherwise>
+	                		<li class="page-item">
+		                    <a class="page-link" style="pointer-events:none">&gt;</a>
+		                  </li>
+	                	</c:otherwise>
+	                  </c:choose>
+	                  <!-- 다음 블럭 끝-->
+	                </ul>
+                </c:if>
               </div>
               <!-- ============================================================== -->
               <!-- End PAge Content -->
@@ -300,5 +339,6 @@
     <script src="/myPT/js/scripts.js"></script>
     <script src="/myPT/js/photo.js"></script>
     <script src="/myPT/js/photoLike.js"></script>
+    <script src="/myPT/js/pageing.js"></script>
   </body>
 </html>
