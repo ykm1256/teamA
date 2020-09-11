@@ -35,16 +35,14 @@ public class ViewAction implements Action {
 			CommentDao cdao = CommentDao.getInstance();
 			int comment = 0;
 			String s = "제발";
-			comment = cdao.countComment("ccomment", num);
+//			comment = cdao.countComment("ccomment", num);
 			System.out.println("댓글수");
 			System.out.println(comment);
-			System.out.println("댓글수");
-			request.setAttribute("s", s);
-			request.setAttribute("commentcount", comment);
-			request.setAttribute("comcnt", comment);
+			System.out.println("댓글수");			
+			request.setAttribute("comment", comment);			
 			request.setAttribute("dto", dto);
 			request.setAttribute("lflag", lflag);			
-			session.setAttribute("dto", dto);
+			session.setAttribute("dto", dto);			
 		}
 		
 		else if(board.equals("qboard")) {
@@ -62,7 +60,7 @@ public class ViewAction implements Action {
 			session.setAttribute("dto", dto);
 		}
 		
-		return "redirect:moveBoardDetail.do";
+		return "common/boardDetail";
 	}
 
 }

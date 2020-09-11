@@ -9,7 +9,7 @@ public class MoveBoardDetailAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
+	
 		return "common/boardDetail";
 
 	}
