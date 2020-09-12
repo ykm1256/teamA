@@ -29,6 +29,8 @@ import com.mypt.action.income.MoveIncomeAction;
 import com.mypt.action.list.AdminTrainerListViewAction;
 import com.mypt.action.list.AdminUserListViewAction;
 import com.mypt.action.list.TrainerUserListViewAction;
+import com.mypt.action.list.UserBoardListViewAction;
+import com.mypt.action.list.UserLikeListViewAction;
 import com.mypt.action.login.LogoutAction;
 import com.mypt.action.login.TrainerLoginAction;
 import com.mypt.action.login.UserLoginAction;
@@ -39,6 +41,7 @@ import com.mypt.action.move.MoveInbody;
 import com.mypt.action.move.MoveIntroAction;
 import com.mypt.action.move.MovePayment;
 import com.mypt.action.move.MovePhotoAction;
+import com.mypt.action.move.MoveProfileAction;
 import com.mypt.action.move.MoveQuestionAction;
 import com.mypt.action.move.MoveReplyAction;
 import com.mypt.action.move.MoveSchedule;
@@ -181,6 +184,15 @@ public class ActionFactory
 		//질문게시판
 		map.put("/moveQuestion", new MoveQuestionAction());
 		map.put("/moveBoardDetail", new MoveBoardDetailAction());
+		
+		//프로필 이동
+		map.put("/moveProfile", new MoveProfileAction());
+		
+		//유저 게시판 목록
+		map.put("/userBoardList", new UserBoardListViewAction());
+		map.put("/userLikeList", new UserLikeListViewAction());
+		
+		
 		
 	}
 	

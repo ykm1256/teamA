@@ -298,6 +298,38 @@ public class CommentDao {
 		return cnt;
 	}
 	
+	//해당 글 댓글 수 가져오기
+		public int countUserComment(String commenttblName, int boardNum,String nick) {
+			Connection con = null;
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			int cnt = 0;
+			
+			try {
+				con = db.getConnection();
+				String sql = "SELECT count(*) FROM "+ commenttblName+ " WHERE boardnum=? and c_nick=?";
+				ps = con.prepareStatement(sql);
+				ps.setInt(1, boardNum);		
+				ps.setString(2, nick);		
+				rs = ps.executeQuery();
+				System.out.println(sql);
+				
+				if (rs.next()) 
+				{
+					cnt = rs.getInt(1);
+				}
+			} 
+			catch (Exception e) 
+			{
+				e.printStackTrace();
+			} 
+			finally 
+			{
+				db.closeConnection(rs, ps, con);
+			}
+			return cnt;
+		}
+	
 	
 
 
