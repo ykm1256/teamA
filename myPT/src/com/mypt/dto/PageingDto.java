@@ -30,6 +30,19 @@ public class PageingDto {
 		this.pageStart=(nowBlock-1)*pagePerBlock+1;
 		this.pageEnd=(pageStart+pagePerBlock)<totalPage?pageStart+pagePerBlock:totalPage+1;
 	}
+	public PageingDto(int nowPage,String keyField,String keyWord) {
+		PboardDao pdao=PboardDao.getInstance();
+		this.totalRecord=pdao.getTotalCount(keyField,keyWord);
+		this.numPerPage=9;
+		this.pagePerBlock=5;
+		this.totalPage=(int)Math.ceil((double)totalRecord/numPerPage);
+		this.totalBlock=(int)Math.ceil((double)totalPage/pagePerBlock);
+		this.nowPage=nowPage;
+		this.nowBlock=(int)Math.ceil((double)nowPage/pagePerBlock);
+		this.startPage=(nowPage*numPerPage)-numPerPage;
+		this.pageStart=(nowBlock-1)*pagePerBlock+1;
+		this.pageEnd=(pageStart+pagePerBlock)<totalPage?pageStart+pagePerBlock:totalPage+1;
+	}
 
 	public int getTotalRecord() {
 		return totalRecord;

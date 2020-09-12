@@ -6,6 +6,7 @@ import java.util.Map;
 import com.mypt.action.board.DeleteAction;
 import com.mypt.action.board.LikeAction;
 import com.mypt.action.board.ReplyAction;
+import com.mypt.action.board.SearchAction;
 import com.mypt.action.board.TestViewAction;
 import com.mypt.action.board.UpdateAction;
 import com.mypt.action.board.UpdateViewAction;
@@ -169,6 +170,8 @@ public class ActionFactory
 		
 		// 포토게시판 이동
 		map.put("/movePhoto",new MovePhotoAction());
+		// 포토게시판 검색
+		map.put("/searchPhoto",new SearchAction());
 		
 		map.put("/testCboardView",new TestViewAction());
 		map.put("/commentInsert", new CommentInsertAction());
