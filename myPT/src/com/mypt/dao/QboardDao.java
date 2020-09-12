@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Vector;
 
+import com.mypt.dto.CboardDto;
 import com.mypt.dto.QboardDto;
 
 
@@ -404,6 +405,48 @@ public class QboardDao extends AbstractBoardDao<QboardDto>
 				} finally {
 					db.closeConnection(null,ps,con);
 				}
+			}
+			
+			// 유저가 쓴글 목록
+			public ArrayList<QboardDto> userList(String nick) 
+			{
+				Connection con = null;
+				PreparedStatement ps = null;
+				ResultSet rs = null;
+				
+				ArrayList<QboardDto> arr= new ArrayList<QboardDto>();
+
+				String sql = "select *,date_format(qb_date,'%Y-%m-%d %H:%i') from qboard where qb_writer=?";
+
+				try {
+					con = db.getConnection();
+					ps = con.prepareStatement(sql);
+					ps.setString(1, nick);
+					rs = ps.executeQuery();
+
+					while(rs.next()) 
+					{
+						QboardDto dto = new QboardDto();
+
+						dto.setTitle(rs.getString("qb_title"));
+						dto.setWriter(rs.getString("qb_writer"));
+						dto.setHit(rs.getInt("qb_hit"));
+						dto.setNum(rs.getInt("qb_num"));
+						dto.setDate(rs.getString(10));					
+											
+						arr.add(dto);
+					}
+				} 
+				catch (Exception e) 
+				{
+					e.printStackTrace();
+				} 
+				finally 
+				{
+					db.closeConnection(rs, ps, con);
+				}
+
+				return arr;
 			}
 
 }
