@@ -5,13 +5,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.mypt.controller.Action;
 
-public class MoveBoardDetailAction implements Action {
+public class MoveProfileAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-	
-		return "common/boardDetail";
-
+		// TODO Auto-generated method stub
+		
+		return "user/profile";
 	}
 
 }

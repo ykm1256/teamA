@@ -59,18 +59,18 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 			Connection con = null;
 			PreparedStatement ps = null;
 
-			String sql = "update cboard set cb_title=?, cb_head=?, cb_content=? where num=?";
+			String sql = "update cboard set cb_title=?, cb_head=?, cb_content=? where cb_num=?";
 			try {
 				con = db.getConnection();
 				ps = con.prepareStatement(sql);
 				
 				ps.setString(1, dto.getTitle());
 				ps.setString(2, dto.getHead());
-				ps.setString(3, dto.getContent());
-				
+				ps.setString(3, dto.getContent());				
 				ps.setInt(4, dto.getNum());
 
 				ps.executeUpdate();
+				System.out.println(sql);
 
 			} 
 			catch (Exception e) 
@@ -83,8 +83,8 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 			}
 		}
 
-		
-		public ArrayList<CboardDto> getList() 
+		// 유저가 쓴글 목록
+		public ArrayList<CboardDto> userList(String nick) 
 		{
 			Connection con = null;
 			PreparedStatement ps = null;
@@ -92,11 +92,12 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 			
 			ArrayList<CboardDto> arr= new ArrayList<CboardDto>();
 
-			String sql = "select * from cboard";
+			String sql = "select *,date_format(cb_date,'%Y-%m-%d %H:%i') from cboard where cb_writer=?";
 
 			try {
 				con = db.getConnection();
 				ps = con.prepareStatement(sql);
+				ps.setString(1, nick);
 				rs = ps.executeQuery();
 
 				while(rs.next()) 
@@ -104,11 +105,10 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 					CboardDto dto = new CboardDto();
 
 					dto.setTitle(rs.getString("cb_title"));
-					dto.setWriter(rs.getString("cb_writer"));					
-					dto.setHead(rs.getString("cb_head"));
-					dto.setHit(rs.getInt("hit"));
-					dto.setDate(rs.getTimestamp("cb_cb_date").toString());
-					dto.setLike(rs.getInt("cb_like"));
+					dto.setWriter(rs.getString("cb_writer"));
+					dto.setHit(rs.getInt("cb_hit"));
+					dto.setNum(rs.getInt("cb_num"));
+					dto.setDate(rs.getString(12));					
 										
 					arr.add(dto);
 				}
@@ -328,7 +328,7 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
-				db.closeConnection(null,ps,con);
+				db.closeConnection(rs,ps,con);
 			}
 			return maxNum;
 		}
@@ -370,7 +370,7 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
-				db.closeConnection(null,ps,con);
+				db.closeConnection(rs,ps,con);
 			}
 			return totalCount;
 		}
@@ -406,9 +406,9 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 				}else {//검색인 경우
 					//말머리 전체보기					
 					if(head.equals("all")) {
-						sql = "select * from cboard where "+keyField+" like '%"+keyWord+"%' order by cb_ref desc, cb_pos limit ?,?";
+						sql = "select *,date_format(cb_date,'%Y-%m-%d %H:%i') from cboard where "+keyField+" like '%"+keyWord+"%' order by cb_ref desc, cb_pos limit ?,?";
 					}else {
-							sql = "select * from cboard where ? like '%"+keyWord+"%' and cb_head='"+head+"' order by cb_ref desc, cb_pos "
+							sql = "select *,date_format(cb_date,'%Y-%m-%d %H:%i') from cboard where ? like '%"+keyWord+"%' and cb_head='"+head+"' order by cb_ref desc, cb_pos "
 									+ "limit ?,?";
 					}
 //					sql = "select * from cboard where " + keyField 
@@ -427,7 +427,7 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 					bean.setPos(rs.getInt("cb_pos"));
 					bean.setRef(rs.getInt("cb_ref"));
 					bean.setDepth(rs.getInt("cb_depth"));
-					bean.setDate(rs.getTimestamp("cb_date").toString());
+					bean.setDate(rs.getString(12));
 					bean.setHit(rs.getInt("cb_hit"));				
 					bean.setHead(rs.getString("cb_head"));
 					bean.setLike(rs.getInt("cb_like"));	
@@ -439,39 +439,8 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 				db.closeConnection(rs,ps,con);
 			}
 			return vlist;
-		}
+		}		
 		
-		//Board Get : 한개의 게시물, 13개 컬럼 모두 리턴
-		public CboardDto getBoard(int num) {
-			Connection con = null;
-			PreparedStatement ps = null;
-			ResultSet rs = null;
-			String sql = null;
-			CboardDto bean = new CboardDto();
-			try {
-				con = db.getConnection();
-				sql = "select * from cboard where cb_num = ?";
-				ps = con.prepareStatement(sql);
-				ps.setInt(1, num);
-				rs = ps.executeQuery();
-				if(rs.next()) {
-					bean.setNum(rs.getInt("cb_num"));
-					bean.setWriter(rs.getString("cb_writer"));
-					bean.setTitle(rs.getString("cb_title"));
-					bean.setContent(rs.getString("cb_content"));
-					bean.setPos(rs.getInt("cb_pos"));
-					bean.setRef(rs.getInt("cb_ref"));
-					bean.setDepth(rs.getInt("cb_depth"));
-					bean.setDate(rs.getTimestamp("cb_date").toString());									
-					bean.setHit(rs.getInt("cb_hit"));
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				db.closeConnection(null,ps,con);
-			}
-			return bean;
-		}
 		
 		//Count Up : 조회수 증가
 		public void upCount(int num) {
@@ -490,41 +459,7 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 				db.closeConnection(null,ps,con);
 			}
 		}
-		//좋아요 증가
-				public void upLike(int num) {
-					Connection con = null;
-					PreparedStatement ps = null;
-					String sql = null;
-					try {
-						con = db.getConnection();
-						sql = "update cboard set cb_like = cb_like +1 where cb_num = ?";
-						ps = con.prepareStatement(sql);
-						ps.setInt(1, num);
-						ps.executeUpdate();
-					} catch (Exception e) {
-						e.printStackTrace();
-					} finally {
-						db.closeConnection(null,ps,con);
-					}
-				}
-			//좋아요 감소
-			public void downLike(int num) {
-				Connection con = null;
-				PreparedStatement ps = null;
-				String sql = null;
-				try {
-					con = db.getConnection();
-					sql = "update cboard set cb_like = cb_like -1 where cb_num = ?";
-					ps = con.prepareStatement(sql);
-					ps.setInt(1, num);
-					ps.executeUpdate();
-				} catch (Exception e) {
-					e.printStackTrace();
-				} finally {
-					db.closeConnection(null,ps,con);
-				}
-			}
-		
+				
 		//Board Delete 원본글
 		public void deleteBoard(int ref, int depth) {
 			Connection con = null;
@@ -563,26 +498,6 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 					}
 				}
 		
-		//Board Update : name, subject, content 3개만 수정
-		public void updateBoard(CboardDto bean) {
-			Connection con = null;
-			PreparedStatement ps = null;
-			String sql = null;
-			try {
-				con = db.getConnection();
-				sql = "update cboard set cb_writer=?, cb_title=?, cb_content=? where cb_num=?";
-				ps = con.prepareStatement(sql);
-				ps.setString(1, bean.getWriter());
-				ps.setString(2, bean.getTitle());
-				ps.setString(3, bean.getContent());
-				ps.setInt(4, bean.getNum());
-				ps.executeUpdate();
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				db.closeConnection(null,ps,con);
-			}
-		}
 		
 		
 		
@@ -659,6 +574,12 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 			CboardDao dao = CboardDao.getInstance();
 			dao.post1000();
 			System.out.println("성공~~");
+		}
+
+		@Override
+		public ArrayList<CboardDto> getList() {
+			// TODO Auto-generated method stub
+			return null;
 		}
 		
 		

@@ -1,3 +1,4 @@
+
 if (window.matchMedia("(min-width: 992px)").matches == true) {
   $(".card-img-top").css("height", "22vw");
 } else if (window.matchMedia("(min-width: 768px)").matches == true) {

@@ -73,14 +73,14 @@ public class LikeDao
 
 		ArrayList<Integer> arr = new ArrayList<Integer>();
 
-		String sql="select num from ? where nick=?";
+		String sql="select num from "+likeTblName+" where nick=?";
 		
 		try {
 			con = db.getConnection();
 			ps = con.prepareStatement(sql);
 			
-			ps.setString(1, likeTblName);
-			ps.setString(2, nickName);
+			
+			ps.setString(1, nickName);
 			
 			rs = ps.executeQuery();
 
