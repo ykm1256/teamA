@@ -165,16 +165,19 @@ public class CommentDao {
 
 	}
 	
-	public void commentUpdate(CCommentDto cd) {
+	public int commentUpdate(String commenttblName, CommentDto cd) {
 		Connection con = null;
 		PreparedStatement ps = null;
+		int result=0;
+		
 		try {
 			con = db.getConnection();
-			String sql = "update ccomment set cb_ccontent=?, cb_cdate=now() where cb_cnum=?";
+			String sql = "update "+commenttblName+" set c_content=? where c_num=?";
+			
 			ps = con.prepareStatement(sql);
-			ps.setString(1, cd.getcb_ccontent());
-			ps.setString(2, String.valueOf(cd.getcb_cdate()));
-			ps.executeUpdate();
+			ps.setString(1, cd.getC_content());
+			ps.setInt(2, cd.getC_num());
+			result= ps.executeUpdate();
 		} 
 		catch (Exception e) 
 		{
@@ -184,6 +187,8 @@ public class CommentDao {
 		{
 			db.closeConnection(null, ps, con);
 		}
+		
+		return result;
 	}
 
 

@@ -37,8 +37,7 @@ public class TestViewAction implements Action {
 		{		
 			CboardDao dao = CboardDao.getInstance();
 			CboardDto dto = dao.detailView(num);
-			
-			
+					
 			totalRecord = cdao.countComment("ccomment", num);
 					
 			totalPage= (int)Math.ceil((double)totalRecord/numPerPage); //총 페이지 수
@@ -47,12 +46,9 @@ public class TestViewAction implements Action {
 			TestPagingDto paging= new TestPagingDto(totalRecord, numPerPage, pagePerBlock, nowPage);
 			
 			 //	한 페이지에 해당하는 댓글 가져오기  
-//			ArrayList<CommentDto> arr= cdao.getCommentsForOneCommentPage("ccomment", num, paging.getStartPage(), numPerPage);
 			JsonArray arr = cdao.getCommentsForOneCommentPage("ccomment", num, paging.getStartPage(), numPerPage);
 			
 			dto.setComments(arr); 
-
-//			request.setAttribute("dto", dto);
 			session.setAttribute("dto", dto);
 									
 			
@@ -63,20 +59,16 @@ public class TestViewAction implements Action {
 			
 			request.setAttribute("paging", paging);
 			session.setAttribute("paging", paging);
-//			
+			
 			request.setAttribute("num", num);
 
-			
-			
+					
 		}
 		else if(board.equals("pboard"))
 		{
 			
 		}
-		else if(board.equals("qboard"))
-		{
-			
-		}
+
 		
 		return "common/testBoardDetail";
 		

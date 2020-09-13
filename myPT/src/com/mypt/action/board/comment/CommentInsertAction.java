@@ -14,7 +14,6 @@ import com.mypt.dto.TestPagingDto;
 
 public class CommentInsertAction implements Action
 {
-
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception 
 	{
@@ -40,24 +39,68 @@ public class CommentInsertAction implements Action
 		comment.setC_content(request.getParameter("c_content"));
 		comment.setC_nick((String)session.getAttribute("nick"));
 			
-		
 		int nowPage=Integer.parseInt(request.getParameter("nowPage"));
 		
+//		if(nowPage!= paging.getTotalPage())
+//		{
+//			if(board.equals("cbaord"))
+//			{
+//				insertResult = cdao.commentInsert("ccomment", comment);
+//				paging.setTotalRecord(paging.getTotalRecord()+1);
+//				paging.setNowPage(paging.getTotalPage());
+//				arr = cdao.getCommentsForOneCommentPage("ccomment", num, paging.getStartPage(), paging.getNumPerPage());
+//
+//			}			
+//			else if(board.equals("pboard"))
+//			{
+//				insertResult = cdao.commentInsert("pcomment", comment);
+//				paging.setTotalRecord(paging.getTotalRecord()+1);
+//				paging.setNowPage(paging.getTotalPage());
+//				arr = cdao.getCommentsForOneCommentPage("pcomment", num, paging.getStartPage(), paging.getNumPerPage());
+//
+//			}
+//			
+//			result.add("comments", arr);								
+//		}
+//		else
+//		{
+//			if(board.equals("cbaord"))
+//			{
+//				insertResult = cdao.commentInsert("ccomment", comment);
+//				paging.setTotalRecord(paging.getTotalRecord()+1);
+//				
+//				if(insertResult==1)
+//				{
+//					comment = cdao.getLastComment("ccomment", num);					
+//				}	
+//			}
+//			
+//			else if(board.equals("pboard"))
+//			{
+//				insertResult = cdao.commentInsert("pcomment", comment);
+//				paging.setTotalRecord(paging.getTotalRecord()+1);
+//				
+//				if(insertResult==1)
+//				{
+//					comment = cdao.getLastComment("pcomment", num);					
+//				}
+//				
+//			}
+//			
+//			result.add("comments", gson.fromJson(gson.toJson(comment, CommentDto.class), JsonObject.class));
+//
+//		}
+		
+		
 		if(board.equals("cboard"))
-		{
-			
-			if(nowPage!= paging.getTotalPage())
+		{			
+			if((nowPage!= paging.getTotalPage()) && paging.getTotalPage()!=0)
 			{
-				insertResult = cdao.commentInsert("ccomment", comment);
+				insertResult = cdao.commentInsert("ccomment", comment);				
 				paging.setTotalRecord(paging.getTotalRecord()+1);
-				paging.setNowPage(paging.getTotalPage());
-					
-				arr = cdao.getCommentsForOneCommentPage("ccomment", num, paging.getStartPage(), paging.getNumPerPage());
-				
-				result.add("comments", arr);
-				
-				
-				
+				paging.setNowPage(paging.getTotalPage());					
+				arr = cdao.getCommentsForOneCommentPage("ccomment", num, paging.getStartPage(), paging.getNumPerPage());			
+				result.add("comments", arr);							
 			}
 			else
 			{
@@ -70,18 +113,47 @@ public class CommentInsertAction implements Action
 				}
 				
 					result.add("comments", gson.fromJson(gson.toJson(comment, CommentDto.class), JsonObject.class));
+			}					
+		}	
+		
+		else if(board.equals("pboard"))
+		{	
+
+			if(nowPage!= paging.getTotalPage())
+			{
+				insertResult = cdao.commentInsert("pcomment", comment);
+				paging.setTotalRecord(paging.getTotalRecord()+1);
+				paging.setNowPage(paging.getTotalPage());					
+				arr = cdao.getCommentsForOneCommentPage("pcomment", num, paging.getStartPage(), paging.getNumPerPage());				
+				result.add("comments", arr);							
 			}
-			
-			session.setAttribute("paging", paging);	
-			result.add("paging", gson.fromJson(gson.toJson(paging, TestPagingDto.class), JsonObject.class));
-			
-			request.setAttribute("result", result);				
-		}		
+			else
+			{
+				insertResult = cdao.commentInsert("pcomment", comment);
+				paging.setTotalRecord(paging.getTotalRecord()+1);
+				
+				if(insertResult==1)
+				{
+					comment = cdao.getLastComment("pcomment", num);					
+				}
+				
+					result.add("comments", gson.fromJson(gson.toJson(comment, CommentDto.class), JsonObject.class));
+
+				
+			}
+				
+		}
+		
+		session.setAttribute("paging", paging);	
+		result.add("paging", gson.fromJson(gson.toJson(paging, TestPagingDto.class), JsonObject.class));
+		
+		request.setAttribute("result", result);	
 		
 	    response.setContentType("application/json; charset=utf-8");
 
 		
 		return "callback";
 	}
+
 
 }

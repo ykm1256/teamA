@@ -391,7 +391,7 @@ var num = ${dto.num};
 var boardWriter= '${dto.writer}'; 
 
 
-setComment();
+setComment(comments.length);
 setEvent();
 
 
@@ -429,13 +429,13 @@ function setComment()
 				htmlForNew+='<a class="dropdown-item commentDelete">삭제</a><input type="number" hidden="true" value='+com.c_num+'></div></div>';
 			}
 									
-		htmlForNew+='</div><div class="row"><div class="col py-2">'+com.c_content+'</div></div>';
+		htmlForNew+='</div><div class="row"><div class="col py-2 content">'+com.c_content+'</div></div>';
 		htmlForNew+='<div class="row"><div class="col text-secondary"><span class="commentDate">'+com.c_date+'</span><span class="ml-2">댓글쓰기</span></div></div></div>';						
 			
 	});
 	
 	$('#commentsWrapper').append(htmlForNew);
-	setBadge();
+	setBadge(comments.length);
 
 	
 
@@ -488,7 +488,7 @@ function getChangedComment()
 				$('#page').empty();
 				
 				
-				setComment();
+				setComment(comments.length);
 				setEvent();
 						
 			},
@@ -501,9 +501,7 @@ function getChangedComment()
 
   var boardNum= ${dto.num};
   
-  $('#commentBtn').click(function(){
-	  
-	  
+  $('#commentBtn').click(function(){  
 	
 	$.ajax({
 		type:"post",
@@ -514,10 +512,12 @@ function getChangedComment()
 		{
 			console.log(data);
 			let newComment= data;
-			comments= newComment.comments;	
+			let lengthOfBeforeComments = comments.length=undefined?1:comments.length+1;
 			
 			if(nowPage!= newComment.paging.nowPage) //페이지가 바뀐 경우
 				{
+					comments= newComment.comments;	
+
 					nowPage= data.paging.nowPage;
 					nowBlock= data.paging.nowBlock;
 					pageStart= data.paging.pageStart;
@@ -529,15 +529,15 @@ function getChangedComment()
 			{
 				let htmlForNew="";
 				htmlForNew+='<div class="comments"><div class="row"><div class="row col-9">';
-				htmlForNew+='<div class="col font-weight-bold commentNick">'+comments.c_nick+'</div></div>';
+				htmlForNew+='<div class="col font-weight-bold commentNick">'+newComment.comments.c_nick+'</div></div>';
 				htmlForNew+='<div class="col-3 text-right dropdown"><a class="mt-1 text-secondary" href="#" role="button" data-toggle="dropdown"><i class="fas fa-ellipsis-v"></i></a>';
-				htmlForNew+='<div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item commentUpdate" href="#">수정</a><a class="dropdown-item commentDelete" href="#">삭제</a>';
-				htmlForNew+='<input type="number" hidden="true" value='+comments.c_num+'></div></div></div>';
-				htmlForNew+='<div class="row"><div class="col py-2">'+comments.c_content+'</div></div>';
-				htmlForNew+='<div class="row"><div class="col text-secondary"><span class="commentDate">'+comments.c_date+'</span><span class="ml-2">댓글쓰기</span></div></div></div>';			
+				htmlForNew+='<div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item commentUpdate" href="#">수정</a><a class="dropdown-item commentDelete" href="#">삭제</a> ';
+				htmlForNew+='<input type="number" hidden="true" value='+newComment.comments.c_num+'></div></div></div>';
+				htmlForNew+='<div class="row"><div class="col py-2 content">'+newComment.comments.c_content+'</div></div>';
+				htmlForNew+='<div class="row"><div class="col text-secondary"><span class="commentDate">'+newComment.comments.c_date+'</span><span class="ml-2">댓글쓰기</span></div></div></div>';			
 
 				$('#commentsWrapper').append(htmlForNew);
-				setBadge();
+				setBadge(lengthOfBeforeComments);
 			}
 			
 			$('#commentContent').val('');
@@ -553,12 +553,12 @@ function getChangedComment()
 
 
 
-function setBadge()
+function setBadge(numOfComments)
 {
 	  var today = new Date();
 	  today.setHours(today.getHours()-24)
 	
-	for(var i=0; i<numPerPage;i++)
+	for(var i=0; i<numOfComments;i++)
 	{
 		  var commentdate= new Date($('.commentDate').eq(i).text())
 
@@ -566,49 +566,80 @@ function setBadge()
 			{
 				$('.commentNick').eq(i).append('<span class="badge badge-success ml-1">작성자</span>');		
 			}
-		if(commentdate>today && $('.commentNick').eq(i).length!=2)
+		if(commentdate>today && $('.commentNick').eq(i).children('.newImg').length!=1)
 			{
-				$('.commentNick').eq(i).append('<img src="img/new.png" width="12px" class="ml-1">');
+				$('.commentNick').eq(i).append('<img src="img/new.png" width="12px" class="ml-1 newImg">');
 			}
 	}
 }
 
 
 function setEvent()
-{
-	  
-	$('.commentDelete').click(function(){
-		 
-		 let $selectedComment= $(this).parents('.comments');
-		 
+{  
+	$('.commentDelete').click(function(){	 
+		 let $selectedComment= $(this).parents('.comments');		 
 		 if(confirm("정말 삭제하시겠습니까?")==true)
-			{
-					 
+			{					 
 			 $.ajax({
 					type:"post",
 					url:"commentDelete.do",
-					data : {"c_num": $(this).siblings('input').val()},
+					data : {"num": num, "c_num": $(this).siblings('input').val()},
 					async: false,
 					success: function(data)
 					{
-						console.log(data);
+						console.log(data);						
 						if(data==1)
 						{
 							$selectedComment.remove();
-						}
-						
+						}						
 					},
 					error: function(e){
 						alert("에러가 발생했습니다.")
 					}					
-				})
-			 
+				})		 
 			}
-	
-	  
-	})  
-	  
+	})  	
+	$('.commentUpdate').click(function(){		
+		let $selectedComment= $(this).parents('.comments');	
+		let c_num= $(this).siblings('input').val();		
+		let $beforeContent= $selectedComment.find('div.content').text();
+		$selectedComment.find('div.content').html('<textarea id="contentForUpdate" cols="30" rows="3" maxlength="500" style="width:100%; resize:none" class="border-0">'+$beforeContent+'</textarea>');
+		$('#contentForUpdate').focus();		
+		let $btnWrapper= $('<div class="text-right"></div>');
+		$('#contentForUpdate').after($btnWrapper);
+		$btnWrapper.append('<input type="button" class="btn btn-primary ml-auto" id="updateBtn" value="수정"><input type="button" class="btn btn-danger mx-2" id="cancelBtn" value="취소">');		
+		$('#cancelBtn').click(function(){
+			$selectedComment.find('div.content').text($beforeContent);
+			return false;
+		})		
+		$('#updateBtn').click(function()
+				{
+					let updateContent= $('#contentForUpdate').val();				
+				 if(confirm("수정하시겠습니까?")==true)
+				{					 
+					 $.ajax({
+							type:"post",
+							url:"commentUpdate.do",
+							data : {"num": num, "c_num": c_num, "c_content":updateContent},
+							async: false,
+							success: function(data)
+							{
+								console.log(data);
+								if(data==1)
+								{
+									$selectedComment.find('div.content').text(updateContent);
+								}								
+							},
+							error: function(e){
+								alert("에러가 발생했습니다.")
+							}					
+						})
+				}
+		})		 				
+	})	  
 }
+
+
 
 
   

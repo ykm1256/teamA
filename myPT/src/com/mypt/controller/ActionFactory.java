@@ -15,6 +15,7 @@ import com.mypt.action.board.WriteAction;
 import com.mypt.action.board.comment.CommentChangePageAction;
 import com.mypt.action.board.comment.CommentDeleteAction;
 import com.mypt.action.board.comment.CommentInsertAction;
+import com.mypt.action.board.comment.CommentUpdateAction;
 import com.mypt.action.check.EmailCheckAction;
 import com.mypt.action.check.NickCheckAction;
 import com.mypt.action.crowded.CrowdedAction;
@@ -182,6 +183,7 @@ public class ActionFactory
 		map.put("/commentInsert", new CommentInsertAction());
 		map.put("/commentDelete", new CommentDeleteAction());
 		map.put("/commentChangePage", new CommentChangePageAction());
+		map.put("/commentUpdate", new CommentUpdateAction());
 		
 
 		

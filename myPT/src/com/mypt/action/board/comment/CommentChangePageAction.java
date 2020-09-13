@@ -30,17 +30,17 @@ public class CommentChangePageAction implements Action
 
 		changedPage.setNowPage(nowPage);
 		Gson gson= new Gson();
-			
-//		ArrayList<CommentDto> arr= cdao.getCommentsForOneCommentPage("ccomment", num, changedPage.getStartPage(), changedPage.getNumPerPage());
-		JsonArray arr= cdao.getCommentsForOneCommentPage("ccomment", num, changedPage.getStartPage(), changedPage.getNumPerPage());
+		JsonArray arr= null;
 		
-//		JsonArray jarr = new JsonArray();
-//		for(CommentDto c : arr)
-//		{
-//			JsonObject obj = gson.fromJson(gson.toJson(c, CommentDto.class),JsonObject.class);
-//			jarr.add(obj);		
-//		}
-		
+		if(board.equals("cboard"))
+		{
+			arr= cdao.getCommentsForOneCommentPage("ccomment", num, changedPage.getStartPage(), changedPage.getNumPerPage());	
+		}
+		else if(board.equals("pboard"))
+		{
+			arr= cdao.getCommentsForOneCommentPage("pcomment", num, changedPage.getStartPage(), changedPage.getNumPerPage());	
+		}
+				
 		JsonObject jsonData= new JsonObject();
 		jsonData.add("paging", gson.fromJson(gson.toJson(changedPage, TestPagingDto.class), JsonObject.class));
 		jsonData.add("comments", arr);	    
@@ -49,7 +49,6 @@ public class CommentChangePageAction implements Action
 		
 	    response.setContentType("application/json; charset=utf-8");
 		request.setAttribute("result", jsonData);
-
 		
 		System.out.println(jsonData);
 		

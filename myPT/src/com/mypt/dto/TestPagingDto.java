@@ -35,7 +35,8 @@ public class TestPagingDto {
 
 	private void setPageInfo()
 	{
-		this.totalPage=(int)Math.ceil((double)totalRecord/numPerPage);
+//		this.totalPage=(int)Math.ceil((double)totalRecord/numPerPage);
+		this.totalPage= totalRecord==0?1:(int)Math.ceil((double)totalRecord/numPerPage);
 		this.totalBlock=(int)Math.ceil((double)totalPage/pagePerBlock);
 		this.nowBlock=(int)Math.ceil((double)nowPage/pagePerBlock);
 //		this.startPage=(nowPage*numPerPage)-numPerPage; //+1 되어야 하지 않나?
@@ -50,12 +51,14 @@ public class TestPagingDto {
 	}
 
 	public void setTotalRecord(int totalRecord) 
-	{
-		totalPage=(int)Math.ceil((double)totalRecord/numPerPage);
-		totalBlock=(int)Math.ceil((double)totalPage/pagePerBlock);
-		pageEnd=(pageStart+pagePerBlock-1)<totalPage ? pageStart+pagePerBlock-1 : totalPage;
-		
+	{		
 		this.totalRecord = totalRecord;
+		
+//		totalPage=(int)Math.ceil((double)totalRecord/numPerPage);
+		totalPage= totalRecord==0?1:(int)Math.ceil((double)totalRecord/numPerPage);
+		totalBlock=(int)Math.ceil((double)totalPage/pagePerBlock);
+		pageEnd=(pageStart+pagePerBlock-1)<totalPage ? pageStart+pagePerBlock-1 : totalPage;	
+
 	}
 
 	public int getNumPerPage() {
@@ -75,7 +78,7 @@ public class TestPagingDto {
 	}
 
 	public int getTotalPage() {
-		return totalPage;
+		return totalRecord==0?1:(int)Math.ceil((double)totalRecord/numPerPage);
 	}
 
 	public void setTotalPage(int totalPage) {
@@ -98,9 +101,9 @@ public class TestPagingDto {
 	{
 		this.nowPage = nowPage;
 		nowBlock=(int)Math.ceil((double)nowPage/pagePerBlock);
-		startPage=(nowPage*numPerPage)-numPerPage+1; //startBoardNum
-		pageStart= (nowBlock-1)*pagePerBlock+1; //현 블럭에서의 첫 페이지
-		pageEnd=(pageStart+pagePerBlock-1)<totalPage ? pageStart+pagePerBlock-1 : totalPage; //현 블럭에서의 마지막 페이지
+		startPage=(nowPage*numPerPage)-numPerPage+1;
+		pageStart= (nowBlock-1)*pagePerBlock+1; 
+		pageEnd=(pageStart+pagePerBlock-1)<totalPage ? pageStart+pagePerBlock-1 : totalPage;
 
 	}
 
