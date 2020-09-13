@@ -23,18 +23,17 @@ public class PboardDao extends AbstractBoardDao<PboardDto> {
 		Connection con = null;
 		PreparedStatement ps = null;
 
-		String sql = "insert into pboard(pb_title, pb_writer, pb_head, pb_content, hit, like, pb_photo) values(?,?,?,?,?,?,?)";
+		String sql = "insert into pboard(pb_title, pb_writer, pb_content, hit, like, pb_photo) values(?,?,?,?,?,?)";
 		try {
 			con = db.getConnection();
 			ps = con.prepareStatement(sql);
 
 			ps.setString(1, dto.getTitle());
 			ps.setString(2, dto.getWriter());
-			ps.setString(3, dto.getHead());
-			ps.setString(4, dto.getContent());
+			ps.setString(3, dto.getContent());
+			ps.setInt(4, 0);
 			ps.setInt(5, 0);
-			ps.setInt(6, 0);
-			ps.setString(7, dto.getPhoto());
+			ps.setString(6, dto.getPhoto());
 
 			ps.executeUpdate();
 

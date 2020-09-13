@@ -6,8 +6,10 @@ import javax.servlet.http.HttpSession;
 
 import com.mypt.controller.Action;
 import com.mypt.dao.CboardDao;
+import com.mypt.dao.PboardDao;
 import com.mypt.dao.QboardDao;
 import com.mypt.dto.CboardDto;
+import com.mypt.dto.PboardDto;
 import com.mypt.dto.QboardDto;
 
 public class WriteAction implements Action{
@@ -53,6 +55,21 @@ public class WriteAction implements Action{
 			dao.insertBoard(dto);			
 			
 			return "redirect:moveQuestion.do";
+		}else if(board.equals("pboard")) {
+			PboardDto dto=new PboardDto();
+				
+			dto.setWriter(session.getAttribute("nick").toString());
+//			if(dto.getWriter()==""|dto.getWriter()==null) {
+//				dto.setWriter("길동이");
+//			}
+			
+			dto.setTitle(request.getParameter("title"));
+			dto.setContent(request.getParameter("content"));
+			
+			PboardDao dao=PboardDao.getInstance();
+			dao.insert(dto);			
+			
+			return "redirect:movePhoto.do";
 		}else {
 			return null;
 		}
