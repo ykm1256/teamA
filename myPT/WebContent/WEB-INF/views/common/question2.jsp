@@ -138,7 +138,7 @@
               <div class="col-12">
                 <div class="card" style="overflow: auto">
                   <div class="card-body">
-                    <a href="moveCommunity.do" class="text-decoration-none text-dark"><h3 class="card-title text-center">질문게시판</h3></a>
+                    <a href="moveQuestion.do" class="text-decoration-none text-dark"><h3 class="card-title text-center">질문게시판</h3></a>
                   </div>
                   
                   <div class="table-responsive">

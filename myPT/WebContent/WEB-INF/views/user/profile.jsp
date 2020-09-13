@@ -55,13 +55,13 @@
                               <div class="widget-subheading"></div>
                             </div>
                             <div class="widget-content-right">
-                              <div class="widget-numbers">20회</div>
+                              <div class="widget-numbers">${lcnt }회</div>
                             </div>
                           </div>
                         </div>
                       </div>
                       <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" data-toggle="modal" data-target="#like" href="#">상세 보기</a>
+                        <a class="small text-white stretched-link" href="userLikeList.do">상세 보기</a>
                         <div class="small text-white">
                           <i class="fas fa-angle-right"></i>
                         </div>
@@ -76,13 +76,13 @@
                               <div class="widget-subheading"></div>
                             </div>
                             <div class="widget-content-right">
-                              <div class="widget-numbers">10개</div>
+                              <div class="widget-numbers">${bcnt }개</div>
                             </div>
                           </div>
                         </div>
                       </div>
                       <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" data-toggle="modal" data-target="#myPost" href="#">상세 보기 </a>
+                        <a class="small text-white stretched-link" href="userBoardList.do">상세 보기 </a>
                         <div class="small text-white">
                           <i class="fas fa-angle-right"></i>
                         </div>
@@ -97,13 +97,13 @@
                               <div class="widget-subheading"></div>
                             </div>
                             <div class="widget-content-right">
-                              <div class="widget-numbers">50개</div>
+                              <div class="widget-numbers">${ccnt }개</div>
                             </div>
                           </div>
                         </div>
                       </div>
                       <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="#" data-toggle="modal" data-target="#myComment">상세 보기</a>
+                        <a class="small text-white stretched-link" href="userCommentList.do">상세 보기</a>
                         <div class="small text-white">
                           <i class="fas fa-angle-right"></i>
                         </div>
@@ -124,14 +124,14 @@
                       <div class="form-row">
                         <div class="col-md-12">
                           <div class="form-group">
-                            <label class="small mb-1" for="trainerID">아이디</label>
+                            <label class="small mb-1" for="trainerID">이메일</label>
                             <input
                               class="form-control py-2"
                               id="trainerID"
                               name="trainerID"
                               type="text"
                               disabled
-                              value="asp4***@naver.com"
+                              value="${dto.email }"
                             />
                           </div>
                         </div>
@@ -141,7 +141,7 @@
                         <div class="col-md-12">
                           <div class="form-group">
                             <label class="small mb-1" for="userName">이름</label>
-                            <input class="form-control py-2" id="userName" name="userName" type="text" value="안상필" disabled />
+                            <input class="form-control py-2" id="userName" name="userName" type="text" value="${dto.name }" disabled />
                           </div>
                         </div>
                       </div>
@@ -150,7 +150,7 @@
                         <div class="col-md-12">
                           <div class="form-group">
                             <label class="small mb-1" for="gender">성별</label>
-                            <input class="form-control py-2" id="gender" name="gender" type="text" value="남성" disabled />
+                            <input class="form-control py-2" id="gender" name="gender" type="text" value="${dto.gender }" disabled />
                           </div>
                         </div>
                       </div>
@@ -159,7 +159,7 @@
                         <div class="col-md-12">
                           <div class="form-group">
                             <label class="small mb-1" for="birthdate">생년월일</label>
-                            <input class="form-control py-2" id="birthdate" name="birthdate" type="text" value="1994-05-11" disabled />
+                            <input class="form-control py-2" id="birthdate" name="birthdate" type="text" value="${dto.birth }" disabled />
                           </div>
                         </div>
                       </div>
@@ -168,13 +168,13 @@
                         <label class="small mb-1" for="nickname">닉네임</label>
                         <div class="form-row">
                           <div class="col-md-12">
-                            <input class="form-control py-2 mb-sm-2" id="nickname" name="nickname" type="text" value="필" disabled />
+                            <input class="form-control py-2 mb-sm-2" id="nickname" name="nickname" type="text" value="${dto.nick }" disabled />
                           </div>
                         </div>
                       </div>
 
                       <div class="form-row mt-4 mb-0">
-                        <a class="btn btn-primary btn-block" href="login.html">수정</a>
+                        <a class="btn btn-primary btn-block" href="userMyDetail.do">수정</a>
                       </div>
                     </form>
                   </div>

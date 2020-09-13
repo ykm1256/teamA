@@ -54,7 +54,7 @@
                 </div>
                 결제
               </a>
-              <a class="nav-link" href="moveMyProfile.do">
+              <a class="nav-link" href="moveProfile.do">
                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                 마이페이지
               </a>

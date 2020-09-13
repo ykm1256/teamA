@@ -31,6 +31,7 @@ import com.mypt.action.list.AdminTrainerListViewAction;
 import com.mypt.action.list.AdminUserListViewAction;
 import com.mypt.action.list.TrainerUserListViewAction;
 import com.mypt.action.list.UserBoardListViewAction;
+import com.mypt.action.list.UserCommentListViewAction;
 import com.mypt.action.list.UserLikeListViewAction;
 import com.mypt.action.login.LogoutAction;
 import com.mypt.action.login.TrainerLoginAction;
@@ -194,6 +195,7 @@ public class ActionFactory
 		//유저 게시판 목록
 		map.put("/userBoardList", new UserBoardListViewAction());
 		map.put("/userLikeList", new UserLikeListViewAction());
+		map.put("/userCommentList", new UserCommentListViewAction());
 		
 		
 		

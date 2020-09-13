@@ -20,7 +20,7 @@ public class UserLikeListViewAction implements Action {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		session.setAttribute("nick", "길동이");
+//		session.setAttribute("nick", "길동이");
 		String nick = session.getAttribute("nick").toString();		
 		LikeDao ldao = LikeDao.getInstance();
 		CommentDao comdao = CommentDao.getInstance();

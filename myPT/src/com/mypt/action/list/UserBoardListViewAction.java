@@ -21,7 +21,7 @@ public class UserBoardListViewAction implements Action {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		session.setAttribute("nick", "길동이");
+//		session.setAttribute("nick", "길동이");
 		String nick = session.getAttribute("nick").toString();
 		CommentDao comdao = CommentDao.getInstance();
 		
@@ -41,7 +41,7 @@ public class UserBoardListViewAction implements Action {
 		ArrayList<Integer> qcom = new ArrayList<Integer>();	
 		for(int i=0; i<qarr.size();i++) {
 			int qnum = qarr.get(i).getNum();					
-			qcom.add(comdao.countUserComment("qcomment", qnum, nick));
+			qcom.add(comdao.countComment("qcomment", qnum));
 		}
 		
 		PboardDao pdao = PboardDao.getInstance();		
@@ -50,7 +50,7 @@ public class UserBoardListViewAction implements Action {
 		ArrayList<Integer> pcom = new ArrayList<Integer>();
 		for(int i=0; i<parr.size();i++) {
 			int pnum = parr.get(i).getNum();						
-			pcom.add(comdao.countUserComment("pcomment", pnum, nick));
+			pcom.add(comdao.countComment("pcomment", pnum));
 		}
 		
 		request.setAttribute("carr", carr);
