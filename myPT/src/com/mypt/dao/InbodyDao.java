@@ -100,16 +100,10 @@ public class InbodyDao {
 				inbody.setMuscle(rs.getFloat(8));
 				inbody.setStrDate(rs.getTimestamp(9).toString());
 
-				System.out.println(rs.getTimestamp(9).toString());
 				user.setInbody(inbody);
 
-//				arr.add(user);  //일반 ArrayList<UserDto>
-
 				String aa = gson.toJson(user);
-				System.out.println(aa);
-
 				obj = gson.fromJson(aa, JsonObject.class);
-				System.out.println(obj);
 
 				jarr.add(obj);
 

@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import com.mypt.controller.Action;
 import com.mypt.dao.PboardDao;
-import com.mypt.dto.PageingDto;
+import com.mypt.dto.PagingDto;
 import com.mypt.dto.PboardDto;
 
 public class SearchAction implements Action {
@@ -40,15 +40,15 @@ public class SearchAction implements Action {
 		int nowPage=Integer.parseInt(request.getParameter("page")==null?"1":request.getParameter("page"));
 		String next=request.getParameter("next");
 		String prev=request.getParameter("prev");
-		PageingDto page=new PageingDto(nowPage,keyField,keyWord);
+		PagingDto page=new PagingDto(nowPage,keyField,keyWord);
 		if(next!=null) {
 			int nowBlock=Integer.parseInt(next)-1;
 			nowPage=page.getPagePerBlock()*nowBlock+1;
-			page=new PageingDto(nowPage);
+			page=new PagingDto(nowPage);
 		}else if(prev!=null){
 			int nowBlock=Integer.parseInt(prev)-1;
 			nowPage=page.getPagePerBlock()*nowBlock+1;
-			page=new PageingDto(nowPage);
+			page=new PagingDto(nowPage);
 		}
 
 		ArrayList<PboardDto> parr=pdao.getList(keyField,keyWord,page.getStartPage(), page.getNumPerPage());

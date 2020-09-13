@@ -12,6 +12,7 @@ import com.mypt.action.board.UpdateAction;
 import com.mypt.action.board.UpdateViewAction;
 import com.mypt.action.board.ViewAction;
 import com.mypt.action.board.WriteAction;
+import com.mypt.action.board.comment.CommentChangePageAction;
 import com.mypt.action.board.comment.CommentDeleteAction;
 import com.mypt.action.board.comment.CommentInsertAction;
 import com.mypt.action.check.EmailCheckAction;
@@ -45,13 +46,13 @@ import com.mypt.action.move.MoveInbody;
 import com.mypt.action.move.MoveIntroAction;
 import com.mypt.action.move.MovePayment;
 import com.mypt.action.move.MovePhotoAction;
-import com.mypt.action.move.MoveUserProfileAction;
 import com.mypt.action.move.MoveQuestionAction;
 import com.mypt.action.move.MoveReplyAction;
 import com.mypt.action.move.MoveSchedule;
 import com.mypt.action.move.MoveTrainerProfileAction;
 import com.mypt.action.move.MoveTrainerRegister;
 import com.mypt.action.move.MoveUserMain;
+import com.mypt.action.move.MoveUserProfileAction;
 import com.mypt.action.move.MoveUserRegister;
 import com.mypt.action.move.MoveWriteAction;
 import com.mypt.action.payment.UserPaymentDataAction;
@@ -177,9 +178,10 @@ public class ActionFactory
 		// 포토게시판 검색
 		map.put("/searchPhoto",new SearchAction());
 		
-		map.put("/testCboardView",new TestViewAction());
+		map.put("/testBoardView",new TestViewAction());
 		map.put("/commentInsert", new CommentInsertAction());
 		map.put("/commentDelete", new CommentDeleteAction());
+		map.put("/commentChangePage", new CommentChangePageAction());
 		
 
 		

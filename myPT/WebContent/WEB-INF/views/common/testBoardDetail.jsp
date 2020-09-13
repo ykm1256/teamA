@@ -313,143 +313,22 @@
                   </form>
                             
                   
+		<!-- 댓글 s-->
                   <div class="card">
                   	<div class="card-body" id="commentsWrapper">
-                  	
-					<c:forEach var="com" items="${comments}">
-					     <div class="comments">
-                  		<div class="row">
-                  			<div class="row col-9">
-                  				<div class="col font-weight-bold"> ${com.c_nick}</div>
-                  			</div>
-                  			
-                 		<c:if test="${sessionScope.nick == com.c_nick || sessionScope.grade==0}">
-                  			<div class="col-3 text-right dropdown">
-                  				<a class="mt-1 text-secondary" href="#" role="button" data-toggle="dropdown">
-                  					<i class="fas fa-ellipsis-v"></i></a>
-	                  			<div class="dropdown-menu dropdown-menu-right">
-								<c:choose>
-									<c:when test="${sessionScope.nick eq com.c_nick}">
-										<a class="dropdown-item commentUpdate" href="#">수정</a>
-										<a class="dropdown-item commentDelete" href="#">삭제</a>
-										<input type="number" hidden="true" value="${com.c_num}">		
-									</c:when>
-									<c:when test="${sessionScope.grade==0}">
-										<a class="dropdown-item commentDelete" href="#">삭제</a>
-										<input type="number" hidden="true" value="${com.c_num}">		
-									</c:when>
-								</c:choose>	
-								</div>
-                  			</div>
-                 		</c:if>                 			
-                  		</div>	
-                  		<div class="row">
-                  			<div class="col py-2">${com.c_content}</div>  
-                  		</div>
-                  		
-                  		<div class="row">
-                  			<div class="col text-secondary commentDate">${com.c_date}<span class="ml-2">댓글쓰기</span></div>	
-                  		</div>              			
-                  	</div>								
-					</c:forEach>
                   </div>
-
-<!--                     <div class="card-footer bg-white" id="loadMore"> -->
-<!--                         <input type="button" class="btn col-12 text-center" value="더보기"> -->
-<!--                     </div>     -->
-
-                </div>   
+                </div>  
+         <!-- 댓글 e-->
                 
+                 
+                								
+		<!-- 페이징 및 블럭 Start -->
+           <ul class="pagination mt-5 ml-5 justify-content-center" id="page">
+           </ul>
+          <!-- 페이징 및 블럭 e-->
+           
                 
-				<c:set var="totalRecord" value="${paging.totalRecord}"/>
-				<c:set var="totalPage" value="${paging.totalPage}"/>
-				<c:set var="numPerPage" value="${paging.numPerPage}"/>
-				<c:set var="nowBlock" value="${paging.nowBlock}"/>
-				<c:set var="pagePerBlock" value="${paging.pagePerBlock}"/>
-				<c:set var="totalBlock" value="${paging.totalBlock}"/>
-				
-				
-<%-- 				<c:set var="pageStart" value="${(nowBlock-1)*pagePerBlock+1}" /> --%>
-				<c:set var="pageStart" value="${(paging.nowPage-1)*numPerPage+1}" />
-				
-
-           <ul class="pagination mt-5 ml-5 justify-content-center">
-                <!-- 페이징 및 블럭 Start -->
-				<c:if test="${totalPage>0}">				
-						<c:choose>
-							<c:when test="${nowBlock>1}">
-								 <li class="page-item">
-<%-- 									<a class="page-link" href="javascript:block('${nowBlock-1}')">이전</a>     --%>
-								<a class="page-link" href="javascript:changeBlock()">이전</a>  
-								</li>	
-							 </c:when>						 									
-							<c:otherwise>
-								<li class="page-item">
-									<a class="page-link text-muted" >이전</a>
-								</li>
-							 </c:otherwise>							 
-						</c:choose>										
-				</c:if> 
-				
-				
-					<c:choose>
-							<c:when test="${(pageStart+pagePerBlock)<totalPage}">
-								<c:set var="pageEnd" value="${pageStart+pagePerBlock}" />
-							 </c:when>						 									
-							<c:otherwise>
-								<c:set var="pageEnd" value="${totalPage}" />
-							 </c:otherwise>							 
-					</c:choose>
-										
-		
-		
-<%-- 					<c:forEach var="i" begin="${pageStart}" end="${pageEnd}" step="1" varStatus="status">										 --%>
-<!-- 						<li class="page-item"> -->
-<%-- 							<a class="page-link" href="javascript:chagePage('${i}')">									 --%>
-<%-- 								<c:if test="${paging.nowPage==pageStart}"> --%>
-<!-- 	                  				<font color="black"> -->
-<%-- 	                 			</c:if>                    			      --%>
-<%-- 
-<%-- 										${i} --%>
-<%-- 	                 			<c:if test="${paging.nowPage==pageStart}"> --%>
-<!-- 	                  				</font> -->
-<%-- 	                 			</c:if> --%>
-<!-- 							</a> -->
-<!-- 						</li> -->
-<%-- 				    </c:forEach> --%>
-
-
-					<c:forEach var="i" begin="${pageStart}" end="${pageEnd}" step="1" varStatus="status">										
-						<li class="page-item">
-							<a class="page-link" href="javascript:chagePage('${i}')">									
-								<c:if test="${paging.nowPage==pageStart}">
-	                  				<div class="bg-secondary text-white">
-	                 			</c:if>                    			     
-										${i}
-	                 			<c:if test="${paging.nowPage==pageStart}">
-	                  				</div>
-	                 			</c:if>
-							</a>
-						</li>
-				    </c:forEach>
-							
-	                 	<c:choose>
-							<c:when test="${totalBlock>nowBlock}">
-								<li class="page-item">
-									<a class="page-link" href="javascript:block('${nowBlock+1}')">다음</a>
-								</li>
-							 </c:when>	
-							 					 									
-							<c:otherwise>
-								<li class="page-item">
-									<a class="page-link text-muted" >다음</a>
-								</li>
-							 </c:otherwise>							 
-						</c:choose>						
-              </ul>
-                
-                
-                       
+      
                 <div class="card my-4 border border-secondary">
                   <div class="card-body p-3" style="width:100%;">
 	            	<div class="mb-2 font-weight-bold">${sessionScope.nick}</div>
@@ -466,7 +345,7 @@
      
      
 <form name="readFrm">
-	<input type="hidden" name="totalRecord" value="${totalRecord}">
+	<input type="hidden" name="totalRecord" value="${paging.totalRecord}">
 	<input type="hidden" name="nowPage" value="${paging.nowPage}">
 </form>
      
@@ -493,83 +372,176 @@
   
   <script>  
   
-  
-  //눌렀을 때 발동을 해서
-  //아작스로 다른 값 가져오면 안되나?`
-  
-		  var totalRecord=${paging.totalRecord};
-		  var totalPage =${paging.totalPage};
-		  var nowBlock= ${paging.nowBlock};
-		  var pagePerBlock= ${paging.pagePerBlock};
-		  var totalBlock= ${paging.totalBlock};
 		  
-		  var startPageNum= ${(nowBlock-1)*pagePerBlock+1}; 
-		  
-		  var pageStart=  ${(paging.nowPage-1)*numPerPage+1};  //이건 그거임. 시작 글번호 
-		  var nowPage= ${paging.nowPage};
-		 
-		  
-// 		  <c:set var="totalRecord" value="${paging.totalRecord}"/>
-// 				<c:set var="totalPage" value="${paging.totalPage}"/>
-// 				<c:set var="nowBlock" value="${paging.nowBlock}"/>
-// 				<c:set var="pagePerBlock" value="${paging.pagePerBlock}"/>
-// 				<c:set var="totalBlock" value="${paging.totalBlock}"/>
-				
-// 				<c:set var="pageStart" value="${(nowBlock-1)*(pagePerBlock+1)}" />
-  	  
+var nowPage= ${paging.nowPage};
+var numPerPage= ${paging.numPerPage};
+var pagePerBlock= ${paging.pagePerBlock};
+var totalPage= ${paging.totalPage};
+var nowBlock= ${paging.nowBlock}
+var pageStart= ${paging.pageStart}
+var pageEnd= ${paging.pageEnd};
+var totalBlock= ${paging.totalBlock};
 
-  	
-  function changeBlock(block)
-  {
-	  nowPage= ${pagePerBlock}*(block-1)+1;	  
-	    
-  }
-  
-  function chagePage(page)
-  {
+var sessionNick= '${sessionScope.nick}';
+var sessionGrade= ${sessionScope.grade};
+
+var comments= ${dto.comments};
+
+var num = ${dto.num};
+var boardWriter= '${dto.writer}'; 
+
+
+setComment();
+setEvent();
+
+
+
+function changePage(page)
+{
 	  nowPage= page;
-	  
-	  
-  }
-  
-  
-// 	function paging(page) 
-// 	{
-// 		document.readFrm.nowPage.value = page;
-// 		document.readFrm.submit();
-// 	}
-// 	function block(block) {
-// 		document.readFrm.nowPage.value = 
-<%-- 			<%=pagePerBlock%>*(block-1)+1; --%>
-// 		document.readFrm.submit();
-// 	}
+	  getChangedComment();
+}
 
+function changeBlock(block)
+{
+	 nowPage= pagePerBlock*(block-1)+1;	  
+	 getChangedComment();
+}
+
+
+function setComment()
+{
+	let htmlForNew=""; 
+	
+	$.each (comments, function (index, com) 
+	{
+		htmlForNew+='<div class="comments"><div class="row"><div class="row col-9">';
+		htmlForNew+='<div class="col font-weight-bold commentNick">'+com.c_nick+'</div></div>';			
+											
+		if(sessionNick== com.c_nick)
+			{
+				htmlForNew+='<div class="col-3 text-right dropdown"><a class="mt-1 text-secondary" href="#" role="button" data-toggle="dropdown"><i class="fas fa-ellipsis-v"></i></a><div class="dropdown-menu dropdown-menu-right">';
+				htmlForNew+='<a class="dropdown-item commentUpdate">수정</a><a class="dropdown-item commentDelete">삭제</a><input type="number" hidden="true" value='+com.c_num+'></div></div>';
+			}
+		else if(sessionGrade==0)
+			{
+				htmlForNew+='<div class="col-3 text-right dropdown"><a class="mt-1 text-secondary" href="#" role="button" data-toggle="dropdown"><i class="fas fa-ellipsis-v"></i></a><div class="dropdown-menu dropdown-menu-right">';
+				htmlForNew+='<a class="dropdown-item commentDelete">삭제</a><input type="number" hidden="true" value='+com.c_num+'></div></div>';
+			}
+									
+		htmlForNew+='</div><div class="row"><div class="col py-2">'+com.c_content+'</div></div>';
+		htmlForNew+='<div class="row"><div class="col text-secondary"><span class="commentDate">'+com.c_date+'</span><span class="ml-2">댓글쓰기</span></div></div></div>';						
+			
+	});
+	
+	$('#commentsWrapper').append(htmlForNew);
+	setBadge();
+
+	
+
+	if(totalPage>0 && nowBlock>1)
+		{
+		   $('#page').prepend('<li class="page-item"><span class="page-link" style="cursor:pointer;" onclick="changeBlock('+(nowBlock-1)+')"> < </span></li>');					   
+		}
+	
+	for(var i = pageStart; i<=pageEnd; i++)
+		{
+			
+			if(nowPage==i)
+				{
+					$('#page').append('<li class="page-item" id="pageNum'+i+'"></li>');
+					$('#pageNum'+i).append('<span class="page-link text-white bg-primary" style="cursor:pointer;" onclick="changePage('+i+');">'+i+'</span>')
+				}		
+			else
+				{
+					$('#page').append('<li class="page-item" id="pageNum'+i+'"></li>');
+					$('#pageNum'+i).append('<span class="page-link" style="cursor:pointer;" onclick="changePage('+i+');">'+i+'</span>')
+				}					
+		}
+	
+	if(totalPage>pagePerBlock && nowBlock!=totalBlock)
+	{
+	   $('#page').append('<li class="page-item"><span class="page-link" style="cursor:pointer" onclick="changeBlock('+(nowBlock+1)+')"> > </span></li>');					   
+	}
+}
+
+
+
+function getChangedComment()
+{
+	 $.ajax({
+			type:"post",
+			url:"commentChangePage.do",
+			data : {"nowPage": nowPage, "num": num},
+			async: false,
+			success: function(data)
+			{
+				console.log(data);
+				
+				nowBlock= data.paging.nowBlock;
+				pageStart= data.paging.pageStart;
+				pageEnd= data.paging.pageEnd;
+									
+				comments= data.comments;
+				
+				$('#commentsWrapper').empty();
+				$('#page').empty();
+				
+				
+				setComment();
+				setEvent();
+						
+			},
+			error: function(e){
+				alert("에러가 발생했습니다.")
+			}					
+	})
+}
 
 
   var boardNum= ${dto.num};
   
   $('#commentBtn').click(function(){
+	  
+	  
 	
 	$.ajax({
 		type:"post",
 		url:"commentInsert.do",
-		data : {"boardNum": boardNum, "c_content":$("#commentContent").val()},
+		data : {"nowPage": nowPage, "num": num, "c_content":$("#commentContent").val()},
+		async: false,
 		success: function(data)
 		{
-			data=data.trim();
 			console.log(data);
-			let newComment= JSON.parse(data);
+			let newComment= data;
+			comments= newComment.comments;	
+			
+			if(nowPage!= newComment.paging.nowPage) //페이지가 바뀐 경우
+				{
+					nowPage= data.paging.nowPage;
+					nowBlock= data.paging.nowBlock;
+					pageStart= data.paging.pageStart;
+					pageEnd= data.paging.pageEnd;
+										
+					getChangedComment()
+				}
+			else //nowPage가 같아서 가장 최근 것만 덧붙이는 경우
+			{
+				let htmlForNew="";
+				htmlForNew+='<div class="comments"><div class="row"><div class="row col-9">';
+				htmlForNew+='<div class="col font-weight-bold commentNick">'+comments.c_nick+'</div></div>';
+				htmlForNew+='<div class="col-3 text-right dropdown"><a class="mt-1 text-secondary" href="#" role="button" data-toggle="dropdown"><i class="fas fa-ellipsis-v"></i></a>';
+				htmlForNew+='<div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item commentUpdate" href="#">수정</a><a class="dropdown-item commentDelete" href="#">삭제</a>';
+				htmlForNew+='<input type="number" hidden="true" value='+comments.c_num+'></div></div></div>';
+				htmlForNew+='<div class="row"><div class="col py-2">'+comments.c_content+'</div></div>';
+				htmlForNew+='<div class="row"><div class="col text-secondary"><span class="commentDate">'+comments.c_date+'</span><span class="ml-2">댓글쓰기</span></div></div></div>';			
 
-			let htmlForNew="";
-			htmlForNew+='<div class="comments"><div class="row"><div class="row col-9">';
-			htmlForNew+='<div class="col font-weight-bold">'+newComment.c_nick+'</div></div>';
-			htmlForNew+='<div class="col-3 text-right dropdown"><a class="mt-1 text-secondary" href="#" role="button" data-toggle="dropdown"><i class="fas fa-ellipsis-v"></i></a>';
-			htmlForNew+='<div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item commentUpdate" href="#">수정</a><a class="dropdown-item commentDelete" href="#">삭제</a>';
-			htmlForNew+='<input type="number" hidden="true" value='+newComment.c_num+'></div></div></div>';
-			htmlForNew+='<div class="row"><div class="col py-2">'+newComment.c_content+'</div></div>';
-			htmlForNew+='<div class="row"><div class="col text-secondary commentDate">'+newComment.c_date+'<span class="ml-2">댓글쓰기</span></div></div></div>';			
-
-			$('#commentsWrapper').append(htmlForNew);
+				$('#commentsWrapper').append(htmlForNew);
+				setBadge();
+			}
+			
+			$('#commentContent').val('');
+			
 			
 		},
 		error: function(e){
@@ -579,38 +551,65 @@
   
 })
 
-$('.commentDelete').click(function(){
-	 
-	 let $selectedComment= $(this).parents('.comments');
-	 
-	 if(confirm("정말 삭제하시겠습니까?")==true)
-		{
-				 
-		 $.ajax({
-				type:"post",
-				url:"commentDelete.do",
-				data : {"c_num": $(this).siblings('input').val()},
-				success: function(data)
-				{
-					data=data.trim();
-					console.log(data);
-					if(data==1)
-					{
-						$selectedComment[$selectedComment.index()].remove();	
-					}
-					
-				},
-				error: function(e){
-					alert("에러가 발생했습니다.")
-				}					
-			})
+
+
+function setBadge()
+{
+	  var today = new Date();
+	  today.setHours(today.getHours()-24)
+	
+	for(var i=0; i<numPerPage;i++)
+	{
+		  var commentdate= new Date($('.commentDate').eq(i).text())
+
+		if(boardWriter== $('.commentNick').eq(i).text())
+			{
+				$('.commentNick').eq(i).append('<span class="badge badge-success ml-1">작성자</span>');		
+			}
+		if(commentdate>today && $('.commentNick').eq(i).length!=2)
+			{
+				$('.commentNick').eq(i).append('<img src="img/new.png" width="12px" class="ml-1">');
+			}
+	}
+}
+
+
+function setEvent()
+{
+	  
+	$('.commentDelete').click(function(){
 		 
-		}
-	 
+		 let $selectedComment= $(this).parents('.comments');
+		 
+		 if(confirm("정말 삭제하시겠습니까?")==true)
+			{
+					 
+			 $.ajax({
+					type:"post",
+					url:"commentDelete.do",
+					data : {"c_num": $(this).siblings('input').val()},
+					async: false,
+					success: function(data)
+					{
+						console.log(data);
+						if(data==1)
+						{
+							$selectedComment.remove();
+						}
+						
+					},
+					error: function(e){
+						alert("에러가 발생했습니다.")
+					}					
+				})
+			 
+			}
 	
-	
-  
-})
+	  
+	})  
+	  
+}
+
 
   
   </script>

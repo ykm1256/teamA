@@ -1,8 +1,6 @@
 package com.mypt.dto;
 
-import com.mypt.dao.PboardDao;
-
-public class PageingDto {
+public class TestPagingDto {
 	
 	private int totalRecord;	
 	private int numPerPage;
@@ -15,40 +13,48 @@ public class PageingDto {
 	private int pageStart;
 	private int pageEnd;
 	
-	public PageingDto() {}
+	public TestPagingDto() {}
 	
-	public PageingDto(int nowPage) {
-		PboardDao pdao=PboardDao.getInstance();
-		this.totalRecord=pdao.getTotalCount();
+	public TestPagingDto(int totalRecord, int nowPage) 
+	{
+		this.totalRecord=totalRecord;
 		this.numPerPage=9;
 		this.pagePerBlock=5;
-		this.totalPage=(int)Math.ceil((double)totalRecord/numPerPage);
-		this.totalBlock=(int)Math.ceil((double)totalPage/pagePerBlock);
 		this.nowPage=nowPage;
-		this.nowBlock=(int)Math.ceil((double)nowPage/pagePerBlock);
-		this.startPage=(nowPage*numPerPage)-numPerPage;
-		this.pageStart=(nowBlock-1)*pagePerBlock+1;
-		this.pageEnd=(pageStart+pagePerBlock)<totalPage?pageStart+pagePerBlock:totalPage+1;
+		setPageInfo();
 	}
-	public PageingDto(int nowPage,String keyField,String keyWord) {
-		PboardDao pdao=PboardDao.getInstance();
-		this.totalRecord=pdao.getTotalCount(keyField,keyWord);
-		this.numPerPage=9;
-		this.pagePerBlock=5;
+	
+	public TestPagingDto(int totalRecord, int numPerPage, int PagePerBlock, int nowPage) 
+	{
+		this.totalRecord= totalRecord;
+		this.numPerPage= numPerPage;
+		this.pagePerBlock= PagePerBlock;
+		this.nowPage=nowPage;
+		setPageInfo();	
+	}	
+
+	private void setPageInfo()
+	{
 		this.totalPage=(int)Math.ceil((double)totalRecord/numPerPage);
 		this.totalBlock=(int)Math.ceil((double)totalPage/pagePerBlock);
-		this.nowPage=nowPage;
 		this.nowBlock=(int)Math.ceil((double)nowPage/pagePerBlock);
-		this.startPage=(nowPage*numPerPage)-numPerPage;
-		this.pageStart=(nowBlock-1)*pagePerBlock+1;
-		this.pageEnd=(pageStart+pagePerBlock)<totalPage?pageStart+pagePerBlock:totalPage+1;
+//		this.startPage=(nowPage*numPerPage)-numPerPage; //+1 되어야 하지 않나?
+		this.startPage=(nowPage*numPerPage)-numPerPage+1; //startBoardNum
+		this.pageStart= (nowBlock-1)*pagePerBlock+1; //현 블럭에서의 첫 페이지
+//		this.pageEnd=(pageStart+pagePerBlock)<totalPage?pageStart+pagePerBlock:totalPage+1; 
+		this.pageEnd=(pageStart+pagePerBlock-1)<totalPage ? pageStart+pagePerBlock-1 : totalPage; //현 블럭에서의 마지막 페이지
 	}
 
 	public int getTotalRecord() {
 		return totalRecord;
 	}
 
-	public void setTotalRecord(int totalRecord) {
+	public void setTotalRecord(int totalRecord) 
+	{
+		totalPage=(int)Math.ceil((double)totalRecord/numPerPage);
+		totalBlock=(int)Math.ceil((double)totalPage/pagePerBlock);
+		pageEnd=(pageStart+pagePerBlock-1)<totalPage ? pageStart+pagePerBlock-1 : totalPage;
+		
 		this.totalRecord = totalRecord;
 	}
 
@@ -88,8 +94,14 @@ public class PageingDto {
 		return nowPage;
 	}
 
-	public void setNowPage(int nowPage) {
+	public void setNowPage(int nowPage) 
+	{
 		this.nowPage = nowPage;
+		nowBlock=(int)Math.ceil((double)nowPage/pagePerBlock);
+		startPage=(nowPage*numPerPage)-numPerPage+1; //startBoardNum
+		pageStart= (nowBlock-1)*pagePerBlock+1; //현 블럭에서의 첫 페이지
+		pageEnd=(pageStart+pagePerBlock-1)<totalPage ? pageStart+pagePerBlock-1 : totalPage; //현 블럭에서의 마지막 페이지
+
 	}
 
 	public int getNowBlock() {

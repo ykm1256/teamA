@@ -6,18 +6,15 @@ public class CommentDto {
 	private int  c_num, boardNum;
 	private String c_nick, c_content;
 	private Timestamp c_date;
-	int c_ref;
 	
-	private Paging paging;
-		
-	public CommentDto() 
-	{
-		paging= new Paging();
-	}
+	private TestPagingDto testPagingDto;
 	
-	public CommentDto(Paging paging) 
+	
+	public CommentDto() {}
+	
+	public CommentDto(TestPagingDto testPagingDto) 
 	{
-		this.paging = paging;
+		this.testPagingDto = testPagingDto;
 	}
 	
 	public int getBoardNum() {
@@ -50,27 +47,23 @@ public class CommentDto {
 	public void setC_date(Timestamp c_date) {
 		this.c_date = c_date;
 	}
-	public int getC_ref() {
-		return c_ref;
-	}
-	public void setC_ref(int c_ref) {
-		this.c_ref = c_ref;
-	}
-
-	public Paging getPaging() {
-		return paging;
-	}
-
-	public void setPaging(Paging paging) {
-		this.paging = paging;
-	}
-	
-	
-	
-	
-	
 
 	
+//	public int getC_ref() {
+//		return c_ref;
+//	}
+//	public void setC_ref(int c_ref) {
+//		this.c_ref = c_ref;
+//	}
+
+	public TestPagingDto getTestPagingDto() {
+		return testPagingDto;
+	}
+	public void setTestPagingDto(TestPagingDto testPagingDto) {
+		this.testPagingDto = testPagingDto;
+	}
+	
+
 	
 
 }
