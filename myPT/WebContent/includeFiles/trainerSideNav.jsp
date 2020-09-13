@@ -48,6 +48,11 @@
                   <a class="nav-link" href="moveQuestion.do">Q & A</a>
                 </nav>
               </div>
+              <a class="nav-link" href="moveTrainerProfile.do">
+                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                마이페이지
+              </a>
+              
             </div>
           </div>
 
