@@ -252,7 +252,7 @@
 					<td><%=hit%></td>
 					<td><%=like%></td>
 				</tr>
-		<%}}//---for%>                        
+		<%}}//---for%>
                         
                       </tbody>
                     </table>

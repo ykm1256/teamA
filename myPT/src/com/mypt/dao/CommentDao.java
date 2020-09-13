@@ -298,8 +298,8 @@ public class CommentDao {
 		return cnt;
 	}
 	
-	//해당 글 댓글 수 가져오기
-		public int countUserComment(String commenttblName, int boardNum,String nick) {
+	//유저 댓글 수
+		public int countUserComment(String nick) {
 			Connection con = null;
 			PreparedStatement ps = null;
 			ResultSet rs = null;
@@ -307,16 +307,19 @@ public class CommentDao {
 			
 			try {
 				con = db.getConnection();
-				String sql = "SELECT count(*) FROM "+ commenttblName+ " WHERE boardnum=? and c_nick=?";
+				String sql = "select count(*) from ccomment where c_nick=? union all "
+						+ "select count(*) from qcomment where c_nick=? union all "
+						+ "select count(*) from pcomment where c_nick=?;";
 				ps = con.prepareStatement(sql);
-				ps.setInt(1, boardNum);		
+				ps.setString(1, nick);		
 				ps.setString(2, nick);		
+				ps.setString(3, nick);		
 				rs = ps.executeQuery();
 				System.out.println(sql);
 				
-				if (rs.next()) 
+				while (rs.next()) 
 				{
-					cnt = rs.getInt(1);
+					cnt += rs.getInt(1);
 				}
 			} 
 			catch (Exception e) 
@@ -331,6 +334,47 @@ public class CommentDao {
 		}
 	
 	
+		//유저 댓글리스트
+		public ArrayList<CommentDto> usercommentList(String commenttblName, String nick){
+			Connection con = null;
+			PreparedStatement ps = null;
+			ResultSet rs = null;			
+			ArrayList<CommentDto> arr = new ArrayList<CommentDto>();	
+			CommentDto cd = null;	
+
+			
+			try {
+				con = db.getConnection();
+				String sql = "select *,date_format(c_date,'%Y-%m-%d %H:%i') from "+commenttblName +" where c_nick=?";
+				ps = con.prepareStatement(sql);
+								
+				ps.setString(1, nick);
+				rs = ps.executeQuery();
+				
+				while(rs.next()) 
+				{
+					cd = new CommentDto();
+					cd.setC_num(rs.getInt("c_num"));
+					cd.setBoardNum(rs.getInt("boardnum"));
+					cd.setC_nick(rs.getString("c_nick"));
+					cd.setC_content(rs.getString("c_content"));
+					cd.setC_date(rs.getTimestamp("c_date"));					
+					arr.add(cd);			
+				}
+			} 
+			catch (Exception e) 
+			{
+				e.printStackTrace();
+			} 
+			finally 
+			{
+				db.closeConnection(rs, ps, con);
+			}
+			
+			return arr;
+		}
+		
+		
 
 
 }

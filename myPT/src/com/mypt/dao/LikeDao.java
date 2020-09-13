@@ -73,7 +73,7 @@ public class LikeDao
 
 		ArrayList<Integer> arr = new ArrayList<Integer>();
 
-		String sql="select num from "+likeTblName+" where nick=?";
+		String sql="select boardnum from "+likeTblName+" where l_nick=?";
 		
 		try {
 			con = db.getConnection();
@@ -115,9 +115,9 @@ public class LikeDao
 		int result= 0;
 		
 		if(likeTblName.equals("cblike")) {
-			sql = "delete from "+likeTblName+" where cbl_num=? and cbl_nick=?";
+			sql = "delete from "+likeTblName+" where boardnum=? and l_nick=?";
 		}else {
-			sql = "delete from "+likeTblName+" where pbl_num=? and pbl_nick=?";
+			sql = "delete from "+likeTblName+" where boardnum=? and l_nick=?";
 		}
 		try {
 			con = db.getConnection();
@@ -156,9 +156,9 @@ public class LikeDao
 			String sql = "";
 			
 			if(likeTblName.equals("cblike")) {
-				sql="select * from "+likeTblName+" where cbl_nick=? and cbl_num=?";
+				sql="select * from "+likeTblName+" where l_nick=? and boardnum=?";
 			}else {
-				sql="select * from "+likeTblName+" where pbl_nick=? and pbl_num=?";
+				sql="select * from "+likeTblName+" where l_nick=? and boardnum=?";
 			}
 			
 			
@@ -186,5 +186,43 @@ public class LikeDao
 			}
 
 			return flag;
+		}
+		
+		//해당 유저 좋아요 개수
+		public int userCountLike(String nickName)
+		{
+			Connection con = null;
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			int cnt=0;			
+			String sql = "";			
+			
+				sql="select count(*) from cblike where l_nick=? union all "
+						+ "select count(*) from pblike where l_nick=?";
+			
+			try {
+				con = db.getConnection();
+				ps = con.prepareStatement(sql);	
+				ps.setString(1, nickName);				
+				ps.setString(2, nickName);
+				System.out.println(sql);
+				rs = ps.executeQuery();
+
+				while(rs.next()) 
+				{
+					cnt += rs.getInt(1);
+				}
+				
+			} 
+			catch (Exception e) 
+			{
+				e.printStackTrace();
+			} 
+			finally 
+			{
+				db.closeConnection(rs, ps, con);
+			}
+
+			return cnt;
 		}
 }

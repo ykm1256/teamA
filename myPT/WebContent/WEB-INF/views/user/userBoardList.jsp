@@ -48,7 +48,7 @@
           <div class="text-left">              
               <a href="userBoardList.do" class="mr-2 btn btn-light btn-sm font-weight-bold">내가 쓴 글</a>
               <a href="userLikeList.do" class="btn btn-light btn-sm font-weight-bold mr-1">좋아요 한 글</a>             
-              <a href="" class="btn btn-light btn-sm font-weight-bold mr-1">댓글 쓴 글</a>             
+              <a href="userCommentList.do" class="btn btn-light btn-sm font-weight-bold mr-1">내가 쓴 댓글</a>             
               </div>
           	<div class="card mb-4 mt-2">
               <div class="card-header font-weight-bold">
