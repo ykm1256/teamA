@@ -268,7 +268,7 @@
                 </div>
 
                 <div class="form-group mt-3 float-right">
-                  <a class="btn btn-primary text-white">글쓰기</a>
+                  <a class="btn btn-primary text-white" href="moveWrite.do">글쓰기</a>
                 </div>
 
 
@@ -323,11 +323,7 @@
 	                  <!-- 다음 블럭 끝-->
 	                </ul>
                 </c:if>
-              </div>
-              <!-- ============================================================== -->
-              <!-- End PAge Content -->
-              <!-- 검색 -->
-              <div class="row justify-content-center">
+                <div class="row justify-content-center">
 				<select name="keyField" id="keyField">
                     <option value="default" selected disabled>카테고리</option>
                     <option value="pb_writer">작성자</option>
@@ -336,7 +332,12 @@
                 </select>
                 <input type="text" name="keyWord" class="mr-2" id="keyWord">
                 <input type="button" class="btn btn-primary" value="검색" onClick="searchCheck()" >
-			  </div>
+			  	</div>
+              </div>
+              <!-- ============================================================== -->
+              <!-- End PAge Content -->
+              <!-- 검색 -->
+              
 
             </div>
           </div>

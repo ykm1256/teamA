@@ -6,8 +6,10 @@ import javax.servlet.http.HttpSession;
 
 import com.mypt.controller.Action;
 import com.mypt.dao.CboardDao;
+import com.mypt.dao.PboardDao;
 import com.mypt.dao.QboardDao;
 import com.mypt.dto.CboardDto;
+import com.mypt.dto.PboardDto;
 import com.mypt.dto.QboardDto;
 
 public class WriteAction implements Action{
@@ -53,6 +55,29 @@ public class WriteAction implements Action{
 			dao.insertBoard(dto);			
 			
 			return "redirect:moveQuestion.do";
+		}else if(board.equals("pboard")) {
+			PboardDto dto=new PboardDto();
+			System.out.println("else if 들어감");
+			dto.setWriter(session.getAttribute("nick").toString());
+			
+			dto.setTitle(request.getParameter("title"));
+			System.out.println(dto.getTitle());
+			dto.setContent(request.getParameter("content"));
+			String content=dto.getContent();
+			System.out.println(content);
+			String target="<img";
+			String targetEnd=">";
+			System.out.println(content.indexOf("<img"));
+			if(content.contains(target)) {
+				int targetNum=content.indexOf(target);
+				System.out.println(targetNum);
+				String photo=content.substring(targetNum, content.substring(targetNum).indexOf(targetEnd)+targetNum)+"/>";
+				dto.setPhoto(photo);
+			}
+			PboardDao dao=PboardDao.getInstance();
+			dao.insert(dto);			
+			
+			return "redirect:movePhoto.do";
 		}else {
 			return null;
 		}
