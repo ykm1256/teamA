@@ -23,7 +23,7 @@ public class UserMyUpdateAction implements Action{
 		UserDao dao = UserDao.getInstance();
 		dao.updateUser(dto);
 		
-		return "user/profile";
+		return "redirect:moveProfile.do";
 	}
 
 }

@@ -448,5 +448,35 @@ public class QboardDao extends AbstractBoardDao<QboardDto>
 
 				return arr;
 			}
+			
+			//유저 작성한 글 개수
+			public int userBoardCount(String nick) {
+				Connection con = null;
+				PreparedStatement ps = null;
+				ResultSet rs = null;
+				String sql = null;
+				int cnt = 0;
+				try {
+					con = db.getConnection();
+										
+					sql = "select count(*) from cboard where cb_writer=? union all "
+						+"select count(*) from pboard where pb_writer=? union all "
+						+"select count(*) from qboard where qb_writer=?;";	
+					ps = con.prepareStatement(sql);
+					ps.setString(1, nick);
+					ps.setString(2, nick);
+					ps.setString(3, nick);
+					
+					rs = ps.executeQuery();
+					while(rs.next()) {
+						cnt += rs.getInt(1);
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					db.closeConnection(rs,ps,con);
+				}
+				return cnt;
+			}
 
 }
