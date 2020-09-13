@@ -23,7 +23,7 @@ public class PboardDao extends AbstractBoardDao<PboardDto> {
 		Connection con = null;
 		PreparedStatement ps = null;
 
-		String sql = "insert into pboard(pb_title, pb_writer, pb_content, hit, like, pb_photo) values(?,?,?,?,?,?)";
+		String sql = "insert into pboard(pb_title, pb_writer, pb_content, pb_hit, pb_like, pb_photo) values(?,?,?,?,?,?)";
 		try {
 			con = db.getConnection();
 			ps = con.prepareStatement(sql);

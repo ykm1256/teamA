@@ -41,16 +41,16 @@ public class MovePhotoAction implements Action {
 			page = new PageingDto(nowPage);
 		}
 		ArrayList<PboardDto> parr = pdao.getList(page.getStartPage(), page.getNumPerPage());
-		ArrayList<Integer> coments = new ArrayList<Integer>();
+		ArrayList<Integer> comments = new ArrayList<Integer>();
 		ArrayList<String> likes = new ArrayList<String>();
 
 		for (int i = 0; i < parr.size(); i++) {
 			int pb_num = parr.get(i).getNum();
-			coments.add(pdao.commentNum(pb_num));
+			comments.add(pdao.commentNum(pb_num));
 			likes.add(pdao.photoLikeCheck(pb_num, nick));
 		}
 		request.setAttribute("photoList", parr);
-		request.setAttribute("comment", coments);
+		request.setAttribute("comment", comments);
 		request.setAttribute("likes", likes);
 
 		request.setAttribute("totalPage", page.getTotalPage());

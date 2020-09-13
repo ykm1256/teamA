@@ -57,15 +57,23 @@ public class WriteAction implements Action{
 			return "redirect:moveQuestion.do";
 		}else if(board.equals("pboard")) {
 			PboardDto dto=new PboardDto();
-				
+			System.out.println("else if 들어감");
 			dto.setWriter(session.getAttribute("nick").toString());
-//			if(dto.getWriter()==""|dto.getWriter()==null) {
-//				dto.setWriter("길동이");
-//			}
 			
 			dto.setTitle(request.getParameter("title"));
+			System.out.println(dto.getTitle());
 			dto.setContent(request.getParameter("content"));
-			
+			String content=dto.getContent();
+			System.out.println(content);
+			String target="<img";
+			String targetEnd=">";
+			System.out.println(content.indexOf("<img"));
+			if(content.contains(target)) {
+				int targetNum=content.indexOf(target);
+				System.out.println(targetNum);
+				String photo=content.substring(targetNum, content.substring(targetNum).indexOf(targetEnd)+targetNum)+"/>";
+				dto.setPhoto(photo);
+			}
 			PboardDao dao=PboardDao.getInstance();
 			dao.insert(dto);			
 			
