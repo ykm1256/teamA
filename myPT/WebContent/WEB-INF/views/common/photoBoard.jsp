@@ -268,7 +268,7 @@
                 </div>
 
                 <div class="form-group mt-3 float-right">
-                  <a class="btn btn-primary text-white">글쓰기</a>
+                  <a class="btn btn-primary text-white" href="moveWrite.do">글쓰기</a>
                 </div>
 
 
@@ -300,7 +300,7 @@
 	                  		</c:when>
 	                  		<c:otherwise>
 	                  			<li class="page-item">
-	                    			<a class="page-link text-primary" id="page${i }" href="movePhoto.do?page=${i }">${i }</a>
+	                    			<a class="page-link text-primary" onclick="pageing('${sessionScope.keyWord}',${i})">${i }</a>
 	                  			</li>
 	                  		</c:otherwise>
 	                  	</c:choose>
@@ -323,9 +323,22 @@
 	                  <!-- 다음 블럭 끝-->
 	                </ul>
                 </c:if>
+                <div class="row justify-content-center">
+				<select name="keyField" id="keyField">
+                    <option value="default" selected disabled>카테고리</option>
+                    <option value="pb_writer">작성자</option>
+                    <option value="pb_title">제목</option>
+                    <option value="pb_content">내용</option>
+                </select>
+                <input type="text" name="keyWord" class="mr-2" id="keyWord">
+                <input type="button" class="btn btn-primary" value="검색" onClick="searchCheck()" >
+			  	</div>
               </div>
               <!-- ============================================================== -->
               <!-- End PAge Content -->
+              <!-- 검색 -->
+              
+
             </div>
           </div>
         </main>
@@ -339,6 +352,6 @@
     <script src="/myPT/js/scripts.js"></script>
     <script src="/myPT/js/photo.js"></script>
     <script src="/myPT/js/photoLike.js"></script>
-    <script src="/myPT/js/pageing.js"></script>
+    
   </body>
 </html>

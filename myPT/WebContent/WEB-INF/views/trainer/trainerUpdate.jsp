@@ -35,7 +35,7 @@
 
     <div id="layoutSidenav">
       <!-- sideNav -->
-      <jsp:include page="/includeFiles/userSideNav.jsp"></jsp:include>
+      <jsp:include page="/includeFiles/trainerSideNav.jsp"></jsp:include>
       <!-- /sideNav -->
       <div id="layoutSidenav_content">
         <main>
@@ -44,10 +44,37 @@
               <div class="col-lg-7">
                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                   <div class="card-header">
-                    <h3 class="text-center font-weight-light my-4">회원정보</h3>
+                    <h3 class="text-center font-weight-light my-4">트레이너정보</h3>
                   </div>
                   <div class="card-body">
-                    <form action="userMyUpdate.do" method="post" onsubmit="return check(this)">
+                    <form action="trainerMyUpdate.do" method="post" onsubmit="return check(this)">
+                    <div class="form-row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="small mb-1" for="tid"
+                              >아이디</label
+                            >
+                            <input
+                              class="form-control py-2"
+                              id="tid"
+                              name="tid"
+                              type="text"
+                              required
+                              disabled
+                              value="${dto.t_id }"
+                            />
+                            <input
+                              class="form-control py-2"
+                              id="hiddentid"
+                              name="hiddentid"
+                              type="text"
+                              required
+                              hidden="true"                             
+                              value="${dto.t_id }"
+                            />
+                          </div>
+                        </div>
+                      </div>
                       <div class="form-row">
                         <div class="col-md-6">
                           <div class="form-group">
@@ -61,7 +88,7 @@
                               type="text"
                               required
                               disabled
-                              value="${user.name }"
+                              value="${dto.t_name }"
                             />
                           </div>
                         </div>
@@ -79,7 +106,7 @@
                               type="text"
                               required
                               disabled
-                              value="${user.nick }"
+                              value="${dto.t_nick }"
                             />
                           </div>
                         </div>
@@ -95,7 +122,7 @@
                               disabled
                             >                            
                             <c:choose>
-                            <c:when test="${user.gender=='남성' }" >                            
+                            <c:when test="${dto.t_gender=='남성' }" >                            
                               <option value="남성" selected>남성</option>
                               <option value="여성">여성</option>                            
                             </c:when>
@@ -112,7 +139,7 @@
                       <div class="form-row">
                         <div class="col-md-6">
                           <div class="form-group">
-                            <label class="small mb-1" for="userEmail"
+                            <label class="small mb-1" for="email"
                               >이메일</label
                             >
                             <input
@@ -120,19 +147,10 @@
                               id="email"
                               name="email"
                               type="text"
-                              required
-                              disabled
-                              value="${user.email }"
+                              required                              
+                              value="${dto.t_email }"
                             />
-                            <input
-                              class="form-control py-2"
-                              id="hiddenemail"
-                              name="hiddenemail"
-                              type="text"
-                              required
-                              hidden="true"                             
-                              value="${user.email }"
-                            />
+                            
                           </div>
                         </div>
                       </div>
@@ -172,7 +190,7 @@
                                       <div class="form-row">
                                           <div class="col-md-6">
                                  				 <input type="text" class="form-control py-2" pattern="01\d{1}-\d{3,4}-\d{4}" title="01X-000(0)-0000" id="tel" name="tel"
-                                 				 value="${user.tel }">
+                                 				 value="${dto.t_tel }">
                                         		<div></div>
                                           
                                           </div>
@@ -189,7 +207,7 @@
                               class="form-control"
                               id="zipcode"
                               name="zipcode"
-                              value="${user.zipcode }"
+                              value="${dto.t_zipcode }"
                             />
                           </div>
                           <div class="col-md-3 col-xs-12">
@@ -211,7 +229,7 @@
                               class="form-control"
                               id="address"
                               name="address"
-                              value="${user.address }"
+                              value="${dto.t_address }"
                             />
                             <input class="form-control py-2 mb-2" id="addrdetail" name="addrdetail" type="text" value="${user.addrdetail }">
                           </div>

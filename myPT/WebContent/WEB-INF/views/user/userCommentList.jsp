@@ -12,7 +12,7 @@
     />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>좋아요 한 글</title>
+    <title>내가 쓴 댓글</title>
     <link href="/myPT/css/styles.css" rel="stylesheet" />
     <link href="/myPT/css/index.css" rel="stylesheet"/>
     <link href="/myPT/css/widget.css" rel="stylesheet"/>
@@ -47,13 +47,13 @@
           <div class="container-fluid mt-3">
           <div class="text-left">              
               <a href="userBoardList.do" class="mr-2 btn btn-light btn-sm font-weight-bold">내가 쓴 글</a>
-              <a href=userLikeList.do"" class="btn btn-light btn-sm font-weight-bold mr-1">좋아요 한 글</a>             
-              <a href="userCommentList.do" class="btn btn-light btn-sm font-weight-bold mr-1">댓글 쓴 글</a>             
+              <a href="userLikeList.do" class="btn btn-light btn-sm font-weight-bold mr-1">좋아요 한 글</a>             
+              <a href="userCommentList.do" class="btn btn-light btn-sm font-weight-bold mr-1">내가 쓴 댓글</a>             
               </div>
           	<div class="card mb-4 mt-2">
               <div class="card-header font-weight-bold">
                 <i class="fas fa-table mr-1"></i>
-               좋아요 한 글
+               내가 쓴 댓글
               </div>
               <div class="card-body">
                 <div class="table-responsive">
@@ -65,47 +65,43 @@
                   >
                     <thead class="text-center">
                       <tr>
-                        <th style="width:15%">게시판</th>
-                        <th style="width:40%">제목</th>
-                        <th style="width:20%">작성일</th>
-                        <th style="width:10%">조회수</th>                                                
-                        <th style="width:10%">좋아요</th>                                                
-                                                                        
+                        <th style="width:20%">게시판</th>
+                        <th>댓글</th>
+                        <th style="width:10%">원본글</th>
+                        <th style="width:20%">작성일</th>                                                                    
                       </tr>
                     </thead>
                     <tbody class="text-center">
-                      <c:forEach items="${carr }" var="item" varStatus="status">
+                      <c:forEach items="${ccom }" var="item" varStatus="status">
                       <tr>
-                        <td>커뮤니티</td>
-                        <c:choose>
-                        <c:when test="${ccom[status.index]!=0}">
-                        <td><a href="boardView.do?num=${item.num }&b=c">${item.title } [${ccom[status.index]}]</a></td>
-                        </c:when>
-                        <c:otherwise>
-                        <td><a href="boardView.do?num=${item.num }&b=c">${item.title }</a></td>
-                        </c:otherwise>
-                        </c:choose>
-                        <td>${item.date }</td>
-                        <td>${item.hit }</td>
-                        <td>${item.like }</td>
+                        <td>커뮤니티</td> 
+                        <td align="left">
+                        <div class="ml-2 mr-0" style="display:inline-block;width:400px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${item.c_content }</div>                        
+                        </td>
+                        <td><a href="boardView.do?num=${item.boardNum }&b=c">글보기</a></td>
+                        <td>${item.c_date }</td>                        
                       </tr>
-                      </c:forEach>                      
+                      </c:forEach>
                       
+                      <c:forEach items="${qcom }" var="item" varStatus="status">
+                      <tr>
+                        <td>질문게시판</td>
+                        <td align="left">
+                        <div class="ml-2 mr-0" style="display:inline-block;width:400px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${item.c_content }</div>
+                        </td>
+                        <td><a href="boardView.do?num=${item.boardNum }&b=q">글보기</a></td>
+                        <td>${item.c_date }</td>
+                      </tr>
+                      </c:forEach>
                       
-                      <c:forEach items="${parr }" var="item" varStatus="status">
+                      <c:forEach items="${pcom }" var="item" varStatus="status">
                       <tr>
                         <td>포토게시판</td>
-                        <c:choose>
-                        <c:when test="${ccom[status.index]!=0}">
-                        <td><a href="boardView.do?num=${item.num }&b=p">${item.title } [${pcom[status.index]}]</a></td>
-                        </c:when>
-                        <c:otherwise>
-                        <td><a href="boardView.do?num=${item.num }&b=p">${item.title }</a></td>
-                        </c:otherwise>
-                        </c:choose>
-                        <td>${item.date }</td>
-                        <td>${item.hit }</td>
-                        <td>${item.like }</td>
+                        <td align="left">
+                        <div class="ml-2 mr-0" style="display:inline-block;width:400px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${item.c_content }</div>
+                        </td>
+                        <td><a href="boardView.do?num=${item.boardNum }&b=p">글보기</a></td>
+                        <td>${item.c_date }</td>
                       </tr>
                       </c:forEach>
                     </tbody>

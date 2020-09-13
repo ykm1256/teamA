@@ -83,17 +83,20 @@ pageEncoding="UTF-8"%>
                   
                     <div class="card-body p-1">
                     <c:choose>
-                    <c:when test="${sessionScope.board=='qboard'}">
-                    <form action="write.do" method="post" onsubmit="return qPostForm()">
-                  </c:when>
-                  <c:otherwise>
-                  <form action="write.do" method="post" onsubmit="return postForm()">
-                  </c:otherwise>
+	                  <c:when test="${sessionScope.board=='qboard'}">
+	                    <form action="write.do" method="post" onsubmit="return qPostForm()">
+	                  </c:when>
+	                  <c:when test="${sessionScope.board=='pboard'}">
+	                  	<form action="write.do" method="post" onsubmit="return pPostForm()">
+	                  </c:when>
+	                  <c:otherwise>
+	                  	<form action="write.do" method="post" onsubmit="return postForm()">
+	                  </c:otherwise>
                   </c:choose>
                       <ul class="list-group list-group-flush h-100">
                         <li class="list-group-item">                          
                           <c:choose>
-                          <c:when test="${sessionScope.board=='qboard' }"> 
+                          <c:when test="${sessionScope.board=='qboard'||sessionScope.board=='pboard' }"> 
                           <div class="col-lg-12 pl-lg-0">
                               <input
                                 class="form-control"
