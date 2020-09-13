@@ -325,5 +325,29 @@ return instance;
 	{
 		
 	}
+	
+	// 트레이너가 수정
+	public void trainerMyUpdate(TrainerDto td) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			con = db.getConnection();
+			String sql = "update trainer set t_pw=?, t_email=?, t_address=?, t_zipcode=?, t_tel=?, t_addrdetail=? where t_id=?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, td.getT_pw());
+			ps.setString(2, td.getT_email());			
+			ps.setString(3, td.getT_address());			
+			ps.setString(4, td.getT_zipcode());
+			ps.setString(5, td.getT_tel());
+			ps.setString(6, td.getT_addrdetail());
+			ps.setString(7, td.getT_id());
+			ps.executeUpdate();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.closeConnection(null, ps, con);
+		}
+	}
 
 }

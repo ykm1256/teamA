@@ -32,7 +32,7 @@ public class ViewAction implements Action {
 		String board = session.getAttribute("board").toString();
 		
 		
-		session.setAttribute("nick", "길동이");
+//		session.setAttribute("nick", "길동이");
 		String nick = session.getAttribute("nick").toString();
 		
 		if(board.equals("cboard")) {		

@@ -21,6 +21,8 @@ import com.mypt.action.detail.AdminTrainerDetailAction;
 import com.mypt.action.detail.AdminTrainerUpdateAction;
 import com.mypt.action.detail.AdminUserDetailAction;
 import com.mypt.action.detail.AdminUserUpdateAction;
+import com.mypt.action.detail.TrainerMyDetailAction;
+import com.mypt.action.detail.TrainerMyUpdateAction;
 import com.mypt.action.detail.UserMyDetailAction;
 import com.mypt.action.detail.UserMyUpdateAction;
 import com.mypt.action.inbody.UserInbodyResultAction;
@@ -43,10 +45,11 @@ import com.mypt.action.move.MoveInbody;
 import com.mypt.action.move.MoveIntroAction;
 import com.mypt.action.move.MovePayment;
 import com.mypt.action.move.MovePhotoAction;
-import com.mypt.action.move.MoveProfileAction;
+import com.mypt.action.move.MoveUserProfileAction;
 import com.mypt.action.move.MoveQuestionAction;
 import com.mypt.action.move.MoveReplyAction;
 import com.mypt.action.move.MoveSchedule;
+import com.mypt.action.move.MoveTrainerProfileAction;
 import com.mypt.action.move.MoveTrainerRegister;
 import com.mypt.action.move.MoveUserMain;
 import com.mypt.action.move.MoveUserRegister;
@@ -190,12 +193,17 @@ public class ActionFactory
 		map.put("/moveBoardDetail", new MoveBoardDetailAction());
 		
 		//프로필 이동
-		map.put("/moveProfile", new MoveProfileAction());
+		map.put("/moveUserProfile", new MoveUserProfileAction());		
 		
 		//유저 게시판 목록
 		map.put("/userBoardList", new UserBoardListViewAction());
 		map.put("/userLikeList", new UserLikeListViewAction());
 		map.put("/userCommentList", new UserCommentListViewAction());
+		
+		//트레이너 마이 페이지
+		map.put("/trainerMyUpdate", new TrainerMyUpdateAction());
+		map.put("/trainerMyDetail", new TrainerMyDetailAction());
+		map.put("/moveTrainerProfile", new MoveTrainerProfileAction());
 		
 		
 		
