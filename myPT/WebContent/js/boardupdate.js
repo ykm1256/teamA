@@ -61,7 +61,7 @@
      
    // 이미지 사이즈 드래그로 조절
 //   $('img').parent().draggable();
-   $('img').parent().addClass('resizeable')
+/*   $('img').parent().addClass('resizeable')*/
 
 
 

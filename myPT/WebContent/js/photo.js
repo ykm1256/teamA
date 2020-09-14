@@ -1,21 +1,4 @@
 
-if (window.matchMedia("(min-width: 992px)").matches == true) {
-  $(".card-img-top").css("height", "22vw");
-} else if (window.matchMedia("(min-width: 768px)").matches == true) {
-  $(".card-img-top").css("height", "40vw");
-} else {
-  $(".card-img-top").css("height", "80vw");
-}
-
-$(window).resize(function () {
-  if (window.matchMedia("(min-width: 992px)").matches == true) {
-    $(".card-img-top").css("height", "22vw");
-  } else if (window.matchMedia("(min-width: 768px)").matches == true) {
-    $(".card-img-top").css("height", "40vw");
-  } else {
-    $(".card-img-top").css("height", "80vw");
-  }
-});
 
 //페이징
 function pageing(keyWord,page){
@@ -41,3 +24,8 @@ function searchCheck(){
 	}
 }
 
+// 이미지 클릭 시 게시물 상세 페이지로 이동
+$("img").on("click",function(){
+	var id=$(this).parent().attr("id").substring(4);
+	window.location.href="boardView.do?num="+id;
+})

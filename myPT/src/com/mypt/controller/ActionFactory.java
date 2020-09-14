@@ -63,6 +63,7 @@ import com.mypt.action.register.AdminTrainerRegisterAction;
 import com.mypt.action.register.AdminUserRegisterAction;
 import com.mypt.action.schedule.ScheduleLoadAction;
 import com.mypt.action.schedule.TrainerScheduleSettingAction;
+import com.mypt.action.schedule.TrainerTodayPTAction;
 import com.mypt.action.schedule.UserScheduleViewAction;
 
 
@@ -151,7 +152,7 @@ public class ActionFactory
 		map.put("/write",new WriteAction());
 		
 		map.put("/moveWrite",new MoveWriteAction());
-		
+		// 게시판 상세보기
 		map.put("/boardView",new ViewAction());
 		
 		// 유저 메인페이지 스케줄
@@ -208,6 +209,8 @@ public class ActionFactory
 		map.put("/trainerMyUpdate", new TrainerMyUpdateAction());
 		map.put("/trainerMyDetail", new TrainerMyDetailAction());
 		map.put("/moveTrainerProfile", new MoveTrainerProfileAction());
+		map.put("/trainerMain", new TrainerTodayPTAction());
+		map.put("/trainerPTFinish", new TrainerTodayPTAction());
 		
 		
 		
