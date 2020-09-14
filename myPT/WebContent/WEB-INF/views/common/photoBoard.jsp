@@ -52,7 +52,7 @@
 							<div class="row">
 								<c:forEach items="${photoList }" var="item" varStatus="status">
 									<div class="col-md-6 col-xs-12 col-lg-4">
-										<div class="card border-0" id="${item.num}">
+										<div class="card border-0" id="card${item.num}">
 											<p class="card-text mb-0 text-muted" style="font-size: 14px">${item.date }</p>
 											${item.photo }
 											<div class="card-body p-0 pt-2">

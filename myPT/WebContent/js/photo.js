@@ -24,8 +24,8 @@ function searchCheck(){
 	}
 }
 
+// 이미지 클릭 시 게시물 상세 페이지로 이동
 $("img").on("click",function(){
-	var id=$(this).parent().attr("id");
-	alert(id);
+	var id=$(this).parent().attr("id").substring(4);
 	window.location.href="boardView.do?num="+id;
 })
