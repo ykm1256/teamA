@@ -252,21 +252,26 @@ function setBadge(numOfComments)
 	})	  
 
 	
+	var selectedComment;
 	
 	//대댓글
+//	$(".replyComment").click(function(){
 	$(document).on("click", '.replyComment', function(){
+//	$(".text-secondary").on("click", function(){
 		
-		let $selectedComment= $(this).parent();
+		
+		selectedComment= $(this).parent();
+		console.log(selectedComment.children().last());
 		
 		console.log($(this).parent());
 		
-		let c_num= $(this).siblings('input').val();		
+		let c_num= $(this).siblings('input').val();
 		
 //		let $beforeContent= $selectedComment.find('div.content').text(); //수정하기위해서 했었음	
 		
 		if(!$(this).siblings().hasClass('reComment'))	
 			{
-				$selectedComment.append('<div class="reComment my-1 ml-md-4"><div class="row"><div class="row col-9"><div class="col text-dark font-weight-bold commentNick">'+sessionNick+'</div></div><textarea id="forRecomment" cols="50" rows="4" maxlength="500" style="width:100%; resize:none" class="border-1"></textarea></div>');
+				selectedComment.append('<div class="reComment my-1 ml-md-4"><div class="row"><div class="row col-9"><div class="col text-dark font-weight-bold commentNick">'+sessionNick+'</div></div><textarea id="forRecomment" cols="50" rows="4" maxlength="500" style="width:100%; resize:none" class="border-1"></textarea></div>');
 				$('#forRecomment').focus();	
 
 				let $btnWrapper= $('<div class="mt-2 ml-auto"></div>');
@@ -277,10 +282,10 @@ function setBadge(numOfComments)
 			}
 				
 		
-		$('#cancelBtn').click(function(){
-			$selectedComment.children().last().remove();
-			return false;
-		})
+//		$('#cancelBtn').click(function(){
+//			$selectedComment.children().last().remove();
+//			return false;
+//		})
 		
 		$(document).on("click", '#replyBtn', function()
 			{
@@ -314,11 +319,13 @@ function setBadge(numOfComments)
 						
 				})	
 				
-
-				
-				
 				
 	})
+	
+	$('#cancelBtn').click(function(){
+			selectedComment.children().last().remove();
+			return false;
+		})
 	
 	
 

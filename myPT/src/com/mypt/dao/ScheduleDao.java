@@ -169,4 +169,30 @@ public class ScheduleDao {
 		return arr;
 	}
 	
+//	public void ptFinish() {
+//		Connection con = null;
+//		PreparedStatement ps = null;
+//		
+//		Calendar cal = Calendar.getInstance();
+//		int year = cal.get(cal.YEAR);
+//		int month = cal.get(cal.MONTH)+1;
+//		int day = cal.get(cal.DATE);
+//		String today = year+"-"+month+"-"+day;
+//		
+//		try {
+//			con = db.getConnection();
+//			String sql = "update schedule set s_time=? where s_id=? and s_date=?";
+//			ps = con.prepareStatement(sql);
+//			ps.setString(1, sd.getS_time());
+//			ps.setString(2, sd.getS_id());
+//			ps.setString(3, sd.getS_date());
+//			ps.executeUpdate();
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} finally {
+//			db.closeConnection(null, ps, con);
+//		}
+//	}
+	
 }

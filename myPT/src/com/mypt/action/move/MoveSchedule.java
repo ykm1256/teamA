@@ -14,7 +14,7 @@ public class MoveSchedule implements Action {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 		String id=request.getParameter("id");
-		session.setAttribute("id", id);
+		session.setAttribute("uid", id);
 		UserDao dao=UserDao.getInstance();
 		UserDto dto=dao.getUserById(id);
 		

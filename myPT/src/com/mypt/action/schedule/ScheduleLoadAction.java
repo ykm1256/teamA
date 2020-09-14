@@ -17,7 +17,7 @@ public class ScheduleLoadAction implements Action {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
-		String id = (String) session.getAttribute("id");
+		String id = (String) session.getAttribute("uid");
 		String[] date = request.getParameterValues("alldate[]");
 
 		// pt와 프로그램을 날짜별로 데이터를 받을 json
