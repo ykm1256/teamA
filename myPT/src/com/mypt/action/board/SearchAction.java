@@ -44,11 +44,11 @@ public class SearchAction implements Action {
 		if(next!=null) {
 			int nowBlock=Integer.parseInt(next)-1;
 			nowPage=page.getPagePerBlock()*nowBlock+1;
-			page=new PagingDto(nowPage);
+			page=new PagingDto(nowPage,keyField,keyWord);
 		}else if(prev!=null){
 			int nowBlock=Integer.parseInt(prev)-1;
 			nowPage=page.getPagePerBlock()*nowBlock+1;
-			page=new PagingDto(nowPage);
+			page=new PagingDto(nowPage,keyField,keyWord);
 		}
 
 		ArrayList<PboardDto> parr=pdao.getList(keyField,keyWord,page.getStartPage(), page.getNumPerPage());
