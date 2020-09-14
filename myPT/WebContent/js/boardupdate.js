@@ -67,7 +67,7 @@
 
 // 글 정보 받아오기
 var num = $("#num").val();
-	$.ajax({
+$.ajax({
 	url: "updateView.do",
 	type: "post",	
 	data: {"num": num},
@@ -87,21 +87,46 @@ var num = $("#num").val();
 
 
 // 글쓰기 (윤)
-function postForm(){
-	var head = $("#writeHead").val()
-	var subject = $("#subject").val()
-	
-	if(head== null){
-		alert("말머리를 선택하세요!")
-		return false;
-	}else if(subject.trim() == "" | subject==null){
-		alert("올바른 제목을 입력하세요!")
-		return false;
+function postForm(board){
+	var head = $("#writeHead").val();
+	var subject = $("#subject").val();
+	if(board=="pboard"){
+		if(subject.trim() == "" | subject==null){
+			alert("올바른 제목을 입력하세요!")
+			return false;
+		}else{
+			var content = $(".note-editable").html();
+			if(content.indexOf("<img")==-1){
+				alert("이미지를 넣어주세요!");
+				return false;
+			}else{
+				$("#content").val(content);
+				return true;
+			}
+		}
+	}else if(board=="qboard"){
+		if(subject.trim() == "" | subject==null){
+			alert("올바른 제목을 입력하세요!")
+			return false;
+		}else{
+			var content = $(".note-editable").html();
+			$("#content").val(content);
+			return true;
+		}
 	}else{
-	var content = $(".note-editable").html();
-	$("#content").val(content);
-	return true;
-	}	
+		if(head== null){
+			alert("말머리를 선택하세요!")
+			return false;
+		}else if(subject.trim() == "" | subject==null){
+			alert("올바른 제목을 입력하세요!")
+			return false;
+		}else{
+			var content = $(".note-editable").html();
+			$("#content").val(content);
+			return true;
+		}
+	}
+		
 }
 
 
