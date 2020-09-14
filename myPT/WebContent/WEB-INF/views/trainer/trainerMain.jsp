@@ -39,8 +39,8 @@
 					<!-- Start Page Content -->
 					<!-- ============================================================== -->
 					<div class="row">
-						<form method="post" action="trainerPTFinish.do">
-							<div class="col-12">
+						<form class="col-12" method="post" action="trainerPTFinish.do">
+							
 
 								<div class="card">
 									<div class="card-body">
@@ -95,8 +95,8 @@
 									</table>
 
 								</div>
-								<a type="submit" class="btn btn-primary text-white float-right mt-4">수업완료</a>
-							</div>
+								<button type="submit" class="btn btn-primary text-white float-right mt-4" >수업완료</button>
+							
 						</form>
 
 					</div>

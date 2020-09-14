@@ -1,7 +1,7 @@
 package com.mypt.dto;
 
 public class ScheduleDto {
-	String s_id,s_date,s_time;
+	String s_id,s_date,s_time,s_finish;
 
 	public String getS_id() {
 		return s_id;
@@ -26,5 +26,14 @@ public class ScheduleDto {
 	public void setS_time(String s_time) {
 		this.s_time = s_time;
 	}
+
+	public String getS_finish() {
+		return s_finish;
+	}
+
+	public void setS_finish(String s_finish) {
+		this.s_finish = s_finish;
+	}	
+	
 	
 }
