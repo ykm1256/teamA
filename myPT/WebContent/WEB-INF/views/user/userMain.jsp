@@ -146,20 +146,7 @@
                         </div>
                       </div>
                     </div>
-                  </li>
-                  <li class="list-group-item">
-                    <div class="widget-content p-0">
-                      <div class="widget-content-wrapper">
-                        <div class="widget-content-left">
-                          <div class="widget-heading">조절 체중</div>
-                          <div class="widget-subheading">조절</div>
-                        </div>
-                        <div class="widget-content-right">
-                          <div class="widget-numbers text-danger">-10KG</div>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
+                  </li>               
                 </ul>
               </div>
             </div>
