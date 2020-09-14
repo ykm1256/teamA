@@ -9,6 +9,7 @@ month = today.getMonth() + 1;
 var income = new Array();
 var tid = new Array();
 var tname = new Array();
+var tphoto = new Array();
 
 $.ajax({
 	url: "incomeTrainerChart.do",
@@ -21,6 +22,7 @@ $.ajax({
 			tid.push(data[i].tid);
 			income.push(data[i].income);
 			tname.push(data[i].tname);
+			tphoto.push(data[i].tphoto);
 		}
 	},
 	error: function(e) {
@@ -113,6 +115,66 @@ var myChart2 = new Chart(ctx2, {
 	},
 });
 
+// 이달의 트레이너 처음 뿌릴 때
+//	var monthtrainer = new Array();
+//	var monthtrainerphoto = new Array();
+//	var max = Math.max.apply(null, income);
+//	for (var i = 0; i < income.length; i++) {
+//		if (income[i] == max) {
+//			monthtrainer.push(tname[i]);
+//			monthtrainerphoto.push(tphoto[i]);
+//		}
+//	}
+//	var tmonth = document.querySelector("#tmonthname");
+//	var tmonthphoto = document.querySelector("#tmonthphoto");
+//	var tmonthdata = new String();
+//	var tmonthphotodata = new String();
+//	for (var i = 0; i < monthtrainer.length; i++) {
+//		
+//		
+//		var data = "<h5 class='card-title'>" + monthtrainer[i] + " 트레이너 </h5>";
+//		var photodata = "<img src='img/TrainerPhoto/"+monthtrainerphoto[i]+"' class='card-img-top' />";
+//		tmonthdata += data;
+//		tmonthphotodata+=photodata;
+//	}
+//	tmonthphoto.innerHTML = tmonthphotodata;
+//	tmonth.innerHTML = tmonthdata;
+
+/////////////////이달의 트레이너
+
+// 이달의 트레이너 처음 뿌릴 때	
+	var monthtrainer = new Array();
+	var monthtrainerphoto = new Array();
+	var max = Math.max.apply(null, income);
+	for (var i = 0; i < income.length; i++) {
+		if (income[i] == max) {
+			monthtrainer.push(tname[i]);
+			monthtrainerphoto.push(tphoto[i]);
+		}
+	}
+	var tmonth = document.querySelector("#tmonth");	
+	var data = new String();	
+	for (var i = 0; i < monthtrainer.length; i++) {			
+	
+		data += "<div class='card'><div id='tmonthphoto"+(i+1)+"'></div><div class='card-body'><div id='tmonthname"+(i+1)+"'></div></div></div>";			
+		
+	}
+	tmonth.innerHTML = data
+	
+	for(var i=0;i<monthtrainer.length;i++){
+		var tmonthname = document.querySelector("#tmonthname"+(i+1));
+		var tmonthphoto = document.querySelector("#tmonthphoto"+(i+1));
+		var namedata = "<h5 class='card-title'>" + monthtrainer[i] + " 트레이너 </h5>";
+		var photodata = "<img src='img/TrainerPhoto/"+monthtrainerphoto[i]+"' class='card-img-top' />";
+				
+		tmonthphoto.innerHTML = photodata;
+		tmonthname.innerHTML = namedata;
+	}
+
+/////////////////이달의 트레이너
+
+
+
 //연도 선택 이벤트
 $("#selectyear2").change(function() {
 	month = today.getMonth()+1;
@@ -138,6 +200,8 @@ $("#selectyear2").change(function() {
 	}
 
 });
+
+
 
 
 // 월 선택이벤트
@@ -203,30 +267,47 @@ $("#selectmonth").change(function() {
 	});
 
 	//////////////////차트 다시그리기
-
-	// 이달의 트레이너
+	
+// 이달의 트레이너 처음 뿌릴 때	
+	var monthtrainer = new Array();
+	var monthtrainerphoto = new Array();
 	var max = Math.max.apply(null, income);
 	for (var i = 0; i < income.length; i++) {
 		if (income[i] == max) {
 			monthtrainer.push(tname[i]);
+			monthtrainerphoto.push(tphoto[i]);
 		}
 	}
-	var tmonth = document.querySelector("#tmonthname");
-	var tmonthdata = new String();
-	for (var i = 0; i < monthtrainer.length; i++) {
-		var data = "<h5 class='card-title'>" + monthtrainer[i] + " 트레이너 </h5>";
-		tmonthdata += data;
+	var tmonth = document.querySelector("#tmonth");	
+	var data = new String();	
+	for (var i = 0; i < monthtrainer.length; i++) {			
+	
+		data += "<div class='card'><div id='tmonthphoto"+(i+1)+"'></div><div class='card-body'><div id='tmonthname"+(i+1)+"'></div></div></div>";		
+		
 	}
-	tmonth.innerHTML = tmonthdata;
+	tmonth.innerHTML = data
+	
+	for(var i=0;i<monthtrainer.length;i++){
+		var tmonthname = document.querySelector("#tmonthname"+(i+1));
+		var tmonthphoto = document.querySelector("#tmonthphoto"+(i+1));
+		var namedata = "<h5 class='card-title'>" + monthtrainer[i] + " 트레이너 </h5>";
+		var photodata = "<img src='img/TrainerPhoto/"+monthtrainerphoto[i]+"' class='card-img-top' />";
+		
+		tmonthphoto.innerHTML = photodata;
+		tmonthname.innerHTML = namedata;
+	}
+	
 
-	/////////////////이달의 트레이너
+/////////////////이달의 트레이너
+	
 
+/////////////////이달의 트레이너
 
 
 
 
 	$("#tincome").text(month + "월의 트레이너 수익");
-	$("#tmonth").text(month + "월의 트레이너");
+	$("#tmonthhead").text(month + "월의 트레이너");
 });
 //////////////////////////////////////////////
 // CHART2 END

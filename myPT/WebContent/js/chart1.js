@@ -169,7 +169,7 @@ var myChart1 = new Chart(ctx1, {
 
 $("#selectyear1").change(function() {
 	year=$("#selectyear1").val();
-	month = today.getMonth+1;
+	month = today.getMonth() + 1;
 	if($("#selectyear1").val()<today.getFullYear()){
 		month=12;
 	}

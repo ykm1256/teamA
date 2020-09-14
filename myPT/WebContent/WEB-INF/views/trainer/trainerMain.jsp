@@ -69,7 +69,7 @@
 											<c:choose>
 												<c:when test="${uarr[0]==null }">
 													<tr>
-														<td colspan="6">데이터가 없습니다.</td>
+														<td colspan="6">오늘의 스케줄이 없습니다.</td>
 													</tr>
 												</c:when>
 												<c:otherwise>

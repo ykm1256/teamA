@@ -3,8 +3,23 @@
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark p-1">
 	<div id="navBrand" class="d-flex align-items-center">
-		<a class="navbar-brand" href="index.html"><img
+	
+	<c:choose>
+	<c:when test="${sessionScope.grade==0}">
+		<a class="navbar-brand" href="userList.do"><img
 			src="img/colorChanged.png" /></a>
+	</c:when>
+	<c:when test="${sessionScope.grade==1}">
+		<a class="navbar-brand" href="trainerMain.do"><img
+			src="img/colorChanged.png" /></a>
+	</c:when>
+	<c:when test="${sessionScope.grade==2}">
+		<a class="navbar-brand" href="userMain.do"><img
+			src="img/colorChanged.png" /></a>
+	</c:when>
+	</c:choose>
+			
+			
 	</div>
 
 	<button class="btn btn-link btn-sm order-4 order-lg-0 mr-lg-auto"

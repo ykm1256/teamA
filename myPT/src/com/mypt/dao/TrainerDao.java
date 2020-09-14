@@ -41,9 +41,9 @@ return instance;
 		int maxSize= 2*1024*1024; //2MB
 		
 //		절대경로로 해당 path를 지정 할 경우
-		String saveFolder = "C:/myPTImages/TrainerPhoto/";
+//		String saveFolder = "C:/myPTImages/TrainerPhoto/";
 		
-//		String saveFolder= request.getServletContext().getRealPath("img/TrainerPhoto/");  
+		String saveFolder= request.getServletContext().getRealPath("img/TrainerPhoto/");  
 //서버 옵션에서 serve modules without publishing. 현재 컴 기준  
 //E:\Work\ProjectA\.metadata\.plugins\org.eclipse.wst.server.core\tmp2\wtpwebapps\myPT\img\TrainerPhoto\
 
@@ -76,11 +76,15 @@ return instance;
 			String t_photo = multi.getFilesystemName("photo"); //input태그-> 서버상에 실제로 업로드된 파일 이름
 			File curFile = multi.getFile("photo");  //실제 업로드된 파일 객체 반환
 
-			String t_Id= makeID(); //트레이너 아이디 생성
-						
+			String t_Id= makeID(); //트레이너 아이디 생성			
+			
 			//파일이름 t_ID
 			String newFileName= t_Id+"."+t_photo.substring(t_photo.lastIndexOf(".")+1);
 	        File newFile = new File(saveFolder + newFileName);
+	        
+	        System.out.println(t_photo);
+			System.out.println(t_Id);
+			System.out.println(newFileName);
 
 	        // 파일명 rename
 	        if(!curFile.renameTo(newFile)){
@@ -149,6 +153,7 @@ return instance;
 				td.setT_zipcode(rs.getString("t_zipcode"));
 				td.setT_tel(rs.getString("t_tel"));
 				td.setT_addrdetail(rs.getString("t_addrdetail"));
+				td.setT_photo(rs.getString("t_photo"));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
