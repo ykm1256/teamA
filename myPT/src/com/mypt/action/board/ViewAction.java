@@ -8,8 +8,10 @@ import com.mypt.controller.Action;
 import com.mypt.dao.CboardDao;
 import com.mypt.dao.CommentDao;
 import com.mypt.dao.LikeDao;
+import com.mypt.dao.PboardDao;
 import com.mypt.dao.QboardDao;
 import com.mypt.dto.CboardDto;
+import com.mypt.dto.PboardDto;
 import com.mypt.dto.QboardDto;
 
 public class ViewAction implements Action {
@@ -59,6 +61,18 @@ public class ViewAction implements Action {
 			request.setAttribute("comcnt", comment);
 			request.setAttribute("dto", dto);			
 			session.setAttribute("dto", dto);
+		}else if(board.equals("pboard")) {
+			PboardDto dto = new PboardDto();
+			PboardDao dao = PboardDao.getInstance();
+			LikeDao ldao = LikeDao.getInstance();
+			int lflag = ldao.selectLike(nick, "pblike",num);
+			dto = dao.detailView(num);
+
+			int comment = dao.commentNum(num);			
+			request.setAttribute("comment", comment);			
+			request.setAttribute("dto", dto);
+			request.setAttribute("lflag", lflag);			
+			session.setAttribute("dto", dto);	
 		}
 		
 		return "common/boardDetail";

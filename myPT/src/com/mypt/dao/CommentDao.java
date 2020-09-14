@@ -9,7 +9,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.mypt.connection.DBConnection;
-import com.mypt.dto.CCommentDto;
 import com.mypt.dto.CommentDto;
 
 public class CommentDao {
