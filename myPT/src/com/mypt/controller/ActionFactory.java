@@ -150,7 +150,7 @@ public class ActionFactory
 		map.put("/write",new WriteAction());
 		
 		map.put("/moveWrite",new MoveWriteAction());
-		
+		// 게시판 상세보기
 		map.put("/boardView",new ViewAction());
 		
 		// 유저 메인페이지 스케줄
