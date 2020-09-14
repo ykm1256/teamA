@@ -11,6 +11,7 @@ import org.json.simple.JSONObject;
 
 import com.mypt.controller.Action;
 import com.mypt.dao.HistoryDao;
+import com.mypt.dao.TrainerDao;
 import com.mypt.dto.HistoryDto;
 
 public class IncomeTrainerAction implements Action{
@@ -23,14 +24,26 @@ public class IncomeTrainerAction implements Action{
 		int month = Integer.parseInt(request.getParameter("month"));
 		System.out.println(year);
 		HistoryDao dao = HistoryDao.getInstance();
-		ArrayList<HistoryDto> arr = dao.getTrainerIncome(year,month);		
+		ArrayList<HistoryDto> arr = dao.getTrainerIncome(year,month);
+		ArrayList<String> photo = new ArrayList<String>();
+		
+		TrainerDao tdao = TrainerDao.getInstance();
+		for(int i=0; i<arr.size();i++) {
+			String tid = arr.get(i).getTid();
+			System.out.println(tid);
+			String ph = tdao.trainerSelect(tid).getT_photo(); 
+			photo.add(ph);
+			System.out.println(ph);
+		}
+				
 		
 		JSONArray jarr = new JSONArray();
-		for(HistoryDto dto: arr) {
+		for(int i=0;i<arr.size();i++) {
 			JSONObject obj = new JSONObject();
-			obj.put("tid", dto.getTid());
-			obj.put("income", dto.getIncome());
-			obj.put("tname", dto.getT_name());
+			obj.put("tid", arr.get(i).getTid());
+			obj.put("income", arr.get(i).getIncome());
+			obj.put("tname", arr.get(i).getT_name());
+			obj.put("tphoto", photo.get(i));
 			jarr.add(obj);
 		}
 		request.setAttribute("result", jarr);

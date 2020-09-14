@@ -177,10 +177,10 @@ public class HistoryDao {
 
 			con = db.getConnection();
 			if (month < 10) {
-				sql = "select sum(price),tid,t.t_name from history h left outer join trainer t on h.tid=t.t_id where paydate like '%"
+				sql = "select sum(price),tid,t_name from history h left outer join trainer t on h.tid=t.t_id where paydate like '%"
 						+ year + "-0" + month + "%' group by tid;";
 			} else {
-				sql = "select sum(price),tid,t.t_name from history h left outer join trainer t on h.tid=t.t_id paydate like '%"
+				sql = "select sum(price),tid,t_name from history h left outer join trainer t on h.tid=t.t_id paydate like '%"
 						+ year + "-" + month + "%' group by tid;";
 			}
 			System.out.println(sql);
@@ -188,11 +188,10 @@ public class HistoryDao {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				historyBean = new HistoryDto();
-				System.out.println(rs.getString(1));
+				historyBean = new HistoryDto();				
 				historyBean.setIncome(Integer.parseInt(rs.getString(1)));
 				historyBean.setTid(rs.getString(2));
-				historyBean.setT_name(rs.getString(3));
+				historyBean.setT_name(rs.getString(3));				
 				arr.add(historyBean);
 
 			}
