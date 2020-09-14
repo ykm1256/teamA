@@ -14,29 +14,38 @@ function changeBlock(block)
 
 function setComment()
 {
+  	
+	if(totalRecord==0)
+	{	
+		$('#commentsWrapper').append('<div class="text-center font-weight-bold py-5">첫번째 댓글을 남겨주세요!</div>');
+		return false;
+	}
+
+	$('#commentsWrapper').empty();
+
+
 	let htmlForNew=""; 
-//	  var today = new Date();
-//	  today.setHours(today.getHours()-24)
-//	  
-//	  
-//	  for(var i=0; i<numOfComments;i++)
-//	{
-//		  var commentdate= new Date($('.commentDate').eq(i).text())
-//
-//		if(boardWriter== $('.commentNick').eq(i).text())
-//			{
-//				$('.commentNick').eq(i).append('<span class="badge badge-success ml-1">작성자</span>');		
-//			}
-//		if(commentdate>today && $('.commentNick').eq(i).children('.newImg').length!=1)
-//			{
-//				$('.commentNick').eq(i).append('<img src="img/new.png" width="12px" class="ml-1 newImg">');
-//			}
-//		
-		
+	 var today = new Date();
+	 today.setHours(today.getHours()-24)					 
+
+
 	$.each (comments, function (index, com) 
 	{
-		htmlForNew+='<div class="comments"><div class="row"><div class="row col-9">';
-		htmlForNew+='<div class="col font-weight-bold commentNick">'+com.c_nick+'</div></div>';			
+		var commentdate= new Date(com.c_date)
+				
+		htmlForNew+='<hr><div class="comments"><div class="row"><div class="row col-9">';
+		htmlForNew+='<div class="col font-weight-bold commentNick">'+com.c_nick
+		
+		if(boardWriter==com.c_nick)
+		{
+			htmlForNew+='<span class="badge badge-success ml-1">작성자</span>';
+		}
+		if(commentdate>today)
+		{
+			htmlForNew+='<img src="img/new.png" width="12px" class="ml-1 newImg">';
+		}		
+		
+		htmlForNew+='</div></div>';			
 											
 		if(sessionNick== com.c_nick)
 			{
@@ -48,14 +57,18 @@ function setComment()
 				htmlForNew+='<div class="col-3 text-right dropdown"><a class="mt-1 text-secondary" href="#" role="button" data-toggle="dropdown"><i class="fas fa-ellipsis-v"></i></a><div class="dropdown-menu dropdown-menu-right">';
 				htmlForNew+='<a class="dropdown-item commentDelete">삭제</a><input type="number" hidden="true" value='+com.c_num+'></div></div>';
 			}
-									
+										
+								
 		htmlForNew+='</div><div class="row"><div class="col py-2 content">'+com.c_content+'</div></div>';
-		htmlForNew+='<div class="row"><div class="col text-secondary"><span class="commentDate">'+com.c_date+'</span><span class="ml-2 replyComment" style="cursor:pointer;">댓글쓰기</span></div></div></div>';						
-			
-	});
+		htmlForNew+='<div class="row"><div class="col text-secondary"><span class="commentDate">'+com.c_date+'</span><span class="ml-2 replyToComment" style="cursor:pointer;">댓글쓰기</span></div></div>';						
+//		htmlForNew+='<div class="my-1 ml-md-4 reComment" style="display:none;"><div class="row"><div class="row col-9"><div class="col text-dark font-weight-bold commentNick">'+sessionNick+'</div></div><textarea id="forRecomment'+index+'" cols="50" rows="4" maxlength="500" style="width:100%; resize:none" class="border-1"></textarea></div>'
+		htmlForNew+='<div class="my-1 ml-md-4" id="reComment'+index+'" style="display:none;"><div class="row"><div class="row col-9"><div class="col text-dark font-weight-bold commentNick">'+sessionNick+'</div></div><textarea id="forRecomment'+index+'" cols="50" rows="4" maxlength="500" style="width:100%; resize:none" class="border-1"></textarea></div>'	
+		htmlForNew+='<div class="mt-2 ml-auto"><input type="button" class="btn btn-dark ml-auto" id="replyBtn'+index+'" value="등록"><input type="button" class="btn btn-danger mx-2" id="cancelReplyBtn'+index+'" value="취소"></div></div></div>';
 	
+	});
 	$('#commentsWrapper').append(htmlForNew);
-	setBadge(comments.length);
+
+	
 }
 
 
@@ -63,6 +76,9 @@ function setBlock()
 {
 	$('#page').empty();
 	
+	if(totalRecord!=0)
+	{
+			
 		if(totalPage>0 && nowBlock>1)
 		{
 		   $('#page').prepend('<li class="page-item"><span class="page-link" style="cursor:pointer;" onclick="changeBlock('+(nowBlock-1)+')"> < </span></li>');					   
@@ -87,6 +103,7 @@ function setBlock()
 		{
 		   $('#page').append('<li class="page-item"><span class="page-link" style="cursor:pointer" onclick="changeBlock('+(nowBlock+1)+')"> > </span></li>');					   
 		}
+	}
 }
 
 	
@@ -110,10 +127,6 @@ function getChangedComment()
 				pageEnd= data.paging.pageEnd;
 									
 				comments= data.comments;
-				
-				$('#commentsWrapper').empty();
-				$('#page').empty();
-				
 				
 				setComment();
 				setBlock();
@@ -139,9 +152,10 @@ function getChangedComment()
 		{
 			console.log(data);
 			let newComment= data;
-			let lengthOfBeforeComments = comments.length==undefined?1:comments.length+1;
 			
-			if(nowPage!= newComment.paging.nowPage) //페이지가 바뀐 경우
+			if(data.result==1)
+			{
+				if(nowPage!= newComment.paging.nowPage) //페이지가 바뀐 경우
 				{
 					comments= newComment.comments;	
 
@@ -149,24 +163,45 @@ function getChangedComment()
 					nowBlock= data.paging.nowBlock;
 					pageStart= data.paging.pageStart;
 					pageEnd= data.paging.pageEnd;
+					totalRecord= data.paging.totalRecord;
 										
 					getChangedComment()
 				}
-			else //nowPage가 같아서 가장 최근 것만 덧붙이는 경우
-			{
-				let htmlForNew="";
-				htmlForNew+='<div class="comments"><div class="row"><div class="row col-9">';
-				htmlForNew+='<div class="col font-weight-bold commentNick">'+newComment.comments.c_nick+'</div></div>';
-				htmlForNew+='<div class="col-3 text-right dropdown"><a class="mt-1 text-secondary" href="#" role="button" data-toggle="dropdown"><i class="fas fa-ellipsis-v"></i></a>';
-				htmlForNew+='<div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item commentUpdate" href="#">수정</a><a class="dropdown-item commentDelete" href="#">삭제</a> ';
-				htmlForNew+='<input type="number" hidden="true" value='+newComment.comments.c_num+'></div></div></div>';
-				htmlForNew+='<div class="row"><div class="col py-2 content">'+newComment.comments.c_content+'</div></div>';
-				htmlForNew+='<div class="row"><div class="col text-secondary"><span class="commentDate">'+newComment.comments.c_date+'</span><span class="ml-2 replyComment" style="cursor:pointer;">댓글쓰기</span></div></div></div>';			
-
-				$('#commentsWrapper').append(htmlForNew);
-				setBadge(lengthOfBeforeComments);
-				setBlock();
+				else //nowPage가 같아서 가장 최근 것만 덧붙이는 경우
+				{
+					totalRecord= data.paging.totalRecord;
+					
+					if(totalRecord==1)
+					{
+						$('#commentsWrapper').empty();
+					}
+					
+					//페이지당 게시물 수- 현재페이지*페이지당게시물 수-총 게시물수  인덱스니까 -1
+					let curIndex= numPerPage-(nowPage*numPerPage-totalRecord-1);
+					
+					let htmlForNew="";
+					htmlForNew+='<hr><div class="comments"><div class="row"><div class="row col-9">';
+					htmlForNew+='<div class="col font-weight-bold commentNick">'+newComment.comments.c_nick+'</div></div>';
+					htmlForNew+='<div class="col-3 text-right dropdown"><a class="mt-1 text-secondary" href="#" role="button" data-toggle="dropdown"><i class="fas fa-ellipsis-v"></i></a>';
+					htmlForNew+='<div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item commentUpdate" href="#">수정</a><a class="dropdown-item commentDelete" href="#">삭제</a> ';
+					htmlForNew+='<input type="number" hidden="true" value='+newComment.comments.c_num+'></div></div></div>';
+					htmlForNew+='<div class="row"><div class="col py-2 content">'+newComment.comments.c_content+'</div></div>';
+					htmlForNew+='<div class="row"><div class="col text-secondary"><span class="commentDate">'+newComment.comments.c_date+'</span><span class="ml-2 replyToContent" style="cursor:pointer;">댓글쓰기</span></div></div>';			
+					
+					///
+					htmlForNew+='<div class="my-1 ml-md-4" id="reComment'+curIndex+'" style="display:none;"><div class="row"><div class="row col-9"><div class="col text-dark font-weight-bold commentNick">'+sessionNick+'</div></div><textarea id="forRecomment'+curIndex+'" cols="50" rows="4" maxlength="500" style="width:100%; resize:none" class="border-1"></textarea></div>'	
+					htmlForNew+='<div class="mt-2 ml-auto"><input type="button" class="btn btn-dark ml-auto" id="replyBtn'+curIndex+'" value="등록"><input type="button" class="btn btn-danger mx-2" id="cancelReplyBtn'+curIndex+'" value="취소"></div></div></div>';					
+					$('#commentsWrapper').append(htmlForNew);
+									
+					
+					
+					setBadge(curIndex);
+					setBlock();
+					
+					
+				}
 			}
+	
 			
 			$('#commentContent').val('');
 			
@@ -181,30 +216,29 @@ function getChangedComment()
 
 
 
-function setBadge()
+function setBadge(i)
 {
 	  var today = new Date();
 	  today.setHours(today.getHours()-24)
 	
-	for(var i=0; i<numPerPage;i++)
-	{
-		  var commentdate= new Date($('.commentDate').eq(i).text())
+	  var comDate= Date.parse($('.commentDate').eq(i).text())
 
 		if(boardWriter== $('.commentNick').eq(i).text())
 			{
 				$('.commentNick').eq(i).append('<span class="badge badge-success ml-1">작성자</span>');		
 			}
-		if(commentdate>today && $('.commentNick').eq(i).children('.newImg').length!=1)
+		if(comDate>today && $('.commentNick').eq(i).children('.newImg').length!=1)
 			{
 				$('.commentNick').eq(i).append('<img src="img/new.png" width="12px" class="ml-1 newImg">');
 			}
-	}
 }
 
 
+var c_num;
 
 	$(document).on("click", '.commentDelete', function(){
-		 let $selectedComment= $(this).parents('.comments');		 
+		 let $selectedComment= $(this).parents('.comments');		
+		 
 		 if(confirm("정말 삭제하시겠습니까?")==true)
 			{					 
 			 $.ajax({
@@ -215,11 +249,30 @@ function setBadge()
 					success: function(data)
 					{
 						console.log(data);						
-						if(data==1)
+						if(data.result==1)
 						{
+							
+							totalPage= data.paging.totalPage;
+							totalBlock=data.paging.totalBlock;
+							totalRecord= data.paging.totalRecord;	
+																			
+							if(totalRecord==0)
+							{
+								$('#commentsWrapper').empty();
+								$('#page').empty();
+								setComment();
+								
+								return false;								
+							}
+							
 							$selectedComment.remove();
 							
+							if(totalRecord%numPerPage==0 && nowPage!=totalPage &&nowPage*numPerPage>=totalRecord)
+							{
+								changePage(nowPage-1);
+							}
 							
+							getChangedComment();							
 							setBlock();
 							
 							
@@ -233,84 +286,87 @@ function setBadge()
 	})  	
 	
 	
+	var selectedCommentForUpdate;
+	var beforeContent;
+	
 	$(document).on("click", '.commentUpdate', function(){
-		let $selectedComment= $(this).parents('.comments');	
-		let c_num= $(this).siblings('input').val();		
-		let $beforeContent= $selectedComment.find('div.content').text();
-		$selectedComment.find('div.content').html('<textarea id="contentForUpdate" cols="30" rows="4" maxlength="500" style="width:100%; resize:none" class="border-0">'+$beforeContent+'</textarea>');
+		
+		selectedCommentForUpdate = $(this).parents('.comments');
+	
+		c_num= $(this).siblings('input').val();		
+		beforeContent= selectedCommentForUpdate.find('div.content').text();
+		selectedCommentForUpdate.find('div.content').html('<textarea id="contentForUpdate" cols="30" rows="4" maxlength="500" style="width:100%; resize:none" class="border-0">'+beforeContent+'</textarea>');
 		$('#contentForUpdate').focus();		
 		let $btnWrapper= $('<div class="text-right"></div>');
 		$('#contentForUpdate').after($btnWrapper);
-		$btnWrapper.append('<input type="button" class="btn btn-primary ml-auto" id="updateBtn" value="수정"><input type="button" class="btn btn-danger mx-2" id="cancelBtn" value="취소">');		
-		
-		$('#cancelBtn').click(function(){
-			$selectedComment.find('div.content').text($beforeContent);
-			return false;
-		})		
-		
-		$(document).on("click", '#updateBtn', function(){
-						let updateContent= $('#contentForUpdate').val();				
-					 if(confirm("수정하시겠습니까?")==true)
-					{					 
-						 $.ajax({
-								type:"post",
-								url:"commentUpdate.do",
-								data : {"num": num, "c_num": c_num, "c_content":updateContent},
-								async: false,
-								success: function(data)
-								{
-									console.log(data);
-									if(data==1)
-									{
-										$selectedComment.find('div.content').text(updateContent);
-										
-									}								
-								},
-								error: function(e){
-									alert("에러가 발생했습니다.")
-								}					
-							})
-					}
-			})		 				
-	})	  
+		$btnWrapper.append('<input type="button" class="btn btn-primary ml-auto" id="updateBtn" value="수정"><input type="button" class="btn btn-danger mx-2" id="cancelUpdateBtn" value="취소">');		
+			
+	})	 
+	 
 
-	
-	var selectedComment;
-	
-	//대댓글
-//	$(".replyComment").click(function(){
-	$(document).on("click", '.replyComment', function(){
-//	$(".text-secondary").on("click", function(){
-		
-		
-		selectedComment= $(this).parent();
-		console.log(selectedComment.children().last());
-		
-		console.log($(this).parent());
-		
-		let c_num= $(this).siblings('input').val();
-		
-//		let $beforeContent= $selectedComment.find('div.content').text(); //수정하기위해서 했었음	
-		
-		if(!$(this).siblings().hasClass('reComment'))	
-			{
-				selectedComment.append('<div class="reComment my-1 ml-md-4"><div class="row"><div class="row col-9"><div class="col text-dark font-weight-bold commentNick">'+sessionNick+'</div></div><textarea id="forRecomment" cols="50" rows="4" maxlength="500" style="width:100%; resize:none" class="border-1"></textarea></div>');
-				$('#forRecomment').focus();	
-
-				let $btnWrapper= $('<div class="mt-2 ml-auto"></div>');
-				$('#forRecomment').after($btnWrapper);
-				
-				$btnWrapper.append('<input type="button" class="btn btn-dark ml-auto" id="replyBtn" value="등록"><input type="button" class="btn btn-danger mx-2" id="cancelBtn" value="취소">');		
-				
+	$(document).on("click", '#updateBtn', function(){
+				let updateContent= $('#contentForUpdate').val();
+							
+			 if(confirm("수정하시겠습니까?")==true)
+			{					 
+				 $.ajax({
+						type:"post",
+						url:"commentUpdate.do",
+						data : {"num": num, "c_num": c_num, "c_content":updateContent},
+						async: false,
+						success: function(data)
+						{
+							console.log(data);
+							
+							if(data==1)
+							{
+								selectedCommentForUpdate.find('div.content').text(updateContent);
+							}								
+						},
+						error: function(e){
+							alert("에러가 발생했습니다.")
+						}					
+					})
 			}
+	})		
+	
+	
+	$(document).on("click", '#cancelUpdateBtn', function(){
+	selectedCommentForUpdate.find('div.content').text(beforeContent);
+	})		
+
+
+
+
+var selectedCommentForReply;
+
+
+         
+
+
+
+	//대댓글
+	$(document).on("click", '.replyToComment', function(){
+		
+		selectedCommentForReply= $(this).parents('.comments').find('div[id^="r"]').attr("id");
+		console.log(selectedCommentForReply.substr(-1))
 				
+		for(var i=0; i<numPerPage;i++)
+		{
+			if(selectedCommentForReply.substr(-1)!=i)
+			{
+				$('#reComment'+i).hide();	
+			}
+		}		
 		
-//		$('#cancelBtn').click(function(){
-//			$selectedComment.children().last().remove();
-//			return false;
-//		})
-		
-		$(document).on("click", '#replyBtn', function()
+		$('#'+selectedCommentForReply).toggle();
+	
+	});
+
+										
+	
+	
+	$(document).on("click", '#replyBtn', function()
 			{
 				console.log($('#forRecomment').val());
 				
@@ -331,7 +387,7 @@ function setBadge()
 							if(data==1)
 							{
 								$('.reComment');
-								$selectedComment.append('')
+								selectedCommentForReply.append('')
 							}						
 						},
 						error: function(e)
@@ -341,15 +397,11 @@ function setBadge()
 					})	
 						
 				})	
-				
-				
-	})
 	
-	$('#cancelBtn').click(function(){
-			selectedComment.children().last().remove();
-			return false;
+	
+		$(document).on("click", '#cancelReplyBtn', function()
+		{
+			selectedCommentForReply.children().last().remove();
 		})
-	
-	
 
 

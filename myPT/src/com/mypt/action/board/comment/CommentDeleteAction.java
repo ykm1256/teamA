@@ -24,16 +24,16 @@ public class CommentDeleteAction implements Action {
 		CommentDao cdao = CommentDao.getInstance();
 		
 		TestPagingDto paging= (TestPagingDto)session.getAttribute("paging");
-		int result = 0;
+		Integer deleteResult = 0;
 		
 		if(board.equals("cboard")) 
 		{		
-			result= cdao.commentDelete("ccomment", c_num);
+			deleteResult= cdao.commentDelete("ccomment", c_num);
 			
 		}
 		else if(board.equals("pboard"))
 		{
-			result= cdao.commentDelete("pcomment", c_num);
+			deleteResult= cdao.commentDelete("pcomment", c_num);
 		}
 		
 		paging.setTotalRecord(paging.getTotalRecord()-1);
@@ -41,16 +41,15 @@ public class CommentDeleteAction implements Action {
 		
 		
 		Gson gson = new Gson();
-		JsonArray jsonArray= new JsonArray();
-		jsonArray.add(gson.fromJson(gson.toJson(paging, TestPagingDto.class), JsonObject.class));
-		jsonArray.add(result);
-	
-		
-		//jsonArray에 원시 타입을 이름을 줘서 넣고 싶긴 함.
-				
+		JsonObject job= new JsonObject();
 		
 		
-		request.setAttribute("result", jsonArray);
+		job.add("paging", gson.fromJson(gson.toJson(paging, TestPagingDto.class), JsonObject.class));		
+		job.addProperty("result", deleteResult);
+		
+	    response.setContentType("application/json; charset=utf-8");
+		
+		request.setAttribute("result", job);
 		return "callback";
 	}
 

@@ -17,6 +17,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
 
+
 </head>
 <body class="sb-nav-fixed">
 	<!-- nav -->
@@ -26,6 +27,9 @@
 	<!-- QR 모달 -->
 	<jsp:include page="/includeFiles/modalQR.jsp"></jsp:include>
 	<!--//QR 모달-->
+
+
+
 
 	<div id="layoutSidenav">
 		<!-- sideNav -->
@@ -256,6 +260,7 @@ var nowBlock= ${paging.nowBlock}
 var pageStart= ${paging.pageStart}
 var pageEnd= ${paging.pageEnd};
 var totalBlock= ${paging.totalBlock};
+var totalRecord= ${paging.totalRecord};
 
 var sessionNick= '${sessionScope.nick}';
 var sessionGrade= ${sessionScope.grade};
