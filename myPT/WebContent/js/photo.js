@@ -1,12 +1,19 @@
 
 
 //페이징
-function pageing(keyWord,page){
+function paging(keyWord,page){
 	if(keyWord==null||keyWord==""){
 		window.location.href="movePhoto.do?page="+page;
 	}else{
 		window.location.href="searchPhoto.do?page="+page;
 	}
+}
+function gtltPaging(keyWord,arrow){
+	if(keyWord==null||keyWord==""){
+		window.location.href="movePhoto.do?next="+arrow;
+	}else{
+		window.location.href="searchPhoto.do?next="+arrow;
+	}s
 }
 
 //검색 확인

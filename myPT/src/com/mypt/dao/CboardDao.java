@@ -583,6 +583,69 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 		}
 		
 		
+		//start : 시작번호, cnt : 한 페이지당 가져올 게시물 개수 
+				public ArrayList<CboardDto> getBoardList2(String keyField, 
+						String keyWord,int start, int cnt,String head){
+					Connection con = null;
+					PreparedStatement ps = null;
+					ResultSet rs = null;
+					String sql = null;
+					ArrayList<CboardDto> arr = new ArrayList<CboardDto>();
+					
+					try {
+						con = db.getConnection();
+						//검색이 아닌경우
+						if(keyWord.trim().equals("")||keyWord==null) {
+							// 말머리 전체보기
+							if(head.equals("all")) {
+							sql = "select *,date_format(cb_date,'%Y-%m-%d %H:%i') from cboard order by cb_ref desc, cb_pos "
+										+ "limit ?,?";
+							}else {
+								sql = "select *,date_format(cb_date,'%Y-%m-%d %H:%i') from cboard where cb_head='"+head+"' order by cb_ref desc, cb_pos "
+										+ "limit ?,?";
+							}
+							
+							ps = con.prepareStatement(sql);					
+							ps.setInt(1, start);
+							ps.setInt(2, cnt);
+						}else {//검색인 경우
+							//말머리 전체보기					
+							if(head.equals("all")) {
+								sql = "select *,date_format(cb_date,'%Y-%m-%d %H:%i') from cboard where "+keyField+" like '%"+keyWord+"%' order by cb_ref desc, cb_pos limit ?,?";
+							}else {
+									sql = "select *,date_format(cb_date,'%Y-%m-%d %H:%i') from cboard where "+keyField+" like '%"+keyWord+"%' and cb_head='"+head+"' order by cb_ref desc, cb_pos "
+											+ "limit ?,?";
+							}
+//							sql = "select * from cboard where " + keyField 
+//									+" like ? order by cb_ref desc, cb_pos limit ?,?";
+							ps = con.prepareStatement(sql);
+							ps.setInt(1, start);
+							ps.setInt(2, cnt);
+						}
+						
+						rs = ps.executeQuery();
+						while(rs.next()) {					
+							CboardDto bean = new CboardDto();
+							bean.setNum(rs.getInt("cb_num"));
+							bean.setWriter(rs.getString("cb_writer"));
+							bean.setTitle(rs.getString("cb_title"));
+							bean.setPos(rs.getInt("cb_pos"));
+							bean.setRef(rs.getInt("cb_ref"));
+							bean.setDepth(rs.getInt("cb_depth"));
+							bean.setDate(rs.getString(12));
+							bean.setHit(rs.getInt("cb_hit"));				
+							bean.setHead(rs.getString("cb_head"));
+							bean.setLike(rs.getInt("cb_like"));	
+							arr.add(bean);
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						db.closeConnection(rs,ps,con);
+					}
+					return arr;
+				}		
+		
 		
 	
 	

@@ -7,6 +7,7 @@ import com.mypt.action.board.DeleteAction;
 import com.mypt.action.board.LikeAction;
 import com.mypt.action.board.ReplyAction;
 import com.mypt.action.board.SearchAction;
+import com.mypt.action.board.SearchCommunityAction;
 import com.mypt.action.board.TestViewAction;
 import com.mypt.action.board.UpdateAction;
 import com.mypt.action.board.UpdateViewAction;
@@ -42,6 +43,7 @@ import com.mypt.action.login.TrainerLoginAction;
 import com.mypt.action.login.UserLoginAction;
 import com.mypt.action.move.MoveBoardDetailAction;
 import com.mypt.action.move.MoveBoardUpdateAction;
+import com.mypt.action.move.MoveCommunityActionBackup;
 import com.mypt.action.move.MoveCommunityAction;
 import com.mypt.action.move.MoveInbody;
 import com.mypt.action.move.MoveIntroAction;
@@ -212,6 +214,10 @@ public class ActionFactory
 		map.put("/moveTrainerProfile", new MoveTrainerProfileAction());
 		map.put("/trainerMain", new TrainerTodayPTAction());
 		map.put("/trainerPTFinish", new TrainerPTFinishAction());
+		
+		
+		map.put("/moveCommunity2", new MoveCommunityActionBackup());
+		map.put("/searchCommunity", new SearchCommunityAction());
 		
 		
 		
