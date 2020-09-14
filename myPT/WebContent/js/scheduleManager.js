@@ -119,6 +119,10 @@ $("select[id=weekSelect]").on("change",function(){
 	for(var i=1;i<=5;i++){
 		$("#btnPT"+i).attr("style","display:inline-block");
 		$("#btnProgram"+i).attr("style","display:inline-block");
+		$("#time"+i).val("");
+		$("#pro"+i).val("");
+		$("#proMention"+i).val("");
+		
 	}
 	
 	weekend=this.value;

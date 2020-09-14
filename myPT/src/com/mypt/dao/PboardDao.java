@@ -127,9 +127,9 @@ public class PboardDao extends AbstractBoardDao<PboardDto> {
 				dto.setTitle(rs.getString("pb_title"));
 				dto.setWriter(rs.getString("pb_writer"));
 				dto.setDate(rs.getTimestamp("pb_date").toString());
-				dto.setHit(rs.getInt(4) + 1);
-				dto.setContent(rs.getString(5));
-				dto.setLike(rs.getInt(6));
+				dto.setHit(rs.getInt("pb_hit") + 1);
+				dto.setContent(rs.getString("pb_content"));
+				dto.setLike(rs.getInt("pb_like"));
 
 				upCount(num);
 			}
