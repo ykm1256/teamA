@@ -71,7 +71,7 @@ public class WriteAction implements Action{
 			if(content.contains(target)) {
 				int targetNum=content.indexOf(target);
 				System.out.println(targetNum);
-				String photo=content.substring(targetNum, content.substring(targetNum).indexOf(targetEnd)+targetNum)+"/>";
+				String photo=content.substring(targetNum, content.substring(targetNum).indexOf(targetEnd)+targetNum)+"class=\"card-img-top mb-1\" />";
 				dto.setPhoto(photo);
 			}
 			PboardDao dao=PboardDao.getInstance();

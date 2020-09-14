@@ -124,12 +124,13 @@ public class PboardDao extends AbstractBoardDao<PboardDto> {
 
 			if (rs.next()) {
 				dto = new PboardDto();
+				dto.setNum(rs.getInt("pb_num"));
 				dto.setTitle(rs.getString("pb_title"));
 				dto.setWriter(rs.getString("pb_writer"));
 				dto.setDate(rs.getTimestamp("pb_date").toString());
-				dto.setHit(rs.getInt(4) + 1);
-				dto.setContent(rs.getString(5));
-				dto.setLike(rs.getInt(6));
+				dto.setHit(rs.getInt("pb_hit") + 1);
+				dto.setContent(rs.getString("pb_content"));
+				dto.setLike(rs.getInt("pb_like"));
 
 				upCount(num);
 			}
@@ -219,7 +220,7 @@ public class PboardDao extends AbstractBoardDao<PboardDto> {
 		ResultSet rs = null;
 		String result = "";
 
-		String sql = "SELECT * FROM pblike where pbl_num=? and pbl_nick=?";
+		String sql = "SELECT * FROM pblike where boardnum=? and l_nick=?";
 
 		try {
 			con = db.getConnection();
