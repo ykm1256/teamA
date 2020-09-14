@@ -60,16 +60,15 @@ public class QboardDao extends AbstractBoardDao<QboardDto>
 		Connection con = null;
 		PreparedStatement ps = null;
 
-		String sql = "update qboard set qb_title=?, qb_head=?, qb_content=? where num=?";
+		String sql = "update qboard set qb_title=?, qb_content=? where qb_num=?";
 		try {
 			con = db.getConnection();
 			ps = con.prepareStatement(sql);
 
 			ps.setString(1, dto.getTitle());
-			ps.setString(2, dto.getHead());
-			ps.setString(3, dto.getContent());
+			ps.setString(2, dto.getContent());
 			
-			ps.setInt(4, dto.getNum());
+			ps.setInt(3, dto.getNum());
 
 			ps.executeUpdate();
 

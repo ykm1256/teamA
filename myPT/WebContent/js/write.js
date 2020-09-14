@@ -146,9 +146,14 @@ function pPostForm(){
 		alert("올바른 제목을 입력하세요!")
 		return false;
 	}else{
-	var content = $(".note-editable").html();
-	$("#content").val(content);
-	return true;
+		var content = $(".note-editable").html();
+		if(content.indexOf("<img")==-1){
+			alert("이미지를 넣어주세요!");
+			return false;
+		}else{
+			$("#content").val(content);
+			return true;
+		}
 	}	
 }
 
