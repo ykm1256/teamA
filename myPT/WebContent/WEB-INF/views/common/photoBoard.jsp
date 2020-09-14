@@ -165,7 +165,7 @@
 									<!-- 다음 블럭 끝-->
 								</ul>
 							</c:if>
-							<div class="row justify-content-center">
+							<div class="row justify-content-center mb-5">
 								<select name="keyField" id="keyField">
 									<option value="default" selected disabled>카테고리</option>
 									<option value="pb_writer">작성자</option>
