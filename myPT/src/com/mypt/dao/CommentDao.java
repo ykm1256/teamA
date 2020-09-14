@@ -5,6 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.mypt.connection.DBConnection;
 import com.mypt.dto.CommentDto;
 
@@ -34,11 +37,18 @@ public class CommentDao {
 		{
 			con = db.getConnection();
 			
-			String sql = "insert into "+ commenttblName+"(boardNum, c_nick, c_content) values(?,?,?)";
+//			String sql = "insert into "+ commenttblName+"(boardNum, c_nick, c_content) values(?,?,?)";
+//			ps = con.prepareStatement(sql);
+//			ps.setInt(1, comment.getBoardNum());			
+//			ps.setString(2, comment.getC_nick());			
+//			ps.setString(3, comment.getC_content());	
+			
+			String sql = "insert into "+ commenttblName+"(boardNum, c_nick, c_content, c_ref) values(?,?,?,?)";
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, comment.getBoardNum());			
 			ps.setString(2, comment.getC_nick());			
 			ps.setString(3, comment.getC_content());	
+			ps.setInt(4, comment.getBoardNum());
 			
 			result= ps.executeUpdate();
 		} 
@@ -131,50 +141,6 @@ public class CommentDao {
 		return arr;
 	}
 		
-//	public JsonArray commentList(String commenttblName, int boardNum)
-//	{
-//			Connection con = null;
-//			PreparedStatement ps = null;
-//			ResultSet rs = null;
-//			
-//			CommentDto cd = null;			
-//			Gson gson = new Gson();
-//			JsonArray arr = new JsonArray();
-//			JsonObject obj = null;
-//			
-//			try {
-//				con = db.getConnection();
-//				String sql = "select * from "+commenttblName +" where boardNum=?";
-//				ps = con.prepareStatement(sql);
-//				ps.setInt(1, boardNum);
-//				rs = ps.executeQuery();
-//				
-//				while(rs.next()) 
-//				{
-//					cd = new CommentDto();
-//					cd.setC_num(rs.getInt(1));
-//					cd.setBoardNum(boardNum);
-//					cd.setC_nick(rs.getString(3));
-//					cd.setC_content(rs.getString(4));
-//					cd.setC_date(rs.getTimestamp(5));
-//				
-//					String aa = gson.toJson(cd);
-//					obj = gson.fromJson(aa, JsonObject.class);
-//					arr.add(obj);		
-//				}
-//			} 
-//			catch (Exception e) 
-//			{
-//				e.printStackTrace();
-//			} 
-//			finally 
-//			{
-//				db.closeConnection(rs, ps, con);
-//			}
-//			
-//			return arr;
-//		}
-	
 	
 	public int commentDelete(String commenttblName, int cnum) 
 	{
@@ -205,64 +171,96 @@ public class CommentDao {
 
 	}
 	
-//	public void commentUpdate(CCommentDto cd) {
-//		Connection con = null;
-//		PreparedStatement ps = null;
-//		try {
-//			con = db.getConnection();
-//			String sql = "update ccomment set cb_ccontent=?, cb_cdate=now() where cb_cnum=?";
-//			ps = con.prepareStatement(sql);
-//			ps.setString(1, cd.getcb_ccontent());
-//			ps.setString(2, String.valueOf(cd.getcb_cdate()));
-//			ps.executeUpdate();
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} finally {
-//			db.closeConnection(null, ps, con);
-//		}
-//	}
+	public int commentUpdate(String commenttblName, CommentDto cd) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result=0;
+		
+		try {
+			con = db.getConnection();
+			String sql = "update "+commenttblName+" set c_content=? where c_num=?";
+			
+			ps = con.prepareStatement(sql);
+			ps.setString(1, cd.getC_content());
+			ps.setInt(2, cd.getC_num());
+			result= ps.executeUpdate();
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		} 
+		finally 
+		{
+			db.closeConnection(null, ps, con);
+		}
+		
+		return result;
+	}
 
 
-	
+
+//start : 시작번호, cnt : 한 페이지당 가져올 게시물 개수
+//	한 페이지에 해당하는 댓글 가져오기  
+//	public ArrayList<CommentDto> getCommentsForOneCommentPage(String commenttblName, int boardNum, int start, int cnt)
+	public JsonArray getCommentsForOneCommentPage(String commenttblName, int boardNum, int start, int cnt)
+	{
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+//		ArrayList<CommentDto> comments= new ArrayList<>();
+		Gson gson = new Gson();
+		JsonArray comments= new JsonArray();
 
 		
-	
+		CommentDto cd = null;
 		
-//	public int commentCountforOne(String commenttblName, int boardNum) {
-//		Connection con = null;
-//		PreparedStatement ps = null;
-//		ResultSet rs = null;
-//		
-//		int count= 0;
-//		
-//		try {
-//			con = db.getConnection();
-//			String sql = "select count(c_num) from "+ commenttblName+ " where boardnum=?";
-//			ps = con.prepareStatement(sql);
-//			
-//			ps.setInt(1, boardNum);
-//			
-//			rs = ps.executeQuery();
-//			
-//			
-//			if (rs.next()) 
-//			{
-//				count = rs.getInt(1);
-//			}
-//		} 
-//		catch (Exception e) 
-//		{
-//			e.printStackTrace();
-//		} 
-//		finally 
-//		{
-//			db.closeConnection(rs, ps, con);
-//		}
-//		return count;
-//	}
+		
+		
+		String sql = "SELECT * FROM "+commenttblName+" WHERE boardNum=? ORDER BY c_num LIMIT ?,?";
+		
+		try {
+				con = db.getConnection();			
+				ps = con.prepareStatement(sql);
+				
+				ps.setInt(1, boardNum);
+				ps.setInt(2, start-1);
+				ps.setInt(3, cnt);
+					
+				rs = ps.executeQuery();
+				
+				while(rs.next()) 
+				{
+					cd = new CommentDto();
+					cd.setC_num(rs.getInt(1));
+					cd.setBoardNum(boardNum);
+					cd.setC_nick(rs.getString(3));
+					cd.setC_content(rs.getString(4));
+					cd.setC_date(rs.getTimestamp(5));
+//					cd.setC_ref(rs.getInt(6));
+
+//					comments.add(cd);	
+							
+					comments.add(gson.fromJson(gson.toJson(cd), JsonObject.class));
+					
+				}
+				
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		} 
+		finally 
+		{
+			db.closeConnection(rs,ps,con);
+		}
+		return comments;
+	}
 	
-	//해당 글 댓글 수 가져오기
+	
+	
+	
+	//해당 글 댓글 수 가져오기  // String sql = "select count(c_num) from "+ commenttblName+ " where boardnum=?"
 	public int countComment(String commenttblName, int boardNum) {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -359,7 +357,7 @@ public class CommentDao {
 			} 
 			catch (Exception e) 
 			{
-				e.printStackTrace(); 
+				e.printStackTrace();
 			} 
 			finally 
 			{
@@ -370,6 +368,5 @@ public class CommentDao {
 		}
 		
 		
-
 
 }

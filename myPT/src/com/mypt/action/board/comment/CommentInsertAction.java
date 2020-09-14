@@ -1,61 +1,109 @@
 package com.mypt.action.board.comment;
 
-import java.util.ArrayList;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.mypt.controller.Action;
-import com.mypt.dao.CboardDao;
 import com.mypt.dao.CommentDao;
-import com.mypt.dto.CboardDto;
 import com.mypt.dto.CommentDto;
+import com.mypt.dto.TestPagingDto;
 
 public class CommentInsertAction implements Action
 {
-
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception 
 	{
 		HttpSession session = request.getSession();
 		
-		int boardNum = Integer.parseInt(request.getParameter("boardNum"));
-		String c_content= request.getParameter("c_content");
+		TestPagingDto paging= (TestPagingDto)session.getAttribute("paging");
+		
+		int num = Integer.parseInt(request.getParameter("num"));
+
 		String board = session.getAttribute("board").toString();
 		
-		int updateResult = 0;
+		int insertResult = 0;
 		
-		CommentDao cdao = CommentDao.getInstance();
-		CommentDto comment = new CommentDto();
-		
-		
-//		JsonArray jarr = new JsonArray();
 		Gson gson = new Gson();
 		
-		if(board.equals("cboard")) 
-		{		
-			comment.setBoardNum(boardNum);
-			comment.setC_content(c_content);
-			comment.setC_nick((String)session.getAttribute("nick"));
+		JsonArray arr= null;
+		JsonObject result= new JsonObject();
+		
+		CommentDto comment = new CommentDto();			
+		CommentDao cdao = CommentDao.getInstance();
+		
+		comment.setBoardNum(num);
+		comment.setC_content(request.getParameter("c_content"));
+		comment.setC_nick((String)session.getAttribute("nick"));
 			
-			updateResult = cdao.commentInsert("ccomment", comment);
-			
-			if(updateResult==1)
+		int nowPage=Integer.parseInt(request.getParameter("nowPage"));
+		
+		
+		if(board.equals("cboard"))
+		{			
+			if((nowPage!= paging.getTotalPage()) && paging.getTotalPage()!=0)
 			{
-				comment = cdao.getLastComment("ccomment", boardNum);
+				insertResult = cdao.commentInsert("ccomment", comment);				
+				paging.setTotalRecord(paging.getTotalRecord()+1);
+				paging.setNowPage(paging.getTotalPage());					
+				arr = cdao.getCommentsForOneCommentPage("ccomment", num, paging.getStartPage(), paging.getNumPerPage());			
+				result.add("comments", arr);							
+			}
+			else
+			{
+				insertResult = cdao.commentInsert("ccomment", comment);
+				paging.setTotalRecord(paging.getTotalRecord()+1);
+				
+				if(insertResult==1)
+				{
+					comment = cdao.getLastComment("ccomment", num);					
+				}
+				
+					result.add("comments", gson.fromJson(gson.toJson(comment, CommentDto.class), JsonObject.class));
+			}					
+		}	
+		
+		else if(board.equals("pboard"))
+		{	
+
+			if(nowPage!= paging.getTotalPage())
+			{
+				insertResult = cdao.commentInsert("pcomment", comment);
+				paging.setTotalRecord(paging.getTotalRecord()+1);
+				paging.setNowPage(paging.getTotalPage());					
+				arr = cdao.getCommentsForOneCommentPage("pcomment", num, paging.getStartPage(), paging.getNumPerPage());				
+				result.add("comments", arr);							
+			}
+			else
+			{
+				insertResult = cdao.commentInsert("pcomment", comment);
+				paging.setTotalRecord(paging.getTotalRecord()+1);
+				
+				if(insertResult==1)
+				{
+					comment = cdao.getLastComment("pcomment", num);					
+				}
+				
+					result.add("comments", gson.fromJson(gson.toJson(comment, CommentDto.class), JsonObject.class));
+
 				
 			}
-			
+				
 		}
 		
-		request.setAttribute("result", gson.toJson(comment));
+		session.setAttribute("paging", paging);	
+		result.add("paging", gson.fromJson(gson.toJson(paging, TestPagingDto.class), JsonObject.class));
 		
+		request.setAttribute("result", result);	
 		
+	    response.setContentType("application/json; charset=utf-8");
+
 		
 		return "callback";
 	}
+
 
 }

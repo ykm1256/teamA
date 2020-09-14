@@ -2,17 +2,25 @@ package com.mypt.dto;
 
 import java.util.ArrayList;
 
+import com.google.gson.JsonArray;
+
 public class CboardDto extends BoardDto 
 {
 	private int ref;
 	private int depth;
 	private int pos;
 	private int like;
-	private ArrayList<CommentDto> comments;
+//	private ArrayList<CommentDto> comments;
+	private JsonArray comments;
 	
 	public CboardDto(){}
 	
-	public CboardDto(ArrayList<CommentDto> comments)
+//	public CboardDto(ArrayList<CommentDto> comments)
+//	{
+//		this.comments = comments;
+//	}
+	
+	public CboardDto(JsonArray comments)
 	{
 		this.comments = comments;
 	}
@@ -43,11 +51,19 @@ public class CboardDto extends BoardDto
 		this.like = like;
 	}
 
-	public ArrayList<CommentDto> getComments() {
+//	public ArrayList<CommentDto> getComments() {
+//		return comments;
+//	}
+//
+//	public void setComments(ArrayList<CommentDto> comments) {
+//		this.comments = comments;
+//	}
+	
+	public JsonArray getComments() {
 		return comments;
 	}
 
-	public void setComments(ArrayList<CommentDto> comments) {
+	public void setComments(JsonArray comments) {
 		this.comments = comments;
 	}
 	

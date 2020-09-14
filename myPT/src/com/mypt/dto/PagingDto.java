@@ -2,7 +2,7 @@ package com.mypt.dto;
 
 import com.mypt.dao.PboardDao;
 
-public class PageingDto {
+public class PagingDto {
 	
 	private int totalRecord;	
 	private int numPerPage;
@@ -15,9 +15,9 @@ public class PageingDto {
 	private int pageStart;
 	private int pageEnd;
 	
-	public PageingDto() {}
+	public PagingDto() {}
 	
-	public PageingDto(int nowPage) {
+	public PagingDto(int nowPage) {
 		PboardDao pdao=PboardDao.getInstance();
 		this.totalRecord=pdao.getTotalCount();
 		this.numPerPage=9;
@@ -30,7 +30,7 @@ public class PageingDto {
 		this.pageStart=(nowBlock-1)*pagePerBlock+1;
 		this.pageEnd=(pageStart+pagePerBlock)<totalPage?pageStart+pagePerBlock:totalPage+1;
 	}
-	public PageingDto(int nowPage,String keyField,String keyWord) {
+	public PagingDto(int nowPage,String keyField,String keyWord) {
 		PboardDao pdao=PboardDao.getInstance();
 		this.totalRecord=pdao.getTotalCount(keyField,keyWord);
 		this.numPerPage=9;

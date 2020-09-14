@@ -6,11 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONArray;
-
 import com.mypt.controller.Action;
 import com.mypt.dao.PboardDao;
-import com.mypt.dto.PageingDto;
+import com.mypt.dto.PagingDto;
 import com.mypt.dto.PboardDto;
 
 public class MovePhotoAction implements Action {
@@ -30,15 +28,15 @@ public class MovePhotoAction implements Action {
 		int nowPage = Integer.parseInt(request.getParameter("page") == null ? "1" : request.getParameter("page"));
 		String next = request.getParameter("next");
 		String prev = request.getParameter("prev");
-		PageingDto page = new PageingDto(nowPage);
+		PagingDto page = new PagingDto(nowPage);
 		if (next != null) {
 			int nowBlock = Integer.parseInt(next) - 1;
 			nowPage = page.getPagePerBlock() * nowBlock + 1;
-			page = new PageingDto(nowPage);
+			page = new PagingDto(nowPage);
 		} else if (prev != null) {
 			int nowBlock = Integer.parseInt(prev) - 1;
 			nowPage = page.getPagePerBlock() * nowBlock + 1;
-			page = new PageingDto(nowPage);
+			page = new PagingDto(nowPage);
 		}
 		ArrayList<PboardDto> parr = pdao.getList(page.getStartPage(), page.getNumPerPage());
 		ArrayList<Integer> comments = new ArrayList<Integer>();
