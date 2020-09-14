@@ -41,56 +41,6 @@ public class CommentInsertAction implements Action
 			
 		int nowPage=Integer.parseInt(request.getParameter("nowPage"));
 		
-//		if(nowPage!= paging.getTotalPage())
-//		{
-//			if(board.equals("cbaord"))
-//			{
-//				insertResult = cdao.commentInsert("ccomment", comment);
-//				paging.setTotalRecord(paging.getTotalRecord()+1);
-//				paging.setNowPage(paging.getTotalPage());
-//				arr = cdao.getCommentsForOneCommentPage("ccomment", num, paging.getStartPage(), paging.getNumPerPage());
-//
-//			}			
-//			else if(board.equals("pboard"))
-//			{
-//				insertResult = cdao.commentInsert("pcomment", comment);
-//				paging.setTotalRecord(paging.getTotalRecord()+1);
-//				paging.setNowPage(paging.getTotalPage());
-//				arr = cdao.getCommentsForOneCommentPage("pcomment", num, paging.getStartPage(), paging.getNumPerPage());
-//
-//			}
-//			
-//			result.add("comments", arr);								
-//		}
-//		else
-//		{
-//			if(board.equals("cbaord"))
-//			{
-//				insertResult = cdao.commentInsert("ccomment", comment);
-//				paging.setTotalRecord(paging.getTotalRecord()+1);
-//				
-//				if(insertResult==1)
-//				{
-//					comment = cdao.getLastComment("ccomment", num);					
-//				}	
-//			}
-//			
-//			else if(board.equals("pboard"))
-//			{
-//				insertResult = cdao.commentInsert("pcomment", comment);
-//				paging.setTotalRecord(paging.getTotalRecord()+1);
-//				
-//				if(insertResult==1)
-//				{
-//					comment = cdao.getLastComment("pcomment", num);					
-//				}
-//				
-//			}
-//			
-//			result.add("comments", gson.fromJson(gson.toJson(comment, CommentDto.class), JsonObject.class));
-//
-//		}
-		
 		
 		if(board.equals("cboard"))
 		{			

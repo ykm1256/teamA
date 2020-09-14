@@ -6,6 +6,8 @@ public class CommentDto {
 	private int  c_num, boardNum;
 	private String c_nick, c_content;
 	private Timestamp c_date;
+	private int c_ref;
+	private int c_depth;
 	
 	private TestPagingDto testPagingDto;
 	
@@ -49,12 +51,21 @@ public class CommentDto {
 	}
 
 	
-//	public int getC_ref() {
-//		return c_ref;
-//	}
-//	public void setC_ref(int c_ref) {
-//		this.c_ref = c_ref;
-//	}
+	public int getC_ref() {
+		return c_ref;
+	}
+	public void setC_ref(int c_ref) {
+		this.c_ref = c_ref;
+	}
+	
+	public int getC_depth() {
+		return c_depth;
+	}
+
+	public void setC_depth(int c_depth) {
+		this.c_depth = c_depth;
+	}
+	
 
 	public TestPagingDto getTestPagingDto() {
 		return testPagingDto;

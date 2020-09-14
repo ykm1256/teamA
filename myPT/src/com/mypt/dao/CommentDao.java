@@ -38,11 +38,18 @@ public class CommentDao {
 		{
 			con = db.getConnection();
 			
-			String sql = "insert into "+ commenttblName+"(boardNum, c_nick, c_content) values(?,?,?)";
+//			String sql = "insert into "+ commenttblName+"(boardNum, c_nick, c_content) values(?,?,?)";
+//			ps = con.prepareStatement(sql);
+//			ps.setInt(1, comment.getBoardNum());			
+//			ps.setString(2, comment.getC_nick());			
+//			ps.setString(3, comment.getC_content());	
+			
+			String sql = "insert into "+ commenttblName+"(boardNum, c_nick, c_content, c_ref) values(?,?,?,?)";
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, comment.getBoardNum());			
 			ps.setString(2, comment.getC_nick());			
 			ps.setString(3, comment.getC_content());	
+			ps.setInt(4, comment.getBoardNum());
 			
 			result= ps.executeUpdate();
 		} 
