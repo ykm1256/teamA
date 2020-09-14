@@ -49,16 +49,15 @@ public class PboardDao extends AbstractBoardDao<PboardDto> {
 		Connection con = null;
 		PreparedStatement ps = null;
 
-		String sql = "update pboard set pb_title=?, pb_head=?, pb_content=?, pb_photo=? where num=?";
+		String sql = "update pboard set pb_title=?, pb_content=?, pb_photo=? where pb_num=?";
 		try {
 			con = db.getConnection();
 			ps = con.prepareStatement(sql);
 
 			ps.setString(1, dto.getTitle());
-			ps.setString(2, dto.getHead());
-			ps.setString(3, dto.getContent());
-			ps.setString(4, dto.getPhoto());
-			ps.setInt(5, dto.getNum());
+			ps.setString(2, dto.getContent());
+			ps.setString(3, dto.getPhoto());
+			ps.setInt(4, dto.getNum());
 
 			ps.executeUpdate();
 
@@ -193,7 +192,7 @@ public class PboardDao extends AbstractBoardDao<PboardDto> {
 		ResultSet rs = null;
 		int result = 0;
 
-		String sql = "SELECT count(*) FROM pcomment where pb_num=" + pb_num;
+		String sql = "SELECT count(*) FROM pcomment where boardnum=" + pb_num;
 
 		try {
 			con = db.getConnection();
@@ -431,5 +430,31 @@ public class PboardDao extends AbstractBoardDao<PboardDto> {
 			db.closeConnection(null, ps, con);
 		}
 	}
+	
+	// 게시물 삭제
+	public void delete(int num)
+	{
+					
+		Connection con = null;
+		PreparedStatement ps = null;
 
+		String sql = "delete from pboard where pb_num=?";
+		try {
+			con = db.getConnection();
+			ps = con.prepareStatement(sql);
+			
+			ps.setInt(1, num);
+
+			ps.executeUpdate();
+
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		} 
+		finally 
+		{
+			db.closeConnection(null, ps, con);
+		}
+	}
 }

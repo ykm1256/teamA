@@ -15,11 +15,6 @@ public class CboardDto extends BoardDto
 	
 	public CboardDto(){}
 	
-//	public CboardDto(ArrayList<CommentDto> comments)
-//	{
-//		this.comments = comments;
-//	}
-	
 	public CboardDto(JsonArray comments)
 	{
 		this.comments = comments;
