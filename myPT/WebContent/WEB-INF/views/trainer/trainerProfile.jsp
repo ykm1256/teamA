@@ -32,7 +32,7 @@
 
     <div id="layoutSidenav">
       <!-- sideNav -->
-      <jsp:include page="/includeFiles/userSideNav.jsp"></jsp:include>
+      <jsp:include page="/includeFiles/trainerSideNav.jsp"></jsp:include>
       <!-- /sideNav -->
       <div id="layoutSidenav_content">
         <main>

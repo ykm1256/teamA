@@ -596,4 +596,28 @@ public class UserDao {
 		return result;
 	}
 	
+	// PT 완료
+		public void ptFinish(String id) {
+			Connection con = null;
+			PreparedStatement ps = null;
+			String sql = null;
+
+			try {
+				con = db.getConnection();
+				sql = "update user set ptcount=ptcount-1 where id=?";
+				ps = con.prepareStatement(sql);
+				ps.setString(1, id);		
+
+				ps.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				db.closeConnection(null, ps, con);
+
+			}
+
+		}
+	
+	
+	
 }

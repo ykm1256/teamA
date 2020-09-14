@@ -61,6 +61,7 @@ import com.mypt.action.register.AdminTrainerRegisterAction;
 import com.mypt.action.register.AdminUserRegisterAction;
 import com.mypt.action.schedule.ScheduleLoadAction;
 import com.mypt.action.schedule.TrainerScheduleSettingAction;
+import com.mypt.action.schedule.TrainerTodayPTAction;
 import com.mypt.action.schedule.UserScheduleViewAction;
 
 
@@ -204,6 +205,8 @@ public class ActionFactory
 		map.put("/trainerMyUpdate", new TrainerMyUpdateAction());
 		map.put("/trainerMyDetail", new TrainerMyDetailAction());
 		map.put("/moveTrainerProfile", new MoveTrainerProfileAction());
+		map.put("/trainerMain", new TrainerTodayPTAction());
+		map.put("/trainerPTFinish", new TrainerTodayPTAction());
 		
 		
 		

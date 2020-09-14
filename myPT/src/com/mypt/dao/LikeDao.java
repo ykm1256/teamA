@@ -112,13 +112,10 @@ public class LikeDao
 		PreparedStatement ps = null;
 		String sql = "";
 
-		int result= 0;
+		int result= 0;		
 		
-		if(likeTblName.equals("cblike")) {
-			sql = "delete from "+likeTblName+" where boardnum=? and l_nick=?";
-		}else {
-			sql = "delete from "+likeTblName+" where boardnum=? and l_nick=?";
-		}
+		sql = "delete from "+likeTblName+" where boardnum=? and l_nick=?";
+		
 		try {
 			con = db.getConnection();
 			ps = con.prepareStatement(sql);
@@ -155,11 +152,8 @@ public class LikeDao
 			int flag=0;			
 			String sql = "";
 			
-			if(likeTblName.equals("cblike")) {
-				sql="select * from "+likeTblName+" where l_nick=? and boardnum=?";
-			}else {
-				sql="select * from "+likeTblName+" where l_nick=? and boardnum=?";
-			}
+			
+			sql="select * from "+likeTblName+" where l_nick=? and boardnum=?";			
 			
 			
 			try {
