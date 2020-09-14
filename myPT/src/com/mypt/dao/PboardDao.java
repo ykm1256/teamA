@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import com.mypt.dto.PboardDto;
+import com.mypt.dto.QboardDto;
 
 public class PboardDao extends AbstractBoardDao<PboardDto> {
 
@@ -22,18 +23,17 @@ public class PboardDao extends AbstractBoardDao<PboardDto> {
 		Connection con = null;
 		PreparedStatement ps = null;
 
-		String sql = "insert into pboard(pb_title, pb_writer, pb_head, pb_content, hit, like, pb_photo) values(?,?,?,?,?,?,?)";
+		String sql = "insert into pboard(pb_title, pb_writer, pb_content, pb_hit, pb_like, pb_photo) values(?,?,?,?,?,?)";
 		try {
 			con = db.getConnection();
 			ps = con.prepareStatement(sql);
 
 			ps.setString(1, dto.getTitle());
 			ps.setString(2, dto.getWriter());
-			ps.setString(3, dto.getHead());
-			ps.setString(4, dto.getContent());
+			ps.setString(3, dto.getContent());
+			ps.setInt(4, 0);
 			ps.setInt(5, 0);
-			ps.setInt(6, 0);
-			ps.setString(7, dto.getPhoto());
+			ps.setString(6, dto.getPhoto());
 
 			ps.executeUpdate();
 
@@ -114,7 +114,7 @@ public class PboardDao extends AbstractBoardDao<PboardDto> {
 
 		PboardDto dto = null;
 
-		String sql = "select pb_title, pb_writer, pb_date, hit, pb_content, like from pboard where num=?";
+		String sql = "select * from pboard where pb_num=?";
 		try {
 			con = db.getConnection();
 			ps = con.prepareStatement(sql);
@@ -124,15 +124,14 @@ public class PboardDao extends AbstractBoardDao<PboardDto> {
 
 			if (rs.next()) {
 				dto = new PboardDto();
-
-				dto.setTitle(rs.getString(1));
-				dto.setWriter(rs.getString(2));
-				dto.setDate(rs.getTimestamp(3).toString());
+				dto.setTitle(rs.getString("pb_title"));
+				dto.setWriter(rs.getString("pb_writer"));
+				dto.setDate(rs.getTimestamp("pb_date").toString());
 				dto.setHit(rs.getInt(4) + 1);
 				dto.setContent(rs.getString(5));
 				dto.setLike(rs.getInt(6));
 
-				updateHit(num, "pboard");
+				upCount(num);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -295,9 +294,9 @@ public class PboardDao extends AbstractBoardDao<PboardDto> {
 		}
 		return totalCount;
 	}
-	
+
 	// 정해진 레코드 수 만큼 리스트 받아옴
-	public ArrayList<PboardDto> getList(int startPage,int numPerPage) {
+	public ArrayList<PboardDto> getList(int startPage, int numPerPage) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -335,6 +334,101 @@ public class PboardDao extends AbstractBoardDao<PboardDto> {
 		}
 
 		return arr;
+	}
+
+	// 검색한 리스트 받아옴
+	public ArrayList<PboardDto> getList(String keyField,String keyWord,int startPage, int numPerPage) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		ArrayList<PboardDto> arr = new ArrayList<PboardDto>();
+
+		String sql = "select * from pboard where "+keyField+" like '%"+keyWord+"%' order by pb_num desc limit ?,?";
+
+		try {
+			con = db.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, startPage);
+			ps.setInt(2, numPerPage);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				PboardDto dto = new PboardDto();
+
+				dto.setNum(rs.getInt("pb_num"));
+				dto.setTitle(rs.getString("pb_title"));
+				dto.setWriter(rs.getString("pb_writer"));
+				String date = rs.getTimestamp("pb_date").toString();
+				dto.setDate(date.substring(0, 10));
+				dto.setPhoto(rs.getString("pb_photo"));
+				dto.setContent(rs.getString("pb_content"));
+				dto.setLike(rs.getInt("pb_like"));
+				dto.setHit(rs.getInt("pb_hit"));
+
+				arr.add(dto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.closeConnection(rs, ps, con);
+		}
+
+		return arr;
+	}
+
+	// 유저가 쓴글 목록
+	public ArrayList<PboardDto> userList(String nick) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		ArrayList<PboardDto> arr = new ArrayList<PboardDto>();
+
+		String sql = "select *,date_format(pb_date,'%Y-%m-%d %H:%i') from pboard where pb_writer=?";
+
+		try {
+			con = db.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, nick);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				PboardDto dto = new PboardDto();
+
+				dto.setTitle(rs.getString("pb_title"));
+				dto.setWriter(rs.getString("pb_writer"));
+				dto.setHit(rs.getInt("pb_hit"));
+				dto.setNum(rs.getInt("pb_num"));
+				dto.setDate(rs.getString(10));
+
+				arr.add(dto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.closeConnection(rs, ps, con);
+		}
+
+		return arr;
+	}
+
+	// Count Up : 조회수 증가
+	public void upCount(int num) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = null;
+		try {
+			con = db.getConnection();
+			sql = "update pboard set pb_hit = pb_hit +1 where pb_num = ?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, num);
+			ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.closeConnection(null, ps, con);
+		}
 	}
 
 }

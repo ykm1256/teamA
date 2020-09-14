@@ -55,7 +55,17 @@
               <h3 class="ml-2">글보기</h3>                        
               <div class="text-right">              
               <a href="moveReply.do" class="mr-2 btn btn-light btn-sm font-weight-bold">답변</a>
-              <a href="moveCommunity.do" class="btn btn-light btn-sm font-weight-bold mr-1">목록</a>             
+              <c:choose>
+              <c:when test="${sessionScope.board=='cboard' }">
+              <a href="moveCommunity.do" class="btn btn-light btn-sm font-weight-bold mr-1">목록</a>
+              </c:when>
+              <c:when test="${sessionScope.board=='qboard' }">
+              <a href="moveQuestion.do" class="btn btn-light btn-sm font-weight-bold mr-1">목록</a>
+              </c:when>
+              <c:when test="${sessionScope.board=='pboard' }">
+              <a href="movePhoto.do" class="btn btn-light btn-sm font-weight-bold mr-1">목록</a>
+              </c:when>             
+              </c:choose>             
               </div>
             </header>
           </div>

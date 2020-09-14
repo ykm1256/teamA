@@ -83,8 +83,8 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 			}
 		}
 
-		
-		public ArrayList<CboardDto> getList() 
+		// 유저가 쓴글 목록
+		public ArrayList<CboardDto> userList(String nick) 
 		{
 			Connection con = null;
 			PreparedStatement ps = null;
@@ -92,11 +92,12 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 			
 			ArrayList<CboardDto> arr= new ArrayList<CboardDto>();
 
-			String sql = "select * from cboard";
+			String sql = "select *,date_format(cb_date,'%Y-%m-%d %H:%i') from cboard where cb_writer=?";
 
 			try {
 				con = db.getConnection();
 				ps = con.prepareStatement(sql);
+				ps.setString(1, nick);
 				rs = ps.executeQuery();
 
 				while(rs.next()) 
@@ -104,11 +105,10 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 					CboardDto dto = new CboardDto();
 
 					dto.setTitle(rs.getString("cb_title"));
-					dto.setWriter(rs.getString("cb_writer"));					
-					dto.setHead(rs.getString("cb_head"));
-					dto.setHit(rs.getInt("hit"));
-					dto.setDate(rs.getTimestamp("cb_cb_date").toString());
-					dto.setLike(rs.getInt("cb_like"));
+					dto.setWriter(rs.getString("cb_writer"));
+					dto.setHit(rs.getInt("cb_hit"));
+					dto.setNum(rs.getInt("cb_num"));
+					dto.setDate(rs.getString(12));					
 										
 					arr.add(dto);
 				}
@@ -406,9 +406,9 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 				}else {//검색인 경우
 					//말머리 전체보기					
 					if(head.equals("all")) {
-						sql = "select * from cboard where "+keyField+" like '%"+keyWord+"%' order by cb_ref desc, cb_pos limit ?,?";
+						sql = "select *,date_format(cb_date,'%Y-%m-%d %H:%i') from cboard where "+keyField+" like '%"+keyWord+"%' order by cb_ref desc, cb_pos limit ?,?";
 					}else {
-							sql = "select * from cboard where ? like '%"+keyWord+"%' and cb_head='"+head+"' order by cb_ref desc, cb_pos "
+							sql = "select *,date_format(cb_date,'%Y-%m-%d %H:%i') from cboard where ? like '%"+keyWord+"%' and cb_head='"+head+"' order by cb_ref desc, cb_pos "
 									+ "limit ?,?";
 					}
 //					sql = "select * from cboard where " + keyField 
@@ -427,7 +427,7 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 					bean.setPos(rs.getInt("cb_pos"));
 					bean.setRef(rs.getInt("cb_ref"));
 					bean.setDepth(rs.getInt("cb_depth"));
-					bean.setDate(rs.getTimestamp("cb_date").toString());
+					bean.setDate(rs.getString(12));
 					bean.setHit(rs.getInt("cb_hit"));				
 					bean.setHead(rs.getString("cb_head"));
 					bean.setLike(rs.getInt("cb_like"));	
@@ -574,6 +574,12 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 			CboardDao dao = CboardDao.getInstance();
 			dao.post1000();
 			System.out.println("성공~~");
+		}
+
+		@Override
+		public ArrayList<CboardDto> getList() {
+			// TODO Auto-generated method stub
+			return null;
 		}
 		
 		

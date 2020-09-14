@@ -19,6 +19,16 @@ public class ViewAction implements Action {
 		// TODO Auto-generated method stub		
 		HttpSession session = request.getSession();
 		int num = Integer.parseInt(request.getParameter("num"));
+		
+		if(request.getParameter("b")!=null) {
+			if(request.getParameter("b").toString().equals("c")) {
+				session.setAttribute("board", "cboard");
+			}else if(request.getParameter("b").toString().equals("q")){
+				session.setAttribute("board", "qboard");
+			}else if(request.getParameter("b").toString().equals("p")) {
+				session.setAttribute("board", "pboard");
+			}
+		}
 		String board = session.getAttribute("board").toString();
 		
 		
@@ -33,12 +43,7 @@ public class ViewAction implements Action {
 			dto = dao.detailView(num);
 			
 			CommentDao cdao = CommentDao.getInstance();
-			int comment = 0;
-			String s = "제발";
-//			comment = cdao.countComment("ccomment", num);
-			System.out.println("댓글수");
-			System.out.println(comment);
-			System.out.println("댓글수");			
+			int comment = 0;			
 			request.setAttribute("comment", comment);			
 			request.setAttribute("dto", dto);
 			request.setAttribute("lflag", lflag);			
@@ -50,11 +55,7 @@ public class ViewAction implements Action {
 			QboardDao dao = QboardDao.getInstance();			
 			dto = dao.detailView(num);
 			CommentDao cdao = CommentDao.getInstance();
-			int comment = cdao.countComment("qcomment", num);
-			
-			System.out.println("댓글수");
-			System.out.println(comment);
-			System.out.println("댓글수");
+			int comment = cdao.countComment("qcomment", num);			
 			request.setAttribute("comcnt", comment);
 			request.setAttribute("dto", dto);			
 			session.setAttribute("dto", dto);
