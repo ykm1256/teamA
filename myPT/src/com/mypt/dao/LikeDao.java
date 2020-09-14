@@ -91,13 +91,10 @@ public class LikeDao {
 		PreparedStatement ps = null;
 		String sql = "";
 
-		int result = 0;
-
-		if (likeTblName.equals("cblike")) {
-			sql = "delete from " + likeTblName + " where boardnum=? and l_nick=?";
-		} else {
-			sql = "delete from " + likeTblName + " where boardnum=? and l_nick=?";
-		}
+		int result= 0;		
+		
+		sql = "delete from "+likeTblName+" where boardnum=? and l_nick=?";
+		
 		try {
 			con = db.getConnection();
 			ps = con.prepareStatement(sql);
@@ -119,6 +116,8 @@ public class LikeDao {
 
 		return result;
 	}
+	
+	
 
 	// 해당 유저 좋아요 여부
 	public int selectLike(String nickName, String likeTblName, int num) {

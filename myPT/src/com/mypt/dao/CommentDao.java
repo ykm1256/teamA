@@ -3,14 +3,9 @@ package com.mypt.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.mypt.connection.DBConnection;
-import com.mypt.dto.CCommentDto;
 import com.mypt.dto.CommentDto;
 
 public class CommentDao {
@@ -210,23 +205,23 @@ public class CommentDao {
 
 	}
 	
-	public void commentUpdate(CCommentDto cd) {
-		Connection con = null;
-		PreparedStatement ps = null;
-		try {
-			con = db.getConnection();
-			String sql = "update ccomment set cb_ccontent=?, cb_cdate=now() where cb_cnum=?";
-			ps = con.prepareStatement(sql);
-			ps.setString(1, cd.getcb_ccontent());
-			ps.setString(2, String.valueOf(cd.getcb_cdate()));
-			ps.executeUpdate();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			db.closeConnection(null, ps, con);
-		}
-	}
+//	public void commentUpdate(CCommentDto cd) {
+//		Connection con = null;
+//		PreparedStatement ps = null;
+//		try {
+//			con = db.getConnection();
+//			String sql = "update ccomment set cb_ccontent=?, cb_cdate=now() where cb_cnum=?";
+//			ps = con.prepareStatement(sql);
+//			ps.setString(1, cd.getcb_ccontent());
+//			ps.setString(2, String.valueOf(cd.getcb_cdate()));
+//			ps.executeUpdate();
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} finally {
+//			db.closeConnection(null, ps, con);
+//		}
+//	}
 
 
 	
@@ -364,7 +359,7 @@ public class CommentDao {
 			} 
 			catch (Exception e) 
 			{
-				e.printStackTrace();
+				e.printStackTrace(); 
 			} 
 			finally 
 			{

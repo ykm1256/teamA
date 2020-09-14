@@ -3,6 +3,8 @@ package com.mypt.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 import com.mypt.connection.DBConnection;
 import com.mypt.dto.ScheduleDto;
@@ -127,6 +129,44 @@ public class ScheduleDao {
 			db.closeConnection(rs, ps, con);
 		}
 		return flag;
+	}
+	
+	
+	//오늘의 피티회원
+	public ArrayList<ScheduleDto> todayPTList(String tid) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		Calendar cal = Calendar.getInstance();
+		int year = cal.get(cal.YEAR);
+		int month = cal.get(cal.MONTH)+1;
+		int day = cal.get(cal.DATE);
+		String today = year+"-"+month+"-"+day;
+		
+		ArrayList<ScheduleDto> arr = new ArrayList<ScheduleDto>();			
+		
+		try {
+			con = db.getConnection();
+			String sql = "select * from schedule s left outer join user u on s.s_id=u.id where tid=? and s_date=?";			
+			ps = con.prepareStatement(sql);
+			ps.setString(1, tid);
+			ps.setString(2, today);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				ScheduleDto sd = new ScheduleDto();				
+				sd.setS_id(rs.getString("id"));
+				sd.setS_date(rs.getString("s_date"));
+				sd.setS_time(rs.getString("s_time"));				
+				arr.add(sd);	
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.closeConnection(rs, ps, con);
+		}
+		return arr;
 	}
 	
 }
