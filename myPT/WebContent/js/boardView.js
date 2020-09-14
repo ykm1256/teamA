@@ -15,7 +15,24 @@ function changeBlock(block)
 function setComment()
 {
 	let htmlForNew=""; 
-	
+//	  var today = new Date();
+//	  today.setHours(today.getHours()-24)
+//	  
+//	  
+//	  for(var i=0; i<numOfComments;i++)
+//	{
+//		  var commentdate= new Date($('.commentDate').eq(i).text())
+//
+//		if(boardWriter== $('.commentNick').eq(i).text())
+//			{
+//				$('.commentNick').eq(i).append('<span class="badge badge-success ml-1">작성자</span>');		
+//			}
+//		if(commentdate>today && $('.commentNick').eq(i).children('.newImg').length!=1)
+//			{
+//				$('.commentNick').eq(i).append('<img src="img/new.png" width="12px" class="ml-1 newImg">');
+//			}
+//		
+		
 	$.each (comments, function (index, com) 
 	{
 		htmlForNew+='<div class="comments"><div class="row"><div class="row col-9">';
@@ -39,11 +56,12 @@ function setComment()
 	
 	$('#commentsWrapper').append(htmlForNew);
 	setBadge(comments.length);
-
 }
+
 
 function setBlock()
 {
+	$('#page').empty();
 	
 		if(totalPage>0 && nowBlock>1)
 		{
@@ -97,7 +115,7 @@ function getChangedComment()
 				$('#page').empty();
 				
 				
-				setComment(comments.length);
+				setComment();
 				setBlock();
 						
 			},
@@ -121,7 +139,7 @@ function getChangedComment()
 		{
 			console.log(data);
 			let newComment= data;
-			let lengthOfBeforeComments = comments.length=undefined?1:comments.length+1;
+			let lengthOfBeforeComments = comments.length==undefined?1:comments.length+1;
 			
 			if(nowPage!= newComment.paging.nowPage) //페이지가 바뀐 경우
 				{
@@ -163,12 +181,12 @@ function getChangedComment()
 
 
 
-function setBadge(numOfComments)
+function setBadge()
 {
 	  var today = new Date();
 	  today.setHours(today.getHours()-24)
 	
-	for(var i=0; i<numOfComments;i++)
+	for(var i=0; i<numPerPage;i++)
 	{
 		  var commentdate= new Date($('.commentDate').eq(i).text())
 
@@ -200,6 +218,11 @@ function setBadge(numOfComments)
 						if(data==1)
 						{
 							$selectedComment.remove();
+							
+							
+							setBlock();
+							
+							
 						}						
 					},
 					error: function(e){

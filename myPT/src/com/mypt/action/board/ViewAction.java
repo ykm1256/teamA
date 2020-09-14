@@ -40,7 +40,7 @@ public class ViewAction implements Action {
 		CommentDao comdao = CommentDao.getInstance();
 		
 		///댓글 페이징
-				int numPerPage=20;
+				int numPerPage=10;
 				int pagePerBlock=5;		
 				int totalRecord=0;
 				int totalPage=0;
