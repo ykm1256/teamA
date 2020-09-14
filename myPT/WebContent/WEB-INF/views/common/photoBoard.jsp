@@ -167,7 +167,8 @@
 									<c:choose>
 										<c:when test="${nowBlock>1 }">
 											<li class="page-item"><a class="page-link"
-												onclick="gtltPaging('${sessionScope.keyWord}','${nowBlock-1 }')">&lt;</a></li>
+												onclick="gtltPaging('${sessionScope.keyWord}','${nowBlock-1 }')"><span
+													style="pointer-events: none">&lt;</span></a></li>
 										</c:when>
 										<c:otherwise>
 											<li class="page-item"><a class="page-link"
@@ -185,7 +186,8 @@
 											</c:when>
 											<c:otherwise>
 												<li class="page-item"><a class="page-link text-primary"
-													onclick="paging('${sessionScope.keyWord}',${i})">${i }</a></li>
+													onclick="paging('${sessionScope.keyWord}',${i})"><span
+														style="pointer-events: none">${i }</span></a></li>
 											</c:otherwise>
 										</c:choose>
 
@@ -195,7 +197,8 @@
 									<c:choose>
 										<c:when test="${totalBlock>nowBlock }">
 											<li class="page-item"><a class="page-link text-muted"
-												onclick="gtltPaging('${sessionScope.keyWord}','${nowBlock+1 }')">&gt;</a></li>
+												onclick="gtltPaging('${sessionScope.keyWord}','${nowBlock+1 }')"><span
+													style="pointer-events: none">&gt;</span></a></li>
 										</c:when>
 										<c:otherwise>
 											<li class="page-item"><a class="page-link"
