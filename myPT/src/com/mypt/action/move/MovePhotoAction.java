@@ -19,7 +19,7 @@ public class MovePhotoAction implements Action {
 		session.setAttribute("board", "pboard");
 		String nick = session.getAttribute("nick").toString();
 		PboardDao pdao = PboardDao.getInstance();
-		int numPerPage=9;
+		int numPerPage = 9;
 
 		// 검색 처리
 		session.removeAttribute("keyField");
@@ -29,15 +29,15 @@ public class MovePhotoAction implements Action {
 		int nowPage = Integer.parseInt(request.getParameter("page") == null ? "1" : request.getParameter("page"));
 		String next = request.getParameter("next");
 		String prev = request.getParameter("prev");
-		PagingDto page = new PagingDto(nowPage,pdao.getTotalCount(),numPerPage);
+		PagingDto page = new PagingDto(nowPage, pdao.getTotalCount(), numPerPage);
 		if (next != null) {
 			int nowBlock = Integer.parseInt(next) - 1;
 			nowPage = page.getPagePerBlock() * nowBlock + 1;
-			page = new PagingDto(nowPage,pdao.getTotalCount(),numPerPage);
+			page = new PagingDto(nowPage, pdao.getTotalCount(), numPerPage);
 		} else if (prev != null) {
 			int nowBlock = Integer.parseInt(prev) - 1;
 			nowPage = page.getPagePerBlock() * nowBlock + 1;
-			page = new PagingDto(nowPage,pdao.getTotalCount(),numPerPage);
+			page = new PagingDto(nowPage, pdao.getTotalCount(), numPerPage);
 		}
 		ArrayList<PboardDto> parr = pdao.getList(page.getStartPage(), page.getNumPerPage());
 		ArrayList<Integer> comments = new ArrayList<Integer>();

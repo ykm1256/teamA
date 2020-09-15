@@ -15,9 +15,9 @@ public class PagingDto {
 	
 	public PagingDto() {}
 	
-	public PagingDto(int nowPage, int totalCount, int numPerPage) {
+	public PagingDto(int nowPage, int totalRecord, int numPerPage) {
 		this.pagePerBlock=5;
-		this.totalRecord=totalCount;
+		this.totalRecord=totalRecord;
 		this.numPerPage=numPerPage;
 		this.totalPage=(int)Math.ceil((double)totalRecord/numPerPage);
 		this.totalBlock=(int)Math.ceil((double)totalPage/pagePerBlock);

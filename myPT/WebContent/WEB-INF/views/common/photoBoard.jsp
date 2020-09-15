@@ -57,7 +57,7 @@
 									<div class="col-md-6 col-xs-12 col-lg-4">
 										<div class="card border-0" id="card${item.num}">
 											<p class="card-text mb-0 text-muted" style="font-size: 14px">${item.date }</p>
-											<span style="cursor:pointer">${item.photo }</span>
+											${item.photo }
 											<div class="card-body p-0 pt-2">
 												<h5 class="card-title mb-1 ml-2">
 													<a class="text-dark text-decoration-none"
