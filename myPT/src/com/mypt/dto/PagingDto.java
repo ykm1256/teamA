@@ -1,7 +1,5 @@
 package com.mypt.dto;
 
-import com.mypt.dao.PboardDao;
-
 public class PagingDto {
 	
 	private int totalRecord;	
@@ -17,31 +15,17 @@ public class PagingDto {
 	
 	public PagingDto() {}
 	
-	public PagingDto(int nowPage) {
-		PboardDao pdao=PboardDao.getInstance();
-		this.totalRecord=pdao.getTotalCount();
-		this.numPerPage=9;
+	public PagingDto(int nowPage, int totalCount, int numPerPage) {
 		this.pagePerBlock=5;
+		this.totalRecord=totalCount;
+		this.numPerPage=numPerPage;
 		this.totalPage=(int)Math.ceil((double)totalRecord/numPerPage);
 		this.totalBlock=(int)Math.ceil((double)totalPage/pagePerBlock);
 		this.nowPage=nowPage;
 		this.nowBlock=(int)Math.ceil((double)nowPage/pagePerBlock);
 		this.startPage=(nowPage*numPerPage)-numPerPage;
 		this.pageStart=(nowBlock-1)*pagePerBlock+1;
-		this.pageEnd=(pageStart+pagePerBlock)<totalPage?pageStart+pagePerBlock:totalPage+1;
-	}
-	public PagingDto(int nowPage,String keyField,String keyWord) {
-		PboardDao pdao=PboardDao.getInstance();
-		this.totalRecord=pdao.getTotalCount(keyField,keyWord);
-		this.numPerPage=9;
-		this.pagePerBlock=5;
-		this.totalPage=(int)Math.ceil((double)totalRecord/numPerPage);
-		this.totalBlock=(int)Math.ceil((double)totalPage/pagePerBlock);
-		this.nowPage=nowPage;
-		this.nowBlock=(int)Math.ceil((double)nowPage/pagePerBlock);
-		this.startPage=(nowPage*numPerPage)-numPerPage;
-		this.pageStart=(nowBlock-1)*pagePerBlock+1;
-		this.pageEnd=(pageStart+pagePerBlock)<totalPage?pageStart+pagePerBlock:totalPage+1;
+		this.pageEnd=(pageStart+pagePerBlock)<=totalPage?pageStart+pagePerBlock:totalPage+1;
 	}
 
 	public int getTotalRecord() {

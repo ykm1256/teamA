@@ -57,7 +57,7 @@
 									<div class="col-md-6 col-xs-12 col-lg-4">
 										<div class="card border-0" id="card${item.num}">
 											<p class="card-text mb-0 text-muted" style="font-size: 14px">${item.date }</p>
-											${item.photo }
+											<span style="cursor:pointer">${item.photo }</span>
 											<div class="card-body p-0 pt-2">
 												<h5 class="card-title mb-1 ml-2">
 													<a class="text-dark text-decoration-none"
@@ -167,8 +167,8 @@
 									<c:choose>
 										<c:when test="${nowBlock>1 }">
 											<li class="page-item"><a class="page-link"
-												onclick="gtltPaging('${sessionScope.keyWord}','${nowBlock-1 }')"><span
-													style="pointer-events: none">&lt;</span></a></li>
+												onclick="gtltPaging('${sessionScope.keyWord}','${nowBlock-1 }')"
+												style="cursor: pointer">&lt;</a></li>
 										</c:when>
 										<c:otherwise>
 											<li class="page-item"><a class="page-link"
@@ -186,8 +186,8 @@
 											</c:when>
 											<c:otherwise>
 												<li class="page-item"><a class="page-link text-primary"
-													onclick="paging('${sessionScope.keyWord}',${i})"><span
-														style="pointer-events: none">${i }</span></a></li>
+													onclick="paging('${sessionScope.keyWord}',${i})"
+													style="cursor: pointer">${i }</a></li>
 											</c:otherwise>
 										</c:choose>
 
@@ -197,8 +197,7 @@
 									<c:choose>
 										<c:when test="${totalBlock>nowBlock }">
 											<li class="page-item"><a class="page-link text-muted"
-												onclick="gtltPaging('${sessionScope.keyWord}','${nowBlock+1 }')"><span
-													style="pointer-events: none">&gt;</span></a></li>
+												onclick="gtltPaging('${sessionScope.keyWord}','${nowBlock+1 }')" style="cursor:pointer">&gt;</a></li>
 										</c:when>
 										<c:otherwise>
 											<li class="page-item"><a class="page-link"
