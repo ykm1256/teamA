@@ -171,6 +171,11 @@ function getChangedComment()
 				{
 					totalRecord= data.paging.totalRecord;
 					
+					  let today = new Date();
+					  today.setHours(today.getHours()-24)
+					
+					  let commentdate= Date.parse($('.commentDate:last').text());
+					
 					if(totalRecord==1)
 					{
 						$('#commentsWrapper').empty();
@@ -181,7 +186,23 @@ function getChangedComment()
 					
 					let htmlForNew="";
 					htmlForNew+='<hr><div class="comments"><div class="row"><div class="row col-9">';
-					htmlForNew+='<div class="col font-weight-bold commentNick">'+newComment.comments.c_nick+'</div></div>';
+//					htmlForNew+='<div class="col font-weight-bold commentNick">'+newComment.comments.c_nick+'</div></div>';
+					
+					
+					htmlForNew+='<div class="col font-weight-bold commentNick">'+newComment.comments.c_nick
+					
+					if(boardWriter==newComment.comments.c_nick)
+					{
+						htmlForNew+='<span class="badge badge-success ml-1">작성자</span>';
+					}
+					if(commentdate>today)
+					{
+						htmlForNew+='<img src="img/new.png" width="12px" class="ml-1 newImg">';
+					}	
+					
+					htmlForNew+='</div></div>';
+					
+					
 					htmlForNew+='<div class="col-3 text-right dropdown"><a class="mt-1 text-secondary" href="#" role="button" data-toggle="dropdown"><i class="fas fa-ellipsis-v"></i></a>';
 					htmlForNew+='<div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item commentUpdate" href="#">수정</a><a class="dropdown-item commentDelete" href="#">삭제</a> ';
 					htmlForNew+='<input type="number" hidden="true" value='+newComment.comments.c_num+'></div></div></div>';
@@ -195,7 +216,7 @@ function getChangedComment()
 									
 					
 					
-					setBadge(curIndex);
+//					setBadge(curIndex);
 					setBlock();
 					
 					
