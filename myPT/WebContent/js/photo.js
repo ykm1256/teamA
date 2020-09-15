@@ -8,7 +8,16 @@ function paging(keyWord,page){
 		window.location.href="searchPhoto.do?page="+page;
 	}
 }
-function gtltPaging(keyWord,arrow){
+
+function ltPaging(keyWord,arrow){
+	if(keyWord==null||keyWord==""){
+		window.location.href="movePhoto.do?prev="+arrow;
+	}else{
+		window.location.href="searchPhoto.do?prev="+arrow;
+	}s
+}
+
+function gtPaging(keyWord,arrow){
 	if(keyWord==null||keyWord==""){
 		window.location.href="movePhoto.do?next="+arrow;
 	}else{
