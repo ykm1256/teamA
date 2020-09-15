@@ -17,7 +17,9 @@ public class MoveSchedule implements Action {
 		session.setAttribute("uid", id);
 		UserDao dao=UserDao.getInstance();
 		UserDto dto=dao.getUserById(id);
+		int ptCount=dto.getPtcount();
 		
+		session.setAttribute("ptCount", ptCount);
 		request.setAttribute("user", dto);
 		return "trainer/schedule";
 	}

@@ -530,7 +530,7 @@ function setting(){
 			"proMention":proMention
 		},
 		success:function(data){
-			alert("성공"+data);
+			alert("스케줄이 등록 되었습니다.");
 		},
 		error:function(e){
 			alert("실패");
