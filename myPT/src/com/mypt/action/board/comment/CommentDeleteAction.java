@@ -35,6 +35,10 @@ public class CommentDeleteAction implements Action {
 		{
 			deleteResult= cdao.commentDelete("pcomment", c_num);
 		}
+		else if(board.equals("qboard"))
+		{
+			deleteResult= cdao.commentDelete("qcomment", c_num);
+		}
 		
 		paging.setTotalRecord(paging.getTotalRecord()-1);
 		session.setAttribute("paging", paging);
