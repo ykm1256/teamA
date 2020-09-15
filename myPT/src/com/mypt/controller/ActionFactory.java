@@ -6,8 +6,8 @@ import java.util.Map;
 import com.mypt.action.board.DeleteAction;
 import com.mypt.action.board.LikeAction;
 import com.mypt.action.board.ReplyAction;
-import com.mypt.action.board.SearchPhotoAction;
 import com.mypt.action.board.SearchCommunityAction;
+import com.mypt.action.board.SearchPhotoAction;
 import com.mypt.action.board.TestViewAction;
 import com.mypt.action.board.UpdateAction;
 import com.mypt.action.board.UpdateViewAction;
@@ -45,7 +45,9 @@ import com.mypt.action.list.UserBoardListViewAction;
 import com.mypt.action.list.UserCommentListViewAction;
 import com.mypt.action.list.UserLikeListViewAction;
 import com.mypt.action.login.LogoutAction;
+import com.mypt.action.login.TrainerCheckSessionId;
 import com.mypt.action.login.TrainerLoginAction;
+import com.mypt.action.login.UserCheckSessionId;
 import com.mypt.action.login.UserLoginAction;
 import com.mypt.action.move.MoveBoardDetailAction;
 import com.mypt.action.move.MoveBoardUpdateAction;
@@ -239,6 +241,9 @@ public class ActionFactory
 		//결제내역 삭제
 		map.put("/adminHistoryDelete",new AdminHistoryDeleteAction());
 		
+		//쿠키-세션아이디로 로그인 유지
+		map.put("/userCheckSessionId", new UserCheckSessionId());
+		map.put("/trainerCheckSessionId", new TrainerCheckSessionId());
 		
 	}
 	

@@ -81,7 +81,7 @@
                         <div class="">
                           <input
                             class=""
-                            id="rememberPasswordCheck1"
+                            id="rememberCheckForTrainer"
                             type="checkbox"
                           />
                           <label class="text-muted" for="rememberPasswordCheck1"
@@ -189,7 +189,7 @@
                         <div class="">
                           <input
                             class=""
-                            id="rememberPasswordCheck2"
+                            id="rememberCheckForUser"
                             type="checkbox"
                           />
                           <label class="text-muted" for="rememberPasswordCheck2"
@@ -233,6 +233,55 @@
     ></script>
     <script src="js/scripts.js"></script>
     <script src="js/login.js"></script>
+
+
+    <script>
     
+    $.ajax({
+		type:"post",
+		url:"userCheckSessionId.do",
+		success: function(data)
+		{				
+			if(data==0)
+			{
+				location.href="intro.jsp";
+			}
+			else if(data==1)
+			{					
+				location.href="userMain.do";					
+			}
+		},
+		error: function(e){
+			alert("에러가 발생했습니다.")
+		}		
+			
+	})
+	
+	$.ajax({
+		type:"post",
+		url:"trainerCheckSessionId.do",
+		success: function(data)
+		{				
+			if(data==0)
+			{
+				location.href="intro.jsp";
+			}
+			else if(data==1)
+			{					
+				location.href="trainerMain.do";
+			}
+			else if(data==2)
+			{
+				location.href="userList.do";
+			}
+		},
+		error: function(e){
+			alert("에러가 발생했습니다.")
+		}		
+			
+	})
+	
+	
+	</script>
   </body>
 </html>

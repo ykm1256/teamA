@@ -21,14 +21,15 @@ public class UserDto {
 	//date->String
 	private String startdate;
 	private String enddate;	
-//	private Date startdate;
-//	private Date enddate;
 
 	private int ptcount;
 	private String tid;
 	private String zipcode;
 	private String tel;
 	private String addrdetail;
+		
+	private String sessionId;
+	private Timestamp cookieEnd;
 	
 	
 	public UserDto() {};
@@ -178,6 +179,24 @@ public class UserDto {
 	public void setHistory(HistoryDto history) {
 		this.history = history;
 	}
+	
+	
+	public String getSessionId() {
+		return sessionId;
+	}
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
+	}
+	public Timestamp getCookieEnd() {
+		return cookieEnd;
+	}
+	public void setCookieEnd(Timestamp cookieEnd) {
+		this.cookieEnd = cookieEnd;
+	}
+	
+	
+
+	
 	
 	
 	

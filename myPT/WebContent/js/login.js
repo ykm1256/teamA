@@ -4,6 +4,9 @@
 
 $(function(){
 
+var rememberCheckForUser;
+var rememberCheckForTrainer;
+
 	$("#btnUser").click(function(){
 		if($("#email").val()==""){
 			alert("이메일을 입력하세요.")
@@ -16,11 +19,16 @@ $(function(){
 			return false;
 		}
 		
+		if($('#rememberCheckForUser').prop("checked"))
+		{
+			rememberCheckForUser="on";
+		}
+
 		
 		$.ajax({
 			type:"post",
 			url:"userLogin.do",
-			data : {"email":$("#email").val(), "pw":$("#pw2").val()},
+			data : {"email":$("#email").val(), "pw":$("#pw2").val(), "pwRemember": rememberCheckForUser},
 			success: function(data){
 				
 				
@@ -53,11 +61,15 @@ $(function(){
 			return false;
 		}
 		
+		if($('#rememberCheckForTrainer').prop("checked"))
+		{
+			rememberCheckForTrainer="on";
+		}
 		
 		$.ajax({
 			type:"post",
 			url:"trainerLogin.do",
-			data : {"id":$("#id").val(), "pw":$("#pw1").val()},
+			data : {"id":$("#id").val(), "pw":$("#pw1").val(), "pwRemember": rememberCheckForTrainer},
 			success: function(data){
 				
 				

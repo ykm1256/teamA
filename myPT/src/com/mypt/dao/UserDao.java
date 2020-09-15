@@ -3,6 +3,7 @@ package com.mypt.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -14,7 +15,6 @@ import com.mypt.dto.UserDto;
 public class UserDao {
 	private DBConnection db;
 
-//////dao 싱글톤 (이)
 	private static UserDao instance = new UserDao();
 
 	public static UserDao getInstance() {
@@ -30,7 +30,7 @@ public class UserDao {
 		PreparedStatement ps = null;
 		String sql = null;
 
-///////		signdate삭제 (이)
+
 		try {
 			con = db.getConnection();
 			sql = "insert user(id,pw,name,gender,email,birth,"
@@ -620,5 +620,96 @@ public class UserDao {
 		}
 	
 	
+	//세션id, 유효시간 저장(쿠키)
+	public int keepLogin(String id, String sessionId, Timestamp cookieEnd)
+	{
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		int result=0;
+
+		String sql = "update user set sessionId=?, cookieEnd=? where id=?";
+		try {
+			con = db.getConnection();
+			ps = con.prepareStatement(sql);
+
+			ps.setString(1, sessionId);
+			ps.setTimestamp(2, cookieEnd);
+			ps.setString(3, id);
+
+			result= ps.executeUpdate();
+			System.out.println("쿠키 result:"+ result);
+
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		} 
+		finally 
+		{
+			db.closeConnection(null, ps, con);
+		}
+		
+		return result;
+		
+	}
+	
+	public UserDto checkSessionId(String sessionId)  //세션아이디로 값 가져오기
+	{
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		UserDto dto= null;
+
+		String sql = "select * from user where sessionId=? and cookieEnd>now()";
+
+		try {
+			con = db.getConnection();
+			ps = con.prepareStatement(sql);
+			
+			ps.setString(1, sessionId);
+			
+			rs = ps.executeQuery();
+
+			if(rs.next()) 
+			{
+				dto = new UserDto();
+				
+				dto.setId(rs.getString("id"));
+				dto.setPw(rs.getString("pw"));
+				dto.setName(rs.getString("name"));
+				dto.setGender(rs.getString("gender"));
+				dto.setEmail(rs.getString("email"));
+				dto.setBirth(rs.getString("birth"));
+				dto.setAddress(rs.getString("address"));
+				dto.setQr(rs.getString("qr"));
+				dto.setSigndate(rs.getTimestamp("signdate"));
+				dto.setNick(rs.getString("nick"));
+
+				dto.setStartdate(rs.getString("startdate"));
+				dto.setEnddate(rs.getString("enddate"));
+				
+				dto.setTid(rs.getString("tid"));
+				dto.setZipcode(rs.getString("zipcode"));
+				dto.setTel(rs.getString("tel"));
+				dto.setPtcount(rs.getInt("ptcount"));
+				dto.setAddrdetail(rs.getString("addrdetail"));
+				
+			}
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		} 
+		finally 
+		{
+			db.closeConnection(rs, ps, con);
+		}
+		
+		return dto;
+
+	}
+		
 	
 }

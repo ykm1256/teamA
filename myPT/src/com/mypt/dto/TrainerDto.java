@@ -1,9 +1,12 @@
 package com.mypt.dto;
 
+import java.sql.Timestamp;
+
 public class TrainerDto {
 	
 	private String t_id, t_pw, t_name, t_email, t_birth, t_address, t_nick,t_gender,t_tel,t_zipcode,t_addrdetail, t_photo;
-	
+	private String sessionId;
+	private Timestamp cookieEnd;
 
 	public String getT_id() {
 		return t_id;
@@ -79,6 +82,19 @@ public class TrainerDto {
 		this.t_photo = t_photo;
 	}
 	
+	
+	public String getSessionId() {
+		return sessionId;
+	}
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
+	}
+	public Timestamp getCookieEnd() {
+		return cookieEnd;
+	}
+	public void setCookieEnd(Timestamp cookieEnd) {
+		this.cookieEnd = cookieEnd;
+	}
 	
 
 }
