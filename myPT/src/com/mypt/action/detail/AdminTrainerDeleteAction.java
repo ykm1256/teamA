@@ -5,20 +5,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.mypt.controller.Action;
 import com.mypt.dao.TrainerDao;
-import com.mypt.dto.TrainerDto;
 
-public class AdminTrainerDetailAction implements Action {
+public class AdminTrainerDeleteAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
-		String id = request.getParameter("id");
+		String t_id = request.getParameter("t_id");
 		TrainerDao tdao = TrainerDao.getInstance();
-		TrainerDto trainer = tdao.trainerSelect(id);
-		request.setAttribute("t", trainer);		
-		return "admin/trainerDetail";
+		tdao.trainerDelete(t_id);
+		
+		return "redirect:trainerList.do";
 	}
-	
-	
 
 }

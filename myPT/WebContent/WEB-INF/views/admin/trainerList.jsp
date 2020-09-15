@@ -65,7 +65,7 @@
                         <th>성별</th>
                         <th>생년월일</th>
                         <th>전화번호</th>
-                        <th>수정하기</th>
+                        <th>수정 / 삭제</th>
                       </tr>
                     </thead>
                     <tbody class="text-center">
@@ -77,8 +77,11 @@
                         <td>${item.t_birth }</td>
                         <td>${item.t_tel }</td>
                         <td>
-                          <button class="btn btn-primary custom-btn">
-                            <i class="fas fa-edit"></i>
+                          <button onclick="location.href='adminTrainerDetail.do?id=${item.t_id}'" class="btn btn-primary custom-btn">
+                            <i class="fas fa-user-edit"></i>
+                          </button>
+                          <button onclick="location.href='adminTrainerDelete.do?id=${item.t_id}'" class="btn btn-danger custom-btn">
+                            <i class="fas fa-user-times"></i>
                           </button>
                         </td>
                       </tr>

@@ -67,6 +67,7 @@
                         <th>PT횟수</th>
                         <th>TID</th>
                         <th>담당 트레이너</th>                      
+                        <th>정보 삭제</th>                      
                       </tr>
                     </thead>
                     <tbody class="text-center">
@@ -79,10 +80,13 @@
                         <td>${item.hcount }회</td>
                         <td>${item.tid}</td>
                         <td>${item.t_name}</td>                        
+                        <td>
+                        	<button onclick="location.href='adminHistoryDelete.do?hid=${item.hid}'" class="btn btn-danger custom-btn">
+                            <i class="fas fa-trash-alt"></i>
+                          	</button>
+						</td>                        
                       </tr>
                       </c:forEach>
-                      
-                      
                     </tbody>
                   </table>
                 </div>

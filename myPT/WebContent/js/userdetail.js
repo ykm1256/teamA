@@ -185,7 +185,14 @@ $('input[type=text], input[type=password], input[type=email]').on('keyup', funct
 	});
 	
 
-	
+
+function cancel(){
+	if(confirm("변경 내용은 사라집니다 계속하시겠습니까?")){
+		window.location.href="trainerList.do";
+	}else {
+		return false;
+	}
+}	
 	
 	
 	

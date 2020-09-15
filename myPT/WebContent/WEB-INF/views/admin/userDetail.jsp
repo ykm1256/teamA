@@ -363,13 +363,11 @@
                         </div>                                                
                         <div class="col-md-6">
                           <div class="form-group">
-                            <a class="btn btn-light btn-block" href="javascript:history.back()"
-                            id="cancel"
+                            <a class="btn btn-light btn-block" onclick="cancel()"                            
                               >취소</a
                             >
                           </div>
-                        </div>
-                        
+                        </div>                        
                       </div>
                       </form>                        
                   </div>

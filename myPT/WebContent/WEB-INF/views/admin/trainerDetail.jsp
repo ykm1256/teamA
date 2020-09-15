@@ -12,7 +12,7 @@
     />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>템플릿</title>
+    <title>트레이너 관리</title>
     <link href="/myPT/css/styles.css" rel="stylesheet" />
     <link href="/myPT/css/index.css" rel="stylesheet"/>
     <link href="/myPT/css/widget.css" rel="stylesheet"/>
@@ -47,10 +47,23 @@
                     <h3 class="text-center font-weight-light my-4">
                       트레이너 관리
                     </h3>
-                  </div>
-
+                  </div>                  
                   <div class="card-body">
-                    <form action="adminTrainerUpdate.do" method="post" onsubmit="return check(this)">
+                    <form action="adminTrainerUpdate.do" method="post" enctype="multipart/form-data" onsubmit="return check(this)">
+                    <div class="form-row" id="tphoto">
+                        <div class="col-md-6"> 
+                            <div class="form-group">
+                            <img class="col-md-12 col-xs-6"  src="img/TrainerPhoto/${t.t_photo }">
+                            <input type="text" hidden="true" value="${t.t_photo }" name="prevphoto"> 
+                                <label class="small mb-1" for="photo">                                	
+                                	사진 변경 시 파일 선택(2mb미만의 .jpg .png)                                	          	
+                                </label>
+                                <input class="py-2" id="photo" name="photo" type="file" accept=".jpg, .png">
+                                <div id="imgThumbnail"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
                    
                       <div class="form-row">
                         <div class="col-md-6">
@@ -218,6 +231,7 @@
                               id="password"
                               name="password"
                               type="password"
+                              value="${t.t_pw }"
                               required
                             />                            
                           </div>
@@ -231,6 +245,7 @@
                               class="form-control py-2"
                               id="confirmPassword"
                               type="password"
+                              value="${t.t_pw }"
                               required
                             />
                             <div></div>                            
@@ -280,7 +295,7 @@
                         
                         <div class="col-md-6">
                           <div class="form-group">
-                            <a class="btn btn-light btn-block" href="">취소</a>
+                            <a class="btn btn-light btn-block" onclick="cancel()">취소</a>
                           </div>
                         </div>
                         </div>
