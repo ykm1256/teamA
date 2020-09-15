@@ -42,7 +42,7 @@
                   <a class="nav-link" href="adminHeadcount.do"
                     >출입기록</a
                   >
-                  <a class="nav-link" href="#">스케줄</a>
+                  <a class="nav-link" href="adminSchedule.do">스케줄</a>
                 </nav>
               </div>
               
