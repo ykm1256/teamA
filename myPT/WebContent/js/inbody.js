@@ -1,3 +1,4 @@
+
 //숫자 반올림 num자리까지 표시 
 function numRound(x) 
 {
@@ -164,7 +165,7 @@ var height= 0;
 var weight= 0;
 var fat= 0;
 var muscle= 0;
-var latestMeasuerDay=0;
+var measureDayForInbodyChart=0;
 
 var numOfMyChartDatas=0;
 
@@ -185,6 +186,8 @@ var myWeightChart="";
 var myMuscleChart="";
 var myFatChart="";
 var myInbodyChart="";
+
+
 
 //비교표 -비포 or 애프터 데이터 세팅
 function setBeforeAfterDatas(BAtype, num)
@@ -244,7 +247,7 @@ function setUserBasicInfo(num)
 	weight=resultArray[num].inbody.weight;
 	fat=resultArray[num].inbody.fat;
 	muscle=resultArray[num].inbody.muscle;
-	latestMeasuerDay=resultArray[num].inbody.strDate;
+	measureDayForInbodyChart=resultArray[num].inbody.strDate;
 }
 
 //차트용 데이터 담기
@@ -310,6 +313,12 @@ function removeMyChartDatas(type, num)
 
 function updateMyCharts()
 {
+//	myWeightChart.destroy();
+//	myMuscleChart.destroy();
+//	myFatChart.destroy();
+//	
+//	createMyCharts();
+	
 	myWeightChart.update();
 	myMuscleChart.update();
 	myFatChart.update();
@@ -335,26 +344,29 @@ function getDatas()
 			$("#height").html(height +"cm");
 		
 //		card footer 최근 측정일
-		$("#latestMeasureDay").html(latestMeasuerDay);
+//		$("#measureDayForInbodyChart").html(measureDayForInbodyChart);
 
 
-//		비교 측정일 드롭다운	
+//		비교 측정일 드롭다운	 & 인바디그래프용 날짜 드롭다운
 		$("#beforeMeasureDay").append("<option selected>"+resultArray[1].inbody.strDate+"</option> ");
-		$("#afterMeasureDay").append("<option selected>"+latestMeasuerDay+"</option> ");
+		$("#afterMeasureDay").append("<option selected>"+measureDayForInbodyChart+"</option> ");
+		$("#measureDayForInbodyChart").append("<option selected>"+measureDayForInbodyChart+"</option> ");
 		
 		for(let i=2, length=resultArray.length; i<length; i++)
 		{
 			$("#beforeMeasureDay").append("<option>"+resultArray[i].inbody.strDate+"</option> ");
-			$("#afterMeasureDay").append("<option>"+resultArray[i-1].inbody.strDate+"</option> ");			
+			$("#afterMeasureDay").append("<option>"+resultArray[i-1].inbody.strDate+"</option> ");
+			$("#measureDayForInbodyChart").append("<option>"+resultArray[i].inbody.strDate+"</option> ");
+			
 		}			
 
 		setEnabledAfterSelect(1);
-		setEnabledBeforeSelect(1);
+		setEnabledBeforeSelect(0);
 		
 //	     과거 측정일 값 세팅. 최근 2번째 측정일
 //	      최근 측정일 값을 애프터 데이터에 세팅		
-		setBeforeAfterDatas("before", 1);
-		setBeforeAfterDatas("after", 0);
+		setBeforeAfterDatas("before", 2);
+		setBeforeAfterDatas("after", 1);
 
 //		선택한 날짜 표시
 		showDates();
@@ -408,15 +420,18 @@ var xMap= ["","","표준이하","","","","표준", "","","", "표준이상","","
 		              label: "kg",
 		              hidden: true,
 		              backgroundColor: "#292b2c",
-		              data: inbodyChartMyStatus
+		              data: inbodyChartMyStatus,
+
 		           }],
 		   		 },
 		    animation:{
-		        animateScale: true,
-		        animateRotate:true
+		        animateScale: true,//
+		        animateRotate: true,  //
+		        duration:0
 		    },
 		    options: {
           		responsive: true,
+//          		responsive: false,
 				maintainAspectRatio: false,
 	            plugins: {
 	                datalabels: {
@@ -424,9 +439,10 @@ var xMap= ["","","표준이하","","","","표준", "","","", "표준이상","","
 	                    anchor: "end",
 	                    align: "right",
 	                    offset: 5,
- 						display: function (context) {
-	                        return context.dataset.data[context.dataIndex];
-	                    },
+						formatter: function(value, context) 
+					   {
+						 return context.dataset.data[context.dataIndex]+'%';
+					   },
 	                    font: {
 	                        weight: 'bold',
 	                        size: 15
@@ -464,13 +480,14 @@ var xMap= ["","","표준이하","","","","표준", "","","", "표준이상","","
 		            displayColors: false,
 		            callbacks:{
 		                        label: function(tooltipItem, data) {                  
-		                        return data['datasets'][1]['data'][tooltipItem['index']];
+		                        return data['datasets'][1]['data'][tooltipItem['index']]+'kg';
 		                        }
                  			  }
 				}
 		  }
 		});
 	}
+	
 
 
 //차트 설정
@@ -483,18 +500,21 @@ return {
 	  },
 	  options: {
     		responsive: true,
+//    		responsive: false,
+//			maintainAspectRatio: false,
 	            plugins: {
 	                datalabels: {
 						color: "black",
 	                    anchor: "top",
+						formatter: function(value, context) 
+								   {
+   									 return context.dataset.data[context.dataIndex]+'kg';
+								   },
 	                    align: "center",
 	                    offset: 20,
- 						display: function (context) {
-	                        return context.dataset.data[context.dataIndex];
-	                    },
 	                    font: {
 	                        weight: 'bold',
-	                        size: 15
+	                        size: 11
 	                    },
 	                }
 				},
@@ -567,11 +587,11 @@ myFatChart= new Chart(fatChart, createMyChartConfig(
 	      label: "체지방량(kg)",
 	      lineTension: 0.5,
 	      backgroundColor: "rgba(255,255,255,0)",
-	      borderColor: "rgba(200,80,110,1)",
+	      borderColor: "rgba(255,153,153,1)",
 	      pointRadius: 5,
-	      pointBackgroundColor: "rgba(230,80,110,0.87)",
+	      pointBackgroundColor: "rgba(220,140,110,0.8)",
 	      pointBorderColor: "rgba(255,255,255,0.8)",
-	      pointHoverBackgroundColor: "rgba(2,117,216,1)",
+	      pointHoverBackgroundColor: "rgba(2,120,216,1)",
 	      data: fatChartDatas
 	    }]));
 				
@@ -584,8 +604,25 @@ myFatChart= new Chart(fatChart, createMyChartConfig(
 	getDatas();
 	
 //	차트 그리기
+	
 	createInbodyChart();
 	createMyCharts();
+	
+	
+
+function measureDayForInbodyIsChanged()
+{
+	
+	var idx = $("#measureDayForInbodyChart option").index( $("#measureDayForInbodyChart option:selected") );
+
+		inbodyChartMyStatus.length=0;
+		inbodyChartPerStandard.length=0;
+
+		setUserBasicInfo(idx);
+		addInbodyChartDatas(idx);
+		myInbodyChart.update();
+//		$("#latestMeasureDay").html(latestMeasuerDay);
+}	
 	
 	
 var beforeMeasureDay = document.querySelector("#beforeMeasureDay");
@@ -660,13 +697,7 @@ function beforeAfterChanged(BAtype, num)
 		numOfMyChartDatas= numOfMyChartDatas-numOfExcution;	
 		}
 
-		 inbodyChartMyStatus.length=0;
-		 inbodyChartPerStandard.length=0;
 
-		setUserBasicInfo(num);
-		addInbodyChartDatas(num);
-		myInbodyChart.update();
-		$("#latestMeasureDay").html(latestMeasuerDay);
 	
 			
 	}

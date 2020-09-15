@@ -3,9 +3,11 @@ package com.mypt.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 
 import com.mypt.connection.DBConnection;
 import com.mypt.dto.AdminDto;
+import com.mypt.dto.UserDto;
 
 public class AdminDao {
 	private DBConnection db;
@@ -130,5 +132,79 @@ public class AdminDao {
 			
 			return flag;
 		}
+		
+		
+
+		//세션id, 유효시간 저장(쿠키)
+			public int keepLogin(String sessionId, Timestamp cookieEnd)
+			{
+				Connection con = null;
+				PreparedStatement ps = null;
+				
+				int result=0;
+
+				String sql = "update admin set sessionId=?, cookieEnd=? where id='admin'";
+				try {
+					con = db.getConnection();
+					ps = con.prepareStatement(sql);
+
+					ps.setString(1, sessionId);
+					ps.setTimestamp(2, cookieEnd);
+
+					result= ps.executeUpdate();
+					System.out.println("관리자 쿠키 result:"+ result);
+
+				} 
+				catch (Exception e) 
+				{
+					e.printStackTrace();
+				} 
+				finally 
+				{
+					db.closeConnection(null, ps, con);
+				}
+				
+				return result;
+				
+			}
+			
+			public AdminDto checkSessionId(String sessionId)  //세션아이디로 값 가져오기
+			{
+				Connection con = null;
+				PreparedStatement ps = null;
+				ResultSet rs = null;
+
+				AdminDto dto= null;
+
+				String sql = "select * from admin where sessionId=? and cookieEnd>now()";
+
+				try {
+					con = db.getConnection();
+					ps = con.prepareStatement(sql);
+					
+					ps.setString(1, sessionId);
+					
+					rs = ps.executeQuery();
+
+					if(rs.next()) 
+					{
+						dto = new AdminDto();
+						dto.setId(rs.getString(1));
+						
+					}
+				} 
+				catch (Exception e) 
+				{
+					e.printStackTrace();
+				} 
+				finally 
+				{
+					db.closeConnection(rs, ps, con);
+				}
+				
+				return dto;
+
+			}
+		
 
 }

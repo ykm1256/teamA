@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.mypt.connection.DBConnection;
 import com.mypt.dto.TrainerDto;
+import com.mypt.dto.UserDto;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -479,5 +481,91 @@ return instance;
 			db.closeConnection(null, ps, con);
 		}
 	}
+	
+	
+	//세션id, 유효시간 저장(쿠키)
+		public int keepLogin(String id, String sessionId, Timestamp cookieEnd)
+		{
+			Connection con = null;
+			PreparedStatement ps = null;
+			
+			int result=0;
+
+			String sql = "update trainer set sessionId=?, cookieEnd=? where t_id=?";
+			try {
+				con = db.getConnection();
+				ps = con.prepareStatement(sql);
+
+				ps.setString(1, sessionId);
+				ps.setTimestamp(2, cookieEnd);
+				ps.setString(3, id);
+
+				result= ps.executeUpdate();
+				System.out.println("트레이너 쿠키 result:"+ result);
+
+			} 
+			catch (Exception e) 
+			{
+				e.printStackTrace();
+			} 
+			finally 
+			{
+				db.closeConnection(null, ps, con);
+			}
+			
+			return result;
+			
+		}
+		
+		public TrainerDto checkSessionId(String sessionId)  //세션아이디로 값 가져오기
+		{
+			Connection con = null;
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+
+			TrainerDto td= null;
+
+			String sql = "select * from trainer where sessionId=? and cookieEnd>now()";
+
+			try {
+				con = db.getConnection();
+				ps = con.prepareStatement(sql);
+				
+				ps.setString(1, sessionId);
+				
+				rs = ps.executeQuery();
+
+				if(rs.next()) 
+				{
+					td = new TrainerDto();
+					
+					td.setT_id(rs.getString("t_id"));
+					td.setT_pw(rs.getString("t_pw"));
+					td.setT_name(rs.getString("t_name"));
+					td.setT_gender(rs.getString("t_gender"));
+					td.setT_email(rs.getString("t_email"));
+					td.setT_birth(rs.getString("t_birth"));
+					td.setT_address(rs.getString("t_address"));
+					td.setT_nick(rs.getString("t_nick"));
+					td.setT_zipcode(rs.getString("t_zipcode"));
+					td.setT_tel(rs.getString("t_tel"));
+					td.setT_addrdetail(rs.getString("t_addrdetail"));
+					td.setT_photo(rs.getString("t_photo"));
+					
+				}
+			} 
+			catch (Exception e) 
+			{
+				e.printStackTrace();
+			} 
+			finally 
+			{
+				db.closeConnection(rs, ps, con);
+			}
+			
+			return td;
+
+		}
+	
 
 }

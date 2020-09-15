@@ -50,31 +50,31 @@
 	                  </div>
 	              </div>
 	                  
-	
 	              <div class="card mb-4">
-	                  <div class="card-body p-1" style="width:100%; height:250px">
+	                  <div class="card-body p-1" id="inbodyChartWrapper" style="width:100%; height:250px;">
 	                      <canvas id="inbodyChart"></canvas>
 	                  </div>
 	                  <div class="card-footer">
-	                      측정일: <span id="latestMeasureDay"></span>
+	                 측정일: <select id="measureDayForInbodyChart" class="col-sm-12 col-md-5" onchange="measureDayForInbodyIsChanged()"> 
+	                    </select> 
 	                  </div>
 	              </div>
 	
 		             
 		          <div class="card-deck mb-4">
-	                  <div class="card pt-3 w-100">
-	                      <h6 class="card-title">체중(kg)</h6>
-	                      <canvas id="weightChart" width="100%"></canvas>                            
+	                  <div class="card pt-3">
+	                      <h6 class="card-title w-100">체중(kg)</h6>
+	                  			<canvas id="weightChart"></canvas>  
 	                  </div>
 	
-	                  <div class="card pt-3 w-100">
-	                      <h6 class="card-title">골격근량(kg)</h6>
-	                      <canvas id="muscleChart" width="100%"></canvas>                            
+	                  <div class="card pt-3">
+	                      <h6 class="card-title w-100">골격근량(kg)</h6>
+	                  <canvas id="muscleChart"></canvas>  
 	                  </div>
 	
-	                  <div class="card pt-3 w-100">
-	                      <h6 class="card-title">체지방량(kg)</h6>
-	                      <canvas id="fatChart" width="100%"></canvas>                            
+	                  <div class="card pt-3">
+	                      <h6 class="card-title w-100">체지방량(kg)</h6>
+	                      <canvas id="fatChart"></canvas>                            
 	                  </div>
              	 </div>
 
