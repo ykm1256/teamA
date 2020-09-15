@@ -19,6 +19,7 @@ public class SearchAction implements Action {
 		session.setAttribute("board", "pboard");
 		String nick=session.getAttribute("nick").toString();
 		PboardDao pdao=PboardDao.getInstance();
+		int numPerPage=9;
 		
 		//검색 처리
 		String keyField;
@@ -40,15 +41,15 @@ public class SearchAction implements Action {
 		int nowPage=Integer.parseInt(request.getParameter("page")==null?"1":request.getParameter("page"));
 		String next=request.getParameter("next");
 		String prev=request.getParameter("prev");
-		PagingDto page=new PagingDto(nowPage,keyField,keyWord);
+		PagingDto page=new PagingDto(nowPage,pdao.getTotalCount(keyField, keyWord),numPerPage);
 		if(next!=null) {
 			int nowBlock=Integer.parseInt(next)-1;
 			nowPage=page.getPagePerBlock()*nowBlock+1;
-			page=new PagingDto(nowPage,keyField,keyWord);
+			page=new PagingDto(nowPage,pdao.getTotalCount(keyField, keyWord),numPerPage);
 		}else if(prev!=null){
 			int nowBlock=Integer.parseInt(prev)-1;
 			nowPage=page.getPagePerBlock()*nowBlock+1;
-			page=new PagingDto(nowPage,keyField,keyWord);
+			page=new PagingDto(nowPage,pdao.getTotalCount(keyField, keyWord),numPerPage);
 		}
 
 		ArrayList<PboardDto> parr=pdao.getList(keyField,keyWord,page.getStartPage(), page.getNumPerPage());
