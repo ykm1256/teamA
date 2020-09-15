@@ -6,21 +6,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.mypt.controller.Action;
-import com.mypt.dao.HistoryDao;
-import com.mypt.dto.HistoryDto;
+import com.mypt.dao.ScheduleDao;
+import com.mypt.dto.ScheduleDto;
 
-public class AdminHistoryListAction implements Action {
+public class AdminScheduleListAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
-		HistoryDao hdao = HistoryDao.getInstance();
-		ArrayList<HistoryDto> arr = hdao.getHistoryList();
+		ScheduleDao sdao = ScheduleDao.getInstance();
+		ArrayList<ScheduleDto> arr=sdao.getScheduleList();
 		
 		request.setAttribute("arr", arr);
-		
-		
-		return "admin/historyList";
+
+		return "admin/scheduleList";
 	}
 
 }
