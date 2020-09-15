@@ -1,3 +1,4 @@
+
 //숫자 반올림 num자리까지 표시 
 function numRound(x) 
 {
@@ -186,6 +187,8 @@ var myMuscleChart="";
 var myFatChart="";
 var myInbodyChart="";
 
+
+
 //비교표 -비포 or 애프터 데이터 세팅
 function setBeforeAfterDatas(BAtype, num)
 {
@@ -310,9 +313,15 @@ function removeMyChartDatas(type, num)
 
 function updateMyCharts()
 {
-	myWeightChart.update();
-	myMuscleChart.update();
-	myFatChart.update();
+	myWeightChart.destroy();
+	myMuscleChart.destroy();
+	myFatChart.destroy();
+	
+	createMyCharts();
+	
+//	myWeightChart.update();
+//	myMuscleChart.update();
+//	myFatChart.update();
 }
 
 
@@ -412,11 +421,13 @@ var xMap= ["","","표준이하","","","","표준", "","","", "표준이상","","
 		           }],
 		   		 },
 		    animation:{
-		        animateScale: true,
-		        animateRotate:true
+		        animateScale: true,//
+		        animateRotate: true,  //
+		        duration:0
 		    },
 		    options: {
-          		responsive: true,
+//          		responsive: true,
+//          		responsive: false,
 				maintainAspectRatio: false,
 	            plugins: {
 	                datalabels: {
@@ -482,7 +493,9 @@ return {
 	    datasets: dataSet,
 	  },
 	  options: {
-    		responsive: true,
+//    		responsive: true,
+    		responsive: false,
+			maintainAspectRatio: false,
 	            plugins: {
 	                datalabels: {
 						color: "black",
@@ -584,8 +597,12 @@ myFatChart= new Chart(fatChart, createMyChartConfig(
 	getDatas();
 	
 //	차트 그리기
+	
 	createInbodyChart();
 	createMyCharts();
+	
+	
+	
 	
 	
 var beforeMeasureDay = document.querySelector("#beforeMeasureDay");
@@ -660,13 +677,13 @@ function beforeAfterChanged(BAtype, num)
 		numOfMyChartDatas= numOfMyChartDatas-numOfExcution;	
 		}
 
-		 inbodyChartMyStatus.length=0;
-		 inbodyChartPerStandard.length=0;
-
-		setUserBasicInfo(num);
-		addInbodyChartDatas(num);
-		myInbodyChart.update();
-		$("#latestMeasureDay").html(latestMeasuerDay);
+//		 inbodyChartMyStatus.length=0;
+//		 inbodyChartPerStandard.length=0;
+//
+//		setUserBasicInfo(num);
+//		addInbodyChartDatas(num);
+//		myInbodyChart.update();
+//		$("#latestMeasureDay").html(latestMeasuerDay);
 	
 			
 	}
