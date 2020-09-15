@@ -211,6 +211,7 @@
                               name="password"
                               type="password"
                               required
+                              value="${user.pw }"
                             />                            
                           </div>
                         </div>
@@ -224,6 +225,7 @@
                               id="confirmPassword"
                               type="password"
                               required
+                              value="${user.pw }"
                             />
                             <div></div>
                             
@@ -356,10 +358,9 @@
                       <div class="form-row mt-4 mb-0">
                         <div class="col-md-6">
                           <div class="form-group">
-                          <input type="submit" class="btn btn-primary btn-block" value="수정">
-                            
+                          <input type="submit" class="btn btn-primary btn-block" value="수정">                            
                           </div>
-                        </div>
+                        </div>                                                
                         <div class="col-md-6">
                           <div class="form-group">
                             <a class="btn btn-light btn-block" href="javascript:history.back()"
@@ -368,6 +369,7 @@
                             >
                           </div>
                         </div>
+                        
                       </div>
                       </form>                        
                   </div>

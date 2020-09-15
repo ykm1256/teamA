@@ -1,3 +1,6 @@
+Chart.defaults.global.defaultFontFamily = '-apple-system, BlinkMacSystemFont, "Nanum Gothic", Roboto, "Nanum Gothic", Arial, "Nanum Gothic", sans-serif, "Nanum Gothic",  "Nanum Gothic", "Nanum Gothicl", "Nanum Gothic"';
+
+
 //현재 날짜
 let today = new Date();
 let year = today.getFullYear();

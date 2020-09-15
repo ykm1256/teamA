@@ -85,7 +85,7 @@
                         <td>${item.ptcount }</td>
                         <td>${item.tid}</td>
                         <td>
-                          <button class="btn btn-primary custom-btn">
+                          <button onclick="location.href='adminUserDetail.do?id=${item.id}'" class="btn btn-primary custom-btn">
                             <i class="fas fa-edit"></i>
                           </button>
                         </td>
