@@ -155,7 +155,11 @@ function getChangedComment()
 			
 			if(data.result==1)
 			{
-				if(newComment.paging.totalRecord%numPerPage!=0 || nowPage!= newComment.paging.nowPage) //페이지가 바뀐 경우
+				let beforeTotalRecord = totalRecord;
+				totalRecord= data.paging.totalRecord;
+									
+//				if((totalRecord!=1 && totalRecord%numPerPage==1) || nowPage!= newComment.paging.nowPage) //페이지가 바뀐 경우
+				if(beforeTotalRecord%numPerPage==0 || nowPage!= newComment.paging.nowPage) //페이지가 바뀐 경우
 				{
 					comments= newComment.comments;	
 
@@ -170,14 +174,13 @@ function getChangedComment()
 						nowBlock= data.paging.nowBlock;
 						pageStart= data.paging.pageStart;
 						pageEnd= data.paging.pageEnd;
-						totalRecord= data.paging.totalRecord;
 										
 					getChangedComment();
 					
 				}
 				else  //nowPage가 같아서 가장 최근 것만 덧붙이는 경우  //이 글이 작성될 때는 nowPage가 같기 때문에 밑에 더 붙음
 				{
-					totalRecord= data.paging.totalRecord;
+//					totalRecord= data.paging.totalRecord;
 					
 					  let today = new Date();
 					  today.setHours(today.getHours()-24)
