@@ -12,7 +12,7 @@
     />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>회원 출입 내역</title>
+    <title>회원 PT 스케줄</title>
     <link href="/myPT/css/styles.css" rel="stylesheet" />
     <link href="/myPT/css/index.css" rel="stylesheet"/>
     <link href="/myPT/css/widget.css" rel="stylesheet"/>
@@ -48,7 +48,7 @@
           	<div class="card mb-4">
               <div class="card-header font-weight-bold">
                 <i class="fas fa-table mr-1"></i>
-                회원 출입 내역
+                회원 PT 스케줄
               </div>
               <div class="card-body">
                 <div class="table-responsive">
@@ -62,28 +62,23 @@
                       <tr>
                         <th>이름</th>
                         <th>회원번호</th>
-                        <th>들어온 시간</th>                        
-                        <th>나간 시간</th>                                             
+                        <th>날짜</th>                        
+                        <th>시간</th>
+                        <th>TID</th>
+                        <th>담당 트레이너</th>                      
                       </tr>
                     </thead>
                     <tbody class="text-center">
                       <c:forEach items="${arr }" var="item">
                       <tr>
                         <td>${item.u_name }</td>
-                        <td>${item.h_id }</td>
-                        <td>${item.intime }</td>
-                        <td>
-                        <c:if test="${item.outtime==null }">
-                        X                        
-                        </c:if>
-                        <c:if test="${item.outtime!=null }">
-                        ${item.outtime }
-                        </c:if>
-                        </td>
+                        <td>${item.s_id }</td>
+                        <td>${item.s_date }</td>
+                        <td>${item.s_time }</td>                                                
+                        <td>${item.t_id}</td>
+                        <td>${item.t_name}</td>                        
                       </tr>
-                      </c:forEach>
-                      
-                      
+                      </c:forEach>                                            
                     </tbody>
                   </table>
                 </div>
@@ -99,7 +94,6 @@
       src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js">
     </script>
     <script src="/myPT/js/scripts.js"></script>
-    <script src="/myPT/js/headcountlist.js"></script>
     
     <!-- 데이터 테이블 js -->
     <script src="/myPT/js/dataTables.min.js"></script>

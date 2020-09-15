@@ -16,9 +16,9 @@ public class AdminUserDetailAction implements Action {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
-		String email = "hong@naver.com";
+		String id = request.getParameter("id");
 		UserDao udao = UserDao.getInstance();
-		UserDto user = udao.getUserByEmail(email);
+		UserDto user = udao.getUserById(id);
 		
 
 		

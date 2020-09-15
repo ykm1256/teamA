@@ -1,3 +1,6 @@
+Chart.defaults.global.defaultFontFamily = '-apple-system, BlinkMacSystemFont, "Nanum Gothic", Roboto, "Nanum Gothic", Arial, "Nanum Gothic", sans-serif, "Nanum Gothic",  "Nanum Gothic", "Nanum Gothicl", "Nanum Gothic"';
+
+
 //현재 날짜
 let today = new Date();
 let year = today.getFullYear();
@@ -122,12 +125,16 @@ var charData1 = {
 			yAxisID: "A",
 			data: user,
 			backgroundColor: "rgba(75, 192, 192, 0.8)",
+			
+			
 		},
 		{
 			label: "월 매출(만원)",
 			yAxisID: "B",
 			data: income,
 			backgroundColor: "rgba(54, 162, 235, 0.8)",
+			
+			
 		},
 	],
 };
@@ -145,7 +152,9 @@ var myChart1 = new Chart(ctx1, {
 					ticks: {
 						max: 80,
 						min: 0,
+						
 					},
+					
 				},
 				{
 					id: "B",
@@ -154,7 +163,9 @@ var myChart1 = new Chart(ctx1, {
 					ticks: {
 						max: 800,
 						min: 0,
+						
 					},
+					
 				},
 			],
 		},

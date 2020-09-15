@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import com.mypt.connection.DBConnection;
+import com.mypt.dto.HistoryDto;
 import com.mypt.dto.ScheduleDto;
 
 public class ScheduleDao {
@@ -192,6 +193,45 @@ public class ScheduleDao {
 		} finally {
 			db.closeConnection(null, ps, con);
 		}
+	}
+	
+	//스케줄리스트
+	public ArrayList<ScheduleDto> getScheduleList() {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = null;
+		ScheduleDto scheduleBean = null;
+		ArrayList<ScheduleDto> arr = new ArrayList<ScheduleDto>();
+
+		try {				
+			con = db.getConnection();
+			sql = "select u.name,s.*,t.t_id,t.t_name from schedule s "
+					+ "left outer join user u on s.s_id = u.id "
+					+ "left outer join trainer t on u.tid = t.t_id "
+					+ " order by s.s_date asc";				
+			
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				scheduleBean = new ScheduleDto();				
+				scheduleBean.setU_name(rs.getString("name"));
+				scheduleBean.setS_id(rs.getString("s_id"));
+				scheduleBean.setS_date(rs.getString("s_date"));
+				scheduleBean.setS_time(rs.getNString("s_time"));
+				scheduleBean.setT_id(rs.getString("t_id"));
+				scheduleBean.setT_name(rs.getString("t_name"));			
+				arr.add(scheduleBean);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.closeConnection(rs, ps, con);
+		}
+
+		return arr;
 	}
 	
 }
