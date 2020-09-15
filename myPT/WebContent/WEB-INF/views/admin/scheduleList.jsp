@@ -79,8 +79,8 @@
                         <td>${item.t_id}</td>
                         <td>${item.t_name}</td>                        
                         <td>
-                        	<button onclick="location.href='adminTrainerDelete.do?s_id=${item.s_id}&s_date=${item.s_date }'" class="btn btn-danger custom-btn">
-                            <i class="fas fa-user-times"></i>
+                        	<button onclick="location.href='adminScheduleDelete.do?s_id=${item.s_id}&s_date=${item.s_date}'" class="btn btn-danger custom-btn">
+                            <i class="fas fa-trash-alt"></i>
                           	</button>
 						</td>                        
                       </tr>
