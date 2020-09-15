@@ -27,6 +27,7 @@ public class CommentChangePageAction implements Action
 		CommentDao cdao = CommentDao.getInstance();
 		
 		int nowPage=Integer.parseInt(request.getParameter("nowPage"));
+		
 
 		changedPage.setNowPage(nowPage);
 		Gson gson= new Gson();
@@ -39,6 +40,10 @@ public class CommentChangePageAction implements Action
 		else if(board.equals("pboard"))
 		{
 			arr= cdao.getCommentsForOneCommentPage("pcomment", num, changedPage.getStartPage(), changedPage.getNumPerPage());	
+		}
+		else if(board.equals("qboard"))
+		{
+			arr= cdao.getCommentsForOneCommentPage("qcomment", num, changedPage.getStartPage(), changedPage.getNumPerPage());	
 		}
 				
 		JsonObject jsonData= new JsonObject();
