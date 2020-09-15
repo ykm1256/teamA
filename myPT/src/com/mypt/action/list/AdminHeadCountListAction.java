@@ -16,14 +16,13 @@ public class AdminHeadCountListAction implements Action {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
-		HeadCountDao hdao = HeadCountDao.getInstance();
-		HistoryDto hdto = new HistoryDto();
+		HeadCountDao hdao = HeadCountDao.getInstance();	
 		ArrayList<HeadCountDto> arr = hdao.headcountList();
 		
 		request.setAttribute("arr", arr);
 		
 		
-		return "admin/historyList";
+		return "admin/headcountList";
 	}
 
 }

@@ -172,7 +172,7 @@ public class HeadCountDao {
 		try {
 			con = db.getConnection();
 			String sql = "select u.name,h.* from headcount h "
-					+ "left outer join user u on h.h_id = u.uid;";					
+					+ "left outer join user u on h.h_id = u.id";
 			ps = con.prepareStatement(sql);			
 			rs = ps.executeQuery();
 			while(rs.next()) {
@@ -181,6 +181,8 @@ public class HeadCountDao {
 				dto.setH_id(rs.getString("h_id"));
 				dto.setIntime(rs.getTimestamp("intime"));
 				dto.setOuttime(rs.getTimestamp("outtime"));
+				
+				arr.add(dto);
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
