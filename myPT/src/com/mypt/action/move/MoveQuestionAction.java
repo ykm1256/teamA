@@ -47,7 +47,7 @@ public class MoveQuestionAction implements Action {
 			page = new PagingDto(nowPage,totalRecord,numPerPage);
 		} else if (prev != null) {
 			int nowBlock = Integer.parseInt(prev) - 1;
-			nowPage = page.getPagePerBlock() * nowBlock + 1;
+			nowPage = page.getPagePerBlock() * nowBlock + 5;
 			page = new PagingDto(nowPage,totalRecord,numPerPage);
 		}
 		String keyword = "";

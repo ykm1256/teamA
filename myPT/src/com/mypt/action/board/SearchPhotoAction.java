@@ -11,7 +11,7 @@ import com.mypt.dao.PboardDao;
 import com.mypt.dto.PagingDto;
 import com.mypt.dto.PboardDto;
 
-public class SearchAction implements Action {
+public class SearchPhotoAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -48,7 +48,7 @@ public class SearchAction implements Action {
 			page=new PagingDto(nowPage,pdao.getTotalCount(keyField, keyWord),numPerPage);
 		}else if(prev!=null){
 			int nowBlock=Integer.parseInt(prev)-1;
-			nowPage=page.getPagePerBlock()*nowBlock+1;
+			nowPage=page.getPagePerBlock()*nowBlock+5;
 			page=new PagingDto(nowPage,pdao.getTotalCount(keyField, keyWord),numPerPage);
 		}
 

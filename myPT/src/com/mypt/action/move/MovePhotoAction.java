@@ -36,7 +36,7 @@ public class MovePhotoAction implements Action {
 			page = new PagingDto(nowPage,pdao.getTotalCount(),numPerPage);
 		} else if (prev != null) {
 			int nowBlock = Integer.parseInt(prev) - 1;
-			nowPage = page.getPagePerBlock() * nowBlock + 1;
+			nowPage = page.getPagePerBlock() * nowBlock + 5;
 			page = new PagingDto(nowPage,pdao.getTotalCount(),numPerPage);
 		}
 		ArrayList<PboardDto> parr = pdao.getList(page.getStartPage(), page.getNumPerPage());

@@ -6,7 +6,7 @@ import java.util.Map;
 import com.mypt.action.board.DeleteAction;
 import com.mypt.action.board.LikeAction;
 import com.mypt.action.board.ReplyAction;
-import com.mypt.action.board.SearchAction;
+import com.mypt.action.board.SearchPhotoAction;
 import com.mypt.action.board.SearchCommunityAction;
 import com.mypt.action.board.TestViewAction;
 import com.mypt.action.board.UpdateAction;
@@ -44,7 +44,6 @@ import com.mypt.action.login.TrainerLoginAction;
 import com.mypt.action.login.UserLoginAction;
 import com.mypt.action.move.MoveBoardDetailAction;
 import com.mypt.action.move.MoveBoardUpdateAction;
-import com.mypt.action.move.MoveCommunityActionBackup;
 import com.mypt.action.move.MoveCommunityAction;
 import com.mypt.action.move.MoveInbody;
 import com.mypt.action.move.MoveIntroAction;
@@ -182,7 +181,7 @@ public class ActionFactory
 		// 포토게시판 이동
 		map.put("/movePhoto",new MovePhotoAction());
 		// 포토게시판 검색
-		map.put("/searchPhoto",new SearchAction());
+		map.put("/searchPhoto",new SearchPhotoAction());
 		
 		map.put("/testBoardView",new TestViewAction());
 		map.put("/commentInsert", new CommentInsertAction());
