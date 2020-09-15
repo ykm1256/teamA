@@ -206,10 +206,10 @@ public class ScheduleDao {
 
 		try {				
 			con = db.getConnection();
-			sql = "select u.name,s.*,t.t_name from schedule s "
+			sql = "select u.name,s.*,t.t_id,t.t_name from schedule s "
 					+ "left outer join user u on s.s_id = u.id "
 					+ "left outer join trainer t on u.tid = t.t_id "
-					+ " order by h.paydate desc";				
+					+ " order by s.s_date asc";				
 			
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
