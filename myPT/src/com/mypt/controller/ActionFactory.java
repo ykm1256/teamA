@@ -20,6 +20,7 @@ import com.mypt.action.board.comment.CommentUpdateAction;
 import com.mypt.action.check.EmailCheckAction;
 import com.mypt.action.check.NickCheckAction;
 import com.mypt.action.crowded.CrowdedAction;
+import com.mypt.action.detail.AdminTrainerDeleteAction;
 import com.mypt.action.detail.AdminTrainerDetailAction;
 import com.mypt.action.detail.AdminTrainerUpdateAction;
 import com.mypt.action.detail.AdminUserDeleteAction;
@@ -229,7 +230,8 @@ public class ActionFactory
 		
 		//유저 삭제
 		map.put("/adminUserDelete", new AdminUserDeleteAction());
-		
+		//트레이너 삭제
+		map.put("/adminTrainerDelete", new AdminTrainerDeleteAction());
 		
 		
 	}
