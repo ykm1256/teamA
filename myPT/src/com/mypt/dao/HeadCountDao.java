@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 import com.mypt.connection.DBConnection;
 import com.mypt.dto.HeadCountDto;
@@ -160,6 +161,35 @@ public class HeadCountDao {
 		}
 		
 		return result;
+	}
+	
+	public ArrayList<HeadCountDto> headcountList() {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		ArrayList<HeadCountDto> arr = new ArrayList<HeadCountDto>();	
+		
+		try {
+			con = db.getConnection();
+			String sql = "select u.name,h.* from headcount h "
+					+ "left outer join user u on h.h_id = u.uid;";					
+			ps = con.prepareStatement(sql);			
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				HeadCountDto dto = new HeadCountDto();
+				dto.setU_name(rs.getString("name"));
+				dto.setH_id(rs.getString("h_id"));
+				dto.setIntime(rs.getTimestamp("intime"));
+				dto.setOuttime(rs.getTimestamp("outtime"));
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.closeConnection(rs, ps, con);
+		}
+		return arr;
+		
 	}
 	
 	
