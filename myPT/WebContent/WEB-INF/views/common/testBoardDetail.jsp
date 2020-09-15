@@ -350,6 +350,7 @@
   
   <script>  
   
+  
 		  
 var nowPage= ${paging.nowPage};
 var numPerPage= ${paging.numPerPage};

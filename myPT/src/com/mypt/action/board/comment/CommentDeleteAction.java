@@ -4,6 +4,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.mypt.controller.Action;
 import com.mypt.dao.CommentDao;
 import com.mypt.dto.TestPagingDto;
@@ -21,21 +24,32 @@ public class CommentDeleteAction implements Action {
 		CommentDao cdao = CommentDao.getInstance();
 		
 		TestPagingDto paging= (TestPagingDto)session.getAttribute("paging");
-		int result = 0;
+		Integer deleteResult = 0;
 		
 		if(board.equals("cboard")) 
 		{		
-			result= cdao.commentDelete("ccomment", c_num);
+			deleteResult= cdao.commentDelete("ccomment", c_num);
+			
 		}
 		else if(board.equals("pboard"))
 		{
-			result= cdao.commentDelete("pcomment", c_num);
+			deleteResult= cdao.commentDelete("pcomment", c_num);
 		}
 		
 		paging.setTotalRecord(paging.getTotalRecord()-1);
 		session.setAttribute("paging", paging);
-		request.setAttribute("result", result);
 		
+		
+		Gson gson = new Gson();
+		JsonObject job= new JsonObject();
+		
+		
+		job.add("paging", gson.fromJson(gson.toJson(paging, TestPagingDto.class), JsonObject.class));		
+		job.addProperty("result", deleteResult);
+		
+	    response.setContentType("application/json; charset=utf-8");
+		
+		request.setAttribute("result", job);
 		return "callback";
 	}
 

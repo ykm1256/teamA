@@ -39,14 +39,16 @@ public class ViewAction implements Action {
 		String nick = session.getAttribute("nick").toString();
 		CommentDao comdao = CommentDao.getInstance();
 
-		/// 댓글 페이징
-		int numPerPage = 20;
-		int pagePerBlock = 5;
-		int totalRecord = 0;
-		int totalPage = 0;
-		int nowPage = 0;
+		
+		///댓글 페이징
+				int numPerPage=10;
+				int pagePerBlock=5;		
+				int totalRecord=0;
+				int totalPage=0;
+				int nowPage=0;
+		
+		if(board.equals("cboard")) {		
 
-		if (board.equals("cboard")) {
 			CboardDto dto = new CboardDto();
 			CboardDao dao = CboardDao.getInstance();
 			LikeDao ldao = LikeDao.getInstance();

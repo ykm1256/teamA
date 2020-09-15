@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.mypt.controller.Action;
@@ -25,7 +26,7 @@ public class CommentInsertAction implements Action
 
 		String board = session.getAttribute("board").toString();
 		
-		int insertResult = 0;
+		Integer insertResult = 0;
 		
 		Gson gson = new Gson();
 		
@@ -75,7 +76,10 @@ public class CommentInsertAction implements Action
 				paging.setTotalRecord(paging.getTotalRecord()+1);
 				paging.setNowPage(paging.getTotalPage());					
 				arr = cdao.getCommentsForOneCommentPage("pcomment", num, paging.getStartPage(), paging.getNumPerPage());				
-				result.add("comments", arr);							
+				
+				result.addProperty("insertResult", gson.toJson(insertResult));
+				result.add("comments", arr);
+				
 			}
 			else
 			{
@@ -87,7 +91,7 @@ public class CommentInsertAction implements Action
 					comment = cdao.getLastComment("pcomment", num);					
 				}
 				
-					result.add("comments", gson.fromJson(gson.toJson(comment, CommentDto.class), JsonObject.class));
+				result.add("comments", gson.fromJson(gson.toJson(comment, CommentDto.class), JsonObject.class));
 
 				
 			}
@@ -96,7 +100,7 @@ public class CommentInsertAction implements Action
 		
 		session.setAttribute("paging", paging);	
 		result.add("paging", gson.fromJson(gson.toJson(paging, TestPagingDto.class), JsonObject.class));
-		
+		result.addProperty("result", insertResult);
 		request.setAttribute("result", result);	
 		
 	    response.setContentType("application/json; charset=utf-8");
