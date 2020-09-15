@@ -82,3 +82,14 @@ $(function(){
 	});	
 	
 });
+
+$('#demo').on('slid.bs.carousel', function () {
+	if($("#tlogin").attr("class")=="carousel-item active"){
+		$("#id").focus();
+	}
+	if($("#ulogin").attr("class")=="carousel-item active"){
+		$("#email").focus();
+	}
+});
+
+

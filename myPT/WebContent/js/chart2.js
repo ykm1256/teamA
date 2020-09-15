@@ -153,23 +153,50 @@ var myChart2 = new Chart(ctx2, {
 		}
 	}
 	var tmonth = document.querySelector("#tmonth");	
-	var data = new String();	
-	for (var i = 0; i < monthtrainer.length; i++) {			
+	var data = new String();
+	if(monthtrainer.length>1){
+		for (var i = 0; i < monthtrainer.length; i++) {			
 	
-		data += "<div class='card'><div id='tmonthphoto"+(i+1)+"'></div><div class='card-body'><div id='tmonthname"+(i+1)+"'></div></div></div>";			
+		data += "<div class='card'><div class='card-body'><div id='tmonthname"+(i+1)+"'></div></div></div>";			
 		
-	}
-	tmonth.innerHTML = data
-	
-	for(var i=0;i<monthtrainer.length;i++){
-		var tmonthname = document.querySelector("#tmonthname"+(i+1));
-		var tmonthphoto = document.querySelector("#tmonthphoto"+(i+1));
-		var namedata = "<h5 class='card-title'>" + monthtrainer[i] + " 트레이너 </h5>";
-		var photodata = "<img src='img/TrainerPhoto/"+monthtrainerphoto[i]+"' class='card-img-top' />";
+		}
+		tmonth.innerHTML = data;
+		
+		for(var i=0;i<monthtrainer.length;i++){
+			var tmonthname = document.querySelector("#tmonthname"+(i+1));			
+			var namedata = "<h5 class='card-title'>" + monthtrainer[i] + " 트레이너 </h5>";	
+			tmonthname.innerHTML = namedata;
+		}
+	}else {
+		data += "<div class='card'><div id='tmonthphoto'></div><div class='card-body'><div id='tmonthname'></div></div></div>";
+		tmonth.innerHTML = data;
+		
+		var tmonthname = document.querySelector("#tmonthname");
+		var tmonthphoto = document.querySelector("#tmonthphoto");
+		var namedata = "<h5 class='card-title'>" + monthtrainer[0] + " 트레이너 </h5>";
+		var photodata = "<img src='img/TrainerPhoto/"+monthtrainerphoto[0]+"' class='card-img-top' />";
 				
 		tmonthphoto.innerHTML = photodata;
 		tmonthname.innerHTML = namedata;
+		
 	}
+	
+//	for (var i = 0; i < monthtrainer.length; i++) {			
+//	
+//		data += "<div class='card'><div id='tmonthphoto"+(i+1)+"'></div><div class='card-body'><div id='tmonthname"+(i+1)+"'></div></div></div>";			
+//		
+//	}
+//	tmonth.innerHTML = data
+//	
+//	for(var i=0;i<monthtrainer.length;i++){
+//		var tmonthname = document.querySelector("#tmonthname"+(i+1));
+//		var tmonthphoto = document.querySelector("#tmonthphoto"+(i+1));
+//		var namedata = "<h5 class='card-title'>" + monthtrainer[i] + " 트레이너 </h5>";
+//		var photodata = "<img src='img/TrainerPhoto/"+monthtrainerphoto[i]+"' class='card-img-top' />";
+//				
+//		tmonthphoto.innerHTML = photodata;
+//		tmonthname.innerHTML = namedata;
+//	}
 
 /////////////////이달의 트레이너
 
@@ -268,7 +295,7 @@ $("#selectmonth").change(function() {
 
 	//////////////////차트 다시그리기
 	
-// 이달의 트레이너 처음 뿌릴 때	
+	// 이달의 트레이너 처음 뿌릴 때	
 	var monthtrainer = new Array();
 	var monthtrainerphoto = new Array();
 	var max = Math.max.apply(null, income);
@@ -279,23 +306,62 @@ $("#selectmonth").change(function() {
 		}
 	}
 	var tmonth = document.querySelector("#tmonth");	
-	var data = new String();	
-	for (var i = 0; i < monthtrainer.length; i++) {			
+	var data = new String();
+	if(monthtrainer.length>1){
+		for (var i = 0; i < monthtrainer.length; i++) {			
 	
-		data += "<div class='card'><div id='tmonthphoto"+(i+1)+"'></div><div class='card-body'><div id='tmonthname"+(i+1)+"'></div></div></div>";		
+		data += "<div class='card'><div class='card-body'><div id='tmonthname"+(i+1)+"'></div></div></div>";			
 		
-	}
-	tmonth.innerHTML = data
-	
-	for(var i=0;i<monthtrainer.length;i++){
-		var tmonthname = document.querySelector("#tmonthname"+(i+1));
-		var tmonthphoto = document.querySelector("#tmonthphoto"+(i+1));
-		var namedata = "<h5 class='card-title'>" + monthtrainer[i] + " 트레이너 </h5>";
-		var photodata = "<img src='img/TrainerPhoto/"+monthtrainerphoto[i]+"' class='card-img-top' />";
+		}
+		tmonth.innerHTML = data;
 		
+		for(var i=0;i<monthtrainer.length;i++){
+			var tmonthname = document.querySelector("#tmonthname"+(i+1));			
+			var namedata = "<h5 class='card-title'>" + monthtrainer[i] + " 트레이너 </h5>";	
+			tmonthname.innerHTML = namedata;
+		}
+	}else {
+		data += "<div class='card'><div id='tmonthphoto'></div><div class='card-body'><div id='tmonthname'></div></div></div>";
+		tmonth.innerHTML = data;
+		
+		var tmonthname = document.querySelector("#tmonthname");
+		var tmonthphoto = document.querySelector("#tmonthphoto");
+		var namedata = "<h5 class='card-title'>" + monthtrainer[0] + " 트레이너 </h5>";
+		var photodata = "<img src='img/TrainerPhoto/"+monthtrainerphoto[0]+"' class='card-img-top' />";
+				
 		tmonthphoto.innerHTML = photodata;
 		tmonthname.innerHTML = namedata;
+		
 	}
+	
+//// 이달의 트레이너 처음 뿌릴 때	
+//	var monthtrainer = new Array();
+//	var monthtrainerphoto = new Array();
+//	var max = Math.max.apply(null, income);
+//	for (var i = 0; i < income.length; i++) {
+//		if (income[i] == max) {
+//			monthtrainer.push(tname[i]);
+//			monthtrainerphoto.push(tphoto[i]);
+//		}
+//	}
+//	var tmonth = document.querySelector("#tmonth");	
+//	var data = new String();	
+//	for (var i = 0; i < monthtrainer.length; i++) {			
+//	
+//		data += "<div class='card'><div id='tmonthphoto"+(i+1)+"'></div><div class='card-body'><div id='tmonthname"+(i+1)+"'></div></div></div>";		
+//		
+//	}
+//	tmonth.innerHTML = data
+//	
+//	for(var i=0;i<monthtrainer.length;i++){
+//		var tmonthname = document.querySelector("#tmonthname"+(i+1));
+//		var tmonthphoto = document.querySelector("#tmonthphoto"+(i+1));
+//		var namedata = "<h5 class='card-title'>" + monthtrainer[i] + " 트레이너 </h5>";
+//		var photodata = "<img src='img/TrainerPhoto/"+monthtrainerphoto[i]+"' class='card-img-top' />";
+//		
+//		tmonthphoto.innerHTML = photodata;
+//		tmonthname.innerHTML = namedata;
+//	}
 	
 
 /////////////////이달의 트레이너

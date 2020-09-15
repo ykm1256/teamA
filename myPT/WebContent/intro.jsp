@@ -26,7 +26,7 @@
       <div class="carousel-inner">
         <!-- 슬라이드 쇼 -->
 
-        <div class="carousel-item">
+        <div class="carousel-item" id="tlogin">
           <div class="container">
             <div class="row justify-content-center">
               <div class="col-lg-5 mt-5">
@@ -120,17 +120,18 @@
                   background-color: rgb(63, 72, 204);
                   border-color: rgb(63, 72, 204);
                 "
+                
                 data-slide="next"
-                ><h4>로그인</h4></a
+                ><h4 >로그인</h4></a
               >
             </div>
 
             <a href="#demo" data-slide="prev" style="text-decoration: none">
-              <h5 class="text-white-50 mt-3">트레이너 로그인</h5>
+              <h5 class="text-white-50 mt-3" >트레이너 로그인</h5>
             </a>
           </div>
         </div>
-        <div class="carousel-item">
+        <div class="carousel-item" id="ulogin">
           <div class="container">
             <div class="row justify-content-center">
               <div class="col-lg-5 mt-5">
