@@ -7,9 +7,26 @@ function changePage(page)
 
 function changeBlock(block)
 {
-	 nowPage= pagePerBlock*(block-1)+1;	  
-	 getChangedComment();
+	if(block<nowBlock) //이전
+	{
+		nowPage= pagePerBlock*(block-1)+pagePerBlock;
+	}
+	else //이후
+	{	
+		nowPage= pagePerBlock*(block-1)+1;	  
+	}
+	
+	nowBlock=block;
+	getChangedComment();
 }
+
+
+//function changeBlock(block)
+//{
+//	nowPage= pagePerBlock*(block-1)+1;	  	
+//	nowBlock=block;
+//	getChangedComment();
+//}
 
 
 function setComment()
@@ -81,7 +98,8 @@ function setBlock()
 			
 		if(totalPage>0 && nowBlock>1)
 		{
-		   $('#page').prepend('<li class="page-item"><span class="page-link" style="cursor:pointer;" onclick="changeBlock('+(nowBlock-1)+')"> < </span></li>');					   
+//		   $('#page').prepend('<li class="page-item"><span class="page-link" style="cursor:pointer;" onclick="changeBlock('+(nowBlock-1)+')"> < </span></li>');	
+			$('#page').prepend('<li class="page-item"><span class="page-link" style="cursor:pointer;" onclick="changeBlock('+(nowBlock-1)+')"> < </span></li>');	
 		}
 	
 		for(var i = pageStart; i<=pageEnd; i++)
@@ -155,23 +173,25 @@ function getChangedComment()
 			
 			if(data.result==1)
 			{
-				let beforeTotalRecord = totalRecord;
+//				let beforeTotalRecord = totalRecord;
 				totalRecord= data.paging.totalRecord;
+				totalPage= data.paging.totalPage;
 									
-//				if((totalRecord!=1 && totalRecord%numPerPage==1) || nowPage!= newComment.paging.nowPage) //페이지가 바뀐 경우
-				if(beforeTotalRecord%numPerPage==0 || nowPage!= newComment.paging.nowPage) //페이지가 바뀐 경우
+				if((totalRecord!=1 && totalRecord%numPerPage==1) || nowPage!= newComment.paging.nowPage) //페이지가 바뀐 경우
+//				if(totalRecord!=0 && beforeTotalRecord%numPerPage==0 || nowPage!= newComment.paging.nowPage) //페이지가 바뀐 경우
 				{
 					comments= newComment.comments;	
 
 					if(newComment.paging.totalRecord%numPerPage!=0)
 						{
-							nowPage= nowPage+1;					
-						}
+							nowPage= totalPage;						
+						}					
 					else
 						{
 							nowPage= data.paging.nowPage;
 						}
 						nowBlock= data.paging.nowBlock;
+						totalBlock=data.paging.totalBlock;
 						pageStart= data.paging.pageStart;
 						pageEnd= data.paging.pageEnd;
 										
