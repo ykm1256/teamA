@@ -69,7 +69,7 @@
                         <th>만료일</th>
                         <th>남은 횟수</th>
                         <th>담당 트레이너</th>
-                        <th>수정하기</th>
+                        <th>수정 / 삭제</th>
                       </tr>
                     </thead>
                     <tbody class="text-center">
@@ -86,13 +86,14 @@
                         <td>${item.tid}</td>
                         <td>
                           <button onclick="location.href='adminUserDetail.do?id=${item.id}'" class="btn btn-primary custom-btn">
-                            <i class="fas fa-edit"></i>
+                            <i class="fas fa-user-edit"></i>
+                          </button>
+                          <button onclick="location.href='adminUserDelete.do?id=${item.id}'" class="btn btn-danger custom-btn">
+                            <i class="fas fa-user-times"></i>
                           </button>
                         </td>
                       </tr>
-                      </c:forEach>
-                      
-                      
+                      </c:forEach> 
                     </tbody>
                   </table>
                 </div>

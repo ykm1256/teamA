@@ -74,3 +74,10 @@
   visibility: visible;
   opacity: 1;
 }
+
+/* 커스텀 버튼 */
+.custom-btn{
+	display:inline-flex !important;
+}
+
+

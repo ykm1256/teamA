@@ -20,14 +20,17 @@ import com.mypt.action.board.comment.CommentUpdateAction;
 import com.mypt.action.check.EmailCheckAction;
 import com.mypt.action.check.NickCheckAction;
 import com.mypt.action.crowded.CrowdedAction;
+import com.mypt.action.detail.AdminTrainerDeleteAction;
 import com.mypt.action.detail.AdminTrainerDetailAction;
 import com.mypt.action.detail.AdminTrainerUpdateAction;
+import com.mypt.action.detail.AdminUserDeleteAction;
 import com.mypt.action.detail.AdminUserDetailAction;
 import com.mypt.action.detail.AdminUserUpdateAction;
 import com.mypt.action.detail.TrainerMyDetailAction;
 import com.mypt.action.detail.TrainerMyUpdateAction;
 import com.mypt.action.detail.UserMyDetailAction;
 import com.mypt.action.detail.UserMyUpdateAction;
+import com.mypt.action.history.AdminHistoryDeleteAction;
 import com.mypt.action.inbody.UserInbodyResultAction;
 import com.mypt.action.income.IncomeAction;
 import com.mypt.action.income.IncomeTrainerAction;
@@ -65,6 +68,7 @@ import com.mypt.action.qr.QrCheckAction;
 import com.mypt.action.qr.QrViewAction;
 import com.mypt.action.register.AdminTrainerRegisterAction;
 import com.mypt.action.register.AdminUserRegisterAction;
+import com.mypt.action.schedule.AdminScheduleDeleteAction;
 import com.mypt.action.schedule.ScheduleLoadAction;
 import com.mypt.action.schedule.TrainerPTFinishAction;
 import com.mypt.action.schedule.TrainerScheduleSettingAction;
@@ -226,6 +230,14 @@ public class ActionFactory
 		//스케줄 리스트
 		map.put("/adminSchedule",new AdminScheduleListAction());
 		
+		//유저 삭제
+		map.put("/adminUserDelete", new AdminUserDeleteAction());
+		//트레이너 삭제
+		map.put("/adminTrainerDelete", new AdminTrainerDeleteAction());
+		//스케줄 삭제
+		map.put("/adminScheduleDelete",new AdminScheduleDeleteAction());
+		//결제내역 삭제
+		map.put("/adminHistoryDelete",new AdminHistoryDeleteAction());
 		
 		
 	}
