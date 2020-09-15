@@ -66,6 +66,7 @@
                         <th>시간</th>
                         <th>TID</th>
                         <th>담당 트레이너</th>                      
+                        <th>정보 삭제</th>                      
                       </tr>
                     </thead>
                     <tbody class="text-center">
@@ -77,6 +78,11 @@
                         <td>${item.s_time }</td>                                                
                         <td>${item.t_id}</td>
                         <td>${item.t_name}</td>                        
+                        <td>
+                        	<button onclick="location.href='adminTrainerDelete.do?s_id=${item.s_id}&s_date=${item.s_date }'" class="btn btn-danger custom-btn">
+                            <i class="fas fa-user-times"></i>
+                          	</button>
+						</td>                        
                       </tr>
                       </c:forEach>                                            
                     </tbody>

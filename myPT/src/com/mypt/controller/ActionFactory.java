@@ -22,6 +22,7 @@ import com.mypt.action.check.NickCheckAction;
 import com.mypt.action.crowded.CrowdedAction;
 import com.mypt.action.detail.AdminTrainerDetailAction;
 import com.mypt.action.detail.AdminTrainerUpdateAction;
+import com.mypt.action.detail.AdminUserDeleteAction;
 import com.mypt.action.detail.AdminUserDetailAction;
 import com.mypt.action.detail.AdminUserUpdateAction;
 import com.mypt.action.detail.TrainerMyDetailAction;
@@ -225,6 +226,9 @@ public class ActionFactory
 		
 		//스케줄 리스트
 		map.put("/adminSchedule",new AdminScheduleListAction());
+		
+		//유저 삭제
+		map.put("/adminUserDelete", new AdminUserDeleteAction());
 		
 		
 		
