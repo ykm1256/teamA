@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -111,10 +112,21 @@
                       <div class="widget-content-wrapper">
                         <div class="widget-content-left">
                           <div class="widget-heading">담당 트레이너</div>
-                          <div class="widget-subheading">${t_nick }</div>
+                          <c:if test="${t_name != null }">
+                          	<div class="widget-subheading">${t_nick }</div>
+                          </c:if>
+                          
                         </div>
                         <div class="widget-content-right">
-                          <div class="widget-numbers text-primary">${t_name }</div>
+                        <c:choose>
+                        	<c:when test="${t_name != null }">
+                        		<div class="widget-numbers text-primary">${t_name }</div>
+                        	</c:when>
+                        	<c:otherwise>
+                        		<div class="widget-numbers text-dark">미정</div>
+                        	</c:otherwise>
+                        </c:choose>
+                          
                         </div>
                       </div>
                     </div>
@@ -127,9 +139,18 @@
                           <div class="widget-subheading"></div>
                         </div>
                         <div class="widget-content-right">
-                          <div class="widget-numbers text-warning">
-                            ${startdate }
-                          </div>
+                        <c:choose>
+                        	<c:when test="${startdate != null }">
+                        		<div class="widget-numbers text-warning">
+                            		${startdate }
+                          		</div>
+                        	</c:when>
+                        	<c:otherwise>
+                        		<div class="widget-numbers text-dark">
+                            		미정
+                          		</div>
+                        	</c:otherwise>
+                        </c:choose>                          
                         </div>
                       </div>
                     </div>
@@ -142,7 +163,17 @@
                           <div class="widget-subheading"></div>
                         </div>
                         <div class="widget-content-right">
-                          <div class="widget-numbers text-dark">${enddate }</div>
+                        <c:choose>
+                        	<c:when test="${enddate != null }">
+                        		<div class="widget-numbers text-dark">${enddate }</div>
+                        	</c:when>
+                        	<c:otherwise>
+                        		<div class="widget-numbers text-dark">
+                            		미정
+                          		</div>
+                        	</c:otherwise>
+                        </c:choose>
+                          
                         </div>
                       </div>
                     </div>

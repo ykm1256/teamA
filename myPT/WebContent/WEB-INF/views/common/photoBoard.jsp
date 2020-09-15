@@ -53,7 +53,16 @@
 							<h3 class="mb-5 mt-3">포토 게시판</h3>
 
 							<div class="row">
-								<c:forEach items="${photoList }" var="item" varStatus="status">
+								<c:choose>
+									<c:when test="${photoList[0]==null }">
+										<div class="col-12 text-center mb-5">
+											<hr>
+											<h2 class="mt-5 mb-5">게시글이 없습니다.</h2>
+											<hr>
+										</div>
+									</c:when>
+									<c:otherwise>
+										<c:forEach items="${photoList }" var="item" varStatus="status">
 									<div class="col-md-6 col-xs-12 col-lg-4">
 										<div class="card border-0" id="card${item.num}">
 											<p class="card-text mb-0 text-muted" style="font-size: 14px">${item.date }</p>
@@ -153,6 +162,9 @@
 										</div>
 									</div>
 								</c:forEach>
+									</c:otherwise>
+								</c:choose>
+								
 							</div>
 
 							<div class="form-group mt-3 float-right">
