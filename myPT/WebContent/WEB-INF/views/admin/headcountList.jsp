@@ -70,9 +70,16 @@
                       <c:forEach items="${arr }" var="item">
                       <tr>
                         <td>${item.u_name }</td>
-                        <td>${item.hid }</td>
-                        <td>${item.paydate }</td>
-                        <td>${item.price }만원</td>
+                        <td>${item.h_id }</td>
+                        <td>${item.intime }</td>
+                        <td>
+                        <c:if test="${item.outtime==null }">
+                        X                        
+                        </c:if>
+                        <c:if test="${item.outtime!=null }">
+                        ${item.outtime }
+                        </c:if>
+                        </td>
                       </tr>
                       </c:forEach>
                       
@@ -92,6 +99,7 @@
       src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js">
     </script>
     <script src="/myPT/js/scripts.js"></script>
+    <script src="/myPT/js/headcountlist.js"></script>
     
     <!-- 데이터 테이블 js -->
     <script src="/myPT/js/dataTables.min.js"></script>

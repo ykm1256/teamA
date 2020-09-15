@@ -97,6 +97,7 @@ public class UserDao {
 				userBean.setPtcount(rs.getInt("ptcount"));
 				userBean.setTid(rs.getString("tid"));
 				userBean.setTel(rs.getString("tel"));
+				userBean.setZipcode(rs.getString("zipcode"));
 				userBean.setAddrdetail(rs.getString("addrdetail"));
 			}
 		} catch (Exception e) {
