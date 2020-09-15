@@ -28,7 +28,7 @@ public class ScheduleDao {
 		PreparedStatement ps = null;
 		try {
 			con = db.getConnection();
-			String sql = "insert into schedule values(?,?,?)";
+			String sql = "insert into schedule(s_id,s_date,s_time) values(?,?,?)";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, sd.getS_id());
 			ps.setString(2, sd.getS_date());

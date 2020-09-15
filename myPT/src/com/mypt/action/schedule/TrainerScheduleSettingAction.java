@@ -15,7 +15,7 @@ public class TrainerScheduleSettingAction implements Action {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
-		String id=(String)session.getAttribute("id");
+		String id=(String)session.getAttribute("uid");
 		ProgramDao pdao=ProgramDao.getInstance();
 		ScheduleDao sdao=ScheduleDao.getInstance();
 		
