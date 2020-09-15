@@ -8,20 +8,12 @@ function paging(keyWord,page,head){
 		window.location.href="searchCommunity.do?page="+page+"&head="+head;
 	}
 }
-function ltPaging(keyWord,arrow,head){
-	if((keyWord==null||keyWord=="")&&head=="all"){
-		window.location.href="moveCommunity.do?prev="+arrow;
-	}else{
-		window.location.href="searchCommunity.do?prev="+arrow+"&head="+head;
-	}
-}
-
-function gtPaging(keyWord,arrow,head){
+function gtltPaging(keyWord,arrow,head){
 	if((keyWord==null||keyWord=="")&&head=="all"){
 		window.location.href="moveCommunity.do?next="+arrow;
 	}else{
 		window.location.href="searchCommunity.do?next="+arrow+"&head="+head;
-	}
+	}s
 }
 
 //검색 확인

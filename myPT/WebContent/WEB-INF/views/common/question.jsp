@@ -58,80 +58,40 @@
 						<div class="col-12">
 							<div class="card" style="overflow: auto">
 								<div class="card-body">
-									<a href="moveCommunity.do"
+									<a href="moveQuestion.do"
 										class="text-decoration-none text-dark"><h3
-											class="card-title text-center">커뮤니티</h3></a>
-								</div>								
-								<c:choose>
-								<c:when test="${sessionScope.head=='정보'}">
-									<select class="form-control text-center col-md-2" id="head"
-										name="head">
-
-										<option value="all">전체보기</option>
-										<option value="정보" selected>정보</option>
-										<option value="잡담">잡담</option>
-
-									</select>
-									</c:when>
-									<c:when test="${sessionScope.head=='잡담'}">
-									<select class="form-control text-center col-md-2" id="head"
-										name="head">
-										<option value="all" >전체보기</option>
-										<option value="정보">정보</option>
-										<option value="잡담" selected>잡담</option>
-									</select>
-									</c:when>
-									<c:otherwise>
-									<select class="form-control text-center col-md-2" id="head"
-										name="head">
-										<option value="all" selected>전체보기</option>
-										<option value="정보">정보</option>
-										<option value="잡담">잡담</option>
-									</select>
-									</c:otherwise>
-									
-									
-									</c:choose>
+											class="card-title text-center">질문게시판</h3></a>
+								</div>	
 								
 								<div class="table-responsive">
 									<table class="table mb-0">
 										<thead class="thead-light text-center">
 											<tr>
-												<th>말머리</th>
+												
 												<th id="title" style="width: 50%">제목</th>
 												<th>작성자</th>
 												<th>작성일자</th>
 												<th>조회수</th>
-												<th>좋아요</th>
+												
 											</tr>
 										</thead>
 										<tbody class="customtable text-center">
 
 											<c:choose>
-												<c:when test="${carr[0]==null }">
+												<c:when test="${qarr[0]==null }">
 													<tr align="center">
 														<td colspan="6">등록된 게시물이 없습니다.</td>
 													</tr>
 												</c:when>
 												<c:otherwise>
-													<c:forEach items="${carr }" var="item" varStatus="status">
+													<c:forEach items="${qarr }" var="item" varStatus="status">
 														<tr align="center">
-															<td><c:if test="${item.depth<=0 }">
-																	<c:if test="${item.head=='정보'}">
-																		<div class="badge badge-primary">${item.head }</div>
-																	</c:if>
-																	<c:if test="${item.head=='잡담' }">
-																		<div class="badge badge-success">${item.head }</div>
-																	</c:if>
-																</c:if></td>
-
 															<c:if test="${item.depth>0 }">
 																<td align="left">
 																<c:forEach var="i" begin="1"
 																		end="${item.depth-1}" varStatus="a">
 																		&nbsp;&nbsp;&nbsp;&nbsp;
 																</c:forEach>
-
 																	<div class="badge badge-light mr-2">답변</div> <a
 																	href="boardView.do?num=${item.num }">
 																		${item.title } <c:if
@@ -145,11 +105,10 @@
 																</a></td>
 															</c:if>
 
-
 															<td>${item.writer }</td>
 															<td>${item.date }</td>
 															<td>${item.hit }</td>
-															<td>${item.like }</td>
+															
 														</tr>
 
 													</c:forEach>
@@ -179,7 +138,7 @@
 									<c:choose>
 										<c:when test="${nowBlock>1 }">
 											<li class="page-item"><a class="page-link"
-												onclick="ltPaging('${sessionScope.keyWord}','${nowBlock-1 }','${sessionScope.head }')">&lt;</a></li>
+												onclick="gtltPaging('${sessionScope.keyWord}','${nowBlock-1 }','${sessionScope.head }')">&lt;</a></li>
 										</c:when>
 										<c:otherwise>
 
@@ -207,7 +166,7 @@
 									<c:choose>
 										<c:when test="${totalBlock>nowBlock }">
 											<li class="page-item"><a class="page-link text-muted"
-												onclick="gtPaging('${sessionScope.keyWord}','${nowBlock+1 }','${sessionScope.head }')">&gt;</a></li>
+												onclick="gtltPaging('${sessionScope.keyWord}','${nowBlock+1 }')">&gt;</a></li>
 										</c:when>
 										<c:otherwise>
 											<li class="page-item"><a class="page-link"
@@ -221,40 +180,35 @@
 							<div class="row justify-content-center mb-5">
 								<select name="keyField" id="keyField">
 									<c:choose>
-										<c:when test="${sessionScope.keyField=='cb_writer'}">
+										<c:when test="${sessionScope.keyField=='qb_writer'}">
 											<option value="default" disabled>카테고리</option>
-											<option value="cb_writer" selected>작성자</option>
-											<option value="cb_title">제목</option>
-											<option value="cb_content">내용</option>
+											<option value="qb_writer" selected>작성자</option>
+											<option value="qb_title">제목</option>
+											<option value="qb_content">내용</option>
 										</c:when>
-										<c:when test="${sessionScope.keyField=='cb_title'}">
+										<c:when test="${sessionScope.keyField=='qb_title'}">
 											<option value="default" disabled>카테고리</option>
-											<option value="cb_writer">작성자</option>
-											<option value="cb_title" selected>제목</option>
-											<option value="cb_content">내용</option>
+											<option value="qb_writer">작성자</option>
+											<option value="qb_title" selected>제목</option>
+											<option value="qb_content">내용</option>
 										</c:when>
-										<c:when test="${sessionScope.keyField=='cb_content'}">
+										<c:when test="${sessionScope.keyField=='qb_content'}">
 											<option value="default" disabled>카테고리</option>
-											<option value="cb_writer">작성자</option>
-											<option value="cb_title">제목</option>
-											<option value="cb_content" selected>내용</option>
+											<option value="qb_writer">작성자</option>
+											<option value="qb_title">제목</option>
+											<option value="qb_content" selected>내용</option>
 										</c:when>
 										<c:otherwise>
 											<option value="default" selected disabled>카테고리</option>
-											<option value="cb_writer">작성자</option>
-											<option value="cb_title">제목</option>
-											<option value="cb_content">내용</option>
+											<option value="qb_writer">작성자</option>
+											<option value="qb_title">제목</option>
+											<option value="qb_content">내용</option>
 										</c:otherwise>
 									</c:choose>
 								</select> <input type="text" name="keyWord" class="mr-2" id="keyWord"
 									value="${sessionScope.keyWord}"> <input type="button"
 									class="btn btn-primary" value="검색" onClick="searchCheck()">
 							</div>
-
-
-
-							
-
 						</div>
 					</div>
 				</div>
@@ -266,7 +220,7 @@
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js">
     </script>
 	<script src="/myPT/js/scripts.js"></script>
-	<script src="/myPT/js/community.js"></script>
+	<script src="/myPT/js/question.js"></script>
 
 </body>
 </html>

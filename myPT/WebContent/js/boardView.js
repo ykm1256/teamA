@@ -50,7 +50,7 @@ function setComment()
 		if(sessionNick== com.c_nick)
 			{
 				htmlForNew+='<div class="col-3 text-right dropdown"><a class="mt-1 text-secondary" href="#" role="button" data-toggle="dropdown"><i class="fas fa-ellipsis-v"></i></a><div class="dropdown-menu dropdown-menu-right">';
-				htmlForNew+='<a class="dropdown-item commentUpdate">수정</a><a class="dropdown-item commentDelete">삭제</a><input type="number" hidden="true" value='+com.c_num+'></div></div>';
+				htmlForNew+='<span class="dropdown-item commentUpdate" style="cursor:pointer;">수정</span><span class="dropdown-item commentDelete" style="cursor:pointer;">삭제</span><input type="number" hidden="true" value='+com.c_num+'></div></div>';
 			}
 		else if(sessionGrade==0)
 			{
@@ -63,7 +63,7 @@ function setComment()
 		htmlForNew+='<div class="row"><div class="col text-secondary"><span class="commentDate">'+com.c_date+'</span><span class="ml-2 replyToComment" style="cursor:pointer;">댓글쓰기</span></div></div>';						
 //		htmlForNew+='<div class="my-1 ml-md-4 reComment" style="display:none;"><div class="row"><div class="row col-9"><div class="col text-dark font-weight-bold commentNick">'+sessionNick+'</div></div><textarea id="forRecomment'+index+'" cols="50" rows="4" maxlength="500" style="width:100%; resize:none" class="border-1"></textarea></div>'
 		htmlForNew+='<div class="my-1 ml-md-4" id="reComment'+index+'" style="display:none;"><div class="row"><div class="row col-9"><div class="col text-dark font-weight-bold commentNick">'+sessionNick+'</div></div><textarea id="forRecomment'+index+'" cols="50" rows="4" maxlength="500" style="width:100%; resize:none" class="border-1"></textarea></div>'	
-		htmlForNew+='<div class="mt-2 ml-auto"><input type="button" class="btn btn-dark ml-auto" id="replyBtn'+index+'" value="등록"><input type="button" class="btn btn-danger mx-2" id="cancelReplyBtn'+index+'" value="취소"></div></div></div>';
+		htmlForNew+='<div class="mt-2 text-right"><input type="button" class="btn btn-dark ml-auto" id="replyBtn'+index+'" value="등록"><input type="button" class="btn btn-danger mx-2" id="cancelReplyBtn'+index+'" value="취소"></div></div></div>';
 	
 	});
 	$('#commentsWrapper').append(htmlForNew);
@@ -155,21 +155,39 @@ function getChangedComment()
 			
 			if(data.result==1)
 			{
-				if(nowPage!= newComment.paging.nowPage) //페이지가 바뀐 경우
+				let beforeTotalRecord = totalRecord;
+				totalRecord= data.paging.totalRecord;
+									
+//				if((totalRecord!=1 && totalRecord%numPerPage==1) || nowPage!= newComment.paging.nowPage) //페이지가 바뀐 경우
+				if(beforeTotalRecord%numPerPage==0 || nowPage!= newComment.paging.nowPage) //페이지가 바뀐 경우
 				{
 					comments= newComment.comments;	
 
-					nowPage= data.paging.nowPage;
-					nowBlock= data.paging.nowBlock;
-					pageStart= data.paging.pageStart;
-					pageEnd= data.paging.pageEnd;
-					totalRecord= data.paging.totalRecord;
+					if(newComment.paging.totalRecord%numPerPage!=0)
+						{
+							nowPage= nowPage+1;					
+						}
+					else
+						{
+							nowPage= data.paging.nowPage;
+						}
+						nowBlock= data.paging.nowBlock;
+						pageStart= data.paging.pageStart;
+						pageEnd= data.paging.pageEnd;
 										
-					getChangedComment()
+					getChangedComment();
+					
 				}
-				else //nowPage가 같아서 가장 최근 것만 덧붙이는 경우
+				else  //nowPage가 같아서 가장 최근 것만 덧붙이는 경우  //이 글이 작성될 때는 nowPage가 같기 때문에 밑에 더 붙음
 				{
-					totalRecord= data.paging.totalRecord;
+//					totalRecord= data.paging.totalRecord;
+					
+					  let today = new Date();
+					  today.setHours(today.getHours()-24)
+					
+//					  		var commentdate= new Date(com.c_date)
+
+					  let commentdate= new Date(newComment.comments.c_date);
 					
 					if(totalRecord==1)
 					{
@@ -181,7 +199,23 @@ function getChangedComment()
 					
 					let htmlForNew="";
 					htmlForNew+='<hr><div class="comments"><div class="row"><div class="row col-9">';
-					htmlForNew+='<div class="col font-weight-bold commentNick">'+newComment.comments.c_nick+'</div></div>';
+//					htmlForNew+='<div class="col font-weight-bold commentNick">'+newComment.comments.c_nick+'</div></div>';
+					
+					
+					htmlForNew+='<div class="col font-weight-bold commentNick">'+newComment.comments.c_nick
+					
+					if(boardWriter==newComment.comments.c_nick)
+					{
+						htmlForNew+='<span class="badge badge-success ml-1">작성자</span>';
+					}
+					if(commentdate>today)
+					{
+						htmlForNew+='<img src="img/new.png" width="12px" class="ml-1 newImg">';
+					}	
+					
+					htmlForNew+='</div></div>';
+					
+					
 					htmlForNew+='<div class="col-3 text-right dropdown"><a class="mt-1 text-secondary" href="#" role="button" data-toggle="dropdown"><i class="fas fa-ellipsis-v"></i></a>';
 					htmlForNew+='<div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item commentUpdate" href="#">수정</a><a class="dropdown-item commentDelete" href="#">삭제</a> ';
 					htmlForNew+='<input type="number" hidden="true" value='+newComment.comments.c_num+'></div></div></div>';
@@ -190,12 +224,12 @@ function getChangedComment()
 					
 					///
 					htmlForNew+='<div class="my-1 ml-md-4" id="reComment'+curIndex+'" style="display:none;"><div class="row"><div class="row col-9"><div class="col text-dark font-weight-bold commentNick">'+sessionNick+'</div></div><textarea id="forRecomment'+curIndex+'" cols="50" rows="4" maxlength="500" style="width:100%; resize:none" class="border-1"></textarea></div>'	
-					htmlForNew+='<div class="mt-2 ml-auto"><input type="button" class="btn btn-dark ml-auto" id="replyBtn'+curIndex+'" value="등록"><input type="button" class="btn btn-danger mx-2" id="cancelReplyBtn'+curIndex+'" value="취소"></div></div></div>';					
+					htmlForNew+='<div class="mt-2 text-right"><input type="button" class="btn btn-dark ml-auto" id="replyBtn'+curIndex+'" value="등록"><input type="button" class="btn btn-danger mx-2" id="cancelReplyBtn'+curIndex+'" value="취소"></div></div></div>';					
 					$('#commentsWrapper').append(htmlForNew);
 									
 					
 					
-					setBadge(curIndex);
+//					setBadge(curIndex);
 					setBlock();
 					
 					
@@ -339,18 +373,16 @@ var c_num;
 
 
 var selectedCommentForReply;
-
-
-         
-
+var selectedCommentForReplyIndex;
 
 
 	//대댓글
 	$(document).on("click", '.replyToComment', function(){
 		
-		selectedCommentForReply= $(this).parents('.comments').find('div[id^="r"]').attr("id");
-		console.log(selectedCommentForReply.substr(-1))
-				
+		selectedCommentForReply= $(this).parents('.comments').find('div[id^="r"]').attr("id");		
+		selectedCommentForReplyIndex= selectedCommentForReply.substr(-1);
+			
+		//다 돌려서 숨겨줌ㅋㅋㅋ 자기 빼고
 		for(var i=0; i<numPerPage;i++)
 		{
 			if(selectedCommentForReply.substr(-1)!=i)

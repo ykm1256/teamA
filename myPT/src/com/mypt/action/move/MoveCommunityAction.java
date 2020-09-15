@@ -35,19 +35,21 @@ public class MoveCommunityAction implements Action {
 		String head = session.getAttribute("head").toString();
 
 		// 페이징 처리
+		int totalRecord = cdao.getTotalCount();
+		int numPerPage = 10;
 		int nowPage = Integer.parseInt(request.getParameter("page") == null ? "1" : request.getParameter("page"));
 		System.out.println("페이지?"+nowPage);
 		String next = request.getParameter("next");
 		String prev = request.getParameter("prev");
-		PagingDto2 page = new PagingDto2(nowPage);
+		PagingDto page = new PagingDto(nowPage,totalRecord,numPerPage);
 		if (next != null) {
 			int nowBlock = Integer.parseInt(next) - 1;
 			nowPage = page.getPagePerBlock() * nowBlock + 1;
-			page = new PagingDto2(nowPage);
+			page = new PagingDto(nowPage,totalRecord,numPerPage);
 		} else if (prev != null) {
 			int nowBlock = Integer.parseInt(prev) - 1;
-			nowPage = page.getPagePerBlock() * nowBlock + 1;
-			page = new PagingDto2(nowPage);
+			nowPage = page.getPagePerBlock() * nowBlock + 5;
+			page = new PagingDto(nowPage,totalRecord,numPerPage);
 		}
 		String keyword = "";
 		String keyfield = "";

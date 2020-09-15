@@ -92,9 +92,38 @@ public class CommentInsertAction implements Action
 				}
 				
 				result.add("comments", gson.fromJson(gson.toJson(comment, CommentDto.class), JsonObject.class));
+				
+			}		
+				
+		}
+		
+		else if(board.equals("qboard"))
+		{	
 
+			if(nowPage!= paging.getTotalPage())
+			{
+				insertResult = cdao.commentInsert("qcomment", comment);
+				paging.setTotalRecord(paging.getTotalRecord()+1);
+				paging.setNowPage(paging.getTotalPage());					
+				arr = cdao.getCommentsForOneCommentPage("qcomment", num, paging.getStartPage(), paging.getNumPerPage());				
+				
+				result.addProperty("insertResult", gson.toJson(insertResult));
+				result.add("comments", arr);
 				
 			}
+			else
+			{
+				insertResult = cdao.commentInsert("qcomment", comment);
+				paging.setTotalRecord(paging.getTotalRecord()+1);
+				
+				if(insertResult==1)
+				{
+					comment = cdao.getLastComment("qcomment", num);					
+				}
+				
+				result.add("comments", gson.fromJson(gson.toJson(comment, CommentDto.class), JsonObject.class));
+				
+			}		
 				
 		}
 		

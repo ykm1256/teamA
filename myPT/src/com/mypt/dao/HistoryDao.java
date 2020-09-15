@@ -294,4 +294,45 @@ public class HistoryDao {
 		}
 		return usercnt;
 	}
+	
+	// 트레이너별 월수입
+		public ArrayList<HistoryDto> getHistoryList() {
+			Connection con = null;
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			String sql = null;
+			HistoryDto historyBean = null;
+			ArrayList<HistoryDto> arr = new ArrayList<HistoryDto>();
+
+			try {				
+				con = db.getConnection();
+				sql = "select u.name,h.*,t.t_name from history h "
+						+ "left outer join user u on h.hid = u.id "
+						+ "left outer join trainer t on h.tid = t.t_id "
+						+ " order by h.paydate desc";				
+				
+				ps = con.prepareStatement(sql);
+				rs = ps.executeQuery();
+
+				while (rs.next()) {
+					historyBean = new HistoryDto();				
+					historyBean.setU_name(rs.getString("name"));
+					historyBean.setHid(rs.getString("hid"));
+					historyBean.setPaydate(rs.getTimestamp("paydate"));
+					historyBean.setPrice(rs.getInt("price"));
+					historyBean.setHcount(rs.getInt("hcount"));
+					historyBean.setTid(rs.getString("tid"));
+					historyBean.setT_name(rs.getString("t_name"));				
+					arr.add(historyBean);
+
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				db.closeConnection(rs, ps, con);
+			}
+
+			return arr;
+		}
 }

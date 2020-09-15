@@ -334,6 +334,30 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 		}
 		
 		//Board Total Count : 총 게시물수
+				public int getTotalCount() {
+					Connection con = null;
+					PreparedStatement ps = null;
+					ResultSet rs = null;
+					String sql = null;
+					int totalCount = 0;
+					try {
+						con = db.getConnection();
+						
+						sql = "select count(*) from cboard";
+					
+						ps = con.prepareStatement(sql);	
+						rs = ps.executeQuery();
+						if(rs.next()) totalCount = rs.getInt(1);
+					} catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						db.closeConnection(rs,ps,con);
+					}
+					return totalCount;
+				}
+		
+		
+		//Board Total Count : 총 게시물수
 		public int getTotalCount(String keyField, String keyWord,String head) {
 			Connection con = null;
 			PreparedStatement ps = null;

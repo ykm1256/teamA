@@ -18,10 +18,7 @@ public class PagingDto2 {
 	
 	public PagingDto2() {}
 	
-	public PagingDto2(int nowPage) {
-		CboardDao cdao=CboardDao.getInstance();
-		this.totalRecord=cdao.getTotalCount("","","all");
-		this.numPerPage=10;
+	public PagingDto2(int nowPage,int totalRecord, int numPerPage) {		
 		this.pagePerBlock=5;
 		this.totalPage=(int)Math.ceil((double)totalRecord/numPerPage);
 		this.totalBlock=(int)Math.ceil((double)totalPage/pagePerBlock);
@@ -29,7 +26,7 @@ public class PagingDto2 {
 		this.nowBlock=(int)Math.ceil((double)nowPage/pagePerBlock);
 		this.startPage=(nowPage*numPerPage)-numPerPage;
 		this.pageStart=(nowBlock-1)*pagePerBlock+1;
-		this.pageEnd=(pageStart+pagePerBlock)<totalPage?pageStart+pagePerBlock:totalPage+1;
+		this.pageEnd=(pageStart+pagePerBlock)<=totalPage?pageStart+pagePerBlock:totalPage+1;
 	}
 	public PagingDto2(int nowPage,String keyField,String keyWord,String head) {
 		CboardDao cdao=CboardDao.getInstance();
@@ -42,7 +39,7 @@ public class PagingDto2 {
 		this.nowBlock=(int)Math.ceil((double)nowPage/pagePerBlock);
 		this.startPage=(nowPage*numPerPage)-numPerPage;
 		this.pageStart=(nowBlock-1)*pagePerBlock+1;
-		this.pageEnd=(pageStart+pagePerBlock)<totalPage?pageStart+pagePerBlock:totalPage+1;
+		this.pageEnd=(pageStart+pagePerBlock)<=totalPage?pageStart+pagePerBlock:totalPage+1;
 	}
 
 	public int getTotalRecord() {

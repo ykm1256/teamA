@@ -39,6 +39,10 @@ public class CommentUpdateAction implements Action
 		{
 			updateResult = cdao.commentUpdate("pcomment", comment);					
 		}
+		else if(board.equals("qboard"))
+		{
+			updateResult = cdao.commentUpdate("qcomment", comment);					
+		}
 		
 		request.setAttribute("result", updateResult);				
 

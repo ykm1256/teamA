@@ -111,7 +111,7 @@ public class ViewAction implements Action {
 			request.setAttribute("comcnt", comment);
 			request.setAttribute("dto", dto);
 			session.setAttribute("dto", dto);
-			request.setAttribute("paging", paging);
+			request.setAttribute("paging", paging); ///
 			session.setAttribute("paging", paging);
 			
 		} else if (board.equals("pboard")) {
@@ -145,7 +145,7 @@ public class ViewAction implements Action {
 			request.setAttribute("dto", dto);
 			request.setAttribute("lflag", lflag);
 			session.setAttribute("dto", dto);
-			request.setAttribute("paging", paging);
+			request.setAttribute("paging", paging);////
 			session.setAttribute("paging", paging);
 		}
 
