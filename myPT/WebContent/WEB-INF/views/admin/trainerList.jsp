@@ -77,10 +77,10 @@
                         <td>${item.t_birth }</td>
                         <td>${item.t_tel }</td>
                         <td>
-                          <button onclick="location.href='adminTrainerDetail.do?t_id=${item.t_id}'" class="btn btn-primary custom-btn">
+                          <button onclick="location.href='adminTrainerDetail.do?id=${item.t_id}'" class="btn btn-primary custom-btn">
                             <i class="fas fa-user-edit"></i>
                           </button>
-                          <button onclick="location.href='adminTrainerDelete.do?t_id=${item.t_id}'" class="btn btn-danger custom-btn">
+                          <button onclick="location.href='adminTrainerDelete.do?id=${item.t_id}'" class="btn btn-danger custom-btn">
                             <i class="fas fa-user-times"></i>
                           </button>
                         </td>
