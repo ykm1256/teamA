@@ -77,7 +77,7 @@
                         <td>${item.t_birth }</td>
                         <td>${item.t_tel }</td>
                         <td>
-                          <button class="btn btn-primary custom-btn">
+                          <button class="btn btn-primary custom-btn" onclick="location.href='adminTrainerDetail.do?id=${item.t_id}'">
                             <i class="fas fa-edit"></i>
                           </button>
                         </td>

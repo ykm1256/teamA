@@ -168,21 +168,145 @@ return instance;
 		Connection con = null;
 		PreparedStatement ps = null;
 		try {
+			con = db.getConnection();			
+				String sql = "update trainer set t_pw=?, t_name=?, t_gender=?, t_email=?, t_birth=?, t_address=?, t_nick=?,t_zipcode=?, t_tel=?, t_addrdetail=? where t_id=?";
+				ps = con.prepareStatement(sql);
+				ps.setString(1, td.getT_pw());
+				ps.setString(2, td.getT_name());
+				ps.setString(3, td.getT_gender());
+				ps.setString(4, td.getT_email());
+				ps.setString(5, td.getT_birth());
+				ps.setString(6, td.getT_address());
+				ps.setString(7, td.getT_nick());
+				ps.setString(8, td.getT_zipcode());
+				ps.setString(9, td.getT_tel());
+				ps.setString(10, td.getT_addrdetail());
+				ps.setString(11, td.getT_id());
+				ps.executeUpdate();
+			
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.closeConnection(null, ps, con);
+		}
+	}
+	
+	public void trainerPhotoUpdate(TrainerDto td) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			con = db.getConnection();			
+				String sql = "update trainer set t_pw=?, t_name=?, t_gender=?, t_email=?, t_birth=?, t_address=?, t_nick=?,t_zipcode=?, t_tel=?, t_addrdetail=?,t_photo=? where t_id=?";
+				ps = con.prepareStatement(sql);
+				ps.setString(1, td.getT_pw());
+				ps.setString(2, td.getT_name());
+				ps.setString(3, td.getT_gender());
+				ps.setString(4, td.getT_email());
+				ps.setString(5, td.getT_birth());
+				ps.setString(6, td.getT_address());
+				ps.setString(7, td.getT_nick());
+				ps.setString(8, td.getT_zipcode());
+				ps.setString(9, td.getT_tel());
+				ps.setString(10, td.getT_addrdetail());
+				ps.setString(11, td.getT_photo());
+				ps.setString(12, td.getT_id());
+				ps.executeUpdate();
+			
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.closeConnection(null, ps, con);
+		}
+	}
+	
+	public void trainerUpdate(HttpServletRequest request,String prevphoto) {
+		String encoding = "UTF-8";
+		int maxSize= 2*1024*1024; //2MB
+		
+		String saveFolder= request.getServletContext().getRealPath("img/TrainerPhoto/");  
+//서버 옵션에서 serve modules without publishing. 현재 컴 기준  
+//E:\Work\ProjectA\.metadata\.plugins\org.eclipse.wst.server.core\tmp2\wtpwebapps\myPT\img\TrainerPhoto\
+
+//serve modules without publishing 체크 //체크 여부 상관 없이 배포한 것을 실행할 땐 아래의 경로로 인식됨.
+//C:\Users\admin\git\teamA\myPT\WebContent\img\TrainerPhoto\		
+								
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		byte[] byteArr = new byte[1024];
+        FileInputStream fin = null;
+        FileOutputStream fout = null;
+        int read= 0;		
+		
+		try {
 			con = db.getConnection();
-			String sql = "update trainer set t_pw=?, t_name=?, t_gender=?, t_email=?, t_birth=?, t_address=?, t_nick=?,t_zipcode=?, t_tel=?, t_addrdetail=? where t_id=?";
-			ps = con.prepareStatement(sql);
-			ps.setString(1, td.getT_pw());
-			ps.setString(2, td.getT_name());
-			ps.setString(3, td.getT_gender());
-			ps.setString(4, td.getT_email());
-			ps.setString(5, td.getT_birth());
-			ps.setString(6, td.getT_address());
-			ps.setString(7, td.getT_nick());
-			ps.setString(8, td.getT_zipcode());
-			ps.setString(9, td.getT_tel());
-			ps.setString(10, td.getT_addrdetail());
-			ps.setString(11, td.getT_id());
-			ps.executeUpdate();
+			
+				String sql = "update trainer set t_pw=?, t_name=?, t_gender=?, t_email=?, t_birth=?, t_address=?, t_nick=?,t_zipcode=?, t_tel=?, t_addrdetail=?, t_photo=? where t_id=?";
+				
+				File dir = new File(saveFolder);			
+				if(!dir.exists()) //디렉터리 없으면 생성
+				{
+					org.apache.commons.io.FileUtils.forceMkdir(dir);
+				}
+				
+				MultipartRequest multi = 
+						new MultipartRequest(request, saveFolder, maxSize,
+								encoding, new DefaultFileRenamePolicy());
+				
+				File prevFile = new File(saveFolder+prevphoto);
+				System.out.println(saveFolder+prevphoto);
+				if(prevFile.exists()) {
+					prevFile.delete();
+				}
+			
+				
+				String t_photo = multi.getFilesystemName("photo"); //input태그-> 서버상에 실제로 업로드된 파일 이름
+				File curFile = multi.getFile("photo");  //실제 업로드된 파일 객체 반환
+	
+				
+				String t_Id = multi.getParameter("hiddentrainerID");				
+				//파일이름 t_ID
+				String newFileName= t_Id+"."+t_photo.substring(t_photo.lastIndexOf(".")+1);
+		        File newFile = new File(saveFolder + newFileName);
+		        
+		        
+
+		        // 파일명 rename
+		        if(!curFile.renameTo(newFile)){
+		            // rename이 되지 않을경우 강제로 파일을 복사하고 기존파일은 삭제
+		            byteArr = new byte[maxSize];
+		            fin = new FileInputStream(curFile);
+		            fout = new FileOutputStream(newFile);
+		            while((read=fin.read(byteArr,0,byteArr.length))!=-1)
+		            {
+		                fout.write(byteArr, 0, read);
+		            }
+		             
+		            fin.close();
+		            fout.close();
+		            curFile.delete();
+		        }  				
+				
+				ps = con.prepareStatement(sql);
+				ps.setString(1, multi.getParameter("password"));
+				ps.setString(2, multi.getParameter("trainerName"));
+				ps.setString(3, multi.getParameter("gender"));
+				ps.setString(4, multi.getParameter("email"));
+				ps.setString(5, multi.getParameter("birthdate"));
+				ps.setString(6, multi.getParameter("address"));
+				ps.setString(7, multi.getParameter("nickname"));
+				ps.setString(8, multi.getParameter("zipcode"));
+				ps.setString(9, multi.getParameter("tel"));
+				ps.setString(10, multi.getParameter("addrdetail"));
+				ps.setString(11, newFileName);
+				ps.setString(12, multi.getParameter("hiddentrainerID"));
+				ps.executeUpdate();
+			
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
