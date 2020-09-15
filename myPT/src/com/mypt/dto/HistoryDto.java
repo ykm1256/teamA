@@ -17,6 +17,7 @@ public class HistoryDto {
 	private int income;
 	private int usercnt;
 	private String t_name;
+	private String u_name;
 
 	public int getMonth() {
 		return month;
@@ -95,6 +96,14 @@ public class HistoryDto {
 
 	public void setHcount(int hcount) {
 		this.hcount = hcount;
+	}
+
+	public String getU_name() {
+		return u_name;
+	}
+
+	public void setU_name(String u_name) {
+		this.u_name = u_name;
 	}
 	
 	

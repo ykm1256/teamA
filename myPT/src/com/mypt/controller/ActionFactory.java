@@ -32,6 +32,7 @@ import com.mypt.action.inbody.UserInbodyResultAction;
 import com.mypt.action.income.IncomeAction;
 import com.mypt.action.income.IncomeTrainerAction;
 import com.mypt.action.income.MoveIncomeAction;
+import com.mypt.action.list.AdminHistoryListAction;
 import com.mypt.action.list.AdminTrainerListViewAction;
 import com.mypt.action.list.AdminUserListViewAction;
 import com.mypt.action.list.TrainerUserListViewAction;
@@ -214,10 +215,10 @@ public class ActionFactory
 		map.put("/moveTrainerProfile", new MoveTrainerProfileAction());
 		map.put("/trainerMain", new TrainerTodayPTAction());
 		map.put("/trainerPTFinish", new TrainerPTFinishAction());
-		
-		
-		map.put("/moveCommunity2", new MoveCommunityActionBackup());
+				
 		map.put("/searchCommunity", new SearchCommunityAction());
+		
+		map.put("/adminHistory", new AdminHistoryListAction());
 		
 		
 		

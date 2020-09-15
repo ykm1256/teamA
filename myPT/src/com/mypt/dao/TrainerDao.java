@@ -110,8 +110,8 @@ return instance;
 			ps.setString(6, multi.getParameter("birthdate"));
 			ps.setString(7, multi.getParameter("address"));
 			ps.setString(8, multi.getParameter("nickname"));
-			ps.setString(9, multi.getParameter("tel"));
-			ps.setString(10, multi.getParameter("zipcode"));			
+			ps.setString(9, multi.getParameter("zipcode"));
+			ps.setString(10, multi.getParameter("tel"));
 			ps.setString(11, multi.getParameter("addrdetail"));		
 			
 //			ps.setString(12, saveFolder+t_photo); // 경로 모두 포함해서 db에 저장
@@ -232,6 +232,7 @@ return instance;
 				td.setT_nick(rs.getString("t_nick"));
 				td.setT_addrdetail(rs.getString("t_addrdetail"));
 				td.setT_zipcode(rs.getString("t_zipcode"));
+				td.setT_tel(rs.getString("t_tel"));
 				arr.add(td);
 			}
 			
