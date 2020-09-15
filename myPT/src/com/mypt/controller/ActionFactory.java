@@ -33,6 +33,7 @@ import com.mypt.action.income.IncomeAction;
 import com.mypt.action.income.IncomeTrainerAction;
 import com.mypt.action.income.MoveIncomeAction;
 import com.mypt.action.list.AdminHistoryListAction;
+import com.mypt.action.list.AdminScheduleListAction;
 import com.mypt.action.list.AdminTrainerListViewAction;
 import com.mypt.action.list.AdminUserListViewAction;
 import com.mypt.action.list.TrainerUserListViewAction;
@@ -218,6 +219,9 @@ public class ActionFactory
 		map.put("/searchCommunity", new SearchCommunityAction());
 		
 		map.put("/adminHistory", new AdminHistoryListAction());
+		
+		//스케줄 리스트
+		map.put("/adminSchedule",new AdminScheduleListAction());
 		
 		
 		
