@@ -12,7 +12,7 @@ public class AdminTrainerDetailAction implements Action {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
-		String id = "t0002";
+		String id = request.getParameter("id");
 		TrainerDao tdao = TrainerDao.getInstance();
 		TrainerDto trainer = tdao.trainerSelect(id);
 		request.setAttribute("t", trainer);		
