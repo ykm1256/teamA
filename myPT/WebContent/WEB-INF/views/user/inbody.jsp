@@ -54,7 +54,7 @@
 	              <div class="card mb-4">
 	                  <div class="card-body p-1" id="inbodyChartWrapper" style="width:100%; height:250px;">
 <!-- 	                  <div class="card-body p-1 w-100""> -->
-	                      <canvas id="inbodyChart" style="max-height:250px;"></canvas>
+	                      <canvas id="inbodyChart"></canvas>
 	                  </div>
 	                  <div class="card-footer">
 	                      측정일: <span id="latestMeasureDay"></span>
