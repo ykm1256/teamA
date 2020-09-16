@@ -44,11 +44,11 @@
       <!-- /sideNav -->
       <div id="layoutSidenav_content">
         <main>
-			<div class="container-fulid">
+			<div class="container-fluid">
             	<div class="card mb-4">
               		<div class="card-header font-weight-bold">
                		 <i class="fas fa-table mr-1"></i>
-                회원 관리
+                트레이너 관리
               </div>
               <div class="card-body">
                 <div class="table-responsive">
