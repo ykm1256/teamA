@@ -58,7 +58,7 @@
 				<div class="col-6">
 					<c:choose>
 				      <c:when test="${not empty user.startdate}">
-				      	  <input type="text" class="form-control w-100" value="${user.startdate}" readonly>
+				      	  <input type="text" id="startdate" class="form-control w-100" value="${user.startdate}" readonly>
 				      </c:when>				      
 					  <c:otherwise>
 						  <input
