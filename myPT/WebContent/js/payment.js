@@ -120,7 +120,7 @@ function pay(input)
 			         		 data: JSON.stringify(myData),
 			         		 success: function(data) 
 				        		{
-					               location.href="moveMyProfile.do";
+					               location.href="userMain.do";
 				        		}
 			             })
 		             }

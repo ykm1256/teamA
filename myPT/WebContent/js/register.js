@@ -183,11 +183,16 @@ $('input[type=text], input[type=password], input[type=email]').on('keyup', funct
 	});
 	
 
-	
-	
 
-function checkValidation()
+	
+//공백값 처리
+//현재보다 이후 날짜의 생년/현재보다 이전 날짜의 시작일 불가하도록 설정 - 유효값확인 전에 가능할 지도
+
+
+
+function checkUser(form)
 {
+	
     if($('#confirmNick').val()!=$('#nickname').val() || $("#confirmNick").val()=="")
 	{
 		alert("닉네임을 중복체크해주세요");
@@ -204,13 +209,6 @@ function checkValidation()
 		alert("비밀번호가 서로 다릅니다");
 		return false;
 	}
-}
-	
-//공백값 처리
-//현재보다 이후 날짜의 생년/현재보다 이전 날짜의 시작일 불가하도록 설정 - 유효값확인 전에 가능할 지도
-function checkUser(form)
-{
-	checkValidation();
 	
 	//생성된 qr코드의 src 값을 qrcode에 넣어줌
 	$("#qrcode").val($("#qrcode img").attr("src"));
@@ -220,7 +218,22 @@ function checkUser(form)
 
 function checkTrainer(form)
 {
-	checkValidation();	
+	if($('#confirmNick').val()!=$('#nickname').val() || $("#confirmNick").val()=="")
+	{
+		alert("닉네임을 중복체크해주세요");
+		return false;
+	}
+	    
+	if($('#confirmEmail').val()!=$('#email').val() || $("#confirmEmail").val()=="")
+	{
+		alert("이메일을 중복체크해주세요");
+		return false;
+	}
+	if($('#password').val()!=$('#confirmPassword').val())
+	{
+		alert("비밀번호가 서로 다릅니다");
+		return false;
+	}	
 	
 	if($('#photo').val()==0)
 	{

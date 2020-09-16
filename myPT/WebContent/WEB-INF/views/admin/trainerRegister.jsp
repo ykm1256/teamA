@@ -104,7 +104,7 @@
 	                                      <label class="small mb-1" for="tel">HP(-)*</label>
 	                                      <div class="form-row">
 	                                          <div class="col-md-6">
-	                                 				 <input type="text" class="form-control py-2" pattern="01\d{1}-\d{3,4}-\d{4}" placeholder="01X-000(0)-0000" id="tel" name="tel">
+	                                 				 <input type="text" class="form-control py-2" pattern="01\d{1}-\d{3,4}-\d{4}" placeholder="01X-000(0)-0000" maxlength="13" id="tel" name="tel">
 	                                        		<div></div>
 	                                          
 	                                          </div>

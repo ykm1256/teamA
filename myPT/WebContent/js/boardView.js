@@ -98,7 +98,6 @@ function setBlock()
 			
 		if(totalPage>0 && nowBlock>1)
 		{
-//		   $('#page').prepend('<li class="page-item"><span class="page-link" style="cursor:pointer;" onclick="changeBlock('+(nowBlock-1)+')"> < </span></li>');	
 			$('#page').prepend('<li class="page-item"><span class="page-link" style="cursor:pointer;" onclick="changeBlock('+(nowBlock-1)+')"> < </span></li>');	
 		}
 	
@@ -173,12 +172,13 @@ function getChangedComment()
 			
 			if(data.result==1)
 			{
-//				let beforeTotalRecord = totalRecord;
 				totalRecord= data.paging.totalRecord;
 				totalPage= data.paging.totalPage;
+				
+				$('#commentnum').text(totalRecord);
+
 									
 				if((totalRecord!=1 && totalRecord%numPerPage==1) || nowPage!= newComment.paging.nowPage) //페이지가 바뀐 경우
-//				if(totalRecord!=0 && beforeTotalRecord%numPerPage==0 || nowPage!= newComment.paging.nowPage) //페이지가 바뀐 경우
 				{
 					comments= newComment.comments;	
 
@@ -309,6 +309,8 @@ var c_num;
 							totalPage= data.paging.totalPage;
 							totalBlock=data.paging.totalBlock;
 							totalRecord= data.paging.totalRecord;	
+							
+							$('#commentnum').text(totalRecord);
 																			
 							if(totalRecord==0)
 							{

@@ -37,7 +37,6 @@ public class UserCheckSessionId implements Action{
 		        	{
 		        		cookie= c;
 		        		String sessionId=c.getValue();
-		        		System.out.println("세션아이디:"+sessionId );
 		        		user= dao.checkSessionId(sessionId); //유저정보 찾아옴		      	        		
 		        		break;
 		        	}

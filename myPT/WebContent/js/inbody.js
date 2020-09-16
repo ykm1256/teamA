@@ -10,7 +10,7 @@ var fat= 0;
 var muscle= 0;
 var measureDayForInbodyChart=0;
 
-var numOfMyChartDatas=0;
+//var numOfMyChartDatas=0;
 
 var inbodyChartMyStatus = []; //inbodyChart용 배열
 var inbodyChartPerStandard = [];  //표준 대비 %
@@ -35,6 +35,10 @@ var weightmm=[];
 var musclemm=[];
 var fatmm=[];
 var minMaxDatas={"weight": weightmm, "muscle":musclemm, "fat":fatmm }
+
+
+var beforeSelected= 1;
+var afterSelected= 0;
 
 
 //숫자 반올림 num자리까지 표시 
@@ -260,7 +264,7 @@ function setUserBasicInfo(num)
 }
 
 //차트용 데이터 담기
-function addInbodyChartDatas(num)
+function setInbodyChartDatas(num)
 {
 	inbodyChartMyStatus.push(resultArray[num].inbody.weight);
 	inbodyChartMyStatus.push(resultArray[num].inbody.muscle);
@@ -271,66 +275,93 @@ function addInbodyChartDatas(num)
 	inbodyChartPerStandard.push(numRound(getPerStandardFat()));
 }
 
-function addMyChartDatas(type, num)
-{	
-	if(type==="addPre")
-	{
-		for(let i=numOfMyChartDatas, length=numOfMyChartDatas+num; i<length; i++)
-		{		
-			measurementDays.unshift(getFormattedDate(resultArray[i].inbody.strDate))
-			weightChartDatas.unshift(resultArray[i].inbody.weight);
-			muscleChartDatas.unshift(resultArray[i].inbody.muscle);
-			fatChartDatas.unshift(resultArray[i].inbody.fat);
-		}
-	}
-	else
-	{
-		for(let i=preAfter-2; i>preAfter-2-num; i--)
-		{		
-			measurementDays.push(getFormattedDate(resultArray[i].inbody.strDate))
-			weightChartDatas.push(resultArray[i].inbody.weight);
-			muscleChartDatas.push(resultArray[i].inbody.muscle);
-			fatChartDatas.push(resultArray[i].inbody.fat);
-		}
-	}
-				
-}
-
-function removeMyChartDatas(type, num)
+function delMyChartDatas()
 {
-	if(type==="removePre")
-	{
-		for(let i=0; i<num; i++)
-		{		
-			$.each(myChartDatas, function(index, item){ 
-				item.shift();				
-			});
-		}	
-	}
-	else
-	{
-		for(let i=0; i<num; i++)
-		{		
-			$.each(myChartDatas, function(index, item){ 
-				item.pop();				
-			});
-
-		}	
-	}
-	
+	measurementDays.length=0;
+	weightChartDatas.length=0;
+	muscleChartDatas.length=0;
+	fatChartDatas.length=0;
 }
+
+function setMyChartDatas()
+{
+	delMyChartDatas();
+	
+	for(let i=beforeSelected; i>=afterSelected; i--)
+	{
+		measurementDays.push(getFormattedDate(resultArray[i].inbody.strDate))
+		weightChartDatas.push(resultArray[i].inbody.weight);
+		muscleChartDatas.push(resultArray[i].inbody.muscle);
+		fatChartDatas.push(resultArray[i].inbody.fat);
+	}
+}
+
+
+
+
+
+//function addMyChartDatas(type, num)
+//{	
+//	if(type==="addPre")
+//	{
+//		for(let i=numOfMyChartDatas, length=numOfMyChartDatas+num; i<length; i++)
+//		{		
+//			measurementDays.unshift(getFormattedDate(resultArray[i].inbody.strDate))
+//			weightChartDatas.unshift(resultArray[i].inbody.weight);
+//			muscleChartDatas.unshift(resultArray[i].inbody.muscle);
+//			fatChartDatas.unshift(resultArray[i].inbody.fat);
+//		}
+//	}
+//	else
+//	{
+//		for(let i=preAfter-2; i>preAfter-2-num; i--)
+//		{		
+//			measurementDays.push(getFormattedDate(resultArray[i].inbody.strDate))
+//			weightChartDatas.push(resultArray[i].inbody.weight);
+//			muscleChartDatas.push(resultArray[i].inbody.muscle);
+//			fatChartDatas.push(resultArray[i].inbody.fat);
+//		}
+//	}
+//				
+//}
+//function removeMyChartDatas(type, num)
+//{
+//	if(type==="removePre")
+//	{
+//		for(let i=0; i<num; i++)
+//		{		
+//			$.each(myChartDatas, function(index, item){ 
+//				item.shift();				
+//			});
+//		}	
+//	}
+//	else
+//	{
+//		for(let i=0; i<num; i++)
+//		{		
+//			$.each(myChartDatas, function(index, item){ 
+//				item.pop();				
+//			});
+//
+//		}	
+//	}
+//	
+//}
+
+
+
 
 function updateMyCharts()
 {
-//	myWeightChart.destroy();
-//	myMuscleChart.destroy();
-//	myFatChart.destroy();
-//	
-//	createMyCharts();
+	myWeightChart.destroy();
+	myMuscleChart.destroy();
+	myFatChart.destroy();
 	
-	myWeightChart.update();
-	myMuscleChart.update();
-	myFatChart.update();
+	createMyCharts();
+	
+//	myWeightChart.update();
+//	myMuscleChart.update();
+//	myFatChart.update();
 }
 
 
@@ -363,7 +394,7 @@ function getDatas()
 			$("#height").html(height +"cm");
 			
 //			인바디차트용 데이터 담기
-			addInbodyChartDatas(0);
+			setInbodyChartDatas(0);
 					
 				
 			if(resultArray.length==1)
@@ -379,7 +410,6 @@ function getDatas()
 		$("#beforeMeasureDay").append("<option selected>"+resultArray[1].inbody.strDate+"</option> ");
 		$("#afterMeasureDay").append("<option selected>"+measureDayForInbodyChart+"</option> ");
 		$("#measureDayForInbodyChart").append("<option selected>"+measureDayForInbodyChart+"</option> ");
-		$("#measureDayForInbodyChart").append("<option>"+resultArray[1].inbody.strDate+"</option> ");
 				
 		for(let i=2, length=resultArray.length; i<length; i++)
 		{
@@ -394,19 +424,9 @@ function getDatas()
 		
 //	     과거 측정일 값 세팅. 최근 2번째 측정일
 //	      최근 측정일 값을 애프터 데이터에 세팅
-		
-		if(resultArray.length==2)
-		{
-			setBeforeAfterDatas("before", 1);
-			setBeforeAfterDatas("after", 0);
-			
-		}
-		else
-		{
-			setBeforeAfterDatas("before", 2);
-			setBeforeAfterDatas("after", 1);
+		setBeforeAfterDatas("before", 1);
+		setBeforeAfterDatas("after", 0);
 
-		}
 	
 //		선택한 날짜 표시
 		showDates();
@@ -414,17 +434,19 @@ function getDatas()
 //		비포-애프터 비교
 		getDifference();
 
-	
-		if(resultArray.length>=6)
-		{
-			addMyChartDatas("addPre", 6);
-			numOfMyChartDatas=6;
-		}
-		else
-		{
-			addMyChartDatas("addPre",resultArray.length);
-			numOfMyChartDatas= resultArray.length;
-		}
+
+//차트 값 세팅	
+//		if(resultArray.length>=6)
+//		{
+//			addMyChartDatas("addPre", 6);
+//			numOfMyChartDatas=6;
+//		}
+//		else
+//		{
+//			addMyChartDatas("addPre",resultArray.length);
+//			numOfMyChartDatas= resultArray.length;
+//		}
+		setMyChartDatas();
 		
 //      차트 tick 설정용 min,max데이터 세팅			
 		setMinMaxforChartDatas();
@@ -631,8 +653,7 @@ return {
 	          max: minMaxDatas[minMaxLabel][1]+1,  //최대 +1
 //	          suggetedmin: 0,
 //	          suggestedmax: 200,
-//	          suggetedmin: minMaxDatas[minMaxLabel][0]-1,
-//	          suggestedmax: minMaxDatas[minMaxLabel][1]+1,
+
 	          stepSize: 1,
 	        },
 	        gridLines: {
@@ -704,89 +725,102 @@ function measureDayForInbodyIsChanged()
 		inbodyChartPerStandard.length=0;
 
 		setUserBasicInfo(idx);
-		addInbodyChartDatas(idx);
+		setInbodyChartDatas(idx);
 		myInbodyChart.update();
-//		$("#latestMeasureDay").html(latestMeasuerDay);
 }	
 	
 	
 var beforeMeasureDay = document.querySelector("#beforeMeasureDay");
 var afterMeasureDay = document.querySelector("#afterMeasureDay")
 
-var preAfter= 1;
-var after = 1;
+//var preAfter= 1;
+//var after = 1;
 
 function beforeDayIschanged()
-{	    
+{	
+	beforeSelected= beforeMeasureDay.selectedIndex;    
 	beforeAfterChanged("before", beforeMeasureDay.selectedIndex);
 }
 
 function afterDayIschanged()
 {
+	afterSelected= afterMeasureDay.selectedIndex-1;
 	beforeAfterChanged("after", afterMeasureDay.selectedIndex-1);
 }
 
 
 function beforeAfterChanged(BAtype, num)
 {
-	let numOfExcution=0;
+
+	let before=  beforeMeasureDay.selectedIndex;
+	let after= afterMeasureDay.selectedIndex-1;
 	
 	setBeforeAfterDatas(BAtype, num);
 	showDates();
     getDifference();
-	
-	if(BAtype=="before")
-	{
-		setEnabledAfterSelect(num);
-		
-		before= num;
-		
-		if(before-numOfMyChartDatas>=0)
-		{
-//			앞- 추가될 데이터 수
-			numOfExcution=before-numOfMyChartDatas+1;
-			addMyChartDatas("addPre", numOfExcution);
-//			추가된 후 차트 데이터 수
-			numOfMyChartDatas= numOfMyChartDatas+numOfExcution;	
-		}
-		else if(before-numOfMyChartDatas<-1)
-		{
-//			앞- 제거될 데이터 수
-			numOfExcution=Math.abs(numOfMyChartDatas-before)-1;
-			removeMyChartDatas("removePre", numOfExcution);
-//			제거된 후 차트 데이터 수
-			numOfMyChartDatas= numOfMyChartDatas-numOfExcution;			
-		}
 
+
+	if(BAtype=="before")
+	{	
+		setEnabledAfterSelect(num);		
 	}
 	else
 	{
 		setEnabledBeforeSelect(num);
-
-		preAfter= after;
-		after= num+1;		
-
-	   if(preAfter>after)
-		{
-		 //뒤 데이터 추가
-		numOfExcution= preAfter-after;
-		addMyChartDatas("addPost", numOfExcution);
-		numOfMyChartDatas= numOfMyChartDatas+numOfExcution;	
-
-		}
-		else if(preAfter<after)
-		{
-		//뒤의 데이터를 뺀다
-		numOfExcution=Math.abs(preAfter-after);
-		removeMyChartDatas("removePost", numOfExcution);
-		numOfMyChartDatas= numOfMyChartDatas-numOfExcution;	
-		}
-
-
-	
-			
 	}
 	
+		
+//	let numOfExcution=0;	
+	
+//	if(BAtype=="before")
+//	{
+//		setEnabledAfterSelect(num);
+//		
+//		before= num;
+//		
+//		if(before-numOfMyChartDatas>=0)
+//		{
+////			앞- 추가될 데이터 수
+//			numOfExcution=before-numOfMyChartDatas+1;
+//			addMyChartDatas("addPre", numOfExcution);
+////			추가된 후 차트 데이터 수
+//			numOfMyChartDatas= numOfMyChartDatas+numOfExcution;	
+//		}
+//		else if(before-numOfMyChartDatas<-1)
+//		{
+////			앞- 제거될 데이터 수
+//			numOfExcution=Math.abs(numOfMyChartDatas-before)-1;
+//			removeMyChartDatas("removePre", numOfExcution);
+////			제거된 후 차트 데이터 수
+//			numOfMyChartDatas= numOfMyChartDatas-numOfExcution;			
+//		}
+//
+//	}
+//	else
+//	{
+//		setEnabledBeforeSelect(num);
+//
+//		preAfter= after;
+//		after= num+1;		
+//
+//	   if(preAfter>after)
+//		{
+//		 //뒤 데이터 추가
+//		numOfExcution= preAfter-after;
+//		addMyChartDatas("addPost", numOfExcution);
+//		numOfMyChartDatas= numOfMyChartDatas+numOfExcution;	
+//
+//		}
+//		else if(preAfter<after)
+//		{
+//		//뒤의 데이터를 뺀다
+//		numOfExcution=Math.abs(preAfter-after);
+//		removeMyChartDatas("removePost", numOfExcution);
+//		numOfMyChartDatas= numOfMyChartDatas-numOfExcution;	
+//		}		
+//	}
+
+	setMyChartDatas();
 	updateMyCharts();
 
 }
@@ -794,23 +828,18 @@ function beforeAfterChanged(BAtype, num)
 
 
 
-
-//$(document).ready(function(){
-//처음 불러올때
 	getDatas();
 	
-//	인바디 차트 그리기	
+//  차트 그리기	
 	if(resultArray.length!=0)
 	{
 		createInbodyChart();	
 	}	
 	if(resultArray.length>=2)
 	{
-		//기간 차트 그리기	
 		createMyCharts();
 	}
 	
 	
-//	});
 
 
