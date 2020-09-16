@@ -42,8 +42,7 @@ public class SearchCommunityAction implements Action {
 			keyField=request.getParameter("keyField");
 			keyWord=request.getParameter("keyWord");
 			session.setAttribute("keyField", keyField);
-			session.setAttribute("keyWord", keyWord);
-			System.out.println(session.getAttribute("keyWord").toString());
+			session.setAttribute("keyWord", keyWord);			
 		}else {
 			if(session.getAttribute("keyField")!=null) {
 				keyField=session.getAttribute("keyField").toString();

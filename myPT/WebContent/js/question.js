@@ -1,18 +1,18 @@
 
 
 //페이징
-function paging(keyWord,page,head){
-	if((keyWord==null||keyWord=="")&&head=="all"){
-		window.location.href="moveCommunity.do?page="+page;
+function paging(keyWord,page){
+	if((keyWord==null||keyWord=="")){
+		window.location.href="moveQuestion.do?page="+page;
 	}else{
-		window.location.href="searchCommunity.do?page="+page+"&head="+head;
+		window.location.href="searchQuestion.do?page="+page;
 	}
 }
-function gtltPaging(keyWord,arrow,head){
+function gtltPaging(keyWord,arrow){
 	if((keyWord==null||keyWord=="")&&head=="all"){
-		window.location.href="moveCommunity.do?next="+arrow;
+		window.location.href="moveQuestion.do?next="+arrow;
 	}else{
-		window.location.href="searchCommunity.do?next="+arrow+"&head="+head;
+		window.location.href="searchQuestion.do?next="+arrow;
 	}s
 }
 
@@ -25,20 +25,10 @@ function searchCheck(){
 		return false;
 	}
 	else if(keyWord==""){
-		window.location.href="moveCommunity.do"
+		window.location.href="moveQuestion.do"
 	}else{
-		window.location.href="searchCommunity.do?keyField="+keyField+"&keyWord="+keyWord;
+		window.location.href="searchQuestion.do?keyField="+keyField+"&keyWord="+keyWord;
 	}
 }
 
-//말머리 선택
-$("#head").change(function() {
-	var head = $("#head").val();
-	window.location.href="searchCommunity.do?head="+head; 
-	})
 
-// 이미지 클릭 시 게시물 상세 페이지로 이동
-$("img").on("click",function(){
-	var id=$(this).parent().attr("id").substring(4);
-	window.location.href="boardView.do?num="+id;
-})

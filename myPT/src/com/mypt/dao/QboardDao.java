@@ -242,8 +242,40 @@ public class QboardDao extends AbstractBoardDao<QboardDto>
 			}
 			
 	
-	//Board Total Count : 총 게시물수
-			public int getTotalCount(String keyField, String keyWord) {
+	//검색
+//			public int getTotalCount(String keyField, String keyWord) {
+//				Connection con = null;
+//				PreparedStatement ps = null;
+//				ResultSet rs = null;
+//				String sql = null;
+//				int totalCount = 0;
+//				try {
+//					con = db.getConnection();
+//					//검색이 아닌경우
+//					if(keyWord.trim().equals("")||keyWord==null) {						
+//							sql = "select count(*) from qboard";										
+//						ps = con.prepareStatement(sql);
+//					}else {
+//						//검색인 경우
+//						
+//						sql = "select count(*) from qboard where " 
+//								+ keyField +" like '%"+keyWord+"%'";	
+//						System.out.println(sql);
+//						ps = con.prepareStatement(sql);
+//						
+//					}
+//					rs = ps.executeQuery();
+//					if(rs.next()) totalCount = rs.getInt(1);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				} finally {
+//					db.closeConnection(rs,ps,con);
+//				}
+//				return totalCount;
+//			}
+			
+			//검색
+			public int getTotalCount(int ref) {
 				Connection con = null;
 				PreparedStatement ps = null;
 				ResultSet rs = null;
@@ -251,19 +283,13 @@ public class QboardDao extends AbstractBoardDao<QboardDto>
 				int totalCount = 0;
 				try {
 					con = db.getConnection();
-					//검색이 아닌경우
-					if(keyWord.trim().equals("")||keyWord==null) {						
-							sql = "select count(*) from qboard";										
-						ps = con.prepareStatement(sql);
-					}else {
-						//검색인 경우
-						
-						sql = "select count(*) from qboard where " 
-								+ keyField +" like '%"+keyWord+"%'";	
+					
+						sql = "select count(*) from qboard where qb_ref=?";	
 						System.out.println(sql);
 						ps = con.prepareStatement(sql);
+						ps.setInt(1, ref);
 						
-					}
+					
 					rs = ps.executeQuery();
 					if(rs.next()) totalCount = rs.getInt(1);
 				} catch (Exception e) {
@@ -274,56 +300,7 @@ public class QboardDao extends AbstractBoardDao<QboardDto>
 				return totalCount;
 			}
 			
-			//Board List : 페이지당 보여줄 갯수만 리턴, 검색 포함.
-			//keyField : 선택옵션(name, subject, content)
-			//keyWord : 검색어
-			//start : 시작번호, cnt : 한 페이지당 가져올 게시물 개수 
-			public Vector<QboardDto> getBoardList(String keyField,
-					String keyWord,int start, int cnt){
-				Connection con = null;
-				PreparedStatement ps = null;
-				ResultSet rs = null;
-				String sql = null;
-				Vector<QboardDto> vlist = new Vector<QboardDto>();
-				
-				try {
-					con = db.getConnection();
-					//검색이 아닌경우
-					if(keyWord.trim().equals("")||keyWord==null) {
-						
-						sql = "select *,date_format(qb_date,'%Y-%m-%d %H:%i') from qboard order by qb_ref desc, qb_pos "
-									+ "limit ?,?";												
-						ps = con.prepareStatement(sql);					
-						ps.setInt(1, start);
-						ps.setInt(2, cnt);
-					}else {//검색인 경우
-						
-						sql = "select * from qboard where "+keyField+" like '%"+keyWord+"%' order by qb_ref desc, qb_pos limit ?,?";						
-						ps = con.prepareStatement(sql);
-						ps.setInt(1, start);
-						ps.setInt(2, cnt);
-					}
-					
-					rs = ps.executeQuery();
-					while(rs.next()) {					
-						QboardDto bean = new QboardDto();
-						bean.setNum(rs.getInt("qb_num"));
-						bean.setWriter(rs.getString("qb_writer"));
-						bean.setTitle(rs.getString("qb_title"));
-						bean.setPos(rs.getInt("qb_pos"));
-						bean.setRef(rs.getInt("qb_ref"));
-						bean.setDepth(rs.getInt("qb_depth"));
-						bean.setDate(rs.getString(10));
-						bean.setHit(rs.getInt("qb_hit"));	
-						vlist.addElement(bean);
-					}
-				} catch (Exception e) {
-					e.printStackTrace();
-				} finally {
-					db.closeConnection(rs,ps,con);
-				}
-				return vlist;
-			}
+			
 			
 			//Count Up : 조회수 증가
 			public void upCount(int num) {
@@ -507,7 +484,7 @@ public class QboardDao extends AbstractBoardDao<QboardDto>
 			//keyField : 선택옵션(name, subject, content)
 			//keyWord : 검색어
 			//start : 시작번호, cnt : 한 페이지당 가져올 게시물 개수 
-			public ArrayList<QboardDto> getBoardList2(String keyField,
+			public ArrayList<QboardDto> getBoardList(String keyField,
 					String keyWord,int start, int cnt){
 				Connection con = null;
 				PreparedStatement ps = null;
@@ -527,7 +504,7 @@ public class QboardDao extends AbstractBoardDao<QboardDto>
 						ps.setInt(2, cnt);
 					}else {//검색인 경우
 						
-						sql = "select * from qboard where "+keyField+" like '%"+keyWord+"%' order by qb_ref desc, qb_pos limit ?,?";						
+						sql = "select *,date_format(qb_date,'%Y-%m-%d %H:%i') from qboard where "+keyField+" like '%"+keyWord+"%' order by qb_ref desc, qb_pos limit ?,?";						
 						ps = con.prepareStatement(sql);
 						ps.setInt(1, start);
 						ps.setInt(2, cnt);
@@ -545,6 +522,73 @@ public class QboardDao extends AbstractBoardDao<QboardDto>
 						bean.setDate(rs.getString(10));
 						bean.setHit(rs.getInt("qb_hit"));	
 						arr.add(bean);
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					db.closeConnection(rs,ps,con);
+				}
+				return arr;
+			}
+			
+			//검색시 답글까지 다 가져오기
+			public ArrayList<QboardDto> getBoardList(int ref,int start, int cnt){
+				Connection con = null;
+				PreparedStatement ps = null;
+				ResultSet rs = null;
+				String sql = null;
+				ArrayList<QboardDto> arr = new ArrayList<QboardDto>();
+				
+				try {
+					con = db.getConnection();
+					
+						sql = "select *,date_format(qb_date,'%Y-%m-%d %H:%i') from qboard where qb_ref=? order by qb_ref desc, qb_pos "
+									+ "limit ?,?";												
+						ps = con.prepareStatement(sql);					
+						ps.setInt(1, ref);
+						ps.setInt(2, start);
+						ps.setInt(3, cnt);
+					
+					
+					rs = ps.executeQuery();
+					while(rs.next()) {					
+						QboardDto bean = new QboardDto();
+						bean.setNum(rs.getInt("qb_num"));
+						bean.setWriter(rs.getString("qb_writer"));
+						bean.setTitle(rs.getString("qb_title"));
+						bean.setPos(rs.getInt("qb_pos"));
+						bean.setRef(rs.getInt("qb_ref"));
+						bean.setDepth(rs.getInt("qb_depth"));
+						bean.setDate(rs.getString(10));
+						bean.setHit(rs.getInt("qb_hit"));	
+						arr.add(bean);
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					db.closeConnection(rs,ps,con);
+				}
+				return arr;
+			}
+			
+			//검색시 ref 값들 가져오기
+			public ArrayList<Integer> getRefList(String keyField, String keyWord){
+				Connection con = null;
+				PreparedStatement ps = null;
+				ResultSet rs = null;
+				String sql = null;
+				ArrayList<Integer> arr = new ArrayList<Integer>();
+				
+				try {
+					con = db.getConnection();
+					
+						sql = "select * from qboard where "+keyField+" like '%"+keyWord+"%' group by qb_ref order by qb_ref desc, qb_pos;";								
+						ps = con.prepareStatement(sql);				
+						
+					rs = ps.executeQuery();
+					while(rs.next()) {
+							
+						arr.add(rs.getInt("qb_ref"));
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
