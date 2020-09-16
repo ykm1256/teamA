@@ -219,7 +219,7 @@
 									<!-- 다음 블럭 끝-->
 								</ul>
 							</c:if>
-							<div class="row justify-content-center mb-5">
+							<div class="row justify-content-center mb-5 mt-3">
 								<select name="keyField" id="keyField">
 									<c:choose>
 										<c:when test="${sessionScope.keyField=='pb_writer'}">
