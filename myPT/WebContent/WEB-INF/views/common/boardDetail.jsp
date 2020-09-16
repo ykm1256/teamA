@@ -53,7 +53,11 @@
 					<header class="px-2">
 						<h3 class="ml-2">글보기</h3>
 						<div class="text-right">
+							<c:if test="${sessionScope.board=='qboard' }">
+							<c:if test="${sessionScope.grade==0||sessionScope.grade==1 }">
 							<a href="moveReply.do" class="mr-2 btn btn-light btn-sm font-weight-bold">답변</a>
+							</c:if>
+							</c:if>
 							<c:choose>
 								<c:when test="${sessionScope.board=='cboard' }">
 									<a href="moveCommunity.do" class="btn btn-light btn-sm font-weight-bold mr-1">목록</a>
