@@ -24,7 +24,9 @@ public class QrCheckAction implements Action {
 		UserDto dto = dao.getUserByEmail(email);
 		HeadCountDao hdao = HeadCountDao.getInstance();
 		HeadCountDto hdto = new HeadCountDto();
+		System.out.println("회원이메일"+email);
 		hdto.setH_id(dto.getId());
+		System.out.println(hdto.getH_id());
 
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date time = new Date();
