@@ -3,7 +3,9 @@ package com.mypt.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import com.mypt.dto.PboardDto;
 import com.mypt.dto.QboardDto;
@@ -384,8 +386,12 @@ public class PboardDao extends AbstractBoardDao<PboardDto> {
 		ResultSet rs = null;
 
 		ArrayList<PboardDto> arr = new ArrayList<PboardDto>();
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar cal = Calendar.getInstance();
+		String today = sdf.format(cal.getTime());
 
-		String sql = "select *,date_format(pb_date,'%Y-%m-%d %H:%i') from pboard where pb_writer=?";
+		String sql = "select * from pboard where pb_writer=?";
 
 		try {
 			con = db.getConnection();
@@ -400,7 +406,13 @@ public class PboardDao extends AbstractBoardDao<PboardDto> {
 				dto.setWriter(rs.getString("pb_writer"));
 				dto.setHit(rs.getInt("pb_hit"));
 				dto.setNum(rs.getInt("pb_num"));
-				dto.setDate(rs.getString(9));
+				
+				String Date = rs.getTimestamp("pb_date").toString();
+				if(Date.substring(0, 10).equals(today)) {
+					dto.setDate(Date.substring(11));
+				}else {
+					dto.setDate(Date.substring(0,10));
+				}
 
 				arr.add(dto);
 			}

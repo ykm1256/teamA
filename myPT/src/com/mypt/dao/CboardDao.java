@@ -3,7 +3,9 @@ package com.mypt.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Vector;
 
 import com.mypt.dto.CboardDto;
@@ -88,8 +90,11 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 			ResultSet rs = null;
 			
 			ArrayList<CboardDto> arr= new ArrayList<CboardDto>();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Calendar cal = Calendar.getInstance();
+			String today = sdf.format(cal.getTime());
 
-			String sql = "select *,date_format(cb_date,'%Y-%m-%d %H:%i') from cboard where cb_writer=?";
+			String sql = "select * from cboard where cb_writer=?";
 
 			try {
 				con = db.getConnection();
@@ -105,7 +110,13 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 					dto.setWriter(rs.getString("cb_writer"));
 					dto.setHit(rs.getInt("cb_hit"));
 					dto.setNum(rs.getInt("cb_num"));
-					dto.setDate(rs.getString(9));					
+					
+					String Date = rs.getTimestamp("cb_date").toString();
+					if(Date.substring(0, 10).equals(today)) {
+						dto.setDate(Date.substring(11));
+					}else {
+						dto.setDate(Date.substring(0,10));
+					}						
 										
 					arr.add(dto);
 				}
@@ -488,16 +499,21 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 					String sql = null;
 					ArrayList<CboardDto> arr = new ArrayList<CboardDto>();
 					
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+					Calendar cal = Calendar.getInstance();
+					String today = sdf.format(cal.getTime());
+					
+					
 					try {
 						con = db.getConnection();
 						//검색이 아닌경우
 						if(keyWord.trim().equals("")||keyWord==null) {
 							// 말머리 전체보기
 							if(head.equals("all")) {
-							sql = "select *,date_format(cb_date,'%Y-%m-%d %H:%i') from cboard order by cb_num desc "
+							sql = "select * from cboard order by cb_num desc "
 										+ "limit ?,?";
 							}else {
-								sql = "select *,date_format(cb_date,'%Y-%m-%d %H:%i') from cboard where cb_head='"+head+"' order by cb_num desc "
+								sql = "select * from cboard where cb_head='"+head+"' order by cb_num desc "
 										+ "limit ?,?";
 							}
 							
@@ -507,9 +523,9 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 						}else {//검색인 경우
 							//말머리 전체보기					
 							if(head.equals("all")) {
-								sql = "select *,date_format(cb_date,'%Y-%m-%d %H:%i') from cboard where "+keyField+" like '%"+keyWord+"%' order by cb_num desc limit ?,?";
+								sql = "select * from cboard where "+keyField+" like '%"+keyWord+"%' order by cb_num desc limit ?,?";
 							}else {
-									sql = "select *,date_format(cb_date,'%Y-%m-%d %H:%i') from cboard where "+keyField+" like '%"+keyWord+"%' and cb_head='"+head+"' order by cb_num desc "
+									sql = "select * from cboard where "+keyField+" like '%"+keyWord+"%' and cb_head='"+head+"' order by cb_num desc "
 											+ "limit ?,?";
 							}
 //							sql = "select * from cboard where " + keyField 
@@ -524,8 +540,16 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 							CboardDto bean = new CboardDto();
 							bean.setNum(rs.getInt("cb_num"));
 							bean.setWriter(rs.getString("cb_writer"));
-							bean.setTitle(rs.getString("cb_title"));							
-							bean.setDate(rs.getString(9));
+							bean.setTitle(rs.getString("cb_title"));
+							
+							String Date = rs.getTimestamp("cb_date").toString();
+							if(Date.substring(0, 10).equals(today)) {
+								bean.setDate(Date.substring(11));
+							}else {
+								bean.setDate(Date.substring(0,10));
+							}
+							
+							
 							bean.setHit(rs.getInt("cb_hit"));				
 							bean.setHead(rs.getString("cb_head"));
 							bean.setLike(rs.getInt("cb_like"));	

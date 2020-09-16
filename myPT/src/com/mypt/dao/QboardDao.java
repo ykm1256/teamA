@@ -3,7 +3,9 @@ package com.mypt.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Vector;
 
 import com.mypt.dto.CboardDto;
@@ -416,8 +418,12 @@ public class QboardDao extends AbstractBoardDao<QboardDto>
 				ResultSet rs = null;
 				
 				ArrayList<QboardDto> arr= new ArrayList<QboardDto>();
+				
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				Calendar cal = Calendar.getInstance();
+				String today = sdf.format(cal.getTime());
 
-				String sql = "select *,date_format(qb_date,'%Y-%m-%d %H:%i') from qboard where qb_writer=?";
+				String sql = "select * from qboard where qb_writer=?";
 
 				try {
 					con = db.getConnection();
@@ -433,7 +439,13 @@ public class QboardDao extends AbstractBoardDao<QboardDto>
 						dto.setWriter(rs.getString("qb_writer"));
 						dto.setHit(rs.getInt("qb_hit"));
 						dto.setNum(rs.getInt("qb_num"));
-						dto.setDate(rs.getString(10));					
+
+						String Date = rs.getTimestamp("qb_date").toString();
+						if(Date.substring(0, 10).equals(today)) {
+							dto.setDate(Date.substring(11));
+						}else {
+							dto.setDate(Date.substring(0,10));
+						}				
 											
 						arr.add(dto);
 					}
@@ -492,23 +504,20 @@ public class QboardDao extends AbstractBoardDao<QboardDto>
 				String sql = null;
 				ArrayList<QboardDto> arr = new ArrayList<QboardDto>();
 				
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				Calendar cal = Calendar.getInstance();
+				String today = sdf.format(cal.getTime());
+				
 				try {
 					con = db.getConnection();
-					//검색이 아닌경우
-					if(keyWord.trim().equals("")||keyWord==null) {
+					
 						
-						sql = "select *,date_format(qb_date,'%Y-%m-%d %H:%i') from qboard order by qb_ref desc, qb_pos "
+						sql = "select * from qboard order by qb_ref desc, qb_pos "
 									+ "limit ?,?";												
 						ps = con.prepareStatement(sql);					
 						ps.setInt(1, start);
 						ps.setInt(2, cnt);
-					}else {//검색인 경우
-						
-						sql = "select *,date_format(qb_date,'%Y-%m-%d %H:%i') from qboard where "+keyField+" like '%"+keyWord+"%' order by qb_ref desc, qb_pos limit ?,?";						
-						ps = con.prepareStatement(sql);
-						ps.setInt(1, start);
-						ps.setInt(2, cnt);
-					}
+			
 					
 					rs = ps.executeQuery();
 					while(rs.next()) {					
@@ -519,7 +528,14 @@ public class QboardDao extends AbstractBoardDao<QboardDto>
 						bean.setPos(rs.getInt("qb_pos"));
 						bean.setRef(rs.getInt("qb_ref"));
 						bean.setDepth(rs.getInt("qb_depth"));
-						bean.setDate(rs.getString(10));
+						
+						String Date = rs.getTimestamp("qb_date").toString();
+						if(Date.substring(0, 10).equals(today)) {
+							bean.setDate(Date.substring(11));
+						}else {
+							bean.setDate(Date.substring(0,10));
+						}
+						
 						bean.setHit(rs.getInt("qb_hit"));	
 						arr.add(bean);
 					}
@@ -539,10 +555,14 @@ public class QboardDao extends AbstractBoardDao<QboardDto>
 				String sql = null;
 				ArrayList<QboardDto> arr = new ArrayList<QboardDto>();
 				
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				Calendar cal = Calendar.getInstance();
+				String today = sdf.format(cal.getTime());
+				
 				try {
 					con = db.getConnection();
 					
-						sql = "select *,date_format(qb_date,'%Y-%m-%d %H:%i') from qboard where qb_ref=? order by qb_ref desc, qb_pos "
+						sql = "select * from qboard where qb_ref=? order by qb_ref desc, qb_pos "
 									+ "limit ?,?";												
 						ps = con.prepareStatement(sql);					
 						ps.setInt(1, ref);
@@ -559,7 +579,15 @@ public class QboardDao extends AbstractBoardDao<QboardDto>
 						bean.setPos(rs.getInt("qb_pos"));
 						bean.setRef(rs.getInt("qb_ref"));
 						bean.setDepth(rs.getInt("qb_depth"));
-						bean.setDate(rs.getString(10));
+						
+						// 오늘날짜면 시간만
+						String Date = rs.getTimestamp("qb_date").toString();
+						if(Date.substring(0, 10).equals(today)) {
+							bean.setDate(Date.substring(11));
+						}else {
+							bean.setDate(Date.substring(0,10));
+						}
+						
 						bean.setHit(rs.getInt("qb_hit"));	
 						arr.add(bean);
 					}
