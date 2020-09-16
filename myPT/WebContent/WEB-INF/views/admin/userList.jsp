@@ -88,7 +88,7 @@
                           <button onclick="location.href='adminUserDetail.do?id=${item.id}'" class="btn btn-primary custom-btn">
                             <i class="fas fa-user-edit"></i>
                           </button>
-                          <button onclick="location.href='adminUserDelete.do?id=${item.id}'" class="btn btn-danger custom-btn">
+                          <button onclick="deleteUser('${item.id}')" class="btn btn-danger custom-btn">
                             <i class="fas fa-user-times"></i>
                           </button>
                         </td>
@@ -116,5 +116,7 @@
     <script src="/myPT/assets/demo/datatables-demo.js"></script>
     <!-- /데이터 테이블 js -->
     
+    <!-- 삭제 js -->
+    <script src="/myPT/js/delete.js"></script>
   </body>
 </html>
