@@ -52,7 +52,7 @@ public class MoveQuestionAction implements Action {
 		}
 		String keyword = "";
 		String keyfield = "";
-		ArrayList<QboardDto> qarr = qdao.getBoardList2(keyword,keyfield,page.getStartPage(), page.getNumPerPage());
+		ArrayList<QboardDto> qarr = qdao.getBoardList(keyword,keyfield,page.getStartPage(), page.getNumPerPage());
 		ArrayList<Integer> comments = new ArrayList<Integer>();		
 
 		CommentDao comdao = CommentDao.getInstance();

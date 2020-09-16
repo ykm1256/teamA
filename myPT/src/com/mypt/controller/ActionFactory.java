@@ -8,6 +8,7 @@ import com.mypt.action.board.LikeAction;
 import com.mypt.action.board.ReplyAction;
 import com.mypt.action.board.SearchCommunityAction;
 import com.mypt.action.board.SearchPhotoAction;
+import com.mypt.action.board.SearchQuestionAction;
 import com.mypt.action.board.TestViewAction;
 import com.mypt.action.board.UpdateAction;
 import com.mypt.action.board.UpdateViewAction;
@@ -207,6 +208,7 @@ public class ActionFactory
 		//질문게시판
 		map.put("/moveQuestion", new MoveQuestionAction());
 		map.put("/moveBoardDetail", new MoveBoardDetailAction());
+		map.put("/searchQuestion", new SearchQuestionAction());
 		
 		//프로필 이동
 		map.put("/moveUserProfile", new MoveUserProfileAction());		

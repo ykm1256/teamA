@@ -22,8 +22,7 @@ public class SearchQuestionAction implements Action {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
-		session.setAttribute("board", "qboard");
-		String nick=session.getAttribute("nick").toString();
+		session.setAttribute("board", "qboard");		
 		QboardDao qdao=QboardDao.getInstance();
 		
 		//검색 처리
@@ -56,7 +55,12 @@ public class SearchQuestionAction implements Action {
 		System.out.println("키필드"+keyField);
 		System.out.println("키워드"+keyWord);
 		//페이징 처리
-		int totalRecord = qdao.getTotalCount(keyField, keyWord);
+		ArrayList<Integer> refs = qdao.getRefList(keyField, keyWord);
+		int totalRecord = 0;
+		for(int i=0;i<refs.size();i++) {
+			totalRecord += qdao.getTotalCount(refs.get(i));
+		}
+		
 		int numPerPage = 10;
 		int nowPage=Integer.parseInt(request.getParameter("page")==null?"1":request.getParameter("page"));
 		String next=request.getParameter("next");
@@ -71,8 +75,20 @@ public class SearchQuestionAction implements Action {
 			nowPage=page.getPagePerBlock()*nowBlock+5;
 			page=new PagingDto(nowPage, totalRecord, numPerPage);
 		}
-
-		ArrayList<QboardDto> qarr=qdao.getBoardList2(keyField,keyWord,page.getStartPage(), page.getNumPerPage());
+		
+		
+		ArrayList<QboardDto> qarr= new ArrayList<QboardDto>();
+		int start = page.getStartPage();
+		int cnt = page.getNumPerPage();
+		for(int i=0; i<refs.size();i++) {
+			ArrayList<QboardDto> arr = qdao.getBoardList(refs.get(i),start , cnt);
+			for(int j=0;j<arr.size();j++) {
+				qarr.add(arr.get(j));
+				--cnt;				
+			}
+		}
+		
+		
 		ArrayList<Integer> comments=new ArrayList<Integer>();		
 		
 		CommentDao comdao = CommentDao.getInstance();
