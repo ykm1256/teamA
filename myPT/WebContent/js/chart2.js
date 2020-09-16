@@ -108,8 +108,8 @@ var myChart2 = new Chart(ctx2, {
 					type: "linear",
 					position: "left",
 					ticks: {
-						max: 200,
-						min: 0,
+						suggetedmin: 0,
+	          				suggestedmax: 2000,
 					},
 				},
 			],
@@ -239,7 +239,7 @@ $("#selectmonth").change(function() {
 	tid = new Array();
 	income = new Array();
 	tname = new Array();
-	var monthtrainer = new Array();
+	tphoto = new Array();	
 
 	$.ajax({
 		url: "incomeTrainerChart.do",
@@ -252,6 +252,7 @@ $("#selectmonth").change(function() {
 				tid.push(data[i].tid);
 				income.push(data[i].income);
 				tname.push(data[i].tname);
+				tphoto.push(data[i].tphoto);
 			}
 		},
 		error: function(e) {
@@ -286,8 +287,8 @@ $("#selectmonth").change(function() {
 						type: "linear",
 						position: "left",
 						ticks: {
-							max: 200,
 							min: 0,
+	          				suggestedmax: 2000,
 						},
 					},
 				],
@@ -298,8 +299,8 @@ $("#selectmonth").change(function() {
 	//////////////////차트 다시그리기
 	
 	// 이달의 트레이너 처음 뿌릴 때	
-	var monthtrainer = new Array();
-	var monthtrainerphoto = new Array();
+	monthtrainer = new Array();
+	monthtrainerphoto = new Array();
 	var max = Math.max.apply(null, income);
 	for (var i = 0; i < income.length; i++) {
 		if (income[i] == max) {

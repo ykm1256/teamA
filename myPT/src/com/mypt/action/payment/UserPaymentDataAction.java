@@ -72,6 +72,8 @@ public class UserPaymentDataAction implements Action {
 		
 		SimpleDateFormat sf = new SimpleDateFormat("yy-MM-dd");	
 		Calendar cal = sf.getCalendar();
+		System.out.println("널확인"+sf.parse(payUser.getStartdate()));
+		System.out.println("널확인"+payUser.getStartdate());
 		
 		//enddate가 지나지 않은. (ptcount 0 or not 0)
 		if(beforeUser.getEnddate()!=null)
@@ -86,10 +88,12 @@ public class UserPaymentDataAction implements Action {
 		//enddate가 없는 사람 //startdate 기준으로 enddate계산
 		else
 		{
+			System.out.println("널확인"+sf.parse(payUser.getStartdate()));
+			System.out.println("널확인"+payUser.getStartdate());
 			cal.setTime(sf.parse(payUser.getStartdate()));
+			
 			cal.add(Calendar.DATE, days);
-			payUser.setEnddate(sf.format(cal.getTime()));
-		
+			payUser.setEnddate(sf.format(cal.getTime()));		
 			userDao.updateAfterPayment(payUser);
 		}
 		

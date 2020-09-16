@@ -457,3 +457,18 @@ var selectedCommentForReplyIndex;
 		})
 
 
+
+//사진 크기 조절
+$(document).ready(function(){
+	if (window.matchMedia("(max-width: 770px)").matches == true) {
+  		$("#result img").attr("style","width:100%");
+}	
+})
+
+$(window).resize(function () {
+  if (window.matchMedia("(max-width: 770px)").matches == true) {
+    $("#result img").attr("style","width:100%");
+  } else {
+	$("#result img").attr("style","");
+  }
+});		
