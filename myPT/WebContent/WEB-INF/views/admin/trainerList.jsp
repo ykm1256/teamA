@@ -44,11 +44,16 @@
       <!-- /sideNav -->
       <div id="layoutSidenav_content">
         <main>
-			<div class="container-fulid">
+			<div class="container-fluid">
             	<div class="card mb-4">
               		<div class="card-header font-weight-bold">
-               		 <i class="fas fa-table mr-1"></i>
-                회원 관리
+               		 <div class="justify-content-between d-flex ">
+              <div class="align-self-center">
+              	<i class="fas fa-table mr-1"></i>
+              	트레이너 관리
+              </div>
+                <div class="btn btn-dark" onclick="location.href='moveTrainerRegister.do'">트레이너 등록</div>
+              </div>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
@@ -108,7 +113,6 @@
     <script src="/myPT/assets/demo/datatables-demo.js"></script>
     <!-- /데이터 테이블 js -->
     
-    <!-- 삭제 js -->
     <script src="/myPT/js/delete.js"></script>
     
   </body>
