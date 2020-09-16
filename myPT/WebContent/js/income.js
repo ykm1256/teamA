@@ -24,7 +24,7 @@ for (var count = 0; count < montharr.length; count++) {
 
 
 $(window).resize(function () {
-  if (window.matchMedia("(max-width: 910px)").matches == true) {
+  if (window.matchMedia("(max-width: 950px)").matches == true) {
     $("#card1").attr("class", "col-6");
     $("#card2").attr("class", "col-6");
     $("#card3").attr("class", "col-6");
