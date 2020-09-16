@@ -26,15 +26,15 @@ public class ViewAction implements Action {
 		HttpSession session = request.getSession();
 		int num = Integer.parseInt(request.getParameter("num"));
 
-//		if(request.getParameter("b")!=null) {
-//			if(request.getParameter("b").toString().equals("c")) {
-//				session.setAttribute("board", "cboard");
-//			}else if(request.getParameter("b").toString().equals("q")){
-//				session.setAttribute("board", "qboard");
-//			}else if(request.getParameter("b").toString().equals("p")) {
-//				session.setAttribute("board", "pboard");
-//			}
-//		}
+		if(request.getParameter("b")!=null) {
+			if(request.getParameter("b").toString().equals("c")) {
+				session.setAttribute("board", "cboard");
+			}else if(request.getParameter("b").toString().equals("q")){
+				session.setAttribute("board", "qboard");
+			}else if(request.getParameter("b").toString().equals("p")) {
+				session.setAttribute("board", "pboard");
+			}
+		}
 		String board = session.getAttribute("board").toString();
 		String nick = session.getAttribute("nick").toString();
 		CommentDao comdao = CommentDao.getInstance();

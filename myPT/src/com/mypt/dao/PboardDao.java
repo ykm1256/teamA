@@ -400,7 +400,7 @@ public class PboardDao extends AbstractBoardDao<PboardDto> {
 				dto.setWriter(rs.getString("pb_writer"));
 				dto.setHit(rs.getInt("pb_hit"));
 				dto.setNum(rs.getInt("pb_num"));
-				dto.setDate(rs.getString(10));
+				dto.setDate(rs.getString(9));
 
 				arr.add(dto);
 			}
