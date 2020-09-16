@@ -93,7 +93,7 @@
                         <div class="widget-content p-0">
                           <div class="widget-content-wrapper">
                             <div class="widget-content-left">
-                              <div class="widget-heading text-white">댓글 작성 글</div>
+                              <div class="widget-heading text-white">작성한 댓글</div>
                               <div class="widget-subheading"></div>
                             </div>
                             <div class="widget-content-right">

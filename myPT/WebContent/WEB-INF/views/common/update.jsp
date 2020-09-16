@@ -64,10 +64,16 @@
 										<ul class="list-group list-group-flush h-100">
 											<li class="list-group-item">
 												<div class="row">
-													<div class="col-lg-2 col-sm-6">
+													
 														<c:choose>
-															<c:when test="${sessionScope.board=='qboard'||sessionScope.board=='pboard' }"></c:when>
+															<c:when test="${sessionScope.board=='qboard'||sessionScope.board=='pboard' }">
+															<div class="col-lg-12">
+														<input type="text" hidden="true" name="num" id="num" value="${sessionScope.dto.num }"> 
+														<input class="form-control" id="subject" name="title" placeholder="제목" value="${sessionScope.dto.title }" />
+													</div>
+															</c:when>
 															<c:otherwise>
+															<div class="col-lg-2 col-sm-6">
 																<select class="form-control" name="writeHead" id="writeHead">
 																	<c:choose>
 																		<c:when test="${sessionScope.dto.head=='잡담' }">
@@ -80,16 +86,22 @@
 																			<option value="잡담">잡담</option>
 																			<option value="정보" selected>정보</option>
 																		</c:when>
+																		<c:when test="${sessionScope.dto.head=='질문' }">
+																			<option value="default" disabled>말머리</option>
+																			<option value="잡담">잡담</option>
+																			<option value="정보">정보</option>
+																			<option value="질문" selected>질문</option>
+																		</c:when>
 																	</c:choose>
 																</select>
-															</c:otherwise>
-
-														</c:choose>
-													</div>
-													<div class="col-lg-10 pl-lg-0">
+															</div>
+															<div class="col-lg-10">
 														<input type="text" hidden="true" name="num" id="num" value="${sessionScope.dto.num }"> 
 														<input class="form-control" id="subject" name="title" placeholder="제목" value="${sessionScope.dto.title }" />
 													</div>
+															</c:otherwise>
+														</c:choose>													
+													
 												</div>
 											</li>
 											<li class="list-group-item"><textarea class="summernote" name="" id="summer"></textarea> <input type="text" name="content" id="content" hidden="true" /></li>
