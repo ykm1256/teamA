@@ -242,11 +242,8 @@
 		url:"userCheckSessionId.do",
 		success: function(data)
 		{				
-			if(data==0)
-			{
-				location.href="intro.jsp";
-			}
-			else if(data==1)
+
+			if(data==1)
 			{					
 				location.href="userMain.do";					
 			}
@@ -262,11 +259,8 @@
 		url:"trainerCheckSessionId.do",
 		success: function(data)
 		{				
-			if(data==0)
-			{
-				location.href="intro.jsp";
-			}
-			else if(data==1)
+
+			if(data==1)
 			{					
 				location.href="trainerMain.do";
 			}

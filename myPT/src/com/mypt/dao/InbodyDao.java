@@ -50,7 +50,7 @@ public class InbodyDao {
 		}
 	}
 
-//	회원 정보+인바디 정보 가져오기, limit 30 (이)
+//	회원 정보+인바디 정보 가져오기, limit 10 (이)
 //	public ArrayList<UserDto> getUserInbodyList(String id) {
 	public JsonArray getUserInbodyList(String id) {
 		Connection con = null;
@@ -72,7 +72,7 @@ public class InbodyDao {
 		sb.append("JOIN inbody AS i ");
 		sb.append("ON u.id = i.i_id ");
 		sb.append("WHERE u.id=? ");
-		sb.append("ORDER BY i.i_date DESC LIMIT 30");
+		sb.append("ORDER BY i.i_date DESC LIMIT 10");
 
 		String sql = sb.toString();
 
