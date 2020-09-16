@@ -1,5 +1,42 @@
 Chart.defaults.global.defaultFontFamily = '-apple-system, BlinkMacSystemFont, "Nanum Gothic", Roboto, "Nanum Gothic", Arial, "Nanum Gothic", sans-serif, "Nanum Gothic",  "Nanum Gothic", "Nanum Gothicl", "Nanum Gothic"';
 
+var resultArray= new Array();	//데이터 받아올 배열
+var userName="";
+var birth="";
+var gender="";
+var height= 0;
+var weight= 0;
+var fat= 0;
+var muscle= 0;
+var measureDayForInbodyChart=0;
+
+var numOfMyChartDatas=0;
+
+var inbodyChartMyStatus = []; //inbodyChart용 배열
+var inbodyChartPerStandard = [];  //표준 대비 %
+
+var measurementDays =[];
+var weightChartDatas = [];
+var muscleChartDatas = []; 
+var fatChartDatas =  [];
+var myChartDatas = 	[measurementDays,weightChartDatas, muscleChartDatas, fatChartDatas];
+
+var weightChart = document.querySelector("#weightChart").getContext('2d');
+var muscleChart = document.querySelector("#muscleChart").getContext('2d');
+var fatChart = document.querySelector("#fatChart").getContext('2d');
+
+var myWeightChart="";
+var myMuscleChart="";
+var myFatChart="";
+var myInbodyChart="";
+
+//데이터 차트 tick 설정용
+var weightmm=[];
+var musclemm=[];
+var fatmm=[];
+var minMaxDatas={"weight": weightmm, "muscle":musclemm, "fat":fatmm }
+
+
 //숫자 반올림 num자리까지 표시 
 function numRound(x) 
 {
@@ -46,6 +83,7 @@ function getAge(birth)
 	return years;
 	
 }
+
 
 //비포, 애프터 차이 구하기
 function getDifference()
@@ -158,36 +196,6 @@ function getPerStandardFat()
 
 
 ////////
-var resultArray= new Array();	//데이터 받아올 배열
-var userName="";
-var birth="";
-var gender="";
-var height= 0;
-var weight= 0;
-var fat= 0;
-var muscle= 0;
-var measureDayForInbodyChart=0;
-
-var numOfMyChartDatas=0;
-
-var inbodyChartMyStatus = []; //inbodyChart용 배열
-var inbodyChartPerStandard = [];  //표준 대비 %
-
-var measurementDays =[];
-var weightChartDatas = [];
-var muscleChartDatas = []; 
-var fatChartDatas =  [];
-var myChartDatas = 	[measurementDays,weightChartDatas, muscleChartDatas, fatChartDatas];
-
-var weightChart = document.querySelector("#weightChart").getContext('2d');
-var muscleChart = document.querySelector("#muscleChart").getContext('2d');
-var fatChart = document.querySelector("#fatChart").getContext('2d');
-
-var myWeightChart="";
-var myMuscleChart="";
-var myFatChart="";
-var myInbodyChart="";
-
 
 
 //비교표 -비포 or 애프터 데이터 세팅
@@ -326,6 +334,9 @@ function updateMyCharts()
 }
 
 
+
+
+
 //db에서 데이터 가져옴
 function getDatas()
 {	
@@ -335,29 +346,46 @@ function getDatas()
 		async: false,
 		success: function(data) 
 		{
-			resultArray = data;
+			resultArray = data;		
+					
+			if(resultArray.length==0)
+				{
+					$('.container-fluid').html('<div class="d-flex justify-content-center align-items-center" style="height:80vh"><div class="text-center font-weight-bold"><img src="img/inbodyNoData.png" class="w-25 h-25">인바디를 측정해주세요</div><div>');
+					$('body').attr("style","background-color:gray");
+					return;
+				}	
 			
 			setUserBasicInfo(0);
-				
+			
 			$("#userName").html(userName);
 			$("#age").html("만 "+ birth +"세");
 			$("#gender").html(gender);
 			$("#height").html(height +"cm");
-		
-//		card footer 최근 측정일
-//		$("#measureDayForInbodyChart").html(measureDayForInbodyChart);
+			
+//			인바디차트용 데이터 담기
+			addInbodyChartDatas(0);
+					
+				
+			if(resultArray.length==1)
+			{
+				$('#datasWithCharts').html('<div class="d-flex justify-content-center align-items-center border p-3" style="height:40vh"><i class="fas fa-chart-area fa-4x"></i><div class="text-center font-weight-bold p-2">2회 이상 측정 시<br>데이터를 비교할 수 있습니다</div><div>');
+				$("#measureDayForInbodyChart").append("<option selected>"+measureDayForInbodyChart+"</option> ");
+				return;
+			}
 
-
+						
+/// 비교 해야하는 데이터
 //		비교 측정일 드롭다운	 & 인바디그래프용 날짜 드롭다운
 		$("#beforeMeasureDay").append("<option selected>"+resultArray[1].inbody.strDate+"</option> ");
 		$("#afterMeasureDay").append("<option selected>"+measureDayForInbodyChart+"</option> ");
 		$("#measureDayForInbodyChart").append("<option selected>"+measureDayForInbodyChart+"</option> ");
-		
+		$("#measureDayForInbodyChart").append("<option>"+resultArray[1].inbody.strDate+"</option> ");
+				
 		for(let i=2, length=resultArray.length; i<length; i++)
 		{
 			$("#beforeMeasureDay").append("<option>"+resultArray[i].inbody.strDate+"</option> ");
 			$("#afterMeasureDay").append("<option>"+resultArray[i-1].inbody.strDate+"</option> ");
-			$("#measureDayForInbodyChart").append("<option>"+resultArray[i].inbody.strDate+"</option> ");
+			$("#measureDayForInbodyChart").append("<option>"+resultArray[i-1].inbody.strDate+"</option> ");
 			
 		}			
 
@@ -365,18 +393,27 @@ function getDatas()
 		setEnabledBeforeSelect(0);
 		
 //	     과거 측정일 값 세팅. 최근 2번째 측정일
-//	      최근 측정일 값을 애프터 데이터에 세팅		
-		setBeforeAfterDatas("before", 2);
-		setBeforeAfterDatas("after", 1);
+//	      최근 측정일 값을 애프터 데이터에 세팅
+		
+		if(resultArray.length==2)
+		{
+			setBeforeAfterDatas("before", 1);
+			setBeforeAfterDatas("after", 0);
+			
+		}
+		else
+		{
+			setBeforeAfterDatas("before", 2);
+			setBeforeAfterDatas("after", 1);
 
+		}
+	
 //		선택한 날짜 표시
 		showDates();
 		
 //		비포-애프터 비교
 		getDifference();
 
-//		차트용 데이터 담기
-		addInbodyChartDatas(0);	
 	
 		if(resultArray.length>=6)
 		{
@@ -389,7 +426,11 @@ function getDatas()
 			numOfMyChartDatas= resultArray.length;
 		}
 		
-			
+//      차트 tick 설정용 min,max데이터 세팅			
+		setMinMaxforChartDatas();
+		
+		
+					
 	},
 	error: function(e) {
 		alert(e);
@@ -399,8 +440,10 @@ function getDatas()
 
 
 
-var xMap= ["","","표준이하","","","","표준", "","","", "표준이상","",""];
 
+
+
+var xMap= ["","","표준이하","","","","표준", "","","", "표준이상","",""]; //인바디 차트 추가 x축
 //인바디 차트	
 	function createInbodyChart()
 	{			
@@ -490,9 +533,58 @@ var xMap= ["","","표준이하","","","","표준", "","","", "표준이상","","
 	}
 	
 
+//데이터 최소 최댓값	
+	function setMinMaxforChartDatas()
+	{
+		getMinMax("weight");
+		getMinMax("muscle");
+		getMinMax("fat");
+	}
+	function getMinMax(status)
+	{
+		let min=0;
+		let max=0;
+		
+		min = resultArray[0].inbody[status];
 
+		for(let i=0, length=resultArray.length; i<length;i++)
+		{
+			if(resultArray[i].inbody[status]<min)
+			{
+				min=resultArray[i].inbody[status];
+			}
+			
+			if(resultArray[i].inbody[status]>max)
+			{
+				max=resultArray[i].inbody[status];
+			}			
+		}
+		
+		switch(status)
+		{
+			case "weight":
+				weightmm.push(min);
+				weightmm.push(max);
+				break;
+			case "muscle":
+				musclemm.push(min);
+				musclemm.push(max);
+				break;
+
+			case "fat":
+				fatmm.push(min);
+				fatmm.push(max);
+				break;
+		}
+
+		
+	}	
+
+	
+	
+	
 //차트 설정
-function createMyChartConfig(dataSet){	
+function createMyChartConfig(dataSet, minMaxLabel){	
 return {
 		type: 'line',
 	  	data: {
@@ -530,15 +622,17 @@ return {
 	          color: "rgba(0, 0, 0, .15)",
 	        },
 	        ticks: {
-	          maxTicksLimit: 30
+	          maxTicksLimit: 10  //최대 결과 10
 	        }
 	      }],
 	      yAxes: [{
 	        ticks: {
-//	          min: minMaxDatas[minMaxLabel][0]-1,
-//	          max: minMaxDatas[minMaxLabel][1]+1,
-	          suggetedmin: 0,
-	          suggestedmax: 200,
+	          min: minMaxDatas[minMaxLabel][0]-1,  //최소 -1
+	          max: minMaxDatas[minMaxLabel][1]+1,  //최대 +1
+//	          suggetedmin: 0,
+//	          suggestedmax: 200,
+//	          suggetedmin: minMaxDatas[minMaxLabel][0]-1,
+//	          suggestedmax: minMaxDatas[minMaxLabel][1]+1,
 	          stepSize: 1,
 	        },
 	        gridLines: {
@@ -561,7 +655,7 @@ function createMyCharts()
 myWeightChart= new Chart(weightChart, createMyChartConfig(
 		[{
 	      label: "체중(kg)",
-	      lineTension: 0,
+	      lineTension: 0.1,
 	      backgroundColor: "rgba(255,255,255,0)",
 	      borderColor: "rgba(164,220,160,1)",
 	      pointRadius: 5,
@@ -569,12 +663,12 @@ myWeightChart= new Chart(weightChart, createMyChartConfig(
 	      pointBorderColor: "rgba(255,255,255,0.8)",
 	      pointHoverBackgroundColor: "rgba(2,117,216,1)",
 	      data: weightChartDatas
-	    }]));
+	    }], "weight"));
 
 myMuscleChart= new Chart(muscleChart, createMyChartConfig(
 			[{
 		      label: "골격근량(kg)",
-		      lineTension: 0,
+		      lineTension: 0.1,
 		      backgroundColor: "rgba(255,255,255,0)",
 		      borderColor: "rgba(180,180,180,1)",
 		      pointRadius: 5,
@@ -582,12 +676,12 @@ myMuscleChart= new Chart(muscleChart, createMyChartConfig(
 		      pointBorderColor: "rgba(255,255,255,0.8)",
 		      pointHoverBackgroundColor: "rgba(2,117,216,1)",
 		      data: muscleChartDatas,
-		    }]));
+		    }], "muscle"));
 
 myFatChart= new Chart(fatChart, createMyChartConfig(
 		[{
 	      label: "체지방량(kg)",
-	      lineTension: 0,
+	      lineTension: 0.1,
 	      backgroundColor: "rgba(255,255,255,0)",
 	      borderColor: "rgba(255,153,153,1)",
 	      pointRadius: 5,
@@ -595,22 +689,11 @@ myFatChart= new Chart(fatChart, createMyChartConfig(
 	      pointBorderColor: "rgba(255,255,255,0.8)",
 	      pointHoverBackgroundColor: "rgba(2,120,216,1)",
 	      data: fatChartDatas
-	    }]));
+	    }], "fat"));
 				
 }
 
 
-
-
-//처음 불러올때
-	getDatas();
-	
-//	차트 그리기
-	
-	createInbodyChart();
-	createMyCharts();
-	
-	
 
 function measureDayForInbodyIsChanged()
 {
@@ -707,5 +790,27 @@ function beforeAfterChanged(BAtype, num)
 	updateMyCharts();
 
 }
+
+
+
+
+
+//$(document).ready(function(){
+//처음 불러올때
+	getDatas();
+	
+//	인바디 차트 그리기	
+	if(resultArray.length!=0)
+	{
+		createInbodyChart();	
+	}	
+	if(resultArray.length>=2)
+	{
+		//기간 차트 그리기	
+		createMyCharts();
+	}
+	
+	
+//	});
 
 
