@@ -79,7 +79,7 @@
                         <td>${item.t_id}</td>
                         <td>${item.t_name}</td>                        
                         <td>
-                        	<button onclick="location.href='adminScheduleDelete.do?s_id=${item.s_id}&s_date=${item.s_date}'" class="btn btn-danger custom-btn">
+                        	<button onclick="delete('${item.s_id}','${item.s_date}')" class="btn btn-danger custom-btn">
                             <i class="fas fa-trash-alt"></i>
                           	</button>
 						</td>                        
@@ -106,6 +106,9 @@
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
     <script src="/myPT/assets/demo/datatables-demo.js"></script>
     <!-- /데이터 테이블 js -->
+    
+    <!-- 삭제 js -->
+    <script src="/myPT/js/delete.js"></script>
     
   </body>
 </html>
