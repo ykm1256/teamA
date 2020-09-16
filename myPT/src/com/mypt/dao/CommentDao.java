@@ -282,7 +282,7 @@ public class CommentDao {
 
 		try {
 			con = db.getConnection();
-			String sql = "select *,date_format(c_date,'%Y-%m-%d %H:%i') from " + commenttblName + " where c_nick=?";
+			String sql = "select * from " + commenttblName + " where c_nick=?";
 			ps = con.prepareStatement(sql);
 
 			ps.setString(1, nick);
