@@ -50,17 +50,24 @@
 	                  </div>
 	              </div>
 	                  
-	              <div class="card mb-4">
-	                  <div class="card-body p-1" id="inbodyChartWrapper" style="width:100%; height:250px;">
-	                      <canvas id="inbodyChart"></canvas>
-	                  </div>
-	                  <div class="card-footer">
-	                 측정일: <select id="measureDayForInbodyChart" class="col-sm-12 col-md-5" onchange="measureDayForInbodyIsChanged()"> 
-	                    </select> 
-	                  </div>
-	              </div>
+	               
+	                
+              <div class="card mb-4">
+              	   <div class="card-footer bg-dark text-white">
+                 	측정일: <select id="measureDayForInbodyChart" class="col-sm-12 col-md-5" onchange="measureDayForInbodyIsChanged()"> 
+                    	</select> 
+                  </div>
+                  <div class="card-body p-1" id="inbodyChartWrapper" style="width:100%; height:250px;">
+                      <canvas id="inbodyChart"></canvas>
+                  </div>
+<!-- 	                  <div class="card-footer"> -->
+<!-- 	                 측정일: <select id="measureDayForInbodyChart" class="col-sm-12 col-md-5" onchange="measureDayForInbodyIsChanged()">  -->
+<!-- 	                    </select>  -->
+<!-- 	                  </div> -->
+              </div>
+	             
 	
-		             
+		         <div id="datasWithCharts">    
 		          <div class="card-deck mb-4">
 	                  <div class="card pt-3">
 	                      <h6 class="card-title w-100">체중(kg)</h6>
@@ -77,6 +84,7 @@
 	                      <canvas id="fatChart"></canvas>                            
 	                  </div>
              	 </div>
+             	 
 
                   <div class="card border-secondary mb-4 col-12 p-0" id="comparison">
                       <div class="card-header bg-dark text-white">
@@ -123,7 +131,8 @@
                               </div>    
                           </div>
                       </div>
-                  </div> 
+                    </div>
+                 </div> 
            </div>          
         </main>       
      

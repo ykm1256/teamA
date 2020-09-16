@@ -62,7 +62,7 @@ return instance;
 		
 		try {
 			con = db.getConnection();
-			String sql = "insert into trainer values(?,?,?,?,?,?,?,?,?,?,?,?)";
+			String sql = "insert into trainer(t_id,t_pw,t_name,t_gender,t_email,t_birth,t_address,t_nick,t_zipcode,t_tel,t_addrdetail,t_photo) values(?,?,?,?,?,?,?,?,?,?,?,?)";
 			ps = con.prepareStatement(sql);
 
 			File dir = new File(saveFolder);			

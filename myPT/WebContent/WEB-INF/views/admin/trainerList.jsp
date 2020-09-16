@@ -46,7 +46,7 @@
         <main>
 			<div class="container-fluid">
             	<div class="card mb-4">
-              		<div class="card-header font-weight-bold">
+              		<div class="card-header font-weight-bold">               		 
                		 <div class="justify-content-between d-flex ">
               <div class="align-self-center">
               	<i class="fas fa-table mr-1"></i>
@@ -113,6 +113,7 @@
     <script src="/myPT/assets/demo/datatables-demo.js"></script>
     <!-- /데이터 테이블 js -->
     
+    <!-- 삭제 js -->
     <script src="/myPT/js/delete.js"></script>
     
   </body>

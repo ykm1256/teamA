@@ -150,10 +150,12 @@ var myChart1 = new Chart(ctx1, {
 					type: "linear",
 					position: "left",
 					ticks: {
-						max: 80,
 						min: 0,
+	          			suggestedmax: 80,
+						
 						
 					},
+					
 					
 				},
 				{
@@ -161,12 +163,17 @@ var myChart1 = new Chart(ctx1, {
 					type: "linear",
 					position: "right",
 					ticks: {
-						max: 800,
-						min: 0,
+						suggestedmin: 0,
+	          			suggestedmax: 2000,
 						
 					},
+					gridLines: {
+                    display: true,
+                    drawOnChartArea: false,
+                  }
 					
-				},
+					
+				},	
 			],
 		},
 	},
@@ -242,8 +249,9 @@ $("#selectyear1").change(function() {
 						type: "linear",
 						position: "left",
 						ticks: {
-							max: 80,
 							min: 0,
+	          				suggestedmax: 80,
+						
 						},
 					},
 					{
@@ -251,8 +259,9 @@ $("#selectyear1").change(function() {
 						type: "linear",
 						position: "right",
 						ticks: {
-							max: 800,
 							min: 0,
+	          				suggestedmax: 2000,
+
 						},
 					},
 				],
