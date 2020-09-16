@@ -63,6 +63,18 @@
 											class="card-title text-center">커뮤니티</h3></a>
 								</div>								
 								<c:choose>
+								<c:when test="${sessionScope.head=='질문'}">
+									<select class="form-control text-center col-md-2" id="head"
+										name="head">
+
+										<option value="all">전체보기</option>
+										<option value="정보">정보</option>
+										<option value="잡담">잡담</option>
+										<option value="질문" selected>질문</option>
+
+									</select>
+									</c:when>
+								
 								<c:when test="${sessionScope.head=='정보'}">
 									<select class="form-control text-center col-md-2" id="head"
 										name="head">
@@ -70,6 +82,7 @@
 										<option value="all">전체보기</option>
 										<option value="정보" selected>정보</option>
 										<option value="잡담">잡담</option>
+										<option value="질문">질문</option>
 
 									</select>
 									</c:when>
@@ -79,6 +92,7 @@
 										<option value="all" >전체보기</option>
 										<option value="정보">정보</option>
 										<option value="잡담" selected>잡담</option>
+										<option value="질문">질문</option>
 									</select>
 									</c:when>
 									<c:otherwise>
@@ -87,6 +101,7 @@
 										<option value="all" selected>전체보기</option>
 										<option value="정보">정보</option>
 										<option value="잡담">잡담</option>
+										<option value="질문">질문</option>
 									</select>
 									</c:otherwise>
 									
@@ -116,33 +131,25 @@
 												<c:otherwise>
 													<c:forEach items="${carr }" var="item" varStatus="status">
 														<tr align="center">
-															<td><c:if test="${item.depth<=0 }">
-																	<c:if test="${item.head=='정보'}">
+															<td>
+																<c:if test="${item.head=='정보'}">
 																		<div class="badge badge-primary">${item.head }</div>
 																	</c:if>
 																	<c:if test="${item.head=='잡담' }">
 																		<div class="badge badge-success">${item.head }</div>
 																	</c:if>
-																</c:if></td>
+																	<c:if test="${item.head=='질문' }">
+																		<div class="badge badge-warning text-white">${item.head }</div>
+																	</c:if>
+																</td>
 
-															<c:if test="${item.depth>0 }">
-																<td align="left">
-																<c:forEach var="i" begin="1"
-																		end="${item.depth-1}" varStatus="a">
-																		&nbsp;&nbsp;&nbsp;&nbsp;
-																</c:forEach>
-
-																	<div class="badge badge-light mr-2">답변</div> <a
-																	href="boardView.do?num=${item.num }">
-																		${item.title } <c:if
-																			test="${comment[status.index]>0 }">[${comment[status.index] }]</c:if>
-																</a></td>
-															</c:if>
+															
+																															
 															<c:if test="${item.depth<=0 }">
 																<td align="left"><a
-																	href="boardView.do?num=${item.num }">
-																		${item.title }<c:if test="${comment[status.index]>0 }">[${comment[status.index] }]</c:if>
-																</a></td>
+																	href="boardView.do?num=${item.num }" class="text-dark text-decoration-none">${item.title }</a>
+																	<c:if test="${comment[status.index]>0 }"><span class="text-primary">[${comment[status.index] }]</span></c:if>
+																	</td>
 															</c:if>
 
 
