@@ -19,6 +19,7 @@ public class QrCheckAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		response.setContentType("text/html; charset=UTF-8");
 		UserDao dao = UserDao.getInstance();
 		String email = request.getParameter("email");
 		UserDto dto = dao.getUserByEmail(email);
@@ -41,14 +42,14 @@ public class QrCheckAction implements Action {
 		if (result == 0) {
 			hdao.headcountInsert(hdto);
 			System.out.println("출석 성공");
-			out.println("<script>alert('출석 성공'); </script>");
+			out.println("<script>alert('반갑습니다.'); </script>");
 		} else if (result == 1) {
 			hdao.headcountUpdate(hdto.getH_id(), date);
-			System.out.println("나가");
-			out.println("<script>alert('나가'); </script>");
+			System.out.println("안녕히가세요.");
+			out.println("<script>alert('안녕히가세요.'); </script>");
 		} else if (result == 2) {
 			System.out.println("오늘 이미 다녀감");
-			out.println("<script>alert('오늘 이미 다녀감'); </script>");
+			out.println("<script>alert('오늘 이미 다녀갔습니다.'); </script>");
 		} else {
 			System.out.println("출석 오류");
 			out.println("<script>alert('출석 오류');</script>");
