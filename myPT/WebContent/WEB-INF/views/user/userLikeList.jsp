@@ -78,7 +78,7 @@
                       <tr>
                         <td>커뮤니티</td>
                         <c:choose>
-                        <c:when test="${ccom[status.index]!=0}">
+                        <c:when test="${ccom[status.index]>0}">
                         <td><a href="boardView.do?num=${item.num }&b=c">${item.title } [${ccom[status.index]}]</a></td>
                         </c:when>
                         <c:otherwise>
@@ -96,7 +96,7 @@
                       <tr>
                         <td>포토게시판</td>
                         <c:choose>
-                        <c:when test="${ccom[status.index]!=0}">
+                        <c:when test="${ccom[status.index]>0}">
                         <td><a href="boardView.do?num=${item.num }&b=p">${item.title } [${pcom[status.index]}]</a></td>
                         </c:when>
                         <c:otherwise>

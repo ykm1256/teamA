@@ -149,7 +149,7 @@ public class ScheduleDao {
 		
 		try {
 			con = db.getConnection();
-			String sql = "select * from schedule s left outer join user u on s.s_id=u.id where tid=? and s_date=? and s_finish=0";			
+			String sql = "select * from schedule s left outer join user u on s.s_id=u.id where tid=? and s_date=? and s_finish=0 and ptcount>0;";			
 			ps = con.prepareStatement(sql);
 			ps.setString(1, tid);
 			ps.setString(2, today);
