@@ -1,3 +1,4 @@
+Chart.defaults.global.defaultFontFamily = '-apple-system, BlinkMacSystemFont, "Nanum Gothic", Roboto, "Nanum Gothic", Arial, "Nanum Gothic", sans-serif, "Nanum Gothic",  "Nanum Gothic", "Nanum Gothicl", "Nanum Gothic"';
 
 //숫자 반올림 num자리까지 표시 
 function numRound(x) 
@@ -499,6 +500,7 @@ return {
 	    datasets: dataSet,
 	  },
 	  options: {
+			valueSpacing : 5,
     		responsive: true,
 //    		responsive: false,
 //			maintainAspectRatio: false,
@@ -559,7 +561,7 @@ function createMyCharts()
 myWeightChart= new Chart(weightChart, createMyChartConfig(
 		[{
 	      label: "체중(kg)",
-	      lineTension: 0.5,
+	      lineTension: 0,
 	      backgroundColor: "rgba(255,255,255,0)",
 	      borderColor: "rgba(164,220,160,1)",
 	      pointRadius: 5,
@@ -572,7 +574,7 @@ myWeightChart= new Chart(weightChart, createMyChartConfig(
 myMuscleChart= new Chart(muscleChart, createMyChartConfig(
 			[{
 		      label: "골격근량(kg)",
-		      lineTension: 0.5,
+		      lineTension: 0,
 		      backgroundColor: "rgba(255,255,255,0)",
 		      borderColor: "rgba(180,180,180,1)",
 		      pointRadius: 5,
@@ -585,7 +587,7 @@ myMuscleChart= new Chart(muscleChart, createMyChartConfig(
 myFatChart= new Chart(fatChart, createMyChartConfig(
 		[{
 	      label: "체지방량(kg)",
-	      lineTension: 0.5,
+	      lineTension: 0,
 	      backgroundColor: "rgba(255,255,255,0)",
 	      borderColor: "rgba(255,153,153,1)",
 	      pointRadius: 5,
