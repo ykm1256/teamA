@@ -113,6 +113,7 @@ pageEncoding="UTF-8"%>
                                 <option value="default" selected disabled>말머리</option>
                                 <option value="잡담">잡담</option>
                                 <option value="정보">정보</option>
+                                <option value="질문">질문</option>
                               </select>
                             </div>           
                             <div class="col-lg-10 pl-lg-0">

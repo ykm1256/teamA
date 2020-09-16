@@ -16,7 +16,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<title>커뮤니티 게시판</title>
+<title>Q&A</title>
 <link href="/myPT/css/styles.css" rel="stylesheet" />
 <link href="/myPT/css/index.css" rel="stylesheet" />
 <link href="/myPT/css/widget.css" rel="stylesheet" />
@@ -60,7 +60,7 @@
 								<div class="card-body">
 									<a href="moveQuestion.do"
 										class="text-decoration-none text-dark"><h3
-											class="card-title text-center">질문게시판</h3></a>
+											class="card-title text-center">Q&A</h3></a>
 								</div>	
 								
 								<div class="table-responsive">
@@ -92,17 +92,20 @@
 																		end="${item.depth-1}" varStatus="a">
 																		&nbsp;&nbsp;&nbsp;&nbsp;
 																</c:forEach>
-																	<div class="badge badge-light mr-2">답변</div> <a
+																	<div class="badge badge-dark mr-2 ml-2">답변</div> <a
+																	class="text-dark text-decoration-none ml-2"
 																	href="boardView.do?num=${item.num }">
-																		${item.title } <c:if
-																			test="${comment[status.index]>0 }">[${comment[status.index] }]</c:if>
-																</a></td>
+																		${item.title } </a>
+																		<span class="text-primary"><c:if test="${comment[status.index]>0 }">[${comment[status.index] }]</c:if></span>
+																		</td>
 															</c:if>
 															<c:if test="${item.depth<=0 }">
 																<td align="left"><a
+																class="text-dark text-decoration-none ml-2"
 																	href="boardView.do?num=${item.num }">
-																		${item.title }<c:if test="${comment[status.index]>0 }">[${comment[status.index] }]</c:if>
-																</a></td>
+																		${item.title }</a>
+																		<span class="text-primary"><c:if test="${comment[status.index]>0 }">[${comment[status.index] }]</c:if></span>
+																		</td>
 															</c:if>
 
 															<td>${item.writer }</td>

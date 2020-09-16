@@ -25,7 +25,7 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 			Connection con = null;
 			PreparedStatement ps = null;
 
-			String sql = "insert into cboard(cb_title, cb_writer, cb_head, cb_content, cb_hit, cb_like, cb_ref, cb_depth, cb_pos) values(?,?,?,?,?,?,?,?,?)";
+			String sql = "insert into cboard(cb_title, cb_writer, cb_head, cb_content, cb_hit, cb_like) values(?,?,?,?,?,?)";
 			try {
 				con = db.getConnection();
 				ps = con.prepareStatement(sql);
@@ -36,10 +36,7 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 				ps.setString(4, dto.getContent());
 				ps.setInt(5, 0);
 				ps.setInt(6, 0);
-				ps.setInt(7, dto.getRef());
-				ps.setInt(8, dto.getDepth());
-				ps.setInt(9, dto.getPos());
-				
+								
 				ps.executeUpdate();
 
 			}
@@ -108,7 +105,7 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 					dto.setWriter(rs.getString("cb_writer"));
 					dto.setHit(rs.getInt("cb_hit"));
 					dto.setNum(rs.getInt("cb_num"));
-					dto.setDate(rs.getString(12));					
+					dto.setDate(rs.getString(9));					
 										
 					arr.add(dto);
 				}
@@ -153,10 +150,7 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 					dto.setHit(rs.getInt("cb_hit")+1);
 					dto.setContent(rs.getString("cb_content"));
 					dto.setLike(rs.getInt("cb_like"));	
-					dto.setHead(rs.getString("cb_head"));	
-					dto.setRef(rs.getInt("cb_ref"));	
-					dto.setDepth(rs.getInt("cb_depth"));	
-					dto.setPos(rs.getInt("cb_pos"));	
+					dto.setHead(rs.getString("cb_head"));						
 					
 					upCount(num);
 				}
@@ -174,60 +168,7 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 		
 		}
 
-		
-		
-		
-///		좋아요 리스트 확인요함
-//		public ArrayList<CboardDto> mycb_likeList(ArrayList<Integer> nums) 
-//		{
-//			Connection con = null;
-//			PreparedStatement ps = null;
-//			ResultSet rs = null;
-//			
-//			ArrayList<CboardDto> arr= new ArrayList<CboardDto>();
-//
-//			String sql = "select * from cboard where num=?";
-//
-//			try 
-//			  {
-//				con = db.getConnection();
-//				
-//				
-//				for(int num : nums)
-//				{
-//					ps = con.prepareStatement(sql);
-//					ps.setInt(1, num);
-//					
-//					rs = ps.executeQuery();
-//
-//					if(rs.next()) 
-//					{
-//						CboardDto dto = new CboardDto();
-//
-//						dto.setTitle(rs.getString("cb_title"));
-//						dto.setWriter(rs.getString("cb_writer"));					
-//						dto.setHead(rs.getString("cb_head"));
-//						dto.setHit(rs.getInt("hit"));
-//						dto.setcb_date(rs.getTimestamp("cb_cb_date"));
-//						dto.setcb_like(rs.getInt("cb_like"));
-//											
-//						arr.add(dto);
-//					}	
-//				}
-//				
-//				
-//			} 
-//			catch (Exception e) 
-//			{
-//				e.printStackTrace();
-//			} 
-//			finally 
-//			{
-//				db.closeConnection(rs, ps, con);
-//			}
-//
-//			return arr;
-//		}
+
 		
 ///		좋아요 리스트 확인요함
 	public ArrayList<CboardDto> mylikeList(ArrayList<Integer> nums) 
@@ -291,19 +232,16 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 			PreparedStatement ps = null;
 			String sql = null;
 			try {
-				
-				///답변을 위한 ref 설정/////
-				int ref = getMaxNum() + 1;
+								
 				con = db.getConnection();
-				sql = "insert into cboard(cb_writer,cb_content,cb_title,cb_ref,cb_pos,cb_depth,";
+				sql = "insert into cboard(cb_writer,cb_content,cb_title,";
 				sql += "cb_hit, cb_like, cb_head)";
-				sql += "values(?, ?, ?, ?, 0, 0, 0, 0,?)";
+				sql += "values(?, ?, ?, 0, 0,?)";
 				ps = con.prepareStatement(sql);
 				ps.setString(1, dto.getWriter());
 				ps.setString(2, dto.getContent());
-				ps.setString(3, dto.getTitle());
-				ps.setInt(4, ref);				
-				ps.setString(5, dto.getHead());				
+				ps.setString(3, dto.getTitle());						
+				ps.setString(4, dto.getHead());				
 				ps.executeUpdate();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -397,73 +335,8 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 				db.closeConnection(rs,ps,con);
 			}
 			return totalCount;
-		}
-		
-		//Board List : 페이지당 보여줄 갯수만 리턴, 검색 포함.
-		//keyField : 선택옵션(name, subject, content)
-		//keyWord : 검색어
-		//start : 시작번호, cnt : 한 페이지당 가져올 게시물 개수 
-		public Vector<CboardDto> getBoardList(String keyField, 
-				String keyWord,int start, int cnt,String head){
-			Connection con = null;
-			PreparedStatement ps = null;
-			ResultSet rs = null;
-			String sql = null;
-			Vector<CboardDto> vlist = new Vector<CboardDto>();
-			
-			try {
-				con = db.getConnection();
-				//검색이 아닌경우
-				if(keyWord.trim().equals("")||keyWord==null) {
-					// 말머리 전체보기
-					if(head.equals("all")) {
-					sql = "select *,date_format(cb_date,'%Y-%m-%d %H:%i') from cboard order by cb_ref desc, cb_pos "
-								+ "limit ?,?";
-					}else {
-						sql = "select *,date_format(cb_date,'%Y-%m-%d %H:%i') from cboard where cb_head='"+head+"' order by cb_ref desc, cb_pos "
-								+ "limit ?,?";
-					}
-					
-					ps = con.prepareStatement(sql);					
-					ps.setInt(1, start);
-					ps.setInt(2, cnt);
-				}else {//검색인 경우
-					//말머리 전체보기					
-					if(head.equals("all")) {
-						sql = "select *,date_format(cb_date,'%Y-%m-%d %H:%i') from cboard where "+keyField+" like '%"+keyWord+"%' order by cb_ref desc, cb_pos limit ?,?";
-					}else {
-							sql = "select *,date_format(cb_date,'%Y-%m-%d %H:%i') from cboard where ? like '%"+keyWord+"%' and cb_head='"+head+"' order by cb_ref desc, cb_pos "
-									+ "limit ?,?";
-					}
-//					sql = "select * from cboard where " + keyField 
-//							+" like ? order by cb_ref desc, cb_pos limit ?,?";
-					ps = con.prepareStatement(sql);
-					ps.setInt(1, start);
-					ps.setInt(2, cnt);
-				}
-				
-				rs = ps.executeQuery();
-				while(rs.next()) {					
-					CboardDto bean = new CboardDto();
-					bean.setNum(rs.getInt("cb_num"));
-					bean.setWriter(rs.getString("cb_writer"));
-					bean.setTitle(rs.getString("cb_title"));
-					bean.setPos(rs.getInt("cb_pos"));
-					bean.setRef(rs.getInt("cb_ref"));
-					bean.setDepth(rs.getInt("cb_depth"));
-					bean.setDate(rs.getString(12));
-					bean.setHit(rs.getInt("cb_hit"));				
-					bean.setHead(rs.getString("cb_head"));
-					bean.setLike(rs.getInt("cb_like"));	
-					vlist.addElement(bean);
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				db.closeConnection(rs,ps,con);
-			}
-			return vlist;
 		}		
+		
 		
 		
 		//Count Up : 조회수 증가
@@ -485,16 +358,15 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 		}
 				
 		//Board Delete 원본글
-		public void deleteBoard(int ref, int depth) {
+		public void deleteBoard(int num) {
 			Connection con = null;
 			PreparedStatement ps = null;
 			String sql = null;
 			try {				
 				con = db.getConnection();
-				sql = "delete from cboard where cb_ref=? and cb_depth>=?";
+				sql = "delete from cboard where cb_num=?";
 				ps = con.prepareStatement(sql);
-				ps.setInt(1, ref);
-				ps.setInt(2, depth);
+				ps.setInt(1, num);				
 				ps.executeUpdate();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -622,10 +494,10 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 						if(keyWord.trim().equals("")||keyWord==null) {
 							// 말머리 전체보기
 							if(head.equals("all")) {
-							sql = "select *,date_format(cb_date,'%Y-%m-%d %H:%i') from cboard order by cb_ref desc, cb_pos "
+							sql = "select *,date_format(cb_date,'%Y-%m-%d %H:%i') from cboard order by cb_num desc "
 										+ "limit ?,?";
 							}else {
-								sql = "select *,date_format(cb_date,'%Y-%m-%d %H:%i') from cboard where cb_head='"+head+"' order by cb_ref desc, cb_pos "
+								sql = "select *,date_format(cb_date,'%Y-%m-%d %H:%i') from cboard where cb_head='"+head+"' order by cb_num desc "
 										+ "limit ?,?";
 							}
 							
@@ -635,9 +507,9 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 						}else {//검색인 경우
 							//말머리 전체보기					
 							if(head.equals("all")) {
-								sql = "select *,date_format(cb_date,'%Y-%m-%d %H:%i') from cboard where "+keyField+" like '%"+keyWord+"%' order by cb_ref desc, cb_pos limit ?,?";
+								sql = "select *,date_format(cb_date,'%Y-%m-%d %H:%i') from cboard where "+keyField+" like '%"+keyWord+"%' order by cb_num desc limit ?,?";
 							}else {
-									sql = "select *,date_format(cb_date,'%Y-%m-%d %H:%i') from cboard where "+keyField+" like '%"+keyWord+"%' and cb_head='"+head+"' order by cb_ref desc, cb_pos "
+									sql = "select *,date_format(cb_date,'%Y-%m-%d %H:%i') from cboard where "+keyField+" like '%"+keyWord+"%' and cb_head='"+head+"' order by cb_num desc "
 											+ "limit ?,?";
 							}
 //							sql = "select * from cboard where " + keyField 
@@ -652,11 +524,8 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 							CboardDto bean = new CboardDto();
 							bean.setNum(rs.getInt("cb_num"));
 							bean.setWriter(rs.getString("cb_writer"));
-							bean.setTitle(rs.getString("cb_title"));
-							bean.setPos(rs.getInt("cb_pos"));
-							bean.setRef(rs.getInt("cb_ref"));
-							bean.setDepth(rs.getInt("cb_depth"));
-							bean.setDate(rs.getString(12));
+							bean.setTitle(rs.getString("cb_title"));							
+							bean.setDate(rs.getString(9));
 							bean.setHit(rs.getInt("cb_hit"));				
 							bean.setHead(rs.getString("cb_head"));
 							bean.setLike(rs.getInt("cb_like"));	
