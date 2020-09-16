@@ -44,7 +44,7 @@
       <!-- /sideNav -->
       <div id="layoutSidenav_content">
         <main>
-			<div class="container-fulid">
+			<div class="container-fluid">
             <div class="card mb-4">
               <div class="card-header font-weight-bold">
                 <i class="fas fa-table mr-1"></i>
@@ -68,7 +68,6 @@
                         <th>시작일</th>
                         <th>만료일</th>
                         <th>남은 횟수</th>
-                        <th>수정하기</th>
                       </tr>
                     </thead>
                     <tbody class="text-center">
@@ -81,12 +80,7 @@
                         <td>${item.tel }</td>
                         <td>${item.startdate }</td>
                         <td>${item.enddate }</td>
-                        <td>${item.ptcount }</td>
-                        <td>
-                          <button class="btn btn-primary custom-btn">
-                            <i class="fas fa-edit"></i>
-                          </button>
-                        </td>
+                        <td>${item.ptcount }</td>                        
                       </tr>
                       </c:forEach>
                     </tbody>

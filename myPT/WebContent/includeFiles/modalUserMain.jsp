@@ -58,7 +58,7 @@
                   </div>
                 </div>
               </li>
-              <li class="list-group-item text-center">
+              <li class="list-group-item">
                 <div class="h5" id="mention"></div>
               </li>
             </ul>
