@@ -23,11 +23,7 @@ public class DeleteAction implements Action {
 			CboardDto dto = new CboardDto();
 			dto = (CboardDto) session.getAttribute("dto");
 			CboardDao dao = CboardDao.getInstance();
-			if(dto.getNum()!=dto.getRef()) {
-				dao.deletereply(dto.getNum());
-			}else {
-				dao.deleteBoard(dto.getRef(),dto.getDepth());
-			}
+			dao.deleteBoard(dto.getNum());
 			return "redirect: moveCommunity.do";
 
 		}else if(board.equals("pboard")) {
