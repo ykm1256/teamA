@@ -46,9 +46,14 @@
         <main>
 			<div class="container-fluid">
             	<div class="card mb-4">
-              		<div class="card-header font-weight-bold">
-               		 <i class="fas fa-table mr-1"></i>
-                트레이너 관리
+              		<div class="card-header font-weight-bold">               		 
+               		 <div class="justify-content-between d-flex ">
+              <div class="align-self-center">
+              	<i class="fas fa-table mr-1"></i>
+              	트레이너 관리
+              </div>
+                <div class="btn btn-dark" onclick="location.href='moveTrainerRegister.do'">트레이너 등록</div>
+              </div>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
