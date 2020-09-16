@@ -30,7 +30,7 @@
         <!-- 슬라이드 쇼 -->
 
         <div class="carousel-item" id="tlogin">
-          <div class="container">
+          <div class="container mt-5">
             <div class="row justify-content-center">
               <div class="col-lg-5 mt-5">
                 <div>
@@ -113,7 +113,7 @@
         </div>
 
         <div class="carousel-item active">
-          <div class="container text-center">
+          <div class="container text-center mt-5">
             <img class="col-md-8 col-lg-6" src="img/logo_transparent.png" />
             <div>
               <a
@@ -135,7 +135,7 @@
           </div>
         </div>
         <div class="carousel-item" id="ulogin">
-          <div class="container">
+          <div class="container mt-5">
             <div class="row justify-content-center">
               <div class="col-lg-5 mt-5">
                 <div>

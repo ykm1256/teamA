@@ -77,10 +77,10 @@
                         <td>커뮤니티</td>
                         <c:choose>
                         <c:when test="${ccom[status.index]>0}">
-                        <td><a href="boardView.do?num=${item.num }&b=c">${item.title } [${ccom[status.index]}]</a></td>
+                        <td><a class="text-dark" href="boardView.do?num=${item.num }&b=c">${item.title } [${ccom[status.index]}]</a></td>
                         </c:when>
                         <c:otherwise>
-                        <td><a href="boardView.do?num=${item.num }&b=c">${item.title }</a></td>
+                        <td><a class="text-dark" href="boardView.do?num=${item.num }&b=c">${item.title }</a></td>
                         </c:otherwise>
                         </c:choose>
                         <td>${item.date }</td>
@@ -93,10 +93,10 @@
                         <td>질문게시판</td>
                         <c:choose>
                         <c:when test="${ccom[status.index]>0}">
-                        <td><a href="boardView.do?num=${item.num }&b=q">${item.title } [${qcom[status.index]}]</a></td>
+                        <td><a class="text-dark" href="boardView.do?num=${item.num }&b=q">${item.title } [${qcom[status.index]}]</a></td>
                         </c:when>
                         <c:otherwise>
-                        <td><a href="boardView.do?num=${item.num }&b=q">${item.title }</a></td>
+                        <td><a class="text-dark" href="boardView.do?num=${item.num }&b=q">${item.title }</a></td>
                         </c:otherwise>
                         </c:choose>
                         <td>${item.date }</td>
@@ -109,10 +109,10 @@
                         <td>포토게시판</td>
                         <c:choose>
                         <c:when test="${ccom[status.index]>0}">
-                        <td><a href="boardView.do?num=${item.num }&b=p">${item.title } [${pcom[status.index]}]</a></td>
+                        <td><a class="text-dark" href="boardView.do?num=${item.num }&b=p">${item.title } [${pcom[status.index]}]</a></td>
                         </c:when>
                         <c:otherwise>
-                        <td><a href="boardView.do?num=${item.num }&b=p">${item.title }</a></td>
+                        <td><a class="text-dark" href="boardView.do?num=${item.num }&b=p">${item.title }</a></td>
                         </c:otherwise>
                         </c:choose>
                         <td>${item.date }</td>

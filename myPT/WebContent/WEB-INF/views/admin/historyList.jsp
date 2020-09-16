@@ -44,7 +44,7 @@
       <!-- /sideNav -->
       <div id="layoutSidenav_content">
         <main>
-          <div class="container-fluid">
+          <div class="container-fluid mt-3">
           	<div class="card mb-4">
               <div class="card-header font-weight-bold">
                 <i class="fas fa-table mr-1"></i>

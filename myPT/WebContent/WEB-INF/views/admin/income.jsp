@@ -173,7 +173,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="card-group col-12 mb-3">
+						<div class="card-group col-12 mb-5">
 							<div class="card col-md-8 col-sm-8 col-xs-12 p-0">
 								<div class="card-header p-4">
 									<h3 class="card-title text-center" id="tincome">이번달 트레이너
