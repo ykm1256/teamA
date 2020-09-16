@@ -1,3 +1,5 @@
+Chart.defaults.global.defaultFontFamily = '-apple-system, BlinkMacSystemFont, "Nanum Gothic", Roboto, "Nanum Gothic", Arial, "Nanum Gothic", sans-serif, "Nanum Gothic",  "Nanum Gothic", "Nanum Gothicl", "Nanum Gothic"';
+
 // 트레이너별 월 수익
 // chart1에서 먼저 선언하였음
 //현재 날짜
