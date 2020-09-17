@@ -42,8 +42,8 @@
               <div class="col-md-6">
                 <div class="card mb-4 p-0">
                   <div class="card-header">
-                    <i class="fas fa-chart-bar mr-1"></i>
-                    Like Post
+                    <i class="fas fa-list"></i>
+                   나의 활동
                   </div>
                   <div class="card-body">
                     <div class="card bg-danger text-white mb-4">
@@ -116,8 +116,8 @@
               <div class="col-md-6">
                 <div class="card mb-4 p-0">
                   <div class="card-header">
-                    <i class="fas fa-chart-bar mr-1"></i>
-                    Privacy Info
+                    <i class="fas fa-user-circle fa-lg"></i>
+                    나의 정보
                   </div>
                   <div class="card-body">
                     <form>

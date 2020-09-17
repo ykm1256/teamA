@@ -6,7 +6,7 @@
             <div class="nav">
               <a class="nav-link" href="userList.do">
                 <div class="sb-nav-link-icon">
-                  <i class="fas fa-tachometer-alt"></i>
+                  <i class="fas fa-home"></i>
                 </div>
                 메인페이지
               </a>
@@ -19,7 +19,7 @@
                 aria-controls="collapseLayouts"
               >
                 <div class="sb-nav-link-icon">
-                  <i class="fas fa-columns"></i>
+                  <i class="fas fa-users-cog"></i>
                 </div>
                 관리 페이지
                 <div class="sb-sidenav-collapse-arrow">
@@ -48,21 +48,21 @@
               
               <a class="nav-link" href="moveUserRegister.do">
                 <div class="sb-nav-link-icon">
-                  <i class="fas fa-chart-area"></i>
+                  <i class="fas fa-user-plus"></i>
                 </div>
                 회원 등록
               </a>
               
               <a class="nav-link" href="moveTrainerRegister.do">
                 <div class="sb-nav-link-icon">
-                  <i class="fas fa-chart-area"></i>
+                  <i class="fas fa-user-plus"></i>
                 </div>
                 트레이너  등록
               </a>
               
               <a class="nav-link" href="moveIncome.do">
                 <div class="sb-nav-link-icon">
-                  <i class="fas fa-chart-area"></i>
+                  <i class="fas fa-chart-line"></i>
                 </div>
                 매출 기록
               </a>

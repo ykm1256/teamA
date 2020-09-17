@@ -47,7 +47,7 @@
           <div class="container-fluid mt-3">
           	<div class="card mb-4">
               <div class="card-header font-weight-bold">
-                <i class="fas fa-table mr-1"></i>
+                <i class="fas fa-history"></i>
                 회원 출입 내역
               </div>
               <div class="card-body">

@@ -13,7 +13,6 @@
     <link href="css/styles.css" rel="stylesheet" />
     <link href="css/index.css" rel="stylesheet"/>
     <link href="css/widget.css" rel="stylesheet"/>
-    <link rel="shortcut icon" href="/myPT/img/favi/favicon-16x16.png">
 
 
     <script
