@@ -426,6 +426,7 @@ function getDatas()
 //	      최근 측정일 값을 애프터 데이터에 세팅
 		setBeforeAfterDatas("before", 1);
 		setBeforeAfterDatas("after", 0);
+		
 
 	
 //		선택한 날짜 표시
@@ -436,16 +437,16 @@ function getDatas()
 
 
 //차트 값 세팅	
-//		if(resultArray.length>=6)
-//		{
-//			addMyChartDatas("addPre", 6);
-//			numOfMyChartDatas=6;
-//		}
-//		else
-//		{
-//			addMyChartDatas("addPre",resultArray.length);
-//			numOfMyChartDatas= resultArray.length;
-//		}
+		if(resultArray.length>=6)
+		{
+			beforeSelected=5;
+		}
+		else
+		{
+			beforeSelected=resultArray.length;
+		}
+		
+		afterSelected=0;
 		setMyChartDatas();
 		
 //      차트 tick 설정용 min,max데이터 세팅			
