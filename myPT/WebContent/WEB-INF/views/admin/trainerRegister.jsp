@@ -62,6 +62,7 @@
                                                     <div class="form-group">
                                                         <label class="small mb-1" for="userName">이름*</label>
                                                         <input class="form-control py-2" id="userName" minlength="2" maxlength="10" name="userName" type="text" required>
+                                                        <div></div>
                                                     </div>
                                                 </div>
                                             </div>

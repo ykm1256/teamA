@@ -97,6 +97,14 @@ $('input[type=text], input[type=password], input[type=email]').on('keyup', funct
 				wrongFormat($('#nickname'),'한글,숫자,영문자/2자 이상 입력해주세요 ');
 				return false;
 			}
+		
+		if($('#nickname').val()=="관리자" || $('#nickname').val()=="admin")
+		{
+			wrongFormat($('#nickname'),'다른 닉네임을 입력해주세요');
+			$('#nickname').val("");
+			return false;
+		}
+		
 			
 			$.ajax({
 				type:"post",
@@ -198,6 +206,7 @@ function checkUser(form)
 		alert("닉네임을 중복체크해주세요");
 		return false;
 	}
+    
 	    
 	if($('#confirmEmail').val()!=$('#email').val() || $("#confirmEmail").val()=="")
 	{
@@ -218,12 +227,13 @@ function checkUser(form)
 
 function checkTrainer(form)
 {
+
 	if($('#confirmNick').val()!=$('#nickname').val() || $("#confirmNick").val()=="")
 	{
 		alert("닉네임을 중복체크해주세요");
 		return false;
 	}
-	    
+			    
 	if($('#confirmEmail').val()!=$('#email').val() || $("#confirmEmail").val()=="")
 	{
 		alert("이메일을 중복체크해주세요");
