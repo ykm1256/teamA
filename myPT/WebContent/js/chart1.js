@@ -227,6 +227,8 @@ $("#selectyear1").change(function() {
 				yAxisID: "A",
 				data: user,
 				backgroundColor: "rgba(75, 192, 192, 0.8)",
+				min: 0,
+	          			suggestedmax: 80,
 			},
 			{
 				label: "월 매출(만원)",
@@ -259,10 +261,14 @@ $("#selectyear1").change(function() {
 						type: "linear",
 						position: "right",
 						ticks: {
-							min: 0,
-	          				suggestedmax: 2000,
-
-						},
+						suggestedmin: 0,
+	          			suggestedmax: 2000,
+						
+					},
+					gridLines: {
+                    display: true,
+                    drawOnChartArea: false,
+                  }
 					},
 				],
 			},
