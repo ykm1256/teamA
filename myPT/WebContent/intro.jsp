@@ -240,6 +240,7 @@
     $.ajax({
 		type:"post",
 		url:"userCheckSessionId.do",
+		async:false,
 		success: function(data)
 		{				
 
@@ -257,6 +258,7 @@
 	$.ajax({
 		type:"post",
 		url:"trainerCheckSessionId.do",
+		async:false,
 		success: function(data)
 		{				
 

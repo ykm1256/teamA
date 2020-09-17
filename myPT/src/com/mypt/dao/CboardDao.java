@@ -113,7 +113,7 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 					
 					String Date = rs.getTimestamp("cb_date").toString();
 					if(Date.substring(0, 10).equals(today)) {
-						dto.setDate(Date.substring(11));
+						dto.setDate(Date.substring(11,19));
 					}else {
 						dto.setDate(Date.substring(0,10));
 					}						
@@ -544,7 +544,7 @@ public class CboardDao extends AbstractBoardDao<CboardDto>
 							
 							String Date = rs.getTimestamp("cb_date").toString();
 							if(Date.substring(0, 10).equals(today)) {
-								bean.setDate(Date.substring(11));
+								bean.setDate(Date.substring(11,19));
 							}else {
 								bean.setDate(Date.substring(0,10));
 							}

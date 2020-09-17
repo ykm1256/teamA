@@ -59,7 +59,7 @@ pageEncoding="UTF-8"%>
         <div class="container py-3">
           <div>
             <header class="px-4">
-              <h4>글쓰기</h4>
+              <h4>답글쓰기s</h4>
               <div class="text-right">
               <c:choose>
               <c:when test="${sessionScope.board=='cboard' }">
