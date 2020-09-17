@@ -8,12 +8,20 @@ function paging(keyWord,page){
 		window.location.href="searchQuestion.do?page="+page;
 	}
 }
-function gtltPaging(keyWord,arrow){
-	if((keyWord==null||keyWord=="")&&head=="all"){
+function ltPaging(keyWord,arrow){
+	if(keyWord==null||keyWord==""){
+		window.location.href="moveQuestion.do?prev="+arrow;
+	}else{
+		window.location.href="searchQuestion.do?prev="+arrow;
+	}
+}
+
+function gtPaging(keyWord,arrow){
+	if(keyWord==null||keyWord==""){
 		window.location.href="moveQuestion.do?next="+arrow;
 	}else{
 		window.location.href="searchQuestion.do?next="+arrow;
-	}s
+	}
 }
 
 //검색 확인

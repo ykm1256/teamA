@@ -6,13 +6,13 @@
             <div class="nav">
               <a class="nav-link" href="userMain.do">
                 <div class="sb-nav-link-icon">
-                  <i class="fas fa-tachometer-alt"></i>
+                  <i class="fas fa-home"></i>
                 </div>
                 메인페이지
               </a>
               <a class="nav-link" href="moveInbody.do">
                 <div class="sb-nav-link-icon">
-                  <i class="fas fa-chart-area"></i>
+                  <i class="fas fa-weight"></i>
                 </div>
                 인바디
               </a>
@@ -50,12 +50,12 @@
               </div>
               <a class="nav-link" href="movePayment.do">
                 <div class="sb-nav-link-icon">
-                  <i class="fas fa-chart-area"></i>
+                  <i class="fas fa-credit-card"></i>
                 </div>
                 결제
               </a>
               <a class="nav-link" href="moveUserProfile.do">
-                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                <div class="sb-nav-link-icon"><i class="fas fa-user-circle"></i></div>
                 마이페이지
               </a>
             </div>

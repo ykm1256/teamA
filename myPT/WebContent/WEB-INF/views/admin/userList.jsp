@@ -49,7 +49,7 @@
               <div class="card-header font-weight-bold ">
               <div class="justify-content-between d-flex ">
               <div class="align-self-center">
-              	<i class="fas fa-table mr-1"></i>
+              	<i class="fas fa-users-cog"></i>
               	회원 관리
               </div>
                 <div class="btn btn-dark" onclick="location.href='moveUserRegister.do'">회원 등록</div>

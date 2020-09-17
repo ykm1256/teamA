@@ -1,27 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<link rel="shortcut icon" href="/myPT/img/favi/favicon-16x16.png">
+
+
+
+
+
+
+
+
+
 <!-- 	<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap" rel="stylesheet"> -->
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap"
+	rel="stylesheet">
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark p-1">
 	<div id="navBrand" class="d-flex align-items-center">
-	
-	<c:choose>
-	<c:when test="${sessionScope.grade==0}">
-		<a class="navbar-brand" href="userList.do"><img
-			src="img/colorChanged.png" /></a>
-	</c:when>
-	<c:when test="${sessionScope.grade==1}">
-		<a class="navbar-brand" href="trainerMain.do"><img
-			src="img/colorChanged.png" /></a>
-	</c:when>
-	<c:when test="${sessionScope.grade==2}">
-		<a class="navbar-brand" href="userMain.do"><img
-			src="img/colorChanged.png" /></a>
-	</c:when>
-	</c:choose>
-			
-			
+
+		<c:choose>
+			<c:when test="${sessionScope.grade==0}">
+				<a class="navbar-brand" href="userList.do"><img
+					src="img/colorChanged.png" /></a>
+			</c:when>
+			<c:when test="${sessionScope.grade==1}">
+				<a class="navbar-brand" href="trainerMain.do"><img
+					src="img/colorChanged.png" /></a>
+			</c:when>
+			<c:when test="${sessionScope.grade==2}">
+				<a class="navbar-brand" href="userMain.do"><img
+					src="img/colorChanged.png" /></a>
+			</c:when>
+		</c:choose>
+
+
 	</div>
 
 	<button class="btn btn-link btn-sm order-4 order-lg-0 mr-lg-auto"
@@ -38,11 +51,10 @@
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle mt-1" id="userDropdown" href="#"
 					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"><i
-						class="fas fa-user fa-fw"></i></a>
+					aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
 					<div class="dropdown-menu dropdown-menu-right"
 						aria-labelledby="userDropdown">
-						
+
 						<c:choose>
 							<c:when test="${sessionScope.grade==2}">
 								<a class="dropdown-item" data-toggle="modal"

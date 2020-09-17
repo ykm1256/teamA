@@ -47,8 +47,8 @@
           <div class="container-fluid">
           	<div class="card mb-4">
               <div class="card-header font-weight-bold">
-                <i class="fas fa-table mr-1"></i>
-                회원 PT 스케줄
+                <i class="fas fa-history"></i>
+                회원 PT 스케줄 기록
               </div>
               <div class="card-body">
                 <div class="table-responsive">

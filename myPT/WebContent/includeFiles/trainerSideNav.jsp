@@ -6,13 +6,13 @@
             <div class="nav">
               <a class="nav-link" href="trainerMain.do">
                 <div class="sb-nav-link-icon">
-                  <i class="fas fa-tachometer-alt"></i>
+                  <i class="fas fa-home"></i>
                 </div>
                 메인페이지
               </a>
               <a class="nav-link" href="ptUserList.do">
                 <div class="sb-nav-link-icon">
-                  <i class="fas fa-chart-area"></i>
+                  <i class="fas fa-users-cog"></i>
                 </div>
                 회원 관리
               </a>
@@ -49,7 +49,7 @@
                 </nav>
               </div>
               <a class="nav-link" href="moveTrainerProfile.do">
-                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                <div class="sb-nav-link-icon"><i class="fas fa-user-circle"></i></div>
                 마이페이지
               </a>
               

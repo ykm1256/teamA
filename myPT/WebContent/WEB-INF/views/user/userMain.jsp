@@ -84,8 +84,8 @@
             </div>
             <div class="card mb-4">
               <div class="card-header bg-dark text-white">
-                <i class="fas fa-chart-area mr-1"></i>
-                Personal Trainning
+                <i class="fas fa-info-circle"></i>
+                PT 등록 정보
               </div>
               <div class="card-body">
                 <ul class="list-group">
