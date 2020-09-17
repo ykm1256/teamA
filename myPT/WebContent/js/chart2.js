@@ -330,7 +330,7 @@ $("#selectmonth").change(function() {
 		var tmonthname = document.querySelector("#tmonthname");
 		var tmonthphoto = document.querySelector("#tmonthphoto");
 		var namedata = "<h5 class='card-title'>" + monthtrainer[0] + " 트레이너 </h5>";
-		var photodata = "<img src='img/TrainerPhoto/"+monthtrainerphoto[0]+"' class='card-img-top' />";
+		var photodata = "<img src='img/TrainerPhoto/"+monthtrainerphoto[0]+"' class='card-img-top' style='height:20rem'/>";
 				
 		tmonthphoto.innerHTML = photodata;
 		tmonthname.innerHTML = namedata;

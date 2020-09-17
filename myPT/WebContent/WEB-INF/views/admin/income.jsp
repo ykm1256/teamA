@@ -186,7 +186,7 @@
 
 							<div class="card col-md-4 col-sm-4 col-xs-12 p-0">
 								<div class="card-header p-4">
-									<h3 class="card-title text-center" id="tmonthead">이달의 트레이너</h3>
+									<h3 class="card-title text-center" id="tmonthhead">이달의 트레이너</h3>
 								</div>
 								<div id="tmonth">								
 								</div>

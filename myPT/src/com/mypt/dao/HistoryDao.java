@@ -180,7 +180,7 @@ public class HistoryDao {
 				sql = "select sum(price),tid,t_name from history h left outer join trainer t on h.tid=t.t_id where paydate like '%"
 						+ year + "-0" + month + "%' group by tid;";
 			} else {
-				sql = "select sum(price),tid,t_name from history h left outer join trainer t on h.tid=t.t_id paydate like '%"
+				sql = "select sum(price),tid,t_name from history h left outer join trainer t on h.tid=t.t_id where paydate like '%"
 						+ year + "-" + month + "%' group by tid;";
 			}
 			System.out.println(sql);
