@@ -60,7 +60,7 @@
 							<div class="card border border-secondary h-100">
 
 								<div class="card-body p-1">
-									<form action="boardUpdate.do" method="post" onsubmit="return postForm('${sessionScope.board}')">
+									<form action="boardUpdate.do" method="post" onsubmit="return postUpdate('${sessionScope.board}')">
 										<ul class="list-group list-group-flush h-100">
 											<li class="list-group-item">
 												<div class="row">
@@ -108,7 +108,7 @@
 										</ul>
 										<div class="text-right px-4 d-flex justify-content-end align-items-center">
 											<!-- 										<button class="btn btn-outline-warning m-2">수정하기</button> -->
-											<input type="submit" class="btn btn-primary" value="수정하기" />
+											<input id="btnUpdate" type="submit" class="btn btn-primary" value="수정하기" />
 										</div>
 									</form>
 								</div>

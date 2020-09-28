@@ -107,10 +107,8 @@ function repForm(){
 }
 
 // 글 수정하기
-function updateForm(){
-	var head = $("#writeHead").val()
+function postUpdate(){
 	var subject = $("#subject").val()
-	
 	if(subject.trim() == "" | subject==null){
 		alert("올바른 제목을 입력하세요!")
 		return false;
